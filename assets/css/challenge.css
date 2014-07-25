@@ -1,0 +1,28 @@
+.choice-button {
+    width: 100%;
+}
+
+.choice-span {
+    float: left;
+}
+
+.row-profile {
+
+}
+.row-profile-left {
+    font-size: 17px;
+}
+.row-profile-right {
+    font-size: 17px;
+}
+.row-question {
+    height: 100px;
+}
+
+.row-answer {
+
+}
+.progress-timeout{
+    margin-left: 150px;
+    color: red;
+}

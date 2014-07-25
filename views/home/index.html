@@ -7,20 +7,25 @@
 
     <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/vendor/cloud-admin/cloud-admin.min.css">
-    <link rel="stylesheet" href="/vendor/datatables/media/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="/vendor/magicsuggest/magicsuggest-min.css">
+
+    <!--<link rel="stylesheet" href="/vendor/datatables/media/css/jquery.dataTables.css">-->
+    <!--<link rel="stylesheet" href="/vendor/magicsuggest/magicsuggest-min.css">-->
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/challenge.css">
 
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/angular/angular.min.js"></script>
     <script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
     <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <!--
     <script src="/vendor/datatables/media/js/jquery.dataTables.js"></script>
     <script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
-    <script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>
-    <script src="/vendor/mp3-player-button.js"></script>
-    <script src="/vendor/jquery.xdomainajax.js"></script>
+    -->
+    <!--<script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>-->
+    <!--<script src="/vendor/mp3-player-button.js"></script>-->
+    <!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
 
     <script src="/controllers/arena.js"></script>
     <script src="/controllers/users/users-service.js"></script>
@@ -28,6 +33,11 @@
     <script src="/commons/api-service.js"></script>
     <script src="/commons/utils/utils-service.js"></script>
     <script src="/controllers/main/main.js"></script>
+    <script src="/controllers/challenge/challenge-route.js"></script>
+    <script src="/controllers/challenge/challenge-ctrl.js"></script>
+    <script src="/controllers/state-machines/quiz_state_machine.js"></script>
+    <script src="/controllers/state-machines/question_state_machine.js"></script>
+
 
     <title ng-bind="Seo.title"></title>
 </head>

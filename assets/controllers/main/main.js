@@ -10,6 +10,12 @@ angular.module('arena.main', [
                     templateUrl: '/views/main/main.html',
                     controller: 'arena.main.ctrl'
                 })
+                .state('login', {
+                    url: '/_=_',
+                    controller: function($state){
+                        $state.go("main");
+                    }
+                })
         }
     ])
 

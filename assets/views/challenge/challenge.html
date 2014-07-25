@@ -1,0 +1,50 @@
+
+<div class="col-md-3"></div>
+<div class="col-md-6 jumbotron challenge">
+    <!--
+    Row 1
+    -->
+    <div class="row">
+        <div class="col-md-6 row-profile-left" style=" border-right: thin solid grey;" >
+            <div class="col-md-3">
+                <img ng-src="{{profile.picture_url}}">
+            </div>
+            <div class="col-md-9" ng-bind="profile.name"></div>
+        </div>
+
+        <div class="col-md-6 row-profile-right">
+            <div class="row" align="center">
+                Your score : {{score}}
+            </div>
+            <div class="row" align="center">
+                Current Question: {{currentQuestion}}/10
+            </div>
+        </div>
+    </div>
+    <hr style="border-top: thin solid grey;">
+    <!--
+    Row 2
+    -->
+    <div class="row row-question" ng-bind="question.question" align="center">
+
+    </div>
+    <div>
+        <span class="badge" ng-bind="countDown"></span>
+    </div>
+
+    <!--
+    Row 3
+    -->
+    <div class="row">
+       <div ng-repeat="choice in question.content.multichoices" class="col-md-6">
+           <button type="button" class="btn btn-primary choice-button" ng-click="clickAnswer($index)"
+                   ng-class="{'btn-success' :answers[$index]==1, 'btn-danger':answers[$index]==0}">
+                <span ng-bind="['A','B','C','D'][$index]" class="badge choice-span" ></span>
+                {{choice.text}}
+           </button>
+    </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>

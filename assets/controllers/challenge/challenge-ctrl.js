@@ -9,9 +9,10 @@ angular.module('arena.challenge.controller', [
 
         var self = this;
         var quizMachine;
+        $scope.results=[{},{},{},{},{},{},{},{},{},{}];
         $scope.answers=[];
         $scope.score=0;
-        $scope.currentQuestion=1;
+        $scope.currentQuestion=0;
         $scope.profile=userSrv.getProfile();
         $scope.clickAnswer = function (index) {
             var event = {};
@@ -33,13 +34,16 @@ angular.module('arena.challenge.controller', [
                     console.log("Answered");
                     //$scope.question = event.data;
                     //alert(event.data.correct);
+                    var index=$scope.lastAnswered;
+                    $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':event.data.correct};
                     if(event.data.correct){
-                        $scope.answers[$scope.lastAnswered]=1;
+                        $scope.answers[index]={correct:1};
                         $scope.score+=event.data.score;
 
                     }else{
-                        $scope.answers[$scope.lastAnswered]=0;
+                        $scope.answers[index]={correct:0};
                     }
+                    $scope.answers[event.data.correctAnswer]={correct:1};
                     //$scope.answers[$scope.lastAnswered] = (event.data.correct)?1:0;
                     break;
                 case "question_time_changed":
@@ -57,7 +61,6 @@ angular.module('arena.challenge.controller', [
 
         $http.get('/data/myData.json').success(function (data) {
             quizMachine = new QuizStateMachine(data.slice(75,85), self);
-
         });
 
     });

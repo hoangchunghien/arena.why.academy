@@ -84,9 +84,12 @@ function QuestionStateMachine(question, eventListener) {
                 if(self.answer==self.question.answer){
                     self.correct=true;
                     self.score=self.remainingTime;
+                }else{
+                    self.score=0;
+                    self.correct=false;
                 }
                 self.eventListener.fireStateChanged({name: "question_answered", data: {answer: self.answer,
-                correct:self.correct, score:self.score}});
+                correct:self.correct, score:self.score,correctAnswer:self.question.answer}});
 
             }
         },

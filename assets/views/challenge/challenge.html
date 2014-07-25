@@ -17,7 +17,7 @@
                 Your score : {{score}}
             </div>
             <div class="row" align="center">
-                Current Question: {{currentQuestion}}/10
+                Current Question: {{currentQuestion+1}}/10
             </div>
         </div>
     </div>
@@ -28,17 +28,31 @@
     <div class="row row-question" ng-bind="question.question" align="center">
 
     </div>
-    <div>
+    <!--<div>-->
+        <!--<span class="badge" ng-bind="countDown"></span>-->
+    <!--</div>-->
+    <div >
+        <div class="arena-progress">
+            <div >
+                <div ng-repeat=" result in results" class="arena-circle "
+                     ng-class="{'arena-done':result.correct}">
+                    <span class="arena-label" ng-bind="$index+1"></span>
+                    <span class="arena-title" ng-bind-template="+{{result.score}}"></span>
+                </div>
+                <!--<span class="arena-bar half"></span>-->
+            </div>
+
+
+        </div>
         <span class="badge" ng-bind="countDown"></span>
     </div>
-
     <!--
     Row 3
     -->
     <div class="row">
        <div ng-repeat="choice in question.content.multichoices" class="col-md-6">
            <button type="button" class="btn btn-primary choice-button" ng-click="clickAnswer($index)"
-                   ng-class="{'btn-success' :answers[$index]==1, 'btn-danger':answers[$index]==0}">
+                   ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}">
                 <span ng-bind="['A','B','C','D'][$index]" class="badge choice-span" ></span>
                 {{choice.text}}
            </button>

@@ -35,13 +35,15 @@ angular.module('arena.challenge.controller', [
                     //$scope.question = event.data;
                     //alert(event.data.correct);
                     var index=$scope.lastAnswered;
-                    $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':event.data.correct};
+
                     if(event.data.correct){
                         $scope.answers[index]={correct:1};
                         $scope.score+=event.data.score;
+                        $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':1};
 
                     }else{
                         $scope.answers[index]={correct:0};
+                        $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':0};
                     }
                     $scope.answers[event.data.correctAnswer]={correct:1};
                     //$scope.answers[$scope.lastAnswered] = (event.data.correct)?1:0;

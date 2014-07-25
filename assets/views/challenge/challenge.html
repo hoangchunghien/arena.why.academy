@@ -35,7 +35,7 @@
         <div class="arena-progress">
             <div >
                 <div ng-repeat=" result in results" class="arena-circle "
-                     ng-class="{'arena-done':result.correct}">
+                     ng-class="{'arena-done':result.correct==1,'arena-fail':result.correct==0}">
                     <span class="arena-label" ng-bind="$index+1"></span>
                     <span class="arena-title" ng-bind-template="+{{result.score}}"></span>
                 </div>

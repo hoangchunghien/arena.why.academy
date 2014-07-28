@@ -80,7 +80,7 @@ angular.module('arena.challenge.controller', [
         };
 
         $http.get('/data/myData.json').success(function (data) {
-            quizMachine = new QuizStateMachine(data.slice(90,100), self);
+            quizMachine = new QuizStateMachine(data.slice(43,53), self);
         });
         $scope.getProgress=function(){
           return (($scope.countDown)/$scope.timeout*100)+'%';

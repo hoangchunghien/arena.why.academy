@@ -5,8 +5,10 @@ var EVENTS = {
         INITIALIZING: "question_initializing",
         ANSWERING: "question_answering",
         ANSWERED: "question_answered",
-        TIMERCHANGED:"question_time_changed",
-        TIMEOUT:"question_timeout",
+        TIMERCHANGED: "question_time_changed",
+        TIMEOUT: "question_timeout",
+        ENDING: "question_ending",
+        FINISH: "question_finish",
         ERROR: "question_error"
     }
 };
@@ -20,9 +22,9 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 15;
-    this.remainingTime = this.timeout;
-    this.correct=false;
+    this.timeout = 20;
+    this.remainingTime = this.timeout+1;
+    this.correct = false;
     this.eventListener = eventListener;
 
     /*
@@ -54,7 +56,7 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "starting");
-                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
+                self.eventListener.handleEventNotification({name: "question_initializing", data: {}});
                 _initialize();
 
                 // After initialized, change state to answering
@@ -69,56 +71,91 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "answering");
-                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.ANSWERING, data: {}});
+                self.eventListener.handleEventNotification({name: "question_answering", data: {}});
             }
         },
         answered: {
             name: 'answered',
             events: {
-
+                question_ending: "ending"
             },
             run: function () {
                 console.log(logInfo + "answered");
                 clearTimeout(self.runtimeout);
-                console.log(self.answer);
-                if(self.answer==self.question.answer){
-                    self.correct=true;
-                    self.score=self.remainingTime;
-                }else{
-                    self.score=0;
-                    self.correct=false;
-                }
-                self.eventListener.handleEventNotification({name: "question_answered", data: {answer: self.answer,
-                correct:self.correct, score:self.score,correctAnswer:self.question.answer}});
+
+                self.eventListener.handleEventNotification({name: "question_answered", data: {}});
+                self.consumeEvent({name: "question_ending", data: {}});
 
             }
         },
-        timeout:{
+        timeout: {
             name: 'timeout',
+            events: {
+                question_ending: "ending"
+            },
+            run: function () {
+                self.eventListener.handleEventNotification({name: "question_timeout", data: {}});
+                self.consumeEvent({name: "question_ending", data: {}});
+            }
+        },
+        ending: {
+            name: 'ending',
+            events: {
+                question_finish: "finish"
+            },
+            run: function () {
+                console.log(logInfo + "ending");
+                console.log(self.answer);
+                if (self.answer == self.question.answer) {
+                    self.correct = true;
+                    self.score = self.remainingTime;
+                } else {
+                    self.score = 0;
+                    self.correct = false;
+                }
+                setTimeout(function(){
+                    self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
+                        correct: self.correct, score: self.score, correctAnswer: self.question.answer}});
+
+                },1000);
+
+                setTimeout(function(){
+                    self.consumeEvent({name: "question_finish", data: {}});
+                },2000);
+
+
+
+            }
+        },
+        finish: {
+            name: 'finish',
             events: {
 
             },
             run: function () {
-                self.eventListener.handleEventNotification({name: "question_timeout", data: {}});
+                console.log(logInfo + "finish");
+
+                self.eventListener.handleEventNotification({name: "question_finish", data: {}});
+
+
             }
         }
-
     };
 
     _startup();
 
-    this.activeTimer=function(){
+    this.activeTimer = function () {
         console.log("run Active timer");
-        var countDown=function(){
-            self.runtimeout=setTimeout(function () {
+        var countDown = function () {
+            self.runtimeout = setTimeout(function () {
                 self.remainingTime--;
 //                console.log(self.remainingTime);
-                var data={};
-                data.remainingTime=self.remainingTime;
-                self.eventListener.handleEventNotification({name:"question_time_changed", data:data});
+                var data = {};
+                data.remainingTime = self.remainingTime;
+                self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
 //                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.TIMERCHANGED, data:data});
-                if(self.remainingTime<=0){
-                    self.consumeEvent({name:"question_timeout"});
+                if (self.remainingTime <= 0) {
+                    self.consumeEvent({name: "question_timeout"});
                     return;
                 }
                 countDown();
@@ -178,7 +215,7 @@ QuestionStateMachine.prototype.getCurrentState = function () {
     return this.currentState;
 };
 
-QuestionStateMachine.prototype.active=function(){
+QuestionStateMachine.prototype.active = function () {
     console.log("active Timer");
     this.activeTimer();
 };

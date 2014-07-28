@@ -95,7 +95,8 @@ function QuizStateMachine(questions, eventListener) {
                     },
                     run: function() {
                         console.log(logInfo + "questioning");
-                        self.eventListener.handleEventNotification({name: "quiz_questioning", data: self.currentQuestionMachines.question});
+                        self.eventListener.handleEventNotification({name: "quiz_questioning",
+                            data:{question:self.currentQuestionMachines.question,timeout:self.currentQuestionMachines.timeout}});
                     },
                     question_events: {
                         question_answer: {
@@ -179,20 +180,27 @@ QuizStateMachine.prototype.getResult = function() {
 QuizStateMachine.prototype.handleEventNotification = function(event) {
     var self = this;
     switch (event.name) {
+        case "question_finish":
+            console.log("question_finish");
+            self.eventListener.handleEventNotification(event);
+            self._nextQuestionMachine();
+            self.eventListener.handleEventNotification({name:"question_next_question",
+                data:{question:self.currentQuestionMachines.question,timeout:self.currentQuestionMachines.timeout}});
+            break;
+        case "question_ending":
+            console.log("Test question_ending");
+
+                self.eventListener.handleEventNotification(event);
+
+            break;
         case "question_answered":
             console.log("test time out");
             self.eventListener.handleEventNotification(event);
-            setTimeout(function(){
-                self._nextQuestionMachine();
-                self.eventListener.handleEventNotification({name:"question_next_question", data:self.currentQuestionMachines.question});
-            },1000);
             break;
         case "question_timeout":
-            self._nextQuestionMachine();
-            self.eventListener.handleEventNotification({name:"question_next_question", data:self.currentQuestionMachines.question});
+            self.eventListener.handleEventNotification({name:"question_timeout", data:self.currentQuestionMachines.question});
             break;
         default:
-//            console.log(event.data.remainingTime);
             self.eventListener.handleEventNotification(event);
             break;
 

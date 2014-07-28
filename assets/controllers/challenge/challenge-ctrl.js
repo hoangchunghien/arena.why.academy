@@ -3,7 +3,7 @@
  */
 angular.module('arena.challenge.controller', [
     'ui.router',
-    'ui.bootstrap',
+
     'arena.users.service'
 
 ])
@@ -15,9 +15,11 @@ angular.module('arena.challenge.controller', [
         $scope.answers=[];
         $scope.score=0;
         $scope.currentQuestion=0;
+        $scope.timeout=0;
         $scope.profile=userSrv.getProfile();
         //disabled button
         $scope.disabledButton=false;
+        $scope.showCorrect=false;
         //
         $scope.clickAnswer = function (index) {
             var event = {};
@@ -32,27 +34,34 @@ angular.module('arena.challenge.controller', [
 
             switch (event.name) {
                 case "quiz_questioning":
-                    $scope.question = event.data;
+                    $scope.question = event.data.question;
+                    $scope.timeout+=event.data.timeout;
                     console.log("quiz_questioning");
+                    console.log($scope.timeout);
                     break;
-                case "question_answered":
-                    console.log("Answered");
-                    //$scope.question = event.data;
-                    //alert(event.data.correct);
+                case "question_ending":
+                    console.log("question_ending");
                     var index=$scope.lastAnswered;
 
                     if(event.data.correct){
                         $scope.answers[index]={correct:1};
                         $scope.score+=event.data.score;
                         $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':1};
+                        $scope.showCorrect=true;
 
                     }else{
                         $scope.answers[index]={correct:0};
                         $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':0};
+
                     }
+                    $scope.$apply();
                     $scope.answers[event.data.correctAnswer]={correct:1};
+                    break;
+                case "question_answered":
+                    console.log("Answered");
+
                     $scope.disabledButton=true;
-                    //$scope.answers[$scope.lastAnswered] = (event.data.correct)?1:0;
+
                     break;
                 case "question_time_changed":
                     console.log(event.name, event.data.remainingTime);
@@ -60,18 +69,22 @@ angular.module('arena.challenge.controller', [
                     $scope.$apply();
                     break;
                 case "question_next_question":
+                    console.log("next question");
                     $scope.currentQuestion++;
-                    $scope.question=event.data;
+                    $scope.question=event.data.question;
                     $scope.answers=[];
                     $scope.disabledButton=false;
+                    $scope.showCorrect=false;
                     break;
             }
         };
 
         $http.get('/data/myData.json').success(function (data) {
-            quizMachine = new QuizStateMachine(data.slice(75,85), self);
+            quizMachine = new QuizStateMachine(data.slice(90,100), self);
         });
-
+        $scope.getProgress=function(){
+          return (($scope.countDown)/$scope.timeout*100)+'%';
+        };
 
 
     });

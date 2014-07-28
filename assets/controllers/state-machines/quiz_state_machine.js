@@ -81,7 +81,7 @@ function QuizStateMachine(questions, eventListener) {
                     run: function() {
                         console.log(logInfo + "initializing");
                         // Notify to player
-                        self.eventListener.fireStateChanged({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
+                        self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
                         _initialize();
 
                         self.consumeEvent({name: "initialized", data: {}});
@@ -95,7 +95,7 @@ function QuizStateMachine(questions, eventListener) {
                     },
                     run: function() {
                         console.log(logInfo + "questioning");
-                        self.eventListener.fireStateChanged({name: "quiz_questioning", data: self.currentQuestionMachines.question});
+                        self.eventListener.handleEventNotification({name: "quiz_questioning", data: self.currentQuestionMachines.question});
                     },
                     question_events: {
                         question_answer: {
@@ -105,7 +105,7 @@ function QuizStateMachine(questions, eventListener) {
                                 if (self.currentQuestionMachines.getCurrentState().name === "answered") {
                                     // If there have no next question, then change state to finished
                                     console.log(logInfo + " answered, next question");
-//                                    self.eventListener.fireStateChanged({name:EVENTS.RESPONSE.QUESTION_ANSWERED, data })
+//                                    self.eventListener.handleEventNotification({name:EVENTS.RESPONSE.QUESTION_ANSWERED, data })
                                     if (!self._nextQuestionMachine()) {
                                         console.log(logInfo + " finished quiz");
                                         self.consumeEvent({name: 'finish', data: {}});
@@ -122,7 +122,7 @@ function QuizStateMachine(questions, eventListener) {
                     },
                     run: function() {
                         console.log(logInfo + "finished");
-                        self.eventListener.fireStateChanged({name: EVENTS.RESPONSE.FINISHED, data: {}});
+                        self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.FINISHED, data: {}});
                     }
                 }
 
@@ -157,7 +157,7 @@ QuizStateMachine.prototype.consumeEvent = function(event) {
 
         }
         else {
-            self.eventListener.fireStateChanged({
+            self.eventListener.handleEventNotification({
                 name: EVENTS.RESPONSE.ERROR,
                 data: {
                     message: " event '" + name + "' not acceptable in '" + self.currentState.name + "' state",
@@ -176,24 +176,24 @@ QuizStateMachine.prototype.getResult = function() {
     return this.result;
 };
 
-QuizStateMachine.prototype.fireStateChanged = function(event) {
+QuizStateMachine.prototype.handleEventNotification = function(event) {
     var self = this;
     switch (event.name) {
         case "question_answered":
             console.log("test time out");
-            self.eventListener.fireStateChanged(event);
+            self.eventListener.handleEventNotification(event);
             setTimeout(function(){
                 self._nextQuestionMachine();
-                self.eventListener.fireStateChanged({name:"question_next_question", data:self.currentQuestionMachines.question});
+                self.eventListener.handleEventNotification({name:"question_next_question", data:self.currentQuestionMachines.question});
             },1000);
             break;
         case "question_timeout":
             self._nextQuestionMachine();
-            self.eventListener.fireStateChanged({name:"question_next_question", data:self.currentQuestionMachines.question});
+            self.eventListener.handleEventNotification({name:"question_next_question", data:self.currentQuestionMachines.question});
             break;
         default:
 //            console.log(event.data.remainingTime);
-            self.eventListener.fireStateChanged(event);
+            self.eventListener.handleEventNotification(event);
             break;
 
     }

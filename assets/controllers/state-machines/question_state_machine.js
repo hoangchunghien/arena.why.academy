@@ -54,7 +54,7 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "starting");
-                self.eventListener.fireStateChanged({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
+                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
                 _initialize();
 
                 // After initialized, change state to answering
@@ -69,7 +69,7 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "answering");
-                self.eventListener.fireStateChanged({name: EVENTS.RESPONSE.ANSWERING, data: {}});
+                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.ANSWERING, data: {}});
             }
         },
         answered: {
@@ -88,7 +88,7 @@ function QuestionStateMachine(question, eventListener) {
                     self.score=0;
                     self.correct=false;
                 }
-                self.eventListener.fireStateChanged({name: "question_answered", data: {answer: self.answer,
+                self.eventListener.handleEventNotification({name: "question_answered", data: {answer: self.answer,
                 correct:self.correct, score:self.score,correctAnswer:self.question.answer}});
 
             }
@@ -99,7 +99,7 @@ function QuestionStateMachine(question, eventListener) {
 
             },
             run: function () {
-                self.eventListener.fireStateChanged({name: "question_timeout", data: {}});
+                self.eventListener.handleEventNotification({name: "question_timeout", data: {}});
             }
         }
 
@@ -115,8 +115,8 @@ function QuestionStateMachine(question, eventListener) {
 //                console.log(self.remainingTime);
                 var data={};
                 data.remainingTime=self.remainingTime;
-                self.eventListener.fireStateChanged({name:"question_time_changed", data:data});
-//                self.eventListener.fireStateChanged({name: EVENTS.RESPONSE.TIMERCHANGED, data:data});
+                self.eventListener.handleEventNotification({name:"question_time_changed", data:data});
+//                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.TIMERCHANGED, data:data});
                 if(self.remainingTime<=0){
                     self.consumeEvent({name:"question_timeout"});
                     return;
@@ -134,7 +134,7 @@ function QuestionStateMachine(question, eventListener) {
 /**
  * The data from client for question_answer must like this
  *     data: {
-*           answer: {..}    
+*           answer: {..}
 *    }
  *
  */
@@ -159,7 +159,7 @@ QuestionStateMachine.prototype.consumeEvent = function (event) {
         self.currentState.run();
     }
     else {
-        self.eventListener.fireStateChanged({
+        self.eventListener.handleEventNotification({
             name: EVENTS.RESPONSE.ERROR,
             data: {
                 message: " event '" + name + "' not acceptable in '" + self.currentState.name + "' state",

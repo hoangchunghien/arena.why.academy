@@ -40,7 +40,7 @@
 }
 .arena-progress .arena-circle .arena-title {
     color: #b5b5ba;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 30px;
     margin-left: -5px;
 }
@@ -51,7 +51,8 @@
 }
 
 .arena-progress .arena-circle.arena-fail .arena-label {
-    background: #DAD8D7;
+    /*background: #DAD8D7;*/
+    background: #F7252E;
 }
 
 /* Done / Active */
@@ -78,4 +79,14 @@
 }
 .arena-progress .arena-circle.arena-active .arena-title {
     color: #0c95be;
+}
+.arena-progress-bar{
+    width: 60%;
+    margin-left: 20%;
+    height: 10px !important;
+}
+.arena-progress-bar-text{
+    font-size: 20px;
+    margin-top: 5px !important;
+    font-weight: bold;
 }

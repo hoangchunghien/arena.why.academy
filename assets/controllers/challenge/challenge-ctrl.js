@@ -3,7 +3,9 @@
  */
 angular.module('arena.challenge.controller', [
     'ui.router',
+    'ui.bootstrap',
     'arena.users.service'
+
 ])
     .controller('arena.challenge.ctrl', function ($scope, $http, userSrv) {
 
@@ -14,6 +16,9 @@ angular.module('arena.challenge.controller', [
         $scope.score=0;
         $scope.currentQuestion=0;
         $scope.profile=userSrv.getProfile();
+        //disabled button
+        $scope.disabledButton=false;
+        //
         $scope.clickAnswer = function (index) {
             var event = {};
             event.name = "question_answer";
@@ -22,7 +27,7 @@ angular.module('arena.challenge.controller', [
             quizMachine.consumeEvent(event);
 
         };
-        this.fireStateChanged = function (event) {
+        this.handleEventNotification = function (event) {
             console.log(event);
 
             switch (event.name) {
@@ -46,6 +51,7 @@ angular.module('arena.challenge.controller', [
                         $scope.results[$scope.currentQuestion]={'score':event.data.score, 'correct':0};
                     }
                     $scope.answers[event.data.correctAnswer]={correct:1};
+                    $scope.disabledButton=true;
                     //$scope.answers[$scope.lastAnswered] = (event.data.correct)?1:0;
                     break;
                 case "question_time_changed":
@@ -57,6 +63,7 @@ angular.module('arena.challenge.controller', [
                     $scope.currentQuestion++;
                     $scope.question=event.data;
                     $scope.answers=[];
+                    $scope.disabledButton=false;
                     break;
             }
         };
@@ -64,5 +71,7 @@ angular.module('arena.challenge.controller', [
         $http.get('/data/myData.json').success(function (data) {
             quizMachine = new QuizStateMachine(data.slice(75,85), self);
         });
+
+
 
     });

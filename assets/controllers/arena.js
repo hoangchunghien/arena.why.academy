@@ -7,7 +7,9 @@ angular.module('arena', [
     'arena.api.service',
     'arena.utils.service',
     'arena.navigation.controller',
-    'ui.router'
+    'ui.router',
+    'arena.challenge',
+    'arena.challenge.controller'
 ]).factory('Seo', function () {
     return {
         title: 'The arena for languages'

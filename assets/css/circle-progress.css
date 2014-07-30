@@ -1,0 +1,92 @@
+/**, *:after, *:before {*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*box-sizing: border-box;*/
+    /*font-family: "Open Sans";*/
+/*}*/
+
+/* Form Progress */
+.arena-progress {
+    width: 100%;
+    margin: 20 auto;
+    text-align: center;
+}
+.arena-progress .arena-circle,
+.arena-progress .arena-bar {
+    display: inline-block;
+    /*background: #fff;*/
+    width: 32px; height: 32px;
+    border-radius: 32px;
+    /*border: 1px solid #d5d5da;*/
+}
+.arena-progress .arena-bar {
+    position: relative;
+    width: 25px;
+    height: 6px;
+    margin: 0 -5px 50px -5px;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+.arena-progress .arena-circle .arena-label {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 32px;
+    /*margin-top: 3px;*/
+    color: #b5b5ba;
+    font-size: 17px;
+}
+.arena-progress .arena-circle .arena-title {
+    color: #b5b5ba;
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: -5px;
+}
+/* Fail*/
+.arena-progress .arena-bar.arena-fail,
+.arena-progress .arena-circle.arena-fail {
+    background: #eee;
+}
+
+.arena-progress .arena-circle.arena-fail .arena-label {
+    /*background: #DAD8D7;*/
+    background: #F7252E;
+}
+
+/* Done / Active */
+.arena-progress .arena-bar.arena-done,
+.arena-progress .arena-circle.arena-done {
+    background: #eee;
+}
+
+.arena-progress .arena-bar.arena-active {
+    background: linear-gradient(to right, #EEE 40%, #FFF 60%);
+}
+.arena-progress .arena-circle.arena-done .arena-label {
+    color: #FFF;
+    background: #8bc435;
+    box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.arena-progress .arena-circle.arena-done .arena-title {
+    color: #8bc435;
+}
+.arena-progress .arena-circle.arena-active .arena-label {
+    color: #FFF;
+    background: #0c95be;
+    box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+}
+.arena-progress .arena-circle.arena-active .arena-title {
+    color: #0c95be;
+}
+.arena-progress-bar{
+    width: 60%;
+    margin-left: 20%;
+    height: 5px !important;
+}
+.arena-progress-bar-text{
+    font-size: 20px;
+    margin-top: 5px !important;
+    font-weight: bold;
+}

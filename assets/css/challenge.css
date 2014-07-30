@@ -1,0 +1,51 @@
+.choice-button {
+    width: 100%;
+    margin: 10px;
+}
+
+.btn{
+    border-radius: 21px;
+}
+.choice-span {
+    float: left;
+}
+
+.row-profile {
+
+}
+.row-profile-left {
+    font-size: 17px;
+}
+.row-profile-right {
+    font-size: 17px;
+}
+.row-question {
+    height: 100px;
+}
+
+.row-answer {
+
+}
+.arena-modal-title{
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: green ;
+    font-family: Georgia;
+    font-style: italic;
+}
+.arena-modal-content{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 50%;
+}
+.arena-modal-finish{
+    width: 100%;
+
+    margin-top: 5%;
+}
+.arena-table-results{
+    float: left;
+    height: 50%;
+    text-align: center;
+}

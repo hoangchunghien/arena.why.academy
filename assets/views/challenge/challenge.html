@@ -1,0 +1,189 @@
+
+<div class="col-md-3"></div>
+<div class="col-md-6 jumbotron challenge">
+    <!--
+    Row 1
+    -->
+    <div class="row">
+        <div class="col-md-6 row-profile-left" style=" border-right: thin solid grey;" >
+            <div class="col-md-3">
+                <img ng-src="{{profile.picture_url}}">
+            </div>
+            <div class="col-md-9" ng-bind="profile.name"></div>
+        </div>
+
+        <div class="col-md-6 row-profile-right">
+            <div class="row" align="center" ng-bind-template="Your score : {{score}}">
+            </div>
+            <div class="row" align="center" ng-bind-template="Current Question: {{currentQuestion+1}}/{{numberOfQuestion}}">
+            </div>
+        </div>
+    </div>
+    <hr style="border-top: thin solid grey;">
+    <!--
+    Row 2
+    -->
+    <div class="row" >
+        <div class="arena-progress">
+            <div >
+                <div ng-repeat=" result in results" class="arena-circle "
+                     ng-class="{'arena-done':result.correct==1,'arena-fail':result.correct==0}">
+                    <span class="arena-label" ng-bind="$index+1"></span>
+                    <span class="arena-title" ng-bind-template="+{{result.score}}"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+   <!--
+   Row 3
+    -->
+    <div class="row row-question" ng-bind="question.question" align="center">
+    </div>
+    <!--<progressbar class="progress-striped active arena-progress-bar" max="timeout" value="countDown" type="danger">-->
+        <!--&lt;!&ndash;<i class="arena-progress-bar-text" ng-bind-template="{{timeout}}/15"></i>&ndash;&gt;-->
+    <!--</progressbar>-->
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+             ng-style="{width: getProgress()} "
+             ng-class="{'progress-bar-warning': countDown/timeout<0.7, 'progress-bar-danger': countDown/timeout<0.4}">
+        </div>
+    </div>
+
+
+
+    <!--
+    Row 4
+    -->
+    <div class="row">
+       <div ng-repeat="choice in question.content.multichoices" class="col-md-6">
+           <button type="button" class="btn btn-info  choice-button" ng-click="clickAnswer($index)"
+                   ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
+                   ng-disabled="disabledButton==true">
+                <span ng-bind="['A','B','C','D'][$index]" class="badge choice-span" ></span>
+                {{choice.text}}
+           </button>
+       </div>
+    </div>
+
+    <!--
+    Modal : check correct answer !
+    -->
+    <!--<input type="checkbox" ng-model="showDialog"> Show-->
+    <div modal-show="showCheckCorrectAnswer" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content arena-modal-content">
+                <div class="modal-header">
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                    <h4 class="modal-title arena-modal-title">Correct !</h4>
+                </div>
+                <!--<div class="modal-body">-->
+                    <!--<p>One fine body&hellip;</p>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!--
+  Modal : Starting Quiz !
+  -->
+    <!--<input type="checkbox" ng-model="showDialog"> Show-->
+    <div modal-show="startChallenge" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content arena-modal-content">
+                <div class="modal-header">
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                    <h4 class="modal-title arena-modal-title" ng-bind="ThreeToZero"></h4>
+                </div>
+                <!--<div class="modal-body">-->
+                <!--<p>One fine body&hellip;</p>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--</div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!--
+       Modal : Finished challenge !
+       -->
+    <div modal-show="finishedChallenge" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content arena-modal-finish ">
+                <!--<div class="modal-header" align="center">-->
+                    <!--&lt;!&ndash;<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>&ndash;&gt;-->
+                    <!--<h4 class="modal-title " ng-bind-template="Your score: {{score}}"></h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body" align="center">-->
+
+                    <!--<div class="col-md-7">-->
+                        <!--<table class="table table-bordered arena-table-results" >-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th>Question</th>-->
+                                <!--<th>Your Answer</th>-->
+                                <!--<th>Correct Answer</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr ng-repeat="result in tableOfResults" valign="middle">-->
+                                <!--<td ng-bind="$index+1"></td>-->
+                                <!--<td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>-->
+                                <!--<td ng-bind="['A','B','C','D'][result.correctAnswer]"></td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<div class="col-md-2"></div>&ndash;&gt;-->
+                    <!--<div class="col-md-5">-->
+                        <!--<p ng-bind-template="Your Award :"></p>-->
+                        <!--<img ng-src="{{medalUrl}}">-->
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<div class="modal-footer" align="center">-->
+                    <!--<button type="button" class="btn btn-success" ng-click="reloadChallenge()">Replay</button>-->
+                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="exitChallenge()">Exit</button>-->
+                    <!--&lt;!&ndash;<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+                <div class="modal-body" align="center">
+                    <div class="row" ng-bind-template="Your score: {{score}}"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-bordered arena-table-results" width="50%" >
+                                <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>Your Answer</th>
+                                    <th>Correct Answer</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="result in tableOfResults" valign="middle">
+                                    <td ng-bind="$index+1"></td>
+                                    <td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>
+                                    <td ng-bind="['A','B','C','D'][result.correctAnswer]"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <p ng-bind-template="Your Award :"></p>
+                            <img ng-src="{{medalUrl}}">
+                            <button type="button" class="btn btn-success" ng-click="reloadChallenge()">Replay</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="exitChallenge()">Exit</button>
+                        </div>
+
+                    </div>
+                    <!--<div class="col-md-2"></div>-->
+
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</div>

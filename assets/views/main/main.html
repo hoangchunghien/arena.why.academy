@@ -1,28 +1,18 @@
 <div class="col-md-3"></div>
 <div class="col-md-6">
-	<br/><br/><br/>
+    <br/><br/><br/>
 	<div class="h1">
-		<div align="left">To learn and be fun</div>
-		<div align="right">Challenge your friends now in <b>Arena</b> for English.</div>
+		<div align="left">For glory and victory,</div>
+		<div align="right">challenge with friends now.</div>
 	</div>
-	<br/>
+	 <br/><br/><br/>
+    <hr style="border-top: thin solid grey;">
+    <br/>
+    <div class="h4">
 
-	<div align="center" >
-		<a class="btn btn-lg btn-default">Play now!</a>
-	</div>
-	<br/><br/>
-	<hr style="border-top: thin solid grey;">
-	<br/>
-	<!-- <div class="h4"> -->
-		<!--<div><span class="glyphicon glyphicon-book"></span> Create New Course for students</div><br>-->
-		<!--<div><span class="glyphicon glyphicon-star"></span> Set learning goal</div><br>-->
-		<!--<div><span class="glyphicon glyphicon-time"></span> Schedule lesson plan</div><br>-->
-		<!--<div><span class="glyphicon glyphicon-file"></span> 15 useful lesson templates</div><br>-->
-		<!--<div><span class="glyphicon glyphicon-phone"></span> Mobile friendly</div>-->
-	<!-- </div> -->
-	<br>
-
-	<div align="center">
-		<iframe width="640" height="360" src="//www.youtube-nocookie.com/embed/3Fiwx-2izDY?rel=0" frameborder="0" allowfullscreen></iframe>
-	</div>
+    </div>
+    <br>
+    <div align="center" ng-controller="NavCtrl" ng-init="init()">
+        <a class="btn btn-primary" ui-sref="challenge" ng-show="showButtonPlayGame">Play now!</a>
+    </div>
 </div>

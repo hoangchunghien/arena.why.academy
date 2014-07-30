@@ -13,6 +13,8 @@ angular.module('arena.challenge', [
                     templateUrl: '/views/challenge/challenge.html',
                     controller: 'arena.challenge.ctrl'
                 })
+
+
         }
     ]);
 

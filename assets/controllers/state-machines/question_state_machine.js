@@ -106,12 +106,15 @@ function QuestionStateMachine(question, eventListener) {
             run: function () {
                 console.log(logInfo + "ending");
                 console.log(self.answer);
+                var timeForChangeQuestion;
                 if (self.answer == self.question.answer) {
                     self.correct = true;
                     self.score = self.remainingTime;
+                    timeForChangeQuestion=3500;
                 } else {
                     self.score = 0;
                     self.correct = false;
+                    timeForChangeQuestion=2000;
                 }
                 setTimeout(function(){
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
@@ -121,7 +124,7 @@ function QuestionStateMachine(question, eventListener) {
 
                 setTimeout(function(){
                     self.consumeEvent({name: "question_finish", data: {}});
-                },2000);
+                },timeForChangeQuestion);
 
 
 
@@ -134,7 +137,6 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "finish");
-
                 self.eventListener.handleEventNotification({name: "question_finish", data: {}});
 
 

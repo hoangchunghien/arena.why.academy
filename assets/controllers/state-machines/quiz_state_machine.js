@@ -42,7 +42,6 @@ function QuizStateMachine(questions, eventListener) {
     };
 
     var _initialize = function() {
-
         for (var i = 0; i < self.quiz.questions.length; i++) {
             var question = self.quiz.questions[i];
             self.questionMachines[i] = new QuestionStateMachine(question, self);
@@ -53,6 +52,7 @@ function QuizStateMachine(questions, eventListener) {
             self.currentQuestionMachines.active();
             console.log("active");
         }
+
     };
 
     self._nextQuestionMachine = function() {
@@ -81,17 +81,24 @@ function QuizStateMachine(questions, eventListener) {
                     run: function() {
                         console.log(logInfo + "initializing");
                         // Notify to player
-                        self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.INITIALIZING, data: {}});
-                        _initialize();
+                        self.eventListener.handleEventNotification({name: "quiz_initializing", data: {}});
 
-                        self.consumeEvent({name: "initialized", data: {}});
+
+                        setTimeout(function(){
+                            _initialize();
+                            self.consumeEvent({name: "initialized", data: {}});
+                        },4500);
+
+
+
+
                     }
                 },
         questioning:
                 {
                     name: 'questioning',
                     events: {
-                        finish: 'finished'
+                        quiz_finish_event: 'finished'
                     },
                     run: function() {
                         console.log(logInfo + "questioning");
@@ -123,7 +130,7 @@ function QuizStateMachine(questions, eventListener) {
                     },
                     run: function() {
                         console.log(logInfo + "finished");
-                        self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.FINISHED, data: {}});
+                        self.eventListener.handleEventNotification({name: "quiz_finished_event", data: {}});
                     }
                 }
 
@@ -183,9 +190,13 @@ QuizStateMachine.prototype.handleEventNotification = function(event) {
         case "question_finish":
             console.log("question_finish");
             self.eventListener.handleEventNotification(event);
-            self._nextQuestionMachine();
-            self.eventListener.handleEventNotification({name:"question_next_question",
-                data:{question:self.currentQuestionMachines.question,timeout:self.currentQuestionMachines.timeout}});
+            if(self._nextQuestionMachine()){
+                self.eventListener.handleEventNotification({name:"question_next_question",
+                    data:{question:self.currentQuestionMachines.question,timeout:self.currentQuestionMachines.timeout}});
+            }else{
+                self.consumeEvent({name:'quiz_finish_event',data:{}});
+            };
+
             break;
         case "question_ending":
             console.log("Test question_ending");

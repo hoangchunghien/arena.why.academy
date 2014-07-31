@@ -7,6 +7,7 @@ body {
 .arena-container {
     background-color: white;
     box-shadow: 0 0 30px hsla(0, 0%, 0%, 0.08);
+    margin-top: 20px;
 }
 
 .choice-button {

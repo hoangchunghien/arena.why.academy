@@ -12,3 +12,20 @@
 .action-bar {
     margin-bottom: 20px;
 }
+
+
+.nav>li>a {
+	padding: 0px;
+}
+
+a.navbar-brand {
+	background: transparent;
+	text-align: center;
+	border-bottom: 0px;
+	padding: 9px 0 10px 0!important;
+	color: white;
+}
+
+.navbar-default .navbar-brand, .navbar a {
+	color: white;	
+}

@@ -23,9 +23,12 @@ function QuestionStateMachine(question, eventListener) {
     this.question = question;
     this.answer = null;
     this.timeout = 20;
-    this.remainingTime = this.timeout+1;
+    this.remainingTime = this.timeout + 1;
     this.correct = false;
     this.eventListener = eventListener;
+
+    this.questionEndingTimer;
+    this.questionFinishTimer;
 
     /*
      * Private methods ---------------------------------------------------------
@@ -110,22 +113,21 @@ function QuestionStateMachine(question, eventListener) {
                 if (self.answer == self.question.answer) {
                     self.correct = true;
                     self.score = self.remainingTime;
-                    timeForChangeQuestion=3500;
+                    timeForChangeQuestion = 3500;
                 } else {
                     self.score = 0;
                     self.correct = false;
-                    timeForChangeQuestion=2000;
+                    timeForChangeQuestion = 2000;
                 }
-                setTimeout(function(){
+                self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
                         correct: self.correct, score: self.score, correctAnswer: self.question.answer}});
 
-                },1000);
+                }, 1000);
 
-                setTimeout(function(){
+                self.questionFinishTimer=setTimeout(function () {
                     self.consumeEvent({name: "question_finish", data: {}});
-                },timeForChangeQuestion);
-
+                }, timeForChangeQuestion);
 
 
             }
@@ -177,6 +179,12 @@ function QuestionStateMachine(question, eventListener) {
 *    }
  *
  */
+QuestionStateMachine.prototype.destroy = function () {
+    clearTimeout(this.questionFinishTimer);
+    clearTimeout(this.questionEndingTimer);
+    clearTimeout(this.runtimeout);
+};
+
 QuestionStateMachine.prototype.consumeEvent = function (event) {
 
     var self = this;

@@ -10,8 +10,12 @@ angular.module('arena.challenge', [
             $stateProvider
                 .state('challenge', {
                     url: '/challenge',
+                    resolve:{delegate:function(){return {};}},
                     templateUrl: '/views/challenge/challenge.html',
-                    controller: 'arena.challenge.ctrl'
+                    controller: 'arena.challenge.ctrl',
+                    onExit: function(delegate){
+                        delegate.destroy();
+                    }
                 })
 
 

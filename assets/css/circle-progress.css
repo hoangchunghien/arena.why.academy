@@ -14,9 +14,9 @@
 .arena-progress .arena-circle,
 .arena-progress .arena-bar {
     display: inline-block;
-    /*background: #fff;*/
-    width: 32px; height: 32px;
-    border-radius: 32px;
+    background: gray;
+    width: 40px; height: 40px;
+    border-radius: 40px;
     /*border: 1px solid #d5d5da;*/
 }
 .arena-progress .arena-bar {
@@ -30,10 +30,10 @@
 }
 .arena-progress .arena-circle .arena-label {
     display: inline-block;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    border-radius: 32px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 40px;
     /*margin-top: 3px;*/
     color: #b5b5ba;
     font-size: 17px;

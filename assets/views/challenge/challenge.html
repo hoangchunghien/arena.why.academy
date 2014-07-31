@@ -1,14 +1,20 @@
-<div class="col-md-3"></div>
-<div class="col-md-6 jumbotron challenge arena-container">
+<div class="col-md-1"></div>
+<div class="col-md-10 jumbotron challenge arena-container">
     <!--
     Row 1
     -->
     <div class="row">
         <div class="col-md-6 row-profile-left" style=" border-right: thin solid grey;">
+            <!--<div class="row" align="center">-->
+                <!--<img ng-src="{{profile.picture_url}}">-->
+            <!--</div>-->
+            <!--<div class="row" align="center" style="margin-top: 3px;">-->
+                <!--<div ng-bind="profile.name"></div>-->
+            <!--</div>-->
             <div class="col-md-3">
                 <img ng-src="{{profile.picture_url}}">
             </div>
-            <div class="col-md-9" ng-bind="profile.name"></div>
+            <div class="col-md-9" ng-bind="profile.name" align="left" ></div>
         </div>
 
         <div class="col-md-6 row-profile-right">

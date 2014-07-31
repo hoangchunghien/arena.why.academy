@@ -14,7 +14,7 @@
 .arena-progress .arena-circle,
 .arena-progress .arena-bar {
     display: inline-block;
-    /*background: #fff;*/
+    background: gray;
     width: 32px; height: 32px;
     border-radius: 32px;
     /*border: 1px solid #d5d5da;*/

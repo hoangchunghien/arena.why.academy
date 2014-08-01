@@ -4,9 +4,10 @@
 
 angular.module('arena.navigation.controller', [
     'ui.router',
-    'arena.users.service'
+    'arena.users.service',
+    'arena.users.facebook.service'
 ])
-    .controller('NavCtrl', function ($scope, $http, userSrv) {
+    .controller('NavCtrl', function ($scope, $http, userSrv, facebookSrv) {
 
         $scope.user = null;
 
@@ -19,9 +20,17 @@ angular.module('arena.navigation.controller', [
         });
 
         $scope.init = function () {
-            document.cookie = decodeURIComponent(document.cookie);
-            $scope.profile = userSrv.getProfile() || {};
-            $scope.authenticated = userSrv.isAuthenticated();
+//            document.cookie = decodeURIComponent(document.cookie);
+//            $scope.profile = userSrv.getProfile() || {};
+            facebookSrv.loadFacebookProfile(function(response) {
+                $scope.profile = response;
+                $scope.profile.picture_url = 'http://graph.facebook.com/' + response.id + "/picture";
+                console.log($scope.profile);
+                console.log($scope.profile.name);
+                $scope.$apply();
+            });
+//            $scope.authenticated = userSrv.isAuthenticated();
+            $scope.authenticated = true;
             $scope.loadUserNavBar();
         };
 
@@ -36,20 +45,14 @@ angular.module('arena.navigation.controller', [
         };
 
         $scope.loadUserNavBar = function () {
-            $scope.isAuth = false;
-            if (userSrv.isAuthenticated()) {
-                $scope.isAuth = true;
-            }
-            else {
-                $scope.isAuth = false;
-            }
-
-            if (window.location.pathname === "/users/" + $scope.profile.id + "/courses") {
-                $("#myCoursesNav").addClass("active");
-            }
-            else if (window.location.pathname === "/courses") {
-                $("#publicCoursesNav").addClass("active");
-            }
+//            $scope.isAuth = false;
+            $scope.isAuth = true;
+//            if (userSrv.isAuthenticated()) {
+//                $scope.isAuth = true;
+//            }
+//            else {
+//                $scope.isAuth = false;
+//            }
         };
 
         $scope.getLoginOrLogoutUrl = function () {

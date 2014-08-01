@@ -33,12 +33,31 @@ angular.module('arena.users.service', [
                 }
             }
             return authenticated;
-        }
+        };
 
         this.logout = function () {
             delete $cookies.user;
             authData = null;
-        }
+        };
+
+        this.loadFacebookProfile = function(callback) {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    console.log(response);
+                    console.log('Logged in.');
+                    FB.api('/me', function(response) {
+                        callback(response);
+                    });
+                }
+                else {
+                    FB.login(function(){
+                        FB.api('/me', function(response) {
+                            callback(response);
+                        });
+                    }, {scope: 'public_profile'});
+                }
+            });
+        };
 
         this.getProfile = function () {
             if (this.isAuthenticated()) {

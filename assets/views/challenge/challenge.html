@@ -112,7 +112,7 @@
     <!--
        Modal : Finished challenge !
        -->
-    <div modal-show="finishedModalChallenge" class="modal fade">
+    <div id="finishModalChallenge"  class="modal">
         <div class="modal-dialog">
             <div class="modal-content arena-modal-finish ">
 
@@ -140,7 +140,9 @@
                         <div class="col-md-6">
                             <p ng-bind-template="Your Award :"></p>
                             <img ng-src="{{medalUrl}}">
-                            <button type="button" class="btn btn-success" ng-click="reloadChallenge()">Replay</button>
+                            <button type="button" class="btn btn-success" ng-click="reloadChallenge()" data-dismiss="modal">
+                                Replay
+                            </button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal"
                                     ng-click="exitChallenge()">Exit
                             </button>

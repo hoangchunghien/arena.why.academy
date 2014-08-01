@@ -7,13 +7,13 @@ angular.module('arena.main', [
         '$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
-                .state('login', {
-                    url: '/',
-                    templateUrl: '/views/main/login.html',
-                    controller: 'arena.loginFacebook.ctrl'
-                })
+//                .state('login', {
+//                    url: '/',
+//                    templateUrl: '/views/main/login.html',
+//                    controller: 'arena.loginFacebook.ctrl'
+//                })
                 .state('main', {
-                    url: 'main',
+                    url: '/',
                     templateUrl: '/views/main/main.html',
                     controller: 'arena.main.ctrl'
                 })

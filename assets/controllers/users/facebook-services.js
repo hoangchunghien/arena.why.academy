@@ -6,18 +6,19 @@ angular.module('arena.users.facebook.service', [
 ])
     .service('facebookSrv', function () {
         var profile;
+        var self=this;
         this.loadFacebookProfile = function (callback) {
             if (profile) {
                 callback(profile);
                 return;
             }
-            initFacebookService(callback);
+            self.initFacebookService(callback);
 
         };
         this.getFacebookProfile = function () {
             return profile;
         };
-        var initFacebookService = function (callback) {
+        this.initFacebookService = function (callback) {
             window.fbAsyncInit = function () {
                 FB.init({
                     appId: '319210081588306',

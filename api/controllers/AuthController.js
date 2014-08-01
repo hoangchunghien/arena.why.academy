@@ -1,7 +1,6 @@
-
 var arena_url;
 var api_url;
-var loadEnv = function() {
+var loadEnv = function () {
     console.log("Running enviroment: " + process.env.NODE_ENV);
     if (process.env.NODE_ENV === "development") {
         arena_url = 'http://localhost';
@@ -25,7 +24,7 @@ var qs = require('querystring');
 var request = require('request');
 var FB = require('fb');
 
-var getFacebookAccessToken = function(code, callback) {
+var getFacebookAccessToken = function (code, callback) {
     var accessToken;
     var expires;
 
@@ -34,7 +33,7 @@ var getFacebookAccessToken = function(code, callback) {
         client_secret: client_secret,
         redirect_uri: redirect_url,
         code: code
-    }, function(res) {
+    }, function (res) {
         if (!res || res.error) {
             console.log(!res ? 'error occurred' : res.error);
             return;
@@ -48,7 +47,7 @@ var getFacebookAccessToken = function(code, callback) {
     });
 };
 
-var login = function(fbToken, callback) {
+var login = function (fbToken, callback) {
 
     var params = {'fb_access_token': fbToken};
     console.log("Param: " + params);
@@ -58,7 +57,7 @@ var login = function(fbToken, callback) {
     request.get({
         headers: {'content-type': 'application/x-www-form-urlencoded'},
         url: url
-    }, function(error, response, body) {
+    }, function (error, response, body) {
         console.log("Error: " + error);
         console.log("Response: " + response);
         console.log("Body: " + body);
@@ -78,32 +77,47 @@ var login = function(fbToken, callback) {
 };
 
 var AuthController = {
-    login: function(req, res) {
+    login: function (req, res) {
         var provider = req.param('provider');
         if (provider === "facebook") {
             res.redirect('https://www.facebook.com/dialog/oauth?' +
-                    'client_id=' + client_id +
-                    '&redirect_uri=' + redirect_url +
-                    '&scope=email%2Cpublish_stream&state=123456789');
+                'client_id=' + client_id +
+                '&redirect_uri=' + redirect_url +
+                '&scope=email%2Cpublish_stream&state=123456789');
             return;
         }
     },
-    facebook: function(req, res) {
+    facebook: function (req, res) {
         var code = req.param('code');
-        getFacebookAccessToken(code, function(fb_token) {
-            login(fb_token, function(user) {
+        var token = req.param('token');
+        if (code) {
+            getFacebookAccessToken(code, function (fb_token) {
+                login(fb_token, function (user) {
+                    var expires = new Date(user.token.expires);
+                    var now = new Date();
+                    var expiresTime = expires.getTime() - now.getTime();
+
+                    res.cookie('user', user, {maxAge: expiresTime});
+                    console.log("Cookie already set");
+                    res.redirect(arena_url);
+                    return;
+                });
+            });
+        }
+        if (token) {
+            login(token, function (user) {
                 var expires = new Date(user.token.expires);
                 var now = new Date();
                 var expiresTime = expires.getTime() - now.getTime();
-                
+
                 res.cookie('user', user, {maxAge: expiresTime});
                 console.log("Cookie already set");
                 res.redirect(arena_url);
                 return;
             });
-        });
+        }
     },
-    logout: function(req, res) {
+    logout: function (req, res) {
         console.log("Do logout");
         res.clearCookie('user');
         res.redirect(arena_url);

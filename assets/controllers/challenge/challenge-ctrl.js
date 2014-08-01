@@ -4,10 +4,11 @@
 var app = angular.module('arena.challenge.controller', [
     'ui.router',
     'arena.audio.service',
-    'arena.users.service'
+    'arena.users.service',
+    'arena.users.facebook.service'
 
 ]);
-app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv) {
+app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv) {
 
     var self = this;
     var quizMachine;
@@ -17,26 +18,29 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
     var correctAnswerAudio = audioSrv.getCorrectAnswerAudio("/data/sound/true-answer.mp3");
     var wrongAnswerAudio = audioSrv.getWrongAnswerAudio("/data/sound/wrong-answer.mp3");
     var countDownToZeroTimer;
-    $scope.results = [];
-    $scope.answers = [];
-    $scope.tableOfResults = [];
-    $scope.score = 0;
-    $scope.currentQuestion = 0;
-    $scope.timeout = 0;
-    $scope.ThreeToZero = 3;
-    $scope.startModalChallenge = false;
-    $scope.finishedModalChallenge = false;
+    var modalFinishChallengeTimer;
+//    $scope.results = [];
+//    $scope.answers = [];
+//    $scope.tableOfResults = [];
+//    $scope.score = 0;
+//    $scope.currentQuestion = 0;
+//    $scope.timeout = 0;
+//    $scope.ThreeToZero = 3;
+//    $scope.startModalChallenge = false;
+//    $scope.finishedModalChallenge = false;
     $scope.medalUrl;
     $scope.profile = userSrv.getProfile();
     //disabled button
-    $scope.disabledButton = false;
+//    $scope.disabledButton = false;
 
 
     //
     delegate.destroy = function () {
         $('#startModalChallenge').modal('hide');
+        $('#finishModalChallenge').modal('hide');
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
+        clearTimeout(modalFinishChallengeTimer);
         clearTimeout(countDownToZeroTimer);
         audioSrv.destroyAllSound();
         quizMachine.destroy();
@@ -104,9 +108,12 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
     var _playAudio = function (url) {
         audioSrv.playAudio(url);
     };
+
     //Reload Challenge
     $scope.reloadChallenge = function () {
-        location.reload();
+        delegate.destroy();
+        _initialize();
+//        location.reload();
     };
 
 
@@ -116,6 +123,7 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         switch (event.name) {
 
             case "quiz_questioning":
+
                 backgroundAudio.play();
                 $scope.question = event.data.question;
                 $scope.timeout += event.data.timeout;
@@ -180,8 +188,8 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
                 } else {
                     $scope.medalUrl = "";
                 }
-                $timeout(function () {
-                    $scope.finishedModalChallenge = true;
+                modalFinishChallengeTimer = $timeout(function () {
+                    $('#finishModalChallenge').modal('show');
                 }, 1000);
 //                $timeout(function () {
 //                    $scope.finishedModalChallenge = false;
@@ -189,27 +197,45 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
                 //
                 break;
             case "quiz_initializing":
-                _startModalChallenge();
+//                _startModalChallenge();
                 break;
 
         }
     };
     $scope.exitChallenge = function () {
-
         $state.go("main");
+    };
+    var _initialize = function () {
+        $scope.results = [];
+        $scope.answers = [];
+        $scope.tableOfResults = [];
+        $scope.score = 0;
+        $scope.currentQuestion = 0;
+        $scope.timeout = 0;
+        $scope.ThreeToZero = 3;
+        $scope.disabledButton = false;
+        $http.get('/data/myData.json').success(function (data) {
+            var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
+            quizMachine = new QuizStateMachine(data.slice(x, x + 1), self);
+            $scope.numberOfQuestion = quizMachine.quiz.questions.length;
+            for (var i = 0; i < $scope.numberOfQuestion; i++) {
+                $scope.results.push({'score': i + 1, 'correct': null});
+            }
+            _startModalChallenge();
+        });
 
     };
-
-
-    $http.get('/data/myData.json').success(function (data) {
-//            quizMachine = new QuizStateMachine(data.slice(101,111), self);
-        var x = Math.floor((Math.random() * 100) + 0);
-        quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
-        $scope.numberOfQuestion = quizMachine.quiz.questions.length;
-        for (var i = 0; i < $scope.numberOfQuestion; i++) {
-            $scope.results.push({'score': i + 1, 'correct': null});
-        }
-    });
+    _initialize();
+//    $http.get('/data/myData.json').success(function (data) {
+////            quizMachine = new QuizStateMachine(data.slice(101,111), self);
+//        initializ
+//        var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
+//        quizMachine = new QuizStateMachine(data.slice(x, x + 1), self);
+//        $scope.numberOfQuestion = quizMachine.quiz.questions.length;
+//        for (var i = 0; i < $scope.numberOfQuestion; i++) {
+//            $scope.results.push({'score': i + 1, 'correct': null});
+//        }
+//    });
     var destroyAllAudio = function () {
         audioSrv.destroySound('backgroundAudio');
         audioSrv.destroySound('countDownAudio');

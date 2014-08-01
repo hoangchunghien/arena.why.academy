@@ -7,7 +7,7 @@ var loadEnv = function () {
         api_url = 'http://staging.why.academy:8080';
     }
     else {
-        arena_url = 'http://arena.why.academy';
+        arena_url = 'https://arena.why.academy';
         api_url = 'http://api.why.academy';
     }
 };

@@ -29,7 +29,7 @@ angular.module('arena.navigation.controller', [
         $scope.init = function () {
             document.cookie = decodeURIComponent(document.cookie);
             $scope.profile = userSrv.getProfile() || {};
-            $scope.$apply();
+//            $scope.$apply();
 //            facebookSrv.loadFacebookProfile(function (response) {
 //                $scope.profile = response;
 //                $scope.profile.picture_url = 'http://graph.facebook.com/' + response.id + "/picture";

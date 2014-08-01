@@ -57,48 +57,58 @@
 
 <nav class="navbar navbar-default" role="navigation" ng-controller="NavCtrl" ng-init="init()">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Arena for English <img src="/images/loaders/spinner5.gif" ng-show="loading" /></a>
-        </div>
+
+        <div class="nav-no-collapse header-nav">
+                <ul class="nav navbar-nav pull-left">
+
+                    <!-- start: User Dropdown -->
+                    <li class="dropdown">
+                        <a class="btn account dropdown-toggle" data-toggle="dropdown" href="/">
+                            <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
+                            <div class="user">
+                                <span class="hello">&nbsp;</span>
+                                <span class="name">&nbsp;</span>
+                            </div>
+                        </a>
+<!--                         <ul class="dropdown-menu">
+                            <li class="dropdown-menu-title">
+                                
+                            </li>
+                            <li><a href="widgets.html#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="widgets.html#"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="widgets.html#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="login.html"><i class="fa fa-off"></i> Logout</a></li>
+                        </ul> -->
+                    </li>
+                    <!-- end: User Dropdown -->
+
+                    <li class="dropdown">
+                        <span class="h2"></span>
+                        <img src="/images/loaders/spinner5.gif" ng-show="loading" />
+                    </li>
+                </ul>
+            </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!--<li ng-class="{active: $state.includes('courses.new')}" ng-show="isAuth">-->
-                <!--<a href="/courses/new"><span class="h2"></span>New course</a>-->
-                <!--</li>-->
-                <!--<li id="myCoursesNav" ng-class="{active: $state.includes('users.detail.courses')}" ng-show="isAuth">-->
-                <!--<a href="/users/{{profile.id}}/courses"><span class="h2"></span>My courses</a></li>-->
-                <!--<li id="publicCoursesNav" ng-class="{active: $state.includes('courses.list')}" ng-show="isAuth">-->
-                <!--<a href="/courses"><span class="h2"></span>Published courses</a></li>-->
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
+        <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+            <!-- <ul class="nav navbar-nav navbar-right"> -->
                 <!--<li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>-->
-                <li ng-show="isAuth" class="dropdown">
+                <!-- <li ng-show="isAuth" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="h2"></span>
                         <img ng-src="{{profile.picture_url}}" width="20" height="20">
                         &nbsp<span ng-bind="profile.name"></span>
-                    </a>
+                    </a> -->
                     <!--&nbsp<b class="caret"></b></a>-->
                     <!--<ul class="dropdown-menu">-->
                     <!--<li>&nbsp;</li>-->
                     <!--<li class="divider"></li>-->
                     <!--<li><a href="" ng-click="doLogout()">Logout</a></li>-->
                     <!--</ul>-->
-                </li>
-            </ul>
+<!--                 </li>
+            </ul> -->
 
-        </div>
+        <!-- </div> -->
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->

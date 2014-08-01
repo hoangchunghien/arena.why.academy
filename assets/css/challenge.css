@@ -5,9 +5,22 @@ body {
 }
 
 .arena-container {
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .arena-container {
+        max-width: 760px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+.arena-container .jumbotron {
     background-color: white;
     box-shadow: 0 0 30px hsla(0, 0%, 0%, 0.08);
-    margin-top: 20px;
 }
 
 .choice-button {

@@ -111,9 +111,12 @@ angular.module('arena.audio.service', [
         };
 
         this.destroyAllSound = function () {
-            soundManager.destroySound('backgroundAudio');
-            soundManager.destroySound('countDownAudio');
-            soundManager.destroySound('countDownCoongAudio');
+            backgroundAudio.destruct();
+            backgroundAudio = null;
+            countDownAudio.destruct();
+            countDownAudio = null;
+            countDownCoongAudio.destruct();
+            countDownCoongAudio = null;
             soundManager.destroySound('wrongAnswerAudio');
             soundManager.destroySound('correctAnswerAudio');
 

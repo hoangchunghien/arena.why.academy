@@ -12,11 +12,11 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
 
     var self = this;
     var quizMachine;
-    var backgroundAudio = audioSrv.getBackgroundAudio("/data/sound/starting.mp3", 10);
-    var countDownAudio = audioSrv.getCountDownAudio("/data/sound/countdown.mp3");
-    var countDownCoongAudio = audioSrv.getCountDownCoongAudio("/data/sound/coong.mp3");
-    var correctAnswerAudio = audioSrv.getCorrectAnswerAudio("/data/sound/true-answer.mp3");
-    var wrongAnswerAudio = audioSrv.getWrongAnswerAudio("/data/sound/wrong-answer.mp3");
+    var backgroundAudio;
+    var countDownAudio;
+    var countDownCoongAudio;
+    var correctAnswerAudio;
+    var wrongAnswerAudio;
     var countDownToZeroTimer;
     var modalFinishChallengeTimer;
 //    $scope.results = [];
@@ -203,9 +203,17 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         }
     };
     $scope.exitChallenge = function () {
+//        delegate.destroy();
         $state.go("main");
     };
     var _initialize = function () {
+        backgroundAudio = audioSrv.getBackgroundAudio("/data/sound/starting.mp3", 10);
+        countDownAudio = audioSrv.getCountDownAudio("/data/sound/countdown.mp3");
+        countDownCoongAudio = audioSrv.getCountDownCoongAudio("/data/sound/coong.mp3");
+        correctAnswerAudio = audioSrv.getCorrectAnswerAudio("/data/sound/true-answer.mp3");
+        wrongAnswerAudio = audioSrv.getWrongAnswerAudio("/data/sound/wrong-answer.mp3");
+        countDownToZeroTimer;
+        modalFinishChallengeTimer;
         $scope.results = [];
         $scope.answers = [];
         $scope.tableOfResults = [];
@@ -216,7 +224,7 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         $scope.disabledButton = false;
         $http.get('/data/myData.json').success(function (data) {
             var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
-            quizMachine = new QuizStateMachine(data.slice(x, x + 1), self);
+            quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
                 $scope.results.push({'score': i + 1, 'correct': null});

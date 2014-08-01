@@ -51,8 +51,8 @@
 }
 
 .arena-progress .arena-circle.arena-fail .arena-label {
-    /*background: #DAD8D7;*/
     background: #F7252E;
+    color: white;
 }
 
 /* Done / Active */

@@ -7,12 +7,18 @@ angular.module('arena.navigation.controller', [
     'arena.users.service',
     'arena.users.facebook.service'
 ])
-    .controller('NavCtrl', function ($scope, $http, userSrv, facebookSrv) {
+    .controller('NavCtrl', function ($scope,$state, $http, userSrv, facebookSrv,$state) {
 
         $scope.user = null;
 
         $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             $scope.loading = true;
+            if(!facebookSrv.getFacebookProfile()){
+                console.log(window.location);
+                if(window.location.pathname!=="/"){
+                    window.location='/';
+                }
+            }
         });
 
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -22,12 +28,15 @@ angular.module('arena.navigation.controller', [
         $scope.init = function () {
 //            document.cookie = decodeURIComponent(document.cookie);
 //            $scope.profile = userSrv.getProfile() || {};
+
             facebookSrv.loadFacebookProfile(function(response) {
                 $scope.profile = response;
                 $scope.profile.picture_url = 'http://graph.facebook.com/' + response.id + "/picture";
                 console.log($scope.profile);
                 console.log($scope.profile.name);
-                $scope.$apply();
+                $state.go('main');
+//                $scope.$apply();
+
             });
 //            $scope.authenticated = userSrv.isAuthenticated();
             $scope.authenticated = true;

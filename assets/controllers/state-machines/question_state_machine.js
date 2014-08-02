@@ -118,7 +118,7 @@ function QuestionStateMachine(question, eventListener) {
                 var timeForChangeQuestion;
                 if (self.answer == self.question.answer) {
                     self.correct = true;
-                    self.score = self.remainingTime;
+                    self.score = self.remainingTime / 1000;
                     timeForChangeQuestion = 3500;
                 } else {
                     self.score = 0;

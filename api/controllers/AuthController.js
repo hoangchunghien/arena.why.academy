@@ -49,7 +49,7 @@ var getFacebookAccessToken = function (code, callback) {
 
 var login = function (fbToken, callback) {
 
-    var params = {'fb_access_token': fbToken};
+    var params = {'fb_access_token': fbToken, 'app_id': 2};
     console.log("Param: " + params);
     var url = api_url + '/v2/login/facebook?';
     url += qs.stringify(params);

@@ -22,8 +22,9 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 20;
-    this.remainingTime = this.timeout + 1;
+    this.timeout = 20000;  // in milisecond
+    this.timeStep = 250;
+    this.remainingTime = this.timeout + 1000; // in milisecond
     this.correct = false;
     this.eventListener = eventListener;
 
@@ -133,10 +134,9 @@ function QuestionStateMachine(question, eventListener) {
 
                 }, 1000);
 
-                self.questionFinishTimer=setTimeout(function () {
+                self.questionFinishTimer = setTimeout(function () {
                     self.consumeEvent({name: "question_finish", data: {}});
                 }, timeForChangeQuestion);
-
 
 
                 mixpanel.track("Answered Question", {
@@ -163,9 +163,13 @@ function QuestionStateMachine(question, eventListener) {
 
     this.activeTimer = function () {
         console.log("run Active timer");
+        var data = {};
+        data.remainingTime = self.remainingTime;
+        self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
+
         var countDown = function () {
             self.runtimeout = setTimeout(function () {
-                self.remainingTime--;
+                self.remainingTime -= self.timeStep;
 //                console.log(self.remainingTime);
                 var data = {};
                 data.remainingTime = self.remainingTime;
@@ -176,9 +180,10 @@ function QuestionStateMachine(question, eventListener) {
                     return;
                 }
                 countDown();
-
-            }, 1000);
+            }, self.timeStep);
         };
+
+//        setTimeout(function(){ countDown();}, 1000);
         countDown();
     };
 

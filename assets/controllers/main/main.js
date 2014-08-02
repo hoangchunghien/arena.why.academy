@@ -31,14 +31,14 @@ angular.module('arena.main', [
         console.log("log facebook");
 //        $scope.showButtonPlayGame=userSrv.isAuthenticated();
 
-        // var profile = userSrv.getProfile();
-        // if (profile) {
-        //     mixpanel.identify(profile.id);  
-        //     mixpanel.people.set({
-        //         "$name": profile.name,
-        //         "$email":profile.email
-        //     });
-        // };
+        var profile = userSrv.getProfile();
+        if (profile) {
+            mixpanel.identify(profile.id);  
+            mixpanel.people.set({
+                "$name": profile.name,
+                "$email":profile.email
+            });
+        };
     })
     
     .controller('arena.loginFacebook.ctrl', function ($scope, $state, Seo, userSrv, facebookSrv) {

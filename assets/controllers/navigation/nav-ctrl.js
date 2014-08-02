@@ -27,7 +27,7 @@ angular.module('arena.navigation.controller', [
 
             mixpanel.track(
                 "Changed State",
-                { "toState": toState, "fromState": fromState,}
+                { "toState": toState.name, "fromState": fromState.name,}
             );
         });
 

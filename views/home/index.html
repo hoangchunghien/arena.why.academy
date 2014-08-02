@@ -16,42 +16,25 @@
     <link rel="stylesheet" href="/css/challenge.css">
     <link rel="stylesheet" href="/css/circle-progress.css">
 
-    <script src="http://connect.facebook.net/en_US/all.js "></script>
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/vendor/angular/angular.min.js"></script>
-    <script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
-    <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/vendor/socket.io-client/socket.io.js"></script>
-    <!--<script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
-    <!--
-    <script src="/vendor/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
-    -->
-    <!--<script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>-->
-    <!--<script src="/vendor/mp3-player-button.js"></script>-->
-    <!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
-    <script src="/controllers/users/facebook-services.js"></script>
-    <script src="/controllers/arena.js"></script>
-    <script src="/controllers/users/users-service.js"></script>
-    <script src="/commons/audio-service.js"></script>
-    <script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>
-    <script src="/vendor/mp3-player-button.js"></script>
-    <script src="/controllers/navigation/nav-ctrl.js"></script>
-    <script src="/commons/api-service.js"></script>
-    <script src="/commons/utils/utils-service.js"></script>
-    <script src="/controllers/main/main.js"></script>
-    <script src="/controllers/challenge/challenge-route.js"></script>
-    <script src="/controllers/challenge/challenge-ctrl.js"></script>
-    <script src="/controllers/state-machines/quiz_state_machine.js"></script>
-    <script src="/controllers/state-machines/question_state_machine.js"></script>
-    <script src="/controllers/chat/chat-route.js"></script>
-    <script src="/controllers/chat/app.js"></script>
-    <script src="/controllers/chat/chat-route.js"></script>
-    <script src="/controllers/chat/services.js"></script>
+
+
+    
+
+
+    
+
 
 
     <title ng-bind="Seo.title"></title>
+
+
+    <!-- start Mixpanel -->
+    <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
+    <!-- end Mixpanel -->
+
+
 </head>
 <body>
 
@@ -116,6 +99,39 @@
 
 <div ui-view class="container bs-docs-container"></div>
 
+
+
+
+    <script src="http://connect.facebook.net/en_US/all.js "></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/socket.io-client/socket.io.js"></script>
+    <!--<script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
+    <!--
+    <script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
+    -->
+    <!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
+    <script src="/controllers/users/facebook-services.js"></script>
+    <script src="/controllers/arena.js"></script>
+    <script src="/controllers/users/users-service.js"></script>
+    <script src="/commons/audio-service.js"></script>
+    <script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>
+    <script src="/vendor/mp3-player-button.js"></script>
+    <script src="/controllers/navigation/nav-ctrl.js"></script>
+    <script src="/commons/api-service.js"></script>
+    <script src="/commons/utils/utils-service.js"></script>
+    <script src="/controllers/main/main.js"></script>
+    <script src="/controllers/challenge/challenge-route.js"></script>
+    <script src="/controllers/challenge/challenge-ctrl.js"></script>
+    <script src="/controllers/state-machines/quiz_state_machine.js"></script>
+    <script src="/controllers/state-machines/question_state_machine.js"></script>
+    <script src="/controllers/chat/chat-route.js"></script>
+    <script src="/controllers/chat/app.js"></script>
+    <script src="/controllers/chat/chat-route.js"></script>
+    <script src="/controllers/chat/services.js"></script>
 
 </body>
 </html>

@@ -24,6 +24,11 @@ angular.module('arena.navigation.controller', [
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $scope.loading = false;
+
+            mixpanel.track(
+                "Changed State",
+                { "toState": toState, "fromState": fromState,}
+            );
         });
 
         $scope.init = function () {

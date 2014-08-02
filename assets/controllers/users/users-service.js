@@ -60,12 +60,21 @@ angular.module('arena.users.service', [
 //        };
 
         this.getProfile = function () {
+
+            var profile;
             if (this.isAuthenticated()) {
                 var user = getUserFromCookies();
-                var profile = user.profile;
-                return profile;
+                profile = user.profile;
             }
-            return null;
+
+            if (profile) {
+                mixpanel.identify(profile.id);  
+                mixpanel.people.set({
+                    "$name": profile.name
+                });
+            };
+
+            return profile;
         }
 
         this.getToken = function () {

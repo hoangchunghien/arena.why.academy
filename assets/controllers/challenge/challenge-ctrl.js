@@ -11,6 +11,8 @@ var app = angular.module('arena.challenge.controller', [
 app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv) {
 
     var self = this;
+
+    var numOfQuestions = 10;
     var quizMachine;
     var backgroundAudio;
     var countDownAudio;
@@ -224,13 +226,30 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         $scope.disabledButton = false;
         $http.get('/data/myData.json').success(function (data) {
             var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
-            quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
+            var questions = generateQuestions(data);
+            // quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
+            quizMachine = new QuizStateMachine(questions, self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
                 $scope.results.push({'score': i + 1, 'correct': null});
             }
             _startModalChallenge();
         });
+
+        var generateQuestions = function(data) {
+            var questions = [];
+            var indexes = [];
+            var n = data.length;
+            while (questions.length < 10) {
+                var rand = Math.random() * 1000;
+                var i = Math.floor(rand % n);
+                if (indexes.indexOf(i) < 0) {
+                    questions.push(data[i]);
+                    indexes.push(i);
+                }
+            }
+            return questions;
+        };
 
     };
     _initialize();

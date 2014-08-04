@@ -231,7 +231,7 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
 
             // quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
 //            var questions = generateQuestions(data);
-            quizMachine = new QuizStateMachine(data.slice(30,40), self);
+            quizMachine = new QuizStateMachine(data.slice(0,10), self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
                 $scope.results.push({'score': i + 1, 'correct': null});

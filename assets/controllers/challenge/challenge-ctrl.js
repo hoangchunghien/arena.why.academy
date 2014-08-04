@@ -226,12 +226,12 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
         $scope.timeout = 0;
         $scope.ThreeToZero = 3;
         $scope.disabledButton = false;
-        $http.get('/data/data-encrypt.json').success(function (data) {
+        $http.get('/data/myData.json').success(function (data) {
 //            var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
 
             // quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
-//            var questions = generateQuestions(data);
-            quizMachine = new QuizStateMachine(data.slice(0,10), self);
+            var questions = generateQuestions(data);
+            quizMachine = new QuizStateMachine(questions, self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
                 $scope.results.push({'score': i + 1, 'correct': null});

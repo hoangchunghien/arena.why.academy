@@ -8,7 +8,7 @@ var app = angular.module('arena.challenge.controller', [
     'arena.users.facebook.service'
 
 ]);
-app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv) {
+app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv) {
 
     var self = this;
 
@@ -55,10 +55,12 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
     $scope.showCheckCorrectAnswer = false;
     var _activeModal = function () {
         $timeout(function () {
-            $scope.showCheckCorrectAnswer = true;
+//            $scope.showCheckCorrectAnswer = true;
+            $('#showCheckCorrectAnswer').modal('show');
         }, 200);
         $timeout(function () {
-            $scope.showCheckCorrectAnswer = false;
+//            $scope.showCheckCorrectAnswer = false;
+            $('#showCheckCorrectAnswer').modal('hide');
         }, 1800);
     };
 
@@ -75,7 +77,7 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
                     _countDownThreeToZero();
                 } else {
                     setTimeout(function () {
-                        $scope.ThreeToZero = "Let's go !";
+                        $scope.ThreeToZero = "Bắt đầu !";
                         countDownCoongAudio.play();
                         $scope.$apply();
                     }, 1000);
@@ -214,8 +216,8 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         countDownCoongAudio = audioSrv.getCountDownCoongAudio("/data/sound/coong.mp3");
         correctAnswerAudio = audioSrv.getCorrectAnswerAudio("/data/sound/true-answer.mp3");
         wrongAnswerAudio = audioSrv.getWrongAnswerAudio("/data/sound/wrong-answer.mp3");
-        countDownToZeroTimer;
-        modalFinishChallengeTimer;
+//        countDownToZeroTimer;
+//        modalFinishChallengeTimer;
         $scope.results = [];
         $scope.answers = [];
         $scope.tableOfResults = [];
@@ -224,11 +226,12 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
         $scope.timeout = 0;
         $scope.ThreeToZero = 3;
         $scope.disabledButton = false;
-        $http.get('/data/myData.json').success(function (data) {
-            var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
-            var questions = generateQuestions(data);
+        $http.get('/data/data-encrypt.json').success(function (data) {
+//            var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
+
             // quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
-            quizMachine = new QuizStateMachine(questions, self);
+//            var questions = generateQuestions(data);
+            quizMachine = new QuizStateMachine(data.slice(0,10), self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
                 $scope.results.push({'score': i + 1, 'correct': null});
@@ -272,7 +275,7 @@ app.controller('arena.challenge.ctrl', function (delegate, $scope, $state, $http
     };
 
 
-});
+}]);
 app.directive("modalShow", function ($parse) {
     return {
         restrict: "A",

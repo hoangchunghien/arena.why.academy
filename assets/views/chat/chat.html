@@ -1,16 +1,14 @@
 ﻿
+
     
 
 
     <div id="container" style="width:100%">
 
-        <div id="header" style="background-color:#FFA500;">
-            <input type="text" ng-model="username" placeholder="Enter name">
-            <button type="submit" ng-click='joinServer()'>Login</button>
-            <p>{{currentRoom}}</p>
-        </div>
 
-        <div id="menu" style="background-color:#FFD700;height:700px;width:300px;float:left;">
+        
+
+        <!--<div id="menu" style="background-color:#FFD700;height:700px;width:300px;float:left;">
             <div style="height:300px;background-color:#FFA500;">
                 <p>rooms</p>
                 <ul>
@@ -46,12 +44,60 @@
         </div>
 
         <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+        </div>-->
+		<div class="box chat chat-full noOverflow">
+
+						<div class="box-header">
+							<h2><!--<i class="fa fa-list"></i>-->Chat</h2>
+							<!--<div class="box-icon">
+								<a href="widgets.html#" class="btn-close"><i class="fa fa-times"></i></a>
+							</div>-->
+						</div>
+						<div class="contacts">
+							<ul class="list" >
+								<li ng-repeat="room in rooms" ng-click="joinRoom(room)">
+									<span class="name">{{room.name}}</span>
+								</li>
+							</ul>
+							<ul class="list" >
+								<li ng-repeat="user1 in users" ng-if="user1.name!==user.name" ng-click="privateChat(user1)">
+									<img class="avatar" ng-src="{{user1.picture_url}}" alt="avatar">
+									<!--<img class="avatar" ng-src="http://www.theipadguide.com/images/facebook50x50.jpg" alt="avatar">-->
+									<span class="name">{{user1.name}}</span>
+									<span class="status online"></span>
+									<!--<span class="important">0</span>-->
+								</li>
+							</ul>	
+						</div>
+						<div class="conversation">
+							<div class="actions">
+								<img ng-repeat="user1 in usersInCurrentRoom" class="avatar" ng-src="{{user1.picture_url}}" alt="avatar">
+							</div>
+							<ul class="talk">
+								<li ng-repeat="message in messages">
+									<!--<img class="avatar" src="http://www.theipadguide.com/images/facebook50x50.jpg" alt="avatar">-->
+									<img class="avatar" ng-src="{{message.user.picture_url}}" alt="avatar">
+									<span class="name">{{ message.user.name }}</span>
+									<span class="time">{{ message.message.time }}</span>
+									<div class="message">{{ message.message.message }}</div>
+								</li>
+							</ul>
+							<div class="form">
+								<input type="text" class="write-message" placeholder="Write Message" ng-model="message" ng-keypress="writeMessage($event)">
+							</div>	
+						</div>
+
+					</div>
+		<div id="footer" style="background-color:#36a9e1;">
+            <input type="text" ng-model="username" placeholder="Enter name">
+            <button type="submit" ng-click='joinServer()'>Login</button>
+            <!--<p>{{currentRoom}}</p>-->
         </div>
 
     </div>
 
 
-<div class="box chat chat-full noOverflow">
+<!--<div class="box chat chat-full noOverflow">
 
                         <div class="box-header">
                             <h2><i class="fa fa-list"></i>Chat Full width</h2>
@@ -122,4 +168,4 @@
                             </div>  
                         </div>
 
-                    </div>
+                    </div>-->

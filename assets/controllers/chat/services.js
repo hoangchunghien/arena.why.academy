@@ -2,7 +2,8 @@
 /// <reference path="app.js" />
 /// <reference path="js/socket.io-1.0.6.js" />
 app.factory('socket', function ($rootScope) {
-    var socket = io.connect('ec2-54-179-163-38.ap-southeast-1.compute.amazonaws.com:8080');
+    //var socket = io.connect('ec2-54-179-163-38.ap-southeast-1.compute.amazonaws.com:8080');
+	var socket = io.connect('localhost:8080');
     var disconnect = false;
     return {
         on: function (eventName, callback) {

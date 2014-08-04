@@ -22,10 +22,14 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 20;
-    this.remainingTime = this.timeout+1;
+    this.timeout = 20000;  // in milisecond
+    this.timeStep = 250;
+    this.remainingTime = this.timeout + 1000; // in milisecond
     this.correct = false;
     this.eventListener = eventListener;
+
+    this.questionEndingTimer;
+    this.questionFinishTimer;
 
     /*
      * Private methods ---------------------------------------------------------
@@ -107,26 +111,38 @@ function QuestionStateMachine(question, eventListener) {
                 console.log(logInfo + "ending");
                 console.log(self.answer);
                 var timeForChangeQuestion;
-                if (self.answer == self.question.answer) {
+                if (self.answer== parseInt(self.question.answer[self.question.question.length%20])) {
                     self.correct = true;
-                    self.score = self.remainingTime;
-                    timeForChangeQuestion=3500;
+                    self.score = Math.floor(self.remainingTime / 1000);
+                    timeForChangeQuestion = 3500;
                 } else {
                     self.score = 0;
                     self.correct = false;
-                    timeForChangeQuestion=2000;
+                    timeForChangeQuestion = 2000;
                 }
-                setTimeout(function(){
+
+                var spentTime = self.timeout - self.remainingTime;
+
+                self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
-                        correct: self.correct, score: self.score, correctAnswer: self.question.answer}});
+                        correct: self.correct, score: self.score, correctAnswer: parseInt(self.question.answer[self.question.question.length%20])}});
 
-                },1000);
+                }, 1000);
 
-                setTimeout(function(){
+                self.questionFinishTimer = setTimeout(function () {
                     self.consumeEvent({name: "question_finish", data: {}});
-                },timeForChangeQuestion);
+                }, timeForChangeQuestion);
 
-
+                if (self.remainingTime > 0) {
+                    mixpanel.track("Answered Question", {
+                        "Corrected": self.correct, "Spent Time": spentTime
+                    });
+                }
+                else {
+                    mixpanel.track("Answered Question", {
+                        "Spent Time": -1
+                    });
+                }
 
             }
         },
@@ -148,9 +164,13 @@ function QuestionStateMachine(question, eventListener) {
 
     this.activeTimer = function () {
         console.log("run Active timer");
+        var data = {};
+        data.remainingTime = self.remainingTime;
+        self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
+
         var countDown = function () {
             self.runtimeout = setTimeout(function () {
-                self.remainingTime--;
+                self.remainingTime -= self.timeStep;
 //                console.log(self.remainingTime);
                 var data = {};
                 data.remainingTime = self.remainingTime;
@@ -161,9 +181,10 @@ function QuestionStateMachine(question, eventListener) {
                     return;
                 }
                 countDown();
-
-            }, 1000);
+            }, self.timeStep);
         };
+
+//        setTimeout(function(){ countDown();}, 1000);
         countDown();
     };
 
@@ -177,6 +198,12 @@ function QuestionStateMachine(question, eventListener) {
 *    }
  *
  */
+QuestionStateMachine.prototype.destroy = function () {
+    clearTimeout(this.questionFinishTimer);
+    clearTimeout(this.questionEndingTimer);
+    clearTimeout(this.runtimeout);
+};
+
 QuestionStateMachine.prototype.consumeEvent = function (event) {
 
     var self = this;

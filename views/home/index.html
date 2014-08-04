@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!--<link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">-->
-    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!--<link rel="stylesheet" href="/vendor/cloud-admin/cloud-admin.min.css">-->
     <!--<link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap-theme.min.css">-->
 
@@ -15,23 +15,106 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/challenge.css">
     <link rel="stylesheet" href="/css/circle-progress.css">
-	<link rel="stylesheet" href="/css/chat.css">
+	<!--<link rel="stylesheet" href="/css/chat.css">-->
 
+
+    
+
+
+    
+
+
+
+    <title ng-bind="Seo.title"></title>
+
+
+    <!-- start Mixpanel -->
+    <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
+    <!-- end Mixpanel -->
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation" ng-controller="NavCtrl" ng-init="init()">
+    <div class="container-fluid">
+
+        <div class="nav-no-collapse header-nav">
+                <ul class="nav navbar-nav pull-left">
+
+                    <!-- start: User Dropdown -->
+                    <li class="dropdown">
+                        <a class="btn account dropdown-toggle" data-toggle="dropdown" href="/">
+                            <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
+                            <div class="user">
+                                <span class="hello">&nbsp;</span>
+                                <span class="name">&nbsp;</span>
+                            </div>
+                        </a>
+<!--                         <ul class="dropdown-menu">
+                            <li class="dropdown-menu-title">
+                                
+                            </li>
+                            <li><a href="widgets.html#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="widgets.html#"><i class="fa fa-cog"></i> Settings</a></li>
+                            <li><a href="widgets.html#"><i class="fa fa-envelope"></i> Messages</a></li>
+                            <li><a href="login.html"><i class="fa fa-off"></i> Logout</a></li>
+                        </ul> -->
+                    </li>
+                    <!-- end: User Dropdown -->
+
+                    <li class="dropdown">
+                        <span class="h2"></span>
+                        <img src="/images/loaders/spinner5.gif" ng-show="loading" />
+                    </li>
+                </ul>
+            </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+            <!-- <ul class="nav navbar-nav navbar-right"> -->
+                <!--<li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>-->
+                <!-- <li ng-show="isAuth" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="h2"></span>
+                        <img ng-src="{{profile.picture_url}}" width="20" height="20">
+                        &nbsp<span ng-bind="profile.name"></span>
+                    </a> -->
+                    <!--&nbsp<b class="caret"></b></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                    <!--<li>&nbsp;</li>-->
+                    <!--<li class="divider"></li>-->
+                    <!--<li><a href="" ng-click="doLogout()">Logout</a></li>-->
+                    <!--</ul>-->
+<!--                 </li>
+            </ul> -->
+
+        <!-- </div> -->
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div ui-view class="container bs-docs-container"></div>
+
+
+
+
+    <script src="http://connect.facebook.net/en_US/all.js "></script>
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/angular/angular.min.js"></script>
     <script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
     <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="/vendor/socket.io-client/socket.io.js"></script>
+    <script src="/vendor/socket.io-client/socket.io.js"></script>
     <!--<script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
     <!--
-    <script src="/vendor/datatables/media/js/jquery.dataTables.js"></script>
     <script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
     -->
-    <!--<script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>-->
-    <!--<script src="/vendor/mp3-player-button.js"></script>-->
     <!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
-
+    <script src="/controllers/users/facebook-services.js"></script>
     <script src="/controllers/arena.js"></script>
     <script src="/controllers/users/users-service.js"></script>
     <script src="/commons/audio-service.js"></script>
@@ -42,68 +125,13 @@
     <script src="/commons/utils/utils-service.js"></script>
     <script src="/controllers/main/main.js"></script>
     <script src="/controllers/challenge/challenge-route.js"></script>
-    <script src="/controllers/challenge/challenge-ctrl.js"></script>
+    <script src="/controllers/challenge/challenge-ctrl.min.js"></script>
     <script src="/controllers/state-machines/quiz_state_machine.js"></script>
-    <script src="/controllers/state-machines/question_state_machine.js"></script>
-	<script src="/controllers/chat/chat-route.js"></script>
-	<script src="/controllers/chat/app.js"></script>
-	<script src="/controllers/chat/chat-route.js"></script>
-	<script src="/controllers/chat/services.js"></script>
-
-
-    <title ng-bind="Seo.title"></title>
-</head>
-<body>
-
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavCtrl" ng-init="init()">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><span class="h2">Arena</span> for English <img src="/images/loaders/spinner5.gif" ng-show="loading" /></a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!--<li ng-class="{active: $state.includes('courses.new')}" ng-show="isAuth">-->
-                    <!--<a href="/courses/new"><span class="h2"></span>New course</a>-->
-                <!--</li>-->
-                <!--<li id="myCoursesNav" ng-class="{active: $state.includes('users.detail.courses')}" ng-show="isAuth">-->
-                    <!--<a href="/users/{{profile.id}}/courses"><span class="h2"></span>My courses</a></li>-->
-                <!--<li id="publicCoursesNav" ng-class="{active: $state.includes('courses.list')}" ng-show="isAuth">-->
-                    <!--<a href="/courses"><span class="h2"></span>Published courses</a></li>-->
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>
-                <li ng-show="isAuth" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="h2"></span>
-                        <img ng-src="{{profile.picture_url}}" width="20" height="20">
-                        &nbsp<span ng-bind="profile.name"></span>
-                        &nbsp<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>&nbsp;</li>
-                        <li class="divider"></li>
-                        <li><a href="" ng-click="doLogout()">Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
-
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-<div ui-view class="container bs-docs-container"></div>
+    <script src="/controllers/state-machines/question_state_machine.min.js"></script>
+    <script src="/controllers/chat/chat-route.js"></script>
+    <script src="/controllers/chat/app.js"></script>
+    <script src="/controllers/chat/chat-route.js"></script>
+    <script src="/controllers/chat/services.js"></script>
 
 </body>
 </html>

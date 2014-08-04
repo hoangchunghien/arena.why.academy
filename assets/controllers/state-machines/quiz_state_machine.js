@@ -32,6 +32,9 @@ function QuizStateMachine(questions, eventListener) {
      */
     // This method _startup run when object is create new
     var _startup = function () {
+        mixpanel.track("Start Game", {
+
+        });
         self.currentState = self.states['initializing'];
         self.currentState.run();
     };
@@ -44,7 +47,6 @@ function QuizStateMachine(questions, eventListener) {
         for (var i = 0; i < self.quiz.questions.length; i++) {
             var question = self.quiz.questions[i];
             self.questionMachines[i] = new QuestionStateMachine(question, self);
-
         }
         if (self.questionMachines.length > 0) {
             self.currentQuestionMachines = self.questionMachines[0];

@@ -100,11 +100,6 @@ function QuestionStateMachine(question, eventListener) {
             run: function () {
                 self.eventListener.handleEventNotification({name: "question_timeout", data: {}});
                 self.consumeEvent({name: "question_ending", data: {}});
-
-
-                mixpanel.track("Answered Question", {
-                    "Spent Time": -1
-                });
             }
         },
         ending: {
@@ -138,10 +133,16 @@ function QuestionStateMachine(question, eventListener) {
                     self.consumeEvent({name: "question_finish", data: {}});
                 }, timeForChangeQuestion);
 
-
-                mixpanel.track("Answered Question", {
-                    "Corrected": self.correct, "Spent Time": spentTime
-                });
+                if (self.remainingTime > 0) {
+                    mixpanel.track("Answered Question", {
+                        "Corrected": self.correct, "Spent Time": spentTime
+                    });
+                }
+                else {
+                    mixpanel.track("Answered Question", {
+                        "Spent Time": -1
+                    });
+                }
 
             }
         },

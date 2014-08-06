@@ -22,7 +22,7 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 20000;  // in milisecond
+    this.timeout = 30000;  // in milisecond
     this.timeStep = 250;
     this.remainingTime = this.timeout + 1000; // in milisecond
     this.correct = false;

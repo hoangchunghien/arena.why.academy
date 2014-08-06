@@ -115,9 +115,17 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
 
     //Reload Challenge
     $scope.reloadChallenge = function () {
+
+        mixpanel.track("Play Again", {
+            "View": "Result"
+        });
+
         delegate.destroy();
         _initialize();
 //        location.reload();
+
+
+
     };
 
 
@@ -199,6 +207,14 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
 //                    $scope.finishedModalChallenge = false;
 //                }, 5000);
                 //
+
+
+
+                mixpanel.track("Finished Quiz", {
+                    "Score": $scope.score,
+                    "Number of Answers": $scope.answers.length
+                });
+
                 break;
             case "quiz_initializing":
 //                _startModalChallenge();
@@ -209,6 +225,11 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
     $scope.exitChallenge = function () {
 //        delegate.destroy();
         $state.go("main");
+
+        mixpanel.track("Go to MainView", {
+            "View": "Result"
+        });
+
     };
     var _initialize = function () {
         backgroundAudio = audioSrv.getBackgroundAudio("/data/sound/starting.mp3", 10);
@@ -230,7 +251,7 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
 //            var x = Math.floor((Math.random() * 60) + (Math.random() * 40));
 
             // quizMachine = new QuizStateMachine(data.slice(x, x + 10), self);
-            var questions = generateQuestions(data);
+            var questions = generateQuestions(data, numOfQuestions);
             quizMachine = new QuizStateMachine(questions, self);
             $scope.numberOfQuestion = quizMachine.quiz.questions.length;
             for (var i = 0; i < $scope.numberOfQuestion; i++) {
@@ -239,11 +260,11 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
             _startModalChallenge();
         });
 
-        var generateQuestions = function(data) {
+        var generateQuestions = function(data, numberOfQuestion) {
             var questions = [];
             var indexes = [];
             var n = data.length;
-            while (questions.length < 10) {
+            while (questions.length < numberOfQuestion) {
                 var rand = Math.random() * 1000;
                 var i = Math.floor(rand % n);
                 if (indexes.indexOf(i) < 0) {
@@ -273,6 +294,15 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
         audioSrv.destroySound('wrongAnswerAudio');
         audioSrv.destroySound('correctAnswerAudio');
     };
+
+
+    $scope.takeSurvey = function () {
+        mixpanel.track("Take Survey", {
+            "View": "Result"
+        });
+
+    }
+
 
 
 }]);

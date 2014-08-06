@@ -22,7 +22,7 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 30000;  // in milisecond
+    this.timeout = 20000;  // in milisecond
     this.timeStep = 250;
     this.remainingTime = this.timeout + 1000; // in milisecond
     this.correct = false;
@@ -111,7 +111,7 @@ function QuestionStateMachine(question, eventListener) {
                 console.log(logInfo + "ending");
                 console.log(self.answer);
                 var timeForChangeQuestion;
-                if (self.answer== parseInt(self.question.answer[self.question.question.length%20])) {
+                if (self.answer== self.question.answer) {
                     self.correct = true;
                     self.score = Math.floor(self.remainingTime / 1000);
                     timeForChangeQuestion = 3500;
@@ -125,7 +125,7 @@ function QuestionStateMachine(question, eventListener) {
 
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
-                        correct: self.correct, score: self.score, correctAnswer: parseInt(self.question.answer[self.question.question.length%20])}});
+                        correct: self.correct, score: self.score, correctAnswer: self.question.answer}});
 
                 }, 1000);
 

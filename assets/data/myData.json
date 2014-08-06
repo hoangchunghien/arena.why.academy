@@ -264,6 +264,50 @@
         "answer": 3
     },
     {
+        "question": "After 5 years of service, Susan Mathews finally asked her boss to give _______ a pay.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "she"
+                },
+                {
+                    "text": "her"
+
+                },
+                {
+                    "text": "hers"
+                },
+                {
+                    "text": "herself"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Ms.Jennifer Hong has beeen a _____ colleague of mine for seven years and it has been pleasure to work with her.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "close"
+                },
+                {
+                    "text": "closely"
+
+                },
+                {
+                    "text": "closing"
+                },
+                {
+                    "text": "closure"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
         "question": "All things ______, Professor Kim is the best instructor I've ever had.",
         "type": "grammar",
         "content":{
@@ -328,6 +372,50 @@
             ]
         },
         "answer": 0
+    },
+    {
+        "question": "A banquet is beeing held in honor of the governor _____ political career began in 1989 in an uderground student movement and spanned almost quarter a century.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "who"
+                },
+                {
+                    "text": "whom"
+
+                },
+                {
+                    "text": "which"
+                },
+                {
+                    "text": "whose"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "The school announced that all handout materials will be supplied in class ____ now on.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "until"
+                },
+                {
+                    "text": "and"
+
+                },
+                {
+                    "text": "since"
+                },
+                {
+                    "text": "from"
+                }
+            ]
+        },
+        "answer": 3
     },
     {
         "question": "He expects ______ soon.",
@@ -438,6 +526,72 @@
             ]
         },
         "answer": 3
+    },
+    {
+        "question": "_____ boarding the aircraft, passengers with small children and passengers with disabilities will be given priority.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "During"
+                },
+                {
+                    "text": "Due to"
+
+                },
+                {
+                    "text": "When"
+                },
+                {
+                    "text": "Because"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The information provided may be inaccurate or outdated; users of the information use it at their own ____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "risk"
+                },
+                {
+                    "text": "cost"
+
+                },
+                {
+                    "text": "danger"
+                },
+                {
+                    "text": "hazard"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Conventional wisdom has it that ____ more and more women become a part of the nation's managerial and excutive work force , they encounted conflict between work and non=work roles.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "as"
+                },
+                {
+                    "text": "both"
+
+                },
+                {
+                    "text": "until"
+                },
+                {
+                    "text": "whether"
+                }
+            ]
+        },
+        "answer": 0
     },
     {
         "question": "When we arrived, the film was about _______.",
@@ -945,6 +1099,94 @@
         "answer": 2
     },
     {
+        "question": "I am writing ____ behalf of Mr.William to inform you of the alteration in the date of our upcoming meeting in Tokyo.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "at"
+                },
+                {
+                    "text": "on"
+
+                },
+                {
+                    "text": "for"
+                },
+                {
+                    "text": "to"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "When Sunlop Corporation moved its headquarters to Chicago, the director had a state-of-the-art security system ____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "installing"
+                },
+                {
+                    "text": "install"
+
+                },
+                {
+                    "text": "installed"
+                },
+                {
+                    "text": "installs"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "On May 6, Mr.Smith will discuss ____ approaches for the advancement of our new goods.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "addition"
+                },
+                {
+                    "text": "additional"
+
+                },
+                {
+                    "text": "additionally"
+                },
+                {
+                    "text": "additions"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Moving away from the city and renting an apartment in the rural area does not always help ____ one's living expenses.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "limit"
+                },
+                {
+                    "text": "limited"
+
+                },
+                {
+                    "text": "limiting"
+                },
+                {
+                    "text": "limitation"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
         "question": "The new law takes ________ next week.",
         "type": "grammar",
         "content":{
@@ -1053,6 +1295,94 @@
             ]
         },
         "answer": 3
+    },
+    {
+        "question": "The Progress Group facilitated the design of a set of incremental steps to ____ its objectives.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "accelerate"
+                },
+                {
+                    "text": "accumulate"
+
+                },
+                {
+                    "text": "accentuate"
+                },
+                {
+                    "text": "accomplish"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "The market research report was full of ____ prediction about exchange rates that later proved completely wrong.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "compel"
+                },
+                {
+                    "text": "compelled"
+
+                },
+                {
+                    "text": "the compelled"
+                },
+                {
+                    "text": "compelling"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Ms.Yoon was involved in the preparation of a common set of principles for _____ productivity.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "achieve"
+                },
+                {
+                    "text": "achiever"
+
+                },
+                {
+                    "text": "achieving"
+                },
+                {
+                    "text": "achievement"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "A career choice is ____ one has to decide for oneself.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "everything"
+                },
+                {
+                    "text": "nothing"
+
+                },
+                {
+                    "text": "something"
+                },
+                {
+                    "text": "anything"
+                }
+            ]
+        },
+        "answer": 2
     },
     {
         "question": "A third of the students ________ passed the test.",
@@ -1181,6 +1511,358 @@
                 },
                 {
                     "text": "reserve"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "You shall be ____ no obligation to accept any offer and may, at your discretion, discontinue membership after two years.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "under"
+                },
+                {
+                    "text": "making"
+
+                },
+                {
+                    "text": "able to"
+                },
+                {
+                    "text": "used to"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "All cellular phones should be turned off while the concert is in _____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "playing"
+                },
+                {
+                    "text": "performance"
+
+                },
+                {
+                    "text": "progress"
+                },
+                {
+                    "text": "practice"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Currently, BDH Corp. is looking at making additional changes in the management strategies that will continue to ____ its employees.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "benefit"
+                },
+                {
+                    "text": "benefiting"
+
+                },
+                {
+                    "text": "beneficial"
+                },
+                {
+                    "text": "beneficiary"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "I feel sorry to inform you that I am unable to ____ your request to join the Mid-Europe Convention.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "admit"
+                },
+                {
+                    "text": "assert"
+
+                },
+                {
+                    "text": "accept"
+                },
+                {
+                    "text": "appear"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Under the revised procedure, efforts have been _____ by the government to ensure that the emerging exporters have adequate access to the credit facilities.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "taken"
+                },
+                {
+                    "text": "made"
+
+                },
+                {
+                    "text": "done"
+                },
+                {
+                    "text": "started"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "The reason for this failure ____ is directly related to the fact that workers do not read the instruction manual before operating equipment.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "occur"
+                },
+                {
+                    "text": "occuring"
+
+                },
+                {
+                    "text": "occurred"
+                },
+                {
+                    "text": "occures"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "The organization works to engage individuals to take greater responsibility for keeping their communities ____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "beauty"
+                },
+                {
+                    "text": "beautifier"
+
+                },
+                {
+                    "text": "beautiful"
+                },
+                {
+                    "text": "beautifully"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Prize winners who do not pick up their VCRs at the _____ stores within three months negate their rights to the prizes.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "designated"
+                },
+                {
+                    "text": "assigned"
+
+                },
+                {
+                    "text": "reserved"
+                },
+                {
+                    "text": "dedicated"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "A good manager ____ an environment where ideas are heard and respected and everyone feels that they are contributing to the whole.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "create"
+                },
+                {
+                    "text": "creates"
+
+                },
+                {
+                    "text": "is created"
+                },
+                {
+                    "text": "creating"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "At the end of the test, students are asked to ____ their tests face down on the desk near the exit.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "write"
+                },
+                {
+                    "text": "prepare"
+
+                },
+                {
+                    "text": "collect"
+                },
+                {
+                    "text": "place"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "A plethora of study programs now available online has made it possible for working people to gain certificates or degrees far ____ than ever before.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "more easily"
+                },
+                {
+                    "text": "easier"
+
+                },
+                {
+                    "text": "easiest"
+                },
+                {
+                    "text": "easily"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Hundreds of outlets _____ in the market fire started by an overturned gas range, despite fire-fighters's effort to put out the flames.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "perished"
+                },
+                {
+                    "text": "disappeared"
+
+                },
+                {
+                    "text": "ruined"
+                },
+                {
+                    "text": "excited"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Under the new regulations, spending on office equipment and photocopier _____ will be strictly controlled.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "used"
+                },
+                {
+                    "text": "using"
+
+                },
+                {
+                    "text": "user"
+                },
+                {
+                    "text": "usage"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Employees wanting to attend the Christmas Ball can ____ tickets to the event at the front desk in the Personnel Department.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "join in"
+                },
+                {
+                    "text": "pick up"
+
+                },
+                {
+                    "text": "get over"
+                },
+                {
+                    "text": "find out"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Graduates holding an MBA degree are _____ competitive these days due to growing skepticism about the value of the education.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "less"
+                },
+                {
+                    "text": "more"
+
+                },
+                {
+                    "text": "better"
+                },
+                {
+                    "text": "fewer"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The resistance _____ by the firm's staff made it very difficult to conduct the audit efficiently.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "built"
+                },
+                {
+                    "text": "taken"
+
+                },
+                {
+                    "text": "furnished"
+                },
+                {
+                    "text": "encountered"
                 }
             ]
         },
@@ -1385,6 +2067,336 @@
         "answer": 1
     },
     {
+        "question": "The County Commision is still waiting for word from the Kansas City Railroard Company concerning repairs _____ to be done at threes crossings.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "need"
+                },
+                {
+                    "text": "needs"
+
+                },
+                {
+                    "text": "needed"
+                },
+                {
+                    "text": "necessary"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The processors they are now promoting are ____ designed for cell phones and wireless PDAs.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "specifically"
+                },
+                {
+                    "text": "eagerly"
+
+                },
+                {
+                    "text": "optionally"
+                },
+                {
+                    "text": "eventually"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Ever since he ____ , he has endeavored to push certain policies through that are quite unpopular with the general public.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "had elected"
+                },
+                {
+                    "text": "is elected"
+
+                },
+                {
+                    "text": "was elected"
+                },
+                {
+                    "text": "will elect"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The newest Chrysler sedan is both stylishly modeled and _____ at a reasonable price, providing consumers with an attractive car for people of all age groups.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "offers"
+                },
+                {
+                    "text": "offering"
+
+                },
+                {
+                    "text": "offered"
+                },
+                {
+                    "text": "offer"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "To remain _____ for financial aid, recipients are required to show satisfactory progress toward a degree according to the guidelines.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "eligible"
+                },
+                {
+                    "text": "entitled"
+
+                },
+                {
+                    "text": "responsible"
+                },
+                {
+                    "text": "considerate"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The managers hope that the new plan will increase sales both in the coming year and ____",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "beyond"
+                },
+                {
+                    "text": "within"
+
+                },
+                {
+                    "text": "above"
+                },
+                {
+                    "text": "along"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The original _____ of the city's significant museum will be preserved during the restitution proces.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "curriculum"
+                },
+                {
+                    "text": "symptom"
+
+                },
+                {
+                    "text": "appearance"
+                },
+                {
+                    "text": "behavior"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "In order to provide a better service to _____, Smallville's traveller information desk has been expanded.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "visit"
+                },
+                {
+                    "text": "visitors"
+
+                },
+                {
+                    "text": "visiting"
+                },
+                {
+                    "text": "visitation"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Her comments made on her dining experience suggested that she was more than _____ with the food and service.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "satisfying"
+                },
+                {
+                    "text": "satisfactory"
+
+                },
+                {
+                    "text": "satisfied"
+                },
+                {
+                    "text": "satisfaction"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The government ordered that the experimental drug ____ to the laboratory for further study.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "send"
+                },
+                {
+                    "text": "sent"
+
+                },
+                {
+                    "text": "sending"
+                },
+                {
+                    "text": "be sent"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "The following information should be ____ to the students who will be using the library facilities over the holidays.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "conveyed"
+                },
+                {
+                    "text": "consumed"
+
+                },
+                {
+                    "text": "concealed"
+                },
+                {
+                    "text": "contributed"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "This leather jacket should be cleanned only as ____ by the manufacturer.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "to recommend"
+                },
+                {
+                    "text": "recommended"
+
+                },
+                {
+                    "text": "recommend"
+                },
+                {
+                    "text": "recommending"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "I would also like to _____ my thanks to MS.Porter, the hotel clerk who located my missing luggage.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "expand"
+                },
+                {
+                    "text": "expect"
+
+                },
+                {
+                    "text": "extend"
+                },
+                {
+                    "text": "exhale"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "A private investor purchased the historic castle, which _____ renovations before being opened to public.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "undergo"
+                },
+                {
+                    "text": "will undergo"
+
+                },
+                {
+                    "text": "have undergone"
+                },
+                {
+                    "text": "will be undergone"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "If you send us your résumé, we will provide you with a list of companies with vacancies ____ closely matched to your career expectations.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "most"
+                },
+                {
+                    "text": "almost"
+
+                },
+                {
+                    "text": "most of"
+                },
+                {
+                    "text": "more"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
         "question": "It's _______ cold.",
         "type": "grammar",
         "content":{
@@ -1561,6 +2573,424 @@
         "answer": 3
     },
     {
+        "question": "The presidents of the _____ companies are planning to visit the join conference.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "participation"
+                },
+                {
+                    "text": "participated"
+
+                },
+                {
+                    "text": "participant"
+                },
+                {
+                    "text": "participating"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "A number of small companies will go bankrupt when the government ____ the legal working hours to thirty hours a week.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "reduces"
+                },
+                {
+                    "text": "is reduced"
+
+                },
+                {
+                    "text": "has reduced"
+                },
+                {
+                    "text": "will reduce"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The European tire market, which has doubled in size _____ the last decade, is now reaching its peak.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "at"
+                },
+                {
+                    "text": "over"
+
+                },
+                {
+                    "text": "while"
+                },
+                {
+                    "text": "until"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Though it was beyond our control, the department head held us _____ for failing to meet the September deadline.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "compatible"
+                },
+                {
+                    "text": "manageable"
+
+                },
+                {
+                    "text": "accountable"
+                },
+                {
+                    "text": "retractable"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "In his budgeting report, Mr.Tomaki _____ that the company could economize by leasing cars instead of buying them.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "spoke"
+                },
+                {
+                    "text": "ordered"
+
+                },
+                {
+                    "text": "objected"
+                },
+                {
+                    "text": "suggested"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Unless the owner can be located within three weeks, the match that Ms.Bryers found at the park is _____ to keep.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "it"
+                },
+                {
+                    "text": "her"
+
+                },
+                {
+                    "text": "hers"
+                },
+                {
+                    "text": "itself"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Under this insurance policy, repairs to damaged vehicles are ______, provided that they are performed by a registered dealership.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "covered"
+                },
+                {
+                    "text": "repaid"
+
+                },
+                {
+                    "text": "affixed"
+                },
+                {
+                    "text": "mended"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "They new telephone system is designe to allow people to place the orders more quickly than ever _____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "after"
+                },
+                {
+                    "text": "since"
+
+                },
+                {
+                    "text": "before"
+                },
+                {
+                    "text": "possibly"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Its proponents _____ that the Springfield's civic development plan will double the number of residences in the city center within the next decade.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "participate"
+                },
+                {
+                    "text": "considerate"
+
+                },
+                {
+                    "text": "inaugurate"
+                },
+                {
+                    "text": "anticipate"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Because the flight was slightly overbooked, there is a chance that a seat will not be available even for a person with a ____ reservation.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "appointed"
+                },
+                {
+                    "text": "notified"
+
+                },
+                {
+                    "text": "canceled"
+                },
+                {
+                    "text": "confirmed"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Our customers expect good service from us and we should do our best to live ______ their expectations.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "in for"
+                },
+                {
+                    "text": "on for"
+
+                },
+                {
+                    "text": "up for"
+                },
+                {
+                    "text": "up to"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "We _____ never have succeeded in winning the contract without the exceptional efforts and expertise of the new consultant.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "can"
+                },
+                {
+                    "text": "would"
+
+                },
+                {
+                    "text": "must"
+                },
+                {
+                    "text": "need"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Although the assistant director will be transferred to the new branch next week, we still have not found a suitable _____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "alternative"
+                },
+                {
+                    "text": "option"
+
+                },
+                {
+                    "text": "choice"
+                },
+                {
+                    "text": "replacement"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Today, many managers reward only good performers and tend to dismiss _____ employees more frequently.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "undecided"
+                },
+                {
+                    "text": "invalid"
+
+                },
+                {
+                    "text": "procrastinated"
+                },
+                {
+                    "text": "incompetent"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Experts urge small business owners to ____ their business to develop both a logo and a set of consistent marketing materials.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "brand"
+                },
+                {
+                    "text": "determine"
+
+                },
+                {
+                    "text": "attract"
+                },
+                {
+                    "text": "deter"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The news regarding the reorganization of management was greeted by a _____ of enthusiasm among those at the meeting.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "set"
+                },
+                {
+                    "text": "sense"
+
+                },
+                {
+                    "text": "variety"
+                },
+                {
+                    "text": "lack"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "If your pizza is not delivered _____ 45 minutes of ordering, you will receive it free of charge.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "during"
+                },
+                {
+                    "text": "from"
+
+                },
+                {
+                    "text": "until"
+                },
+                {
+                    "text": "within"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Pet Love is an independent veterinary _____ devoted to the highest standard of animal care and to the provision of quality pet supplies.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "practically"
+                },
+                {
+                    "text": "practice"
+
+                },
+                {
+                    "text": "practical"
+                },
+                {
+                    "text": "practices"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "In its continuing effort to enhance security, INS is immediately implementing rule changes _____ the period of time visitors are permitted to remain in the US.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "governed"
+                },
+                {
+                    "text": "govern"
+
+                },
+                {
+                    "text": "governing"
+                },
+                {
+                    "text": "government"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
         "question": "I don't like that one _______.",
         "type": "grammar",
         "content":{
@@ -1731,6 +3161,380 @@
                 },
                 {
                     "text": "corrected"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "No one could have _____ predicted some of the changes that have occurred due to the gradual expansion of political rights and social acceptance.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "confidently"
+                },
+                {
+                    "text": "optionally"
+
+                },
+                {
+                    "text": "economically"
+                },
+                {
+                    "text": "steeply"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "It was discovered that the blood bank knowingly ______ using contaminated products.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "risked"
+                },
+                {
+                    "text": "damaged"
+
+                },
+                {
+                    "text": "feared"
+                },
+                {
+                    "text": "attempted"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The university football player ______ his success and development as a player to his mother and his coach.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "accounts"
+                },
+                {
+                    "text": "attributes"
+
+                },
+                {
+                    "text": "accuses"
+                },
+                {
+                    "text": "appraises"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "The company's ad seeking a computer programmer gave no _____ of what salary to expect.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "indication"
+                },
+                {
+                    "text": "indicate"
+
+                },
+                {
+                    "text": "indicating"
+                },
+                {
+                    "text": "indicator"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "This free downloadable software will work _____ to maintain a virus-free network.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "repeatedly"
+                },
+                {
+                    "text": "hardly"
+
+                },
+                {
+                    "text": "diligently"
+                },
+                {
+                    "text": "genuinely"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "We request that students edit their essays carefully before ______, or else they will receive major point reductions.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "submit"
+                },
+                {
+                    "text": "submitting"
+
+                },
+                {
+                    "text": "submission"
+                },
+                {
+                    "text": "submitted"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Because of the national ethanol mandate, the NACS is up in arms because they believe it will _____ fuel supplies and hurt consumer, while working against the nation's energy independence.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "utilize"
+                },
+                {
+                    "text": "hospitalize"
+
+                },
+                {
+                    "text": "patronize"
+                },
+                {
+                    "text": "jeopardize"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Stephen Conners is not only a brilliant problem solver, but his _____ manners make him the perfect choice for the position as diplomat.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "worthy"
+                },
+                {
+                    "text": "surpassed"
+
+                },
+                {
+                    "text": "fragile"
+                },
+                {
+                    "text": "impeccable"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Treatment for accident victims, illnesses and other injuries may be impaired _____ the Red Cross is unable to supply enough blood to hospitals.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "since"
+                },
+                {
+                    "text": "when"
+
+                },
+                {
+                    "text": "before"
+                },
+                {
+                    "text": "after"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Learning to use Internet tools should _____ people to use more efficient at office work.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "enable"
+                },
+                {
+                    "text": "expect"
+
+                },
+                {
+                    "text": "acquire"
+                },
+                {
+                    "text": "accept"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "As far as the records show, Mrs.Gomez wasn't in the office on Monday, _____ on Tuesday for that matter.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "no"
+                },
+                {
+                    "text": "nor"
+
+                },
+                {
+                    "text": "either"
+                },
+                {
+                    "text": "or"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Use this remote desktop or free downloadable software to access your desktop from ______ you may be.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "whenever"
+                },
+                {
+                    "text": "whomever"
+
+                },
+                {
+                    "text": "whatever"
+                },
+                {
+                    "text": "wherever"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Be sure to contact the help center if you _____ receive the error message after you have completed these steps.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "once"
+                },
+                {
+                    "text": "never"
+
+                },
+                {
+                    "text": "while"
+                },
+                {
+                    "text": "still"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Club members are strictly prohibited from using spam in their marketing efforts, and are _____ to immediate termination if they do so.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "accustomed"
+                },
+                {
+                    "text": "subject"
+
+                },
+                {
+                    "text": "possible"
+                },
+                {
+                    "text": "likely"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Citizens are so frustrated by traffic that more than half want things improved, _____ it means they must pay higher taxes.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "which"
+                },
+                {
+                    "text": "in spite of"
+
+                },
+                {
+                    "text": "even if"
+                },
+                {
+                    "text": "as well as"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "With the newly built manufacturing facility in North Korea, the company will be able to produce ____ as many units as before.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "two"
+                },
+                {
+                    "text": "double"
+
+                },
+                {
+                    "text": "twice"
+                },
+                {
+                    "text": "second"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Parts are _____ under the lifetime warranty but you must pay for the labor after 6 months of purchase.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "discontinued"
+                },
+                {
+                    "text": "purchased"
+
+                },
+                {
+                    "text": "deducted"
+                },
+                {
+                    "text": "covered"
                 }
             ]
         },
@@ -1933,6 +3737,292 @@
             ]
         },
         "answer": 3
+    },
+    {
+        "question": "During job interviews, applicants should try to remain as calm as they can _____ nervous the may actually be.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "even if"
+                },
+                {
+                    "text": "however"
+
+                },
+                {
+                    "text": "although"
+                },
+                {
+                    "text": "nonetheless"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Requests for extra tables must be made at least 48 hours in advance _____ our staff to have time to set them up in the dining area.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "to"
+                },
+                {
+                    "text": "for"
+
+                },
+                {
+                    "text": "that"
+                },
+                {
+                    "text": "after"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "This appliance is intended solely for indoor use and the manufacturer will not be held responsible for any damage or injury resulting from its _____.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "error"
+                },
+                {
+                    "text": "misuse"
+
+                },
+                {
+                    "text": "defect"
+                },
+                {
+                    "text": "depletion"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "The manager made _____ clear that everyone will be given additional time to complete the required survey forms after the meeting.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "them"
+                },
+                {
+                    "text": "so"
+
+                },
+                {
+                    "text": "much"
+                },
+                {
+                    "text": "it"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Even though there have been a number of new products claiming to be similar to our company's product in recent years, ______ is still rated number one by the consumer magazines.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "its"
+                },
+                {
+                    "text": "that"
+
+                },
+                {
+                    "text": "ours"
+                },
+                {
+                    "text": "which"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "Because of the adverse weather conditions, the captain decided to disembark the ship to ____ the safety of her passengers.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "assure"
+                },
+                {
+                    "text": "ensure"
+
+                },
+                {
+                    "text": "obscure"
+                },
+                {
+                    "text": "unsure"
+                }
+            ]
+        },
+        "answer": 1
+    },
+    {
+        "question": "Of all the applicants, there seems to be _____ one who qualifies more than Ms.Spiegel.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "no"
+                },
+                {
+                    "text": "not"
+
+                },
+                {
+                    "text": "none"
+                },
+                {
+                    "text": "neither"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "The director requested that we use airmail when shipping samples to our potential customers despite the considerable shipping costs ______.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "involve"
+                },
+                {
+                    "text": "involving"
+
+                },
+                {
+                    "text": "involved"
+                },
+                {
+                    "text": "involvement"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The company will _____ announce a new joint venture with the city government near the close of the fiscal year.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "probably"
+                },
+                {
+                    "text": "increasingly"
+
+                },
+                {
+                    "text": "secretively"
+                },
+                {
+                    "text": "consecutively"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "My sister is an _____ reader of mystery books and wants to become a mystery writer herself.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "ardent"
+                },
+                {
+                    "text": "arduous"
+
+                },
+                {
+                    "text": "articulate"
+                },
+                {
+                    "text": "argumentative"
+                }
+            ]
+        },
+        "answer": 0
+    },
+    {
+        "question": "Mr.Taylor currently _____ many positions in various groups he belongs to even after his retirement.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "chairs"
+                },
+                {
+                    "text": "hosts"
+
+                },
+                {
+                    "text": "charges"
+                },
+                {
+                    "text": "holds"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "We should expand our existing production capabilities since our product is still very much in _____ throughout the world.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "need"
+                },
+                {
+                    "text": "question"
+
+                },
+                {
+                    "text": "control"
+                },
+                {
+                    "text": "demand"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "This is a _____ to all shoppers that the store will be closing in 5 minutes; so we ask that you bring your items to the cash register.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "remains"
+                },
+                {
+                    "text": "reminder"
+
+                },
+                {
+                    "text": "remainder"
+                },
+                {
+                    "text": "remembrance"
+                }
+            ]
+        },
+        "answer": 1
     },
     {
         "question": "He works to support his family, _______ he is in his seventies.",
@@ -2153,6 +4243,116 @@
             ]
         },
         "answer": 1
+    },
+    {
+        "question": "During the summer peak season, the hotel rooms in this area are usually _____ occupied.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "very"
+                },
+                {
+                    "text": "routinely"
+
+                },
+                {
+                    "text": "largely"
+                },
+                {
+                    "text": "fully"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Next month, we will be offering a cash rebate on all 2003 Ford Escort models at our _____ car dealers nationwide.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "familiarized"
+                },
+                {
+                    "text": "participated"
+
+                },
+                {
+                    "text": "automotive"
+                },
+                {
+                    "text": "authorized"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "The local business establishments _____ dry cleaners and restaurant are reporting more incidents of thefts and burglaries in recent months.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "such"
+                },
+                {
+                    "text": "such a"
+
+                },
+                {
+                    "text": "such as"
+                },
+                {
+                    "text": "such that"
+                }
+            ]
+        },
+        "answer": 2
+    },
+    {
+        "question": "The management will not be held responsible for any personal belongings left _____ in rooms.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "inattention"
+                },
+                {
+                    "text": "unintended"
+
+                },
+                {
+                    "text": "intuitively"
+                },
+                {
+                    "text": "unattended"
+                }
+            ]
+        },
+        "answer": 3
+    },
+    {
+        "question": "Usually between the two stock options the company offers, it makes little difference in the final amount _____ way you prefer.",
+        "type": "grammar",
+        "content":{
+            "multichoices": [
+                {
+                    "text": "which"
+                },
+                {
+                    "text": "what"
+
+                },
+                {
+                    "text": "in which"
+                },
+                {
+                    "text": "whichever"
+                }
+            ]
+        },
+        "answer": 3
     },
     {
         "question": "I _______ like to see his daughter right now.",

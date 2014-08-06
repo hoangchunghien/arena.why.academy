@@ -7,27 +7,36 @@ angular.module('arena.navigation.controller', [
     'arena.users.service',
     'arena.users.facebook.service'
 ])
-    .controller('NavCtrl', function ($scope, $state, $http, userSrv, facebookSrv, $state) {
+    .controller('NavCtrl', function ($scope, $state, $http, userSrv, facebookSrv) {
 
         $scope.user = null;
 
         $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $scope.loading = true;
             if (!userSrv.isAuthenticated()) {
-                console.log(window.location);
-                if (window.location.pathname !== "/") {
-                    window.location = '/';
-                }
+//                console.log(window.location);
+//                if (window.location.pathname !== "/") {
+//                    window.location.href = '/';
+//                }
                 $scope.doLogin();
             }
         });
 
         $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $scope.loading = false;
-
+            if (!userSrv.isAuthenticated()) {
+                console.log(window.location);
+//                if (window.location.pathname !== "/") {
+//                    window.location.href = '/';
+//                }
+                if (toState.name !== "main") {
+                    window.location.href = '/';
+                }
+//                $scope.doLogin();
+            }
             mixpanel.track(
                 "Changed State",
-                { "toState": toState.name, "fromState": fromState.name,}
+                { "toState": toState.name, "fromState": fromState.name}
             );
         });
 

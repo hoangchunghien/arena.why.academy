@@ -32,6 +32,8 @@ angular.module('arena.main', [
 //        $scope.showButtonPlayGame=userSrv.isAuthenticated();
 
         var profile = userSrv.getProfile();
+        $scope.profile = profile;
+
         if (profile) {
             mixpanel.identify(profile.id);  
             mixpanel.people.set({
@@ -39,6 +41,7 @@ angular.module('arena.main', [
                 "$email":profile.email
             });
         };
+
     })
     
     .controller('arena.loginFacebook.ctrl', function ($scope, $state, Seo, userSrv, facebookSrv) {

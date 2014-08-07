@@ -17,21 +17,22 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 	$scope.usersInCurrentRoom = [];
     $scope.username = '';
     
-    $scope.joinServer = function(){
-		if (!$scope.user.name){
-			$scope.user.name = this.username;
-			$scope.user.id = Math.floor((Math.random()*1000)+1);
-			$scope.user.picture_url = "http://www.theipadguide.com/images/facebook50x50.jpg";
-			var profile =userSrv.getProfile();
-			if (profile)
-				$scope.user = profile;
-			socket.emit('log in', JSON.stringify($scope.user));
-			$scope.joinRoom({room_id:"1", name: "#general" });
-		}
-    }
+    //$scope.joinServer = function(){
+		//if (!$scope.user){
+			//$scope.user.name = this.username;
+			//$scope.user.id = Math.floor((Math.random()*1000)+1);
+			//$scope.user.picture_url = "http://www.theipadguide.com/images/facebook50x50.jpg";
+			//var profile =userSrv.getProfile();
+			//if (profile)
+				//$scope.user = profile;
+			//socket.emit('log in', JSON.stringify($scope.user));
+			//$scope.joinRoom({room_id:"1", name: "#general" });
+		//}
+    //}
     $scope.joinRoom = function (room) {
         if (room !== $scope.currentRoom) {
             $scope.currentRoom = room;
+			$scope.usersInCurrentRoom = [];
             $scope.messages = [];
             socket.emit('join', JSON.stringify({ "user": $scope.user, "room": room }));
         }
@@ -42,6 +43,7 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
         $scope.message ='';
     }
     $scope.privateChat = function (user) {
+		$scope.usersInCurrentRoom = [];
         socket.emit('private chat', user.id);
     }
 	$scope.writeMessage = function(event){
@@ -60,19 +62,39 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 		{
 			$scope.user = profile;
 			socket.emit('log in', JSON.stringify($scope.user));
-			$scope.joinRoom({room_id:"1", name: "#general" });
+			//$scope.joinRoom({room_id:"1", name: "#general" });
 		}
     });
     socket.on("log in", function (data) {
-		console.log(data);
+		//console.log(data);
         $scope.users = data;
+		$scope.joinRoom({room_id:"1", name: "#general" });
+    });
+	socket.on("new user login", function (data) {
+		//console.log(data);
+        $scope.users.push(data);
     });
 	socket.on("join", function (string) {
+		console.log(string);
 		var data = JSON.parse(string);
 		console.log(data);
 		console.log(data.user);
 		console.log(data.user.picture_url);
-        $scope.usersInCurrentRoom.push(data.user);
+		var array = $scope.usersInCurrentRoom;
+		var i;
+		if (array.length !=0)
+		{
+			for(i = array.length; i--;){
+				if (array[i].id === data.user.id) 
+					break;
+			}
+			if (i==-1)
+				array.push(data.user);
+		}
+		else
+		{
+			array.push(data.user);
+		}
     });
     socket.on("message", function (string) {
 		var data = JSON.parse(string);
@@ -90,7 +112,16 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
         //$scope.currentRoom = data.room;
         //socket.emit('add user', { username: $scope.username, room: data.room });
     });
-	socket.on("part", function (data) {
-        $scope.users = data;
+	socket.on("user disconnect", function (data) {
+        //$scope.users = data;
+		for(var i = $scope.users.length; i--;){
+			if ($scope.users[i].id === data.id) 
+				$scope.users.splice(i, 1);
+		}
+		var array = $scope.usersInCurrentRoom;
+		for(var i = array.length; i--;){
+			if (array[i].id === data.id) 
+				array.splice(i, 1);
+		}
     });
 })

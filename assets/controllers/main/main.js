@@ -1,7 +1,8 @@
 angular.module('arena.main', [
     'ui.router',
     'arena.users.service',
-    'arena.users.facebook.service'
+    'arena.users.facebook.service',
+    'arena.apollo.service',
 ])
     .config([
         '$stateProvider', '$urlRouterProvider',
@@ -23,6 +24,12 @@ angular.module('arena.main', [
                         $state.go("main");
                     }
                 })
+                .state('home', {
+                    url: '/home',
+                    templateUrl: '/views/main/home.html',
+                    controller: 'arena.home.ctrl'
+                })
+
         }
     ])
 
@@ -43,7 +50,19 @@ angular.module('arena.main', [
         };
 
     })
-    
+
+    .controller('arena.home.ctrl', function ($scope, $state, Seo, userSrv, facebookSrv,apolloSrv) {
+        Seo.title = "Arena for English";
+        console.log("home game");
+        $scope.friends=[];
+        $scope.profile=userSrv.getProfile();
+        apolloSrv.getFriends($scope.profile.id,function(friends){
+            console.log(friends);
+            $scope.friends=friends;
+        });
+
+    })
+
     .controller('arena.loginFacebook.ctrl', function ($scope, $state, Seo, userSrv, facebookSrv) {
         Seo.title = "Arena for English";
         console.log("log facebook");

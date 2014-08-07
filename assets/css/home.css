@@ -1,0 +1,22 @@
+.home {
+
+}
+
+.box {
+
+}
+
+.home .contacts {
+    width: 35%;
+}
+
+.home .home-activities {
+    width: 65%;
+}
+.home .home-activities .actions {
+ padding-top: 5px;
+}
+.home .contacts ul {
+    overflow-y: scroll;
+    height: 576px;
+}

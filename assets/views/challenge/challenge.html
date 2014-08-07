@@ -5,12 +5,6 @@
         -->
         <div class="row">
             <div class="col-xs-6 row-profile-left" style=" border-right: thin solid grey;">
-                <!--<div class="row" align="center">-->
-                <!--<img ng-src="{{profile.picture_url}}">-->
-                <!--</div>-->
-                <!--<div class="row" align="center" style="margin-top: 3px;">-->
-                <!--<div ng-bind="profile.name"></div>-->
-                <!--</div>-->
                 <div class="col-md-3">
                     <img ng-src="{{profile.picture_url}}">
                 </div>
@@ -33,9 +27,7 @@
                 <div>
                     <div ng-repeat=" result in results" class="arena-circle"
                          ng-class="{'arena-done':result.correct==1,'arena-fail':result.correct==0}">
-                        <!--<span class="arena-label" ng-bind="$index+1"></span>-->
                         <span class="arena-label" ng-bind-template="{{result.score}}"></span>
-                        <!--<span class="arena-title" ng-bind-template="+{{result.score}}"></span>-->
                     </div>
                 </div>
             </div>
@@ -74,16 +66,8 @@
             <div class="modal-dialog">
                 <div class="modal-content arena-modal-content">
                     <div class="modal-header">
-                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        -->
                         <h4 class="modal-title arena-modal-title">Chính xác !</h4>
                     </div>
-                    <!--<div class="modal-body">-->
-                    <!--<p>One fine body&hellip;</p>-->
-                    <!--</div>-->
-                    <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                    <!--</div>-->
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -146,14 +130,22 @@
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"
                                             ng-click="exitChallenge()">Đóng
                                     </button>
+                                    <div class="survey row alert alert-info">
+                                        <span class="label label-success">Góp ý giúp phát triển English Arena</span>
+                                        <h3>
+                                            Chào <b>{{profile.name}}</b>, English Arena cần bạn!<br/>Dành vài phút góp ý, giúp Arena phát triển tốt hơn nhé!<br/><br/>
+                                            <a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()">
+                                                <b style="font-size: 20px;">Link góp ý</b>
+                                            </a>
+                                        </h3>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="survey row alert alert-info">
-                            <span class="label label-success">Góp ý giúp phát triển English Arena</span>
-                            <h3>Chào <b>{{profile.name}}</b>, English Arena cần bạn!<br/>Dành vài phút góp ý, giúp Arena phát triển tốt hơn nhé! <a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><b>Link góp ý</b></a></h3>
-                        </div>
+
+
+
                     </div>
                 </div>
                 <!-- /.modal-content -->

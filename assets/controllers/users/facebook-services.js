@@ -6,6 +6,7 @@ angular.module('arena.users.facebook.service', [
 ])
     .service('facebookSrv', function () {
         var profile;
+
         var self=this;
         this.loadFacebookProfile = function (callback) {
             if (profile) {
@@ -15,6 +16,7 @@ angular.module('arena.users.facebook.service', [
             self.initFacebookService(callback);
 
         };
+
         this.getFacebookProfile = function () {
             return profile;
         };

@@ -57,18 +57,22 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 	
 	
 	socket.on("connect", function () {
-        var profile =userSrv.getProfile();
-		if (profile)
+		if (!$scope.user.name)
 		{
-			$scope.user = profile;
-			socket.emit('log in', JSON.stringify($scope.user));
-			//$scope.joinRoom({room_id:"1", name: "#general" });
+			var profile =userSrv.getProfile();
+			if (profile)
+			{
+				$scope.user = profile;
+				socket.emit('log in', JSON.stringify($scope.user));
+				//$scope.joinRoom({room_id:"1", name: "#general" });
+			}
 		}
     });
     socket.on("log in", function (data) {
 		//console.log(data);
         $scope.users = data;
-		$scope.joinRoom({room_id:"1", name: "#general" });
+		//$scope.joinRoom({room_id:"1", name: "#general" });
+		$scope.joinRoom($scope.rooms[0]);
     });
 	socket.on("new user login", function (data) {
 		//console.log(data);

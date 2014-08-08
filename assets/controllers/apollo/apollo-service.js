@@ -7,8 +7,8 @@ angular.module('arena.apollo.service', [
 ])
     .service('apolloSrv', ['$http', 'userSrv', function ($http, userSrv) {
 
-//        var baseUrl = "http://staging.why.academy/v2/";
-        var baseUrl = "http://api.why.academy/";
+        var baseUrl = "http://staging.why.academy:8080/";
+//        var baseUrl = "http://api.why.academy/";
         var self = this;
 
 
@@ -61,8 +61,14 @@ angular.module('arena.apollo.service', [
         this.getQuiz = function (quizID, include, callback) {
             var params = [];
             params.include = include;
-            self.getPath("quiz/" + quizID, params, function (data) {
-                var quiz = data;
+            self.getPath("v2/quiz/" + quizID, params, function (data) {
+                var quiz=data.quiz;
+                for (var i = 0; i < quiz.questions.length; i++) {
+                    var question = quiz.questions[i];
+                    question.question = JSON.parse(question.question);
+                    question.content = JSON.parse(question.content);
+                    console.log(question.question);
+                }
                 callback(quiz);
             });
         };
@@ -72,7 +78,7 @@ angular.module('arena.apollo.service', [
             var params = [];
             params.friends = friendsID;
             params.tags = tags;
-            self.postPath("quiz/challenge", params, function (data) {
+            self.postPath("v2/quiz/challenge", params, function (data) {
                 var results = data;
                 callback(results);
             });
@@ -81,7 +87,7 @@ angular.module('arena.apollo.service', [
 
         //path-format: method : get  quiz/id/results
         this.getQuizResults = function (userID, callback) {
-            self.getPath("quiz/" + userID + "/results", null, function (data) {
+            self.getPath("v2/quiz/" + userID + "/results", null, function (data) {
                 var quiz = data;
                 callback(quiz);
             });
@@ -92,7 +98,7 @@ angular.module('arena.apollo.service', [
             var params = [];
             params.user_answers = userAnswers;
             params.point = userPoints;
-            self.postPath("quiz/" + quizID + "/results", params, function (data) {
+            self.postPath("v2/quiz/" + quizID + "/results", params, function (data) {
                 var results = data;
                 callback(results);
             });

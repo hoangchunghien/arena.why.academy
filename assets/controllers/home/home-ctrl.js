@@ -15,10 +15,10 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         $scope.friends = [];
         $scope.activities = [];
         $scope.profile = userSrv.getProfile();
-        apolloSrv.getFriends(1, function (friends) {
+        apolloSrv.getFriends($scope.profile.id, function (friends) {
             $scope.friends = friends;
         });
-        apolloSrv.getAppActivities(1, true, "actor", function (activities) {
+        apolloSrv.getAppActivities($scope.profile.id, true, "actor", function (activities) {
             console.log(activities);
             for(var i=0; i<activities.length; i++){
                 var activity=activities[i];

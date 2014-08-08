@@ -13,10 +13,24 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
     function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv) {
         console.log("home game");
         $scope.friends = [];
+        $scope.activities = [];
         $scope.profile = userSrv.getProfile();
-        apolloSrv.getFriends($scope.profile.id, function (friends) {
-            console.log(friends);
+        apolloSrv.getFriends(1, function (friends) {
             $scope.friends = friends;
+        });
+        apolloSrv.getAppActivities(1, true, "actor", function (activities) {
+            console.log(activities);
+            for(var i=0; i<activities.length; i++){
+                var activity=activities[i];
+                var metadata=activity.metadata;
+                if(metadata){
+                    console.log(activity);
+                    activity.metadata=JSON.parse(metadata);
+                    activity.is_finished=activity.metadata.is_finished;
+                }
+            }
+            console.log(activities);
+            $scope.activities = activities;
         });
 
     }]);

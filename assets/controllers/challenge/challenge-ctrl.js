@@ -5,11 +5,12 @@ var app = angular.module('arena.challenge.controller', [
     'ui.router',
     'arena.audio.service',
     'arena.users.service',
-    'arena.users.facebook.service'
+    'arena.users.facebook.service',
+    'arena.apollo.service'
 
 ]);
-app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv',
-    function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv) {
+app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv','apolloSrv',
+    function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv,apolloSrv) {
 
         var self = this;
 
@@ -36,7 +37,9 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
             clearTimeout(modalFinishChallengeTimer);
             clearTimeout(countDownToZeroTimer);
             audioSrv.destroyAllSound();
-            quizMachine.destroy();
+            if(quizMachine){
+                quizMachine.destroy();
+            }
             delete quizMachine;
 
         };
@@ -128,7 +131,7 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
                 case "question_ending":
                     console.log("question_ending");
                     var index = $scope.lastAnswered;
-
+                    var yourAnswer="Sai";
                     if (event.data.correct) {
                         _activeModal();
                         correctAnswerAudio.play();
@@ -136,7 +139,7 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
                         $scope.score += event.data.score;
                         $scope.results[$scope.currentQuestion] = {'score': '+' + event.data.score, 'correct': 1};
                         $scope.showCorrect = true;
-
+                        yourAnswer="Đúng";
 
                     } else {
                         wrongAnswerAudio.play();
@@ -145,7 +148,7 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
 
                     }
                     $scope.answers[event.data.correctAnswer] = {correct: 1};
-                    var tableResult = {'yourAnswer': $scope.lastAnswered, 'correctAnswer': event.data.correctAnswer};
+                    var tableResult = {'yourAnswer': yourAnswer};
                     $scope.tableOfResults.push(tableResult);
                     $scope.lastAnswered = null;
                     $scope.$apply();
@@ -221,16 +224,26 @@ app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http',
             $scope.timeout = 0;
             $scope.ThreeToZero = 3;
             $scope.disabledButton = false;
-            $http.get('/data/myData.json').success(function (data) {
-
-                var questions = generateQuestions(data, numOfQuestions);
-                quizMachine = new QuizStateMachine(questions, self);
+//            $http.get('/data/myData.json').success(function (data) {
+//
+//                var questions = generateQuestions(data, numOfQuestions);
+//                quizMachine = new QuizStateMachine(questions, self);
+//                $scope.numberOfQuestion = quizMachine.quiz.questions.length;
+//                for (var i = 0; i < $scope.numberOfQuestion; i++) {
+//                    $scope.results.push({'score': i + 1, 'correct': null});
+//                }
+//                _startModalChallenge();
+//            });
+            apolloSrv.getQuiz(1907,"players,results,questions", function (quiz) {
+                console.log(quiz.questions);
+                quizMachine = new QuizStateMachine(quiz.questions, self);
                 $scope.numberOfQuestion = quizMachine.quiz.questions.length;
                 for (var i = 0; i < $scope.numberOfQuestion; i++) {
                     $scope.results.push({'score': i + 1, 'correct': null});
                 }
                 _startModalChallenge();
             });
+
 
             var generateQuestions = function (data, numberOfQuestion) {
                 var questions = [];

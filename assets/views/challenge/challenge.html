@@ -48,7 +48,7 @@
         Row 4
         -->
         <div class="row">
-            <div ng-repeat="choice in question.content.multichoices" class="col-md-6">
+            <div ng-repeat="choice in question.content.choices" class="col-md-6">
                 <button type="button" class="btn  choice-button" ng-click="clickAnswer($index)"
                         ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
                         ng-disabled="disabledButton==true">
@@ -105,14 +105,13 @@
                                     <tr>
                                         <th>Câu hỏi</th>
                                         <th>Đáp án của bạn</th>
-                                        <th>Đáp án đúng</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="result in tableOfResults" valign="middle">
                                         <td ng-bind="$index+1"></td>
-                                        <td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>
-                                        <td ng-bind="['A','B','C','D'][result.correctAnswer]"></td>
+                                        <td ng-bind="result.yourAnswer"></td>
+                                        <!--<td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>-->
                                     </tr>
                                     </tbody>
                                 </table>

@@ -2,46 +2,112 @@
  * Created by VanLinh on 8/7/2014.
  */
 angular.module('arena.apollo.service', [
+    'arena.users.service'
 
 ])
-    .service('apolloSrv', function ($http) {
+    .service('apolloSrv', ['$http', 'userSrv', function ($http, userSrv) {
 
-        var baseUrl="http://api.why.academy/";
-        var self=this;
+//        var baseUrl = "http://staging.why.academy/v2/";
+        var baseUrl = "http://api.why.academy/";
+        var self = this;
+
+
+//        this.getPath = function (urlPath, params, callback) {
+//            var url = baseUrl + urlPath;
+//            $http.get(url).success(function (data) {
+//                callback(data);
+//            });
+//        };
 
         this.getPath = function (urlPath, params, callback) {
-            var url =baseUrl +urlPath;
-            $http.get(url).success(function (data) {
-                callback(data);
+            var url = baseUrl + urlPath;
+            $http({
+                method: 'GET',
+                url: url,
+                params: params,
+                headers: {
+                    'Access-Token': userSrv.getToken().value
+                }
+            }).then(function (resp) {
+                callback(resp.data);
             });
         };
 
-        this.postPath=function(urlPath,params,callback){
 
+        this.postPath = function (urlPath, params, callback) {
+            var url = baseUrl + urlPath;
+            $http({
+                method: 'POST',
+                url: url,
+                params: params,
+                headers: {
+                    'Content-Type': 'application/vnd.api+json; charset=utf-8',
+                    'Access-Token': userSrv.getToken().value
+                }
+            }).then(function (resp) {
+                callback(resp.data);
+            });
         };
 
-        this.getFriends=function(userID,callback){
-            self.getPath("/users/1/friends",null,function(data){
-                var friends=data.user_friends;
+        this.getFriends = function (userID, callback) {
+            self.getPath("users/" + userID + "/friends", null, function (data) {
+                var friends = data.user_friends;
                 callback(friends);
             });
 
         };
 
-        this.getQuiz=function(quizID,callback){
-
+        // path-format : quiz/{id} method :get
+        this.getQuiz = function (quizID, include, callback) {
+            var params = [];
+            params.include = include;
+            self.getPath("quiz/" + quizID, params, function (data) {
+                var quiz = data;
+                callback(quiz);
+            });
         };
 
-        this.createNewQuiz=function(userID,friendID,tags,callback){
-
+        // path-format : quiz/challenge method : post
+        this.createNewQuiz = function (friendsID, tags, callback) {
+            var params = [];
+            params.friends = friendsID;
+            params.tags = tags;
+            self.postPath("quiz/challenge", params, function (data) {
+                var results = data;
+                callback(results);
+            });
         };
 
-        this.getAppActivities=function(userID,callback){
 
+        //path-format: method : get  quiz/id/results
+        this.getQuizResults = function (userID, callback) {
+            self.getPath("quiz/" + userID + "/results", null, function (data) {
+                var quiz = data;
+                callback(quiz);
+            });
         };
 
-        this.postQuizResult=function(userID,quizID,callback){
-
+        //path-format: method : post  quiz/id/results
+        this.postQuizResults = function (quizID, userAnswers, userPoints, callback) {
+            var params = [];
+            params.user_answers = userAnswers;
+            params.point = userPoints;
+            self.postPath("quiz/" + quizID + "/results", params, function (data) {
+                var results = data;
+                callback(results);
+            });
         };
 
-    });
+
+        this.getAppActivities = function (userID, read, me, callback) {
+            var params = [];
+            params.read = read;
+            params.me = me;
+            self.getPath("users/" + userID + "/app_activities", null, function (data) {
+                var activities = data.app_activities;
+                callback(activities);
+            });
+        };
+
+
+    }]);

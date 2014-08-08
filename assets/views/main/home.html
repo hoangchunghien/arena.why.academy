@@ -3,26 +3,42 @@
 
         <div class="box home chat chat-full noOverflow">
 
-            <div class="box-header" align="center">
-                <h2><i class="fa fa-list"></i>English Arena</h2>
-                <div class="box-icon">
-                    <a href="widgets.html#" class="btn-close"><i class="fa fa-times"></i></a>
-                </div>
+            <div class="box-title" align="center" >
+                English Arena
             </div>
 
-            <div class="conversation home-activities">
+            <div class=" home-main" >
                 <div class="actions" align="center">
-                   <button type="button" class="btn btn-primary" ui-sref="challenge">Trận Mới</button>
+                   <button class="label  label-success" ui-sref="challenge">Trận Mới</button>
                 </div>
-                <ul class="talk">
-                    <li>
-                        <img class="avatar" src="assets/img/avatar.jpg" alt="avatar">
-                        <span class="name">Łukasz Holeczek</span>
-                        <span class="time">1:32PM</span>
-                        <div class="message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</div>
-                    </li>
 
-                </ul>
+                    <div class="activities">
+                        <table>
+                            <tbody>
+                            <tr ng-repeat="activity in activities">
+                                <td>
+                                    <div class="row"><img class="avatar" ng-src="{{activity.user.picture_url}}" alt="avatar"></div>
+                                    <div class="row"><span class="name" ng-bind="activity.user.name"></span></div>
+
+                                </td>
+                                <td class="score">
+                                    <span><b>1 -- 1</b></span>
+                                </td>
+                                <td>
+                                    <div class="row"><img class="avatar" ng-src="{{activity.receiver.picture_url}}" alt="avatar"></div>
+                                    <div class="row"><span class="name" ng-bind="activity.receiver.name"></span></div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn"
+                                            ng-bind="(activity.is_finished)?'Lượt Mới':'Nhận Lời'"
+                                            ng-class="{'btn-success' :activity.is_finished, 'btn-danger':activity.is_finished==null}">
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 <div class="form" align="center">
                     <span class="label label-success h1" >Điểm cao nhất của bạn trong tuần</span>
                 </div>
@@ -39,9 +55,9 @@
                                 <a >
                                     <img class="avatar" alt="{{friend.name}}" ng-src="{{friend.picture_url}}">
                                 </a>
-                                <strong>Name:</strong> <a ng-bind="friend.name"></a><br>
+                                <b ng-bind="friend.name"></b><br>
                                 <strong>Điểm cao :</strong> 1111<br>
-                                <span class="label label-success">Thách Đấu</span>
+                                <button class="label label-success" ng-click="">Thách Đấu</button>
                             </li>
 
                         </ul>

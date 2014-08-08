@@ -10,9 +10,12 @@ angular.module('arena', [
     'ui.router',
     'arena.challenge',
     'arena.challenge.controller',
+    'arena.home',
+    'arena.home.controller',
 	'arena.chat',
 	'arena.chat.controller',
-    'arena.users.facebook.service'
+    'arena.users.facebook.service',
+    'arena.apollo.service'
 ]).factory('Seo', function () {
     return {
         title: 'The arena for languages'

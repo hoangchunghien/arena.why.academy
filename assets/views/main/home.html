@@ -4,13 +4,14 @@
         <div class="box home chat chat-full noOverflow">
 
             <div class="box-title" align="center" >
-                English Arena
+                English Arena <button class="btn btn-success" ui-sref="challenge">Trận Mới</</button>
             </div>
 
-            <div class=" home-main" >
-                <div class="actions" align="center">
-                   <button class="label  label-success" ui-sref="challenge">Trận Mới</button>
-                </div>
+            <div class="home-main" >
+                <div class="box-header">
+                        <h2><i class="fa fa-flash"></i>Các trận đấu đang diễn ra</h2>
+
+                    </div>
 
                     <div class="activities">
                         <table>
@@ -22,7 +23,7 @@
 
                                 </td>
                                 <td class="score">
-                                    <span><b>1 -- 1</b></span>
+                                    <span class="blue"><b>1 : 1</b></span>
                                 </td>
                                 <td>
                                     <div class="row"><img class="avatar" ng-src="{{activity.receiver.picture_url}}" alt="avatar"></div>
@@ -39,12 +40,12 @@
                         </table>
                     </div>
 
-                <div class="form" align="center">
-                    <span class="label label-success h1" >Điểm cao nhất của bạn trong tuần</span>
+                <div class="status">
+                    <span class="trophy label label-info"><i class="fa fa-trophy"></i></span><span class="highscore h4">Điểm cao nhất của bạn trong tuần 4300</span>
                 </div>
             </div>
             <div class="contacts">
-                <div class="box span4" ontablet="span6" ondesktop="span4">
+                <div class="span4" ontablet="span6" ondesktop="span4">
                     <div class="box-header">
                         <h2><i class="fa fa-user"></i>Bạn Bè</h2>
 
@@ -56,8 +57,8 @@
                                     <img class="avatar" alt="{{friend.name}}" ng-src="{{friend.picture_url}}">
                                 </a>
                                 <b ng-bind="friend.name"></b><br>
-                                <strong>Điểm cao :</strong> 1111<br>
-                                <button class="label label-success" ng-click="">Thách Đấu</button>
+                                Điểm cao: <span>1111</span><br>
+                                <button class="btn btn-sm btn-success" ng-click="">Thách Đấu</button>
                             </li>
 
                         </ul>

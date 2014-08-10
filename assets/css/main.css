@@ -29,3 +29,16 @@ a.navbar-brand {
 .navbar-default .navbar-brand, .navbar a {
 	color: white;	
 }
+
+.box {
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+	border-radius: 6px;
+}
+
+.btn {
+    border-radius: 21px;
+}
+
+.btn-sm {
+	border-radius: 14px;	
+}

@@ -27,16 +27,18 @@
 
 .home .contacts {
     width: 35%;
+    position: inherit;
+    float: right;
 }
 
 .home .home-main {
     width: 65%;
-    float: right;
+    float: left;
 }
 
-.home .home-main .actions {
-    padding-top: 6px;
-    background-color: whitesmoke;
+.home .home-main .action {
+    margin-top: 3px;    
+    margin-left: 20px;    
 }
 
 .home .contacts ul {

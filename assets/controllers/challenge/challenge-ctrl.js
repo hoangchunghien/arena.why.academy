@@ -9,6 +9,11 @@ var app = angular.module('arena.challenge.controller', [
     'arena.apollo.service'
 
 ]);
+
+app.controller('arena.play.init-game.ctrl', function(gameFSM) {
+    // gameSrv.getState().go("main");
+});
+
 app.controller('arena.challenge.ctrl', ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv','apolloSrv',
     function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv,apolloSrv) {
 

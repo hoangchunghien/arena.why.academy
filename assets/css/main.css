@@ -18,6 +18,10 @@
 	padding: 0px;
 }
 
+.navbar {
+	border-bottom: 1px solid #1E8FC6;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+}
 a.navbar-brand {
 	background: transparent;
 	text-align: center;

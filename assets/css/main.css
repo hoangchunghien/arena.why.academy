@@ -40,9 +40,15 @@ a.navbar-brand {
 }
 
 .btn {
-    border-radius: 21px;
+    border-radius: 16px;
 }
 
 .btn-sm {
 	border-radius: 14px;	
 }
+
+.btn-lg {
+	border-radius: 21px;	
+}
+
+

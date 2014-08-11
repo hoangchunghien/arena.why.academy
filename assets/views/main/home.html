@@ -3,14 +3,24 @@
 
         <div class="box home chat chat-full noOverflow">
 
-            <div class="box-title" align="center" >
-                English Arena
+            <div class="box-title" >
+                <div class="col-md-8" align="center">
+                    <span class="title">English Arena</span>
+                </div>
+                <div class="col-md-4" align="right">
+                    <span ng-click="doHelp()">
+                        <i class="fa fa-question-circle"></i> <span>Hướng dẫn</span>
+                    </span>
+                </div>
             </div>
 
             <div class="home-main" >
-                <div class="box-header">
-                        <h2><i class="fa fa-flash"></i>Các trận đấu đang diễn ra</h2>
-                        <button class="btn btn-success action" ui-sref="challenge">Trận Mới</</button>
+                <div class="actions" align="center">
+                    <button class="btn btn-lg btn-success btn-action" ui-sref="challenge">Trận Mới</</button>
+                </div>
+                <div class="section-header">
+                        <h2><i class="fa fa-flash"></i>Các Trận đấu đang diễn ra</h2>
+                        
                     </div>
 
                     <div class="activities">
@@ -46,8 +56,8 @@
             </div>
             <div class="contacts">
                 <div class="span4" ontablet="span6" ondesktop="span4">
-                    <div class="box-header">
-                        <h2><i class="fa fa-user"></i>Bạn Bè</h2>
+                    <div class="section-header">
+                        <h2><i class="fa fa-user"></i>Bạn bè</h2>
 
                     </div>
                     <div class="box-content">

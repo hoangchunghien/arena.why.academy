@@ -213,8 +213,10 @@ app.controller('arena.play.on-game.ctrl',
         }]);
 
 
-app.controller('arena.play.result.ctrl', function ($scope, gameSrv, gameFSM) {
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 
+    function ($scope, gameSrv, gameFSM, userSrv) {
     $scope.results = gameFSM.result;
+    $scope.profile = userSrv.getProfile();
 
     $scope.medalUrl = "";
     if ($scope.results.point >= 220) {
@@ -236,7 +238,7 @@ app.controller('arena.play.result.ctrl', function ($scope, gameSrv, gameFSM) {
 
     }
 
-});
+}]);
 
 app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 

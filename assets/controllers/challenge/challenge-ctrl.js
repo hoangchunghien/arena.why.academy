@@ -231,6 +231,9 @@ app.controller('arena.play.result.ctrl', function ($scope, gameSrv, gameFSM) {
         $scope.results = null;
         $scope.medalUrl = null;
         gameFSM.handleEventNotification({name: "result_finished", data: {}});
+        gameFSM=null;
+        gameSrv.destroy();
+
     }
 
 });

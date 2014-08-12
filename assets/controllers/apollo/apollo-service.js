@@ -45,6 +45,7 @@ angular.module('arena.apollo.service', [
                     'Access-Token': userSrv.getToken().value
                 }
             }).then(function (resp) {
+                console.log(resp);
                 callback(resp.data);
             });
         };

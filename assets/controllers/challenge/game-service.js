@@ -23,9 +23,9 @@ angular.module('arena.game.service', [
             return gameFSM;
         };
 
-//        this.destroy = function () {
-//            gameFSM=null;
-//        };
+        this.destroy = function () {
+            gameFSM=null;
+        };
 
         this.setFriends = function (values) {
             friends = values;

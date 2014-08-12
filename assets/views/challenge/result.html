@@ -14,9 +14,9 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="result in results.answers">
+                    <tr ng-repeat="result in results.user_answers">
                         <td ng-bind="$index+1"></td>
-                        <td ng-bind="['A','B','C','D'][result.answer]"></td>
+                        <td ng-bind="['A','B','C','D'][result.user_answer]"></td>
                         <th ng-bind="result.time"></th>
                     </tr>
                     </tbody>

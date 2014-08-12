@@ -4,6 +4,7 @@
 
 function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
     var self = this;
+    var quizId=null;
     var quiz = {};
     var result = {};
 
@@ -22,6 +23,7 @@ function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
             run: function () {
                 $state.go("init-game");
                 apolloSrv.createNewQuiz(friendIds, tagIds, function (quiz) {
+                    self.quizId=quiz.id;
                     self.quiz = quiz;
                     self.consumeEvent({name: 'on_game_event', data: {}});
                 });
@@ -45,6 +47,11 @@ function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
             },
             run: function () {
                 $state.go("result");
+                console.log(self.quizId);
+                console.log(JSON.stringify(self.result));
+                apolloSrv.postQuizResults(self.quizId,self.result,function(data){
+                    console.log(data);
+                });
 
             }
         },

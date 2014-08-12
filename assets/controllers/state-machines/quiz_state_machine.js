@@ -24,7 +24,7 @@ function QuizStateMachine(quiz, eventListener) {
     this.quiz.questions = quiz.questions;
     this.result = {};
     //
-    this.result.answers=[];
+    this.result.user_answers=[];
     this.result.point=0;
     //
     this.questionMachines = [];
@@ -212,7 +212,7 @@ QuizStateMachine.prototype.handleEventNotification = function (event) {
         case "question_ending":
             console.log("Test question_ending");
 
-            self.result.answers.push({"question_id":event.data.id,"answer":event.data.answer.toString(),"time":event.data.time});
+            self.result.user_answers.push({"question_id":event.data.id,"user_answer":event.data.answer.toString(),"time":event.data.time});
             self.result.point +=event.data.score;
 
             self.eventListener.handleEventNotification(event);

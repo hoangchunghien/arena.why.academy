@@ -7,8 +7,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     var quizId = null;
     var quiz = {};
     var result = {};
+    var results = {};
 
-    var _startup = function () {
+    this.startup = function () {
         self.currentState = self.states['initGame'];
         self.currentState.run();
     };
@@ -75,8 +76,6 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
         }
     };
 
-    _startup();
-
     GameFSM.prototype.consumeEvent = function (event) {
 
         var self = this;
@@ -104,7 +103,11 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 break;
 
         }
-    }
+    };
 
+
+    this.setGameData = function(data) {
+        if (data.quiz) self.quiz = data.quiz;
+    }
 
 };

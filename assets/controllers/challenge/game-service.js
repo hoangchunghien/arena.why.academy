@@ -40,11 +40,21 @@ angular.module('arena.game.service', [
             var gameData={};
             gameData.friendIds=getFriendIds(friends);
             gameData.tagIds=TAGS;
-            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
+            self.gameFSM = new GameFSM(gameData, self, apolloSrv, state);
+            self.gameFSM.startup();
         };
 
         this.showResult = function (quizId) {
-            console.log('Show Result: ' + quizId);
+
+            gameFSM = new GameFSM({}, self, apolloSrv, state);
+
+            apolloSrv.getQuiz(quizId,"players,results,questions", function (quiz) {
+                var gameData = {};
+                gameData.quiz = quiz;
+
+                gameFSM.setGameData(gameData);
+                state.go('result');
+            });
         };
 
         this.acceptChallenge = function (quizId) {
@@ -52,6 +62,7 @@ angular.module('arena.game.service', [
             gameData.quizId=quizId;
             console.log(quizId);
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
+            gameFSM.startup();
         };
 
         var getFriendIds = function (friends) {

@@ -215,19 +215,48 @@ app.controller('arena.play.on-game.ctrl',
 
 app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 
     function ($scope, gameSrv, gameFSM, userSrv) {
-    $scope.results = gameFSM.result;
-    $scope.profile = userSrv.getProfile();
 
+    $scope.myResult = gameFSM.result;
+    $scope.profile = userSrv.getProfile();
+    $scope.quiz = gameFSM.quiz;
     $scope.medalUrl = "";
-    if ($scope.results.point >= 220) {
-        $scope.medalUrl = "/data/image/gold-medal.png";
-    } else if ($scope.results.point >= 160) {
-        $scope.medalUrl = "/data/image/silver-medal.png";
-    } else if ($scope.results.point > 90) {
-        $scope.medalUrl = "/data/image/bronze-medal.png";
-    } else {
-        $scope.medalUrl = "";
+
+
+    var _prepareData = function () {
+
+
+        console.log($scope.quiz.results);
+
+        if ($scope.myResult == null && $scope.quiz.results) {
+            var playerId;
+            for (playerId in $scope.quiz.results) {
+                if (playerId == $scope.profile.id) {
+                    $scope.myResult = $scope.quiz.results[playerId];
+                };
+            };
+        };
+
+
+        if ($scope.myResult) {
+            prepareModal();
+        };
     }
+
+
+    var prepareModal = function () {
+        if ($scope.myResult.point >= 220) {
+            $scope.medalUrl = "/data/image/gold-medal.png";
+        } else if ($scope.myResult.point >= 160) {
+            $scope.medalUrl = "/data/image/silver-medal.png";
+        } else if ($scope.myResult.point > 90) {
+            $scope.medalUrl = "/data/image/bronze-medal.png";
+        } else {
+            $scope.medalUrl = "";
+        }
+    }
+
+    _prepareData();
+
 
     $scope.backHome = function () {
         $scope.results = null;

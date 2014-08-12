@@ -1,7 +1,7 @@
 <div class="container arena-container">
     <div class="jumbotron challenge">
         <div class="row">
-            <div align="center" ng-bind-template="Tổng Điểm : {{results.point}}"></div>
+            <div align="center" ng-bind-template="Tổng Điểm : {{myResult.point}}"></div>
         </div>
 
         <div class="row" >
@@ -10,14 +10,12 @@
                     <thead>
                     <th>Câu Hỏi</th>
                     <th>Đáp Án Của Bạn</th>
-                    <th>Thời Gian</th>
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="result in results.user_answers">
+                    <tr ng-repeat="result in myResult.user_answers">
                         <td ng-bind="$index+1"></td>
-                        <td ng-bind="['A','B','C','D'][result.user_answer]"></td>
-                        <th ng-bind="result.time"></th>
+                        <td> <span ng-bind="['A','B','C','D'][myResult.user_answer]"> </span><span myResult.time></span></td>
                     </tr>
                     </tbody>
                 </table>

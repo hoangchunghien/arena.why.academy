@@ -42,7 +42,8 @@
                                 <td>
                                     <button type="button" class="btn"
                                             ng-bind="(activity.is_finished)?'Lượt Mới':'Nhận Lời'"
-                                            ng-class="{'btn-success' :activity.is_finished, 'btn-danger':activity.is_finished==null}">
+                                            ng-class="{'btn-success' :activity.is_finished, 'btn-danger':activity.is_finished==null}"
+                                            ng-click="acceptChallenge(activity)">
                                     </button>
                                 </td>
                             </tr>

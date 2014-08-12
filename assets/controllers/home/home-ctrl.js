@@ -48,4 +48,8 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             gameSrv.challengeFriends();
         };
 
+        $scope.acceptChallenge=function(activity){
+            gameSrv.acceptChallenge(activity.object_id);
+        }
+
     }]);

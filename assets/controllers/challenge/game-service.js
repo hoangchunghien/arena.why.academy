@@ -24,7 +24,7 @@ angular.module('arena.game.service', [
         };
 
         this.destroy = function () {
-            gameFSM=null;
+            gameFSM = null;
         };
 
         this.setFriends = function (values) {
@@ -37,9 +37,11 @@ angular.module('arena.game.service', [
 
 
         this.challengeFriends = function () {
-
-            var friendIds = getFriendIds(friends);
-            gameFSM = new GameFSM(friendIds, TAGS, self, apolloSrv, state);
+            var gameData={};
+            gameData.friendIds=getFriendIds(friends);
+            gameData.tagIds=TAGS;
+//            var friendIds = getFriendIds(friends);
+            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
 
 
         };
@@ -49,7 +51,10 @@ angular.module('arena.game.service', [
         };
 
         this.acceptChallenge = function (quizId) {
-
+            var gameData={};
+            gameData.quizId=quizId;
+            console.log(quizId);
+            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
         };
 
         var getFriendIds = function (friends) {

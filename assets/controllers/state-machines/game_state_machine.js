@@ -2,9 +2,9 @@
  * Created by hoang_000 on 8/11/2014.
  */
 
-function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
+function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     var self = this;
-    var quizId=null;
+    var quizId = null;
     var quiz = {};
     var result = {};
 
@@ -22,11 +22,20 @@ function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
             },
             run: function () {
                 $state.go("init-game");
-                apolloSrv.createNewQuiz(friendIds, tagIds, function (quiz) {
-                    self.quizId=quiz.id;
-                    self.quiz = quiz;
-                    self.consumeEvent({name: 'on_game_event', data: {}});
-                });
+                if (gameData.friendIds) {
+                    apolloSrv.createNewQuiz(gameData.friendIds, gameData.tagIds, function (quiz) {
+                        self.quizId = quiz.id;
+                        self.quiz = quiz;
+                        self.consumeEvent({name: 'on_game_event', data: {}});
+                    });
+                } else {
+                    apolloSrv.getQuiz(gameData.quizId,"players,results,questions", function (quiz) {
+                        self.quizId = quiz.id;
+                        self.quiz = quiz;
+                        self.consumeEvent({name: 'on_game_event', data: {}});
+                    });
+                }
+
 
             }
         },
@@ -49,7 +58,7 @@ function GameFSM(friendIds, tagIds, gameSrv, apolloSrv, $state) {
                 $state.go("result");
                 console.log(self.quizId);
                 console.log(JSON.stringify(self.result));
-                apolloSrv.postQuizResults(self.quizId,self.result,function(data){
+                apolloSrv.postQuizResults(self.quizId, self.result, function (data) {
                     console.log(data);
                 });
 

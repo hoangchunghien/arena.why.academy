@@ -93,41 +93,6 @@
 
 
 <script type="text/javascript">
-    window.fbAsyncInit = function () {
-        $(".bt-fs-dialog").addClass('disabled');
-        FB.init({
-            appId: '319210081588306',
-            status: true,
-            cookie: true,
-            xfbml: true
-        });
-        FB.getLoginStatus(function (response) {
-            if (response.status === 'connected') {
-                $(".bt-fs-dialog").removeClass('disabled');
-                console.log(response);
-                console.log('Logged in.');
-            }
-            else {
-                FB.login(function () {
-                    FB.api('/me', function (response) {
-                        console.log('Successful login for: ' + response.name);
-                        document.getElementById('status').innerHTML =
-                                'Thanks for logging in, ' + response.name + '!';
-                    });
-                }, {scope: 'public_profile,user_friends,email'});
-            }
-        });
-    };
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
 
     jQuery(document).ready(function($) {
         $(".bt-fs-dialog").fSelector({

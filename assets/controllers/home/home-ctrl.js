@@ -28,16 +28,25 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         apolloSrv.getFriends($scope.profile.id, function (friends) {
             $scope.friends = friends;
         });
-        apolloSrv.getAppActivities($scope.profile.id, true, "actor", function (activities) {
-            for(var i=0; i<activities.length; i++){
-                var activity=activities[i];
-                var metadata=activity.metadata;
-                if(metadata){
-                    console.log(activity);
-                    activity.metadata=JSON.parse(metadata);
-                    activity.is_finished=activity.metadata.is_finished;
+        apolloSrv.getAppActivities($scope.profile.id, true, null, function (activities) {
+            // prepare activity status
+
+            for (var i = activities.length - 1; i >= 0; i--) {
+                activity = activities[i];
+
+                if ($scope.profile.id ==  activity.receiver.id) {
+                    if (activity.is_finished) {
+                        activity.status = 'show_result';
+                    } else {
+                        activity.status = 'accepting';
+                    }
+                } else {
+                    activity.status = 'waiting';
                 }
-            }
+            };
+
+            // console.log(activities);
+
             $scope.activities = activities;
         });
 
@@ -56,8 +65,30 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         };
 
 
-        $scope.acceptChallenge=function(activity){
+        $scope.acceptChallenge=function(activity) {
             gameSrv.acceptChallenge(activity.object_id);
+        }
+
+        $scope.showResult = function(activity) {
+            gameSrv.showResult(activity.object_id);
+        }
+
+        $scope.activityAction = function(activity) {
+            if (activity.is_finished) {
+                $scope.showResult(activity);
+            } else {
+                $scope.acceptChallenge(activity);
+            }
+        }
+
+        $scope.activityActionString = function(activity) {
+            if (activity.status == 'show_result') {
+                return 'Xem Kết quả';
+            } else if (activity.status == 'waiting') {
+                return 'Đang chờ';
+            } else if (activity.status == 'accepting') {
+                return 'Nhận Lời';
+            }
         }
 
     }]);

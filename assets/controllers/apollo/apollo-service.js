@@ -22,7 +22,7 @@ angular.module('arena.apollo.service', [
         this.getPath = function (urlPath, params, callback) {
             var url = baseUrl + urlPath;
             if (params === null) params = {};
-            params.app_id = '2';
+            // params.app_id = '2';
             $http({
                 method: 'GET',
                 url: url,
@@ -117,10 +117,32 @@ angular.module('arena.apollo.service', [
         this.getAppActivities = function (userID, read, me, callback) {
             var params = [];
             params.read = read;
-            params.me = me;
+            // params.me = me;
             self.getPath("users/" + userID + "/app_activities", null, function (data) {
                 var activities = data.app_activities;
-                callback(activities);
+
+                var temporaryFilteredAppActivities = [];
+                for(var i=0; i<activities.length; i++){
+                    var activity=activities[i];
+                    var metadata=activity.metadata;
+
+                    if(metadata){
+                        console.log(activity);
+                        activity.metadata=JSON.parse(metadata);
+                        activity.is_finished=activity.metadata.is_finished;
+                    }
+
+                    if (activity.action != 'finished') {
+                        temporaryFilteredAppActivities.push(activity);
+                    };
+
+
+                    console.log(activity.user.name + ' ' + activity.receiver.name + ' ' + activity.action + ' ' + (activity.is_finished?'is_finished':'not_finished'));
+
+                    
+                }
+
+                callback(temporaryFilteredAppActivities);
             });
         };
 

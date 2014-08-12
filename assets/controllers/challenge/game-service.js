@@ -44,7 +44,7 @@ angular.module('arena.game.service', [
         };
 
         this.showResult = function (quizId) {
-
+            console.log('Show Result: ' + quizId);
         };
 
         this.acceptChallenge = function (quizId) {

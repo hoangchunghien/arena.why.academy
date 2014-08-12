@@ -41,10 +41,13 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn"
-                                            ng-bind="(activity.is_finished)?'Lượt Mới':'Nhận Lời'"
+                                            ng-bind="activityActionString(activity)"
                                             ng-class="{'btn-success' :activity.is_finished, 'btn-danger':activity.is_finished==null}"
-                                            ng-click="acceptChallenge(activity)">
+                                            ng-click="activityAction(activity)"
+                                            ng-hide="activity.status == 'waiting'">
                                     </button>
+                                    <span ng-show="activity.status == 'waiting'" ng-bind="activityActionString(activity)">
+                                    </span>
                                 </td>
                             </tr>
                             </tbody>

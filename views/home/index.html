@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"> -->
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">    
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <!--<link rel="stylesheet" href="/vendor/cloud-admin/cloud-admin.min.css">-->
     <!--<link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap-theme.min.css">-->
@@ -19,17 +19,54 @@
     <link rel="stylesheet" href="/css/challenge.css">
     <link rel="stylesheet" href="/css/circle-progress.css">
     <link rel="stylesheet" href="/css/home.css">
-    
-	<!--<link rel="stylesheet" href="/css/chat.css">-->
+    <link type="text/css" href="/vendor/facebook-friend-selector/jquery.friend.selector-1.2.1.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="/css/chat.css">-->
 
 
     <title ng-bind="Seo.title"></title>
 
 
     <!-- start Mixpanel -->
-    <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
+    <script type="text/javascript">(function (f, b) {
+        if (!b.__SV) {
+            var a, e, i, g;
+            window.mixpanel = b;
+            b._i = [];
+            b.init = function (a, e, d) {
+                function f(b, h) {
+                    var a = h.split(".");
+                    2 == a.length && (b = b[a[0]], h = a[1]);
+                    b[h] = function () {
+                        b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
+                    }
+                }
+
+                var c = b;
+                "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+                c.people = c.people || [];
+                c.toString = function (b) {
+                    var a = "mixpanel";
+                    "mixpanel" !== d && (a += "." + d);
+                    b || (a += " (stub)");
+                    return a
+                };
+                c.people.toString = function () {
+                    return c.toString(1) + ".people (stub)"
+                };
+                i = "disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+                for (g = 0; g < i.length; g++)f(c, i[g]);
+                b._i.push([a, e, d])
+            };
+            b.__SV = 1.2;
+            a = f.createElement("script");
+            a.type = "text/javascript";
+            a.async = !0;
+            a.src = "//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";
+            e = f.getElementsByTagName("script")[0];
+            e.parentNode.insertBefore(a, e)
+        }
+    })(document, window.mixpanel || []);
+    mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
     <!-- end Mixpanel -->
 
 
@@ -40,54 +77,54 @@ mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
     <div class="container-fluid">
 
         <div class="nav-no-collapse header-nav">
-                <ul class="nav navbar-nav pull-left">
+            <ul class="nav navbar-nav pull-left">
 
-                    <!-- start: User Dropdown -->
-                    <li class="dropdown">
-                        <a class="btn account dropdown-toggle" data-toggle="dropdown" href="/">
-                            <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
-                            <div class="user">
-                                <span class="hello">&nbsp;</span>
-                                <span class="name">&nbsp;</span>
-                            </div>
-                        </a>
-<!--                         <ul class="dropdown-menu">
-                            <li class="dropdown-menu-title">
+                <!-- start: User Dropdown -->
+                <li class="dropdown">
+                    <a class="btn account dropdown-toggle" data-toggle="dropdown" href="/">
+                        <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
+                        <div class="user">
+                            <span class="hello">&nbsp;</span>
+                            <span class="name">&nbsp;</span>
+                        </div>
+                    </a>
+                    <!--                         <ul class="dropdown-menu">
+                                                <li class="dropdown-menu-title">
 
-                            </li>
-                            <li><a href="widgets.html#"><i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="widgets.html#"><i class="fa fa-cog"></i> Settings</a></li>
-                            <li><a href="widgets.html#"><i class="fa fa-envelope"></i> Messages</a></li>
-                            <li><a href="login.html"><i class="fa fa-off"></i> Logout</a></li>
-                        </ul> -->
-                    </li>
-                    <!-- end: User Dropdown -->
+                                                </li>
+                                                <li><a href="widgets.html#"><i class="fa fa-user"></i> Profile</a></li>
+                                                <li><a href="widgets.html#"><i class="fa fa-cog"></i> Settings</a></li>
+                                                <li><a href="widgets.html#"><i class="fa fa-envelope"></i> Messages</a></li>
+                                                <li><a href="login.html"><i class="fa fa-off"></i> Logout</a></li>
+                                            </ul> -->
+                </li>
+                <!-- end: User Dropdown -->
 
-                    <li class="dropdown">
-                        <span class="h2"></span>
-                        <img src="/images/loaders/spinner5.gif" ng-show="loading" />
-                    </li>
-                </ul>
-            </div>
+                <li class="dropdown">
+                    <span class="h2"></span>
+                    <img src="/images/loaders/spinner5.gif" ng-show="loading"/>
+                </li>
+            </ul>
+        </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-            <!-- <ul class="nav navbar-nav navbar-right"> -->
-                <!--<li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>-->
-                <!-- <li ng-show="isAuth" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="h2"></span>
-                        <img ng-src="{{profile.picture_url}}" width="20" height="20">
-                        &nbsp<span ng-bind="profile.name"></span>
-                    </a> -->
-                    <!--&nbsp<b class="caret"></b></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                    <!--<li>&nbsp;</li>-->
-                    <!--<li class="divider"></li>-->
-                    <!--<li><a href="" ng-click="doLogout()">Logout</a></li>-->
-                    <!--</ul>-->
-<!--                 </li>
-            </ul> -->
+        <!-- <ul class="nav navbar-nav navbar-right"> -->
+        <!--<li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>-->
+        <!-- <li ng-show="isAuth" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="h2"></span>
+                <img ng-src="{{profile.picture_url}}" width="20" height="20">
+                &nbsp<span ng-bind="profile.name"></span>
+            </a> -->
+        <!--&nbsp<b class="caret"></b></a>-->
+        <!--<ul class="dropdown-menu">-->
+        <!--<li>&nbsp;</li>-->
+        <!--<li class="divider"></li>-->
+        <!--<li><a href="" ng-click="doLogout()">Logout</a></li>-->
+        <!--</ul>-->
+        <!--                 </li>
+                    </ul> -->
 
         <!-- </div> -->
         <!-- /.navbar-collapse -->
@@ -98,46 +135,107 @@ mixpanel.init("42929bbca69a69373d6a8258badf0761");</script>
 <div ui-view class="container bs-docs-container"></div>
 
 
+<script src="//connect.facebook.net/en_US/all.js "></script>
+<script src="/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/vendor/angular/angular.min.js"></script>
+<script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
+<script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/vendor/socket.io-client/socket.io.js"></script>
+<script type="text/javascript" src="/vendor/facebook-friend-selector/jquery.friend.selector-1.2.1.js"></script>
+<!--<script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
+<!--
+<script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
+-->
+<!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
+
+<script src="/controllers/transfer/transfer-service.js"></script>
+<script src="/controllers/apollo/apollo-service.js"></script>
+<script src="/controllers/users/facebook-services.js"></script>
+<script src="/controllers/arena.js"></script>
+<script src="/controllers/users/users-service.js"></script>
+<script src="/commons/audio-service.js"></script>
+<script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>
+<script src="/vendor/mp3-player-button.js"></script>
+
+<script src="/controllers/navigation/nav-ctrl.js"></script>
+<script src="/commons/api-service.js"></script>
+<script src="/commons/utils/utils-service.js"></script>
+<script src="/controllers/main/main.js"></script>
+<script src="/controllers/challenge/challenge-route.js"></script>
+<script src="/controllers/challenge/challenge-ctrl.js"></script>
+<script src="/controllers/state-machines/quiz_state_machine.js"></script>
+<script src="/controllers/state-machines/question_state_machine.js"></script>
+<script src="/controllers/chat/chat-route.js"></script>
+<script src="/controllers/chat/app.js"></script>
+<script src="/controllers/chat/chat-route.js"></script>
+<script src="/controllers/chat/services.js"></script>
+<script src="/controllers/home/home-route.js"></script>
+<script src="/controllers/home/home-ctrl.js"></script>
+<script src="/controllers/state-machines/game_state_machine.js"></script>
+<script src="/controllers/challenge/game-service.js"></script>
 
 
-    <script src="https://connect.facebook.net/en_US/all.js "></script>
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/vendor/angular/angular.min.js"></script>
-    <script src="/vendor/angular-cookies/angular-cookies.min.js"></script>
-    <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/vendor/socket.io-client/socket.io.js"></script>
-    <!--<script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>-->
-    <!--
-    <script src="/vendor/magicsuggest/magicsuggest-min.js"></script>
-    -->
-    <!--<script src="/vendor/jquery.xdomainajax.js"></script>-->
+<script type="text/javascript">
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '319210081588306',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            channelUrl  : '//ffs.codersgrave.com/example/channel.html',
+//            version: 'v2.0'
+        });
+        FB.Canvas.setAutoGrow(91);
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                console.log(response);
+                console.log('Logged in.');
+                FB.api('/me', function (response) {
+                    profile = response;
+//                    callback(profile);
+                });
+            }
+            else {
+                FB.login(function () {
+                    FB.api('/me', function (response) {
+                        profile = response;
+//                        callback(profile);
+                        console.log('Successful login for: ' + response.name);
+                        document.getElementById('status').innerHTML =
+                                'Thanks for logging in, ' + response.name + '!';
+                    });
+                }, {scope: 'public_profile,user_friends,email,user_groups'});
+            }
+        });
+    };
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 
-    <script src="/controllers/transfer/transfer-service.js"></script>
-    <script src="/controllers/apollo/apollo-service.js"></script>
-    <script src="/controllers/users/facebook-services.js"></script>
-    <script src="/controllers/arena.js"></script>
-    <script src="/controllers/users/users-service.js"></script>
-    <script src="/commons/audio-service.js"></script>
-    <script src="/vendor/soundmanager2-nodebug-jsmin.js"></script>
-    <script src="/vendor/mp3-player-button.js"></script>
-    <script src="/controllers/navigation/nav-ctrl.js"></script>
-    <script src="/commons/api-service.js"></script>
-    <script src="/commons/utils/utils-service.js"></script>
-    <script src="/controllers/main/main.js"></script>
-    <script src="/controllers/challenge/challenge-route.js"></script>
-    <script src="/controllers/challenge/challenge-ctrl.js"></script>
-    <script src="/controllers/state-machines/quiz_state_machine.js"></script>
-    <script src="/controllers/state-machines/question_state_machine.js"></script>
-    <script src="/controllers/chat/chat-route.js"></script>
-    <script src="/controllers/chat/app.js"></script>
-    <script src="/controllers/chat/chat-route.js"></script>
-    <script src="/controllers/chat/services.js"></script>
-    <script src="/controllers/home/home-route.js"></script>
-    <script src="/controllers/home/home-ctrl.js"></script>
-    <script src="/controllers/state-machines/game_state_machine.js"></script>
-    <script src="/controllers/challenge/game-service.js"></script>
 
+    jQuery(document).ready(function($) {
+        $(".bt-fs-dialog").fSelector({
+            facebookInvite: true,
+            lang: {
+                facebookInviteMessage: "Invite message",
+            },
+            onSubmit: function(response){
+                // example response usage
+                alert(response);
+            }
+        });
+    });
+</script>
+
+<a href="javascript:{}" class="bt-fs-dialog">Click here</a>
 
 </body>
 </html>

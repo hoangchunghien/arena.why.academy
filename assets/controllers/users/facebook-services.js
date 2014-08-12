@@ -47,7 +47,7 @@ angular.module('arena.users.facebook.service', [
                                 document.getElementById('status').innerHTML =
                                     'Thanks for logging in, ' + response.name + '!';
                             });
-                        }, {scope: 'public_profile,user_friends,email,user_groups'});
+                        }, {scope: 'public_profile,user_friends,email'});
                     }
                 });
             };

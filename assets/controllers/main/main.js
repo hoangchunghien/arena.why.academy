@@ -32,7 +32,6 @@ angular.module('arena.main', [
     .controller('arena.main.ctrl', function ($scope, Seo, userSrv) {
         Seo.title = "Arena for English";
         console.log("log facebook");
-//        $scope.showButtonPlayGame=userSrv.isAuthenticated();
 
         var profile = userSrv.getProfile();
         $scope.profile = profile;

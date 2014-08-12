@@ -18,12 +18,12 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         $scope.activities = [];
         $scope.profile = userSrv.getProfile();
 
-        $scope.getOpponentIDs=function(id){
-            var opponentIDs=[];
-            opponentIDs.push(id);
-            transferSrv.setOpponentIDs(opponentIDs);
-            $state.go("challenge");
-        }
+//        $scope.getOpponentIDs=function(id){
+//            var opponentIDs=[];
+//            opponentIDs.push(id);
+//            transferSrv.setOpponentIDs(opponentIDs);
+//            $state.go("challenge");
+//        }
 
         apolloSrv.getFriends($scope.profile.id, function (friends) {
             $scope.friends = friends;

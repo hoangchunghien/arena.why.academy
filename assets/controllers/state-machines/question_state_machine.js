@@ -121,8 +121,10 @@ function QuestionStateMachine(question, eventListener) {
                     self.correct = false;
                     timeForChangeQuestion = 2000;
                 }
-
-                var spentTime = self.timeout + 1000 - self.remainingTime;
+                var spentTime=-1;
+                if(self.remainingTime>0){
+                    spentTime = self.timeout + 1000 - self.remainingTime;
+                }
 
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,

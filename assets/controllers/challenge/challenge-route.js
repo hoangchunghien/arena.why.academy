@@ -44,6 +44,9 @@ angular.module('arena.challenge', [
                             templateUrl: '/views/challenge/on-game.html',
                             controller: 'arena.play.on-game.ctrl'
                         }
+                    },
+                    onExit: function (delegate) {
+                        delegate.destroy();
                     }
                 })
                 .state('result', {

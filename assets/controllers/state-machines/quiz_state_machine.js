@@ -212,7 +212,7 @@ QuizStateMachine.prototype.handleEventNotification = function (event) {
         case "question_ending":
             console.log("Test question_ending");
 
-            self.result.user_answers.push({"question_id":event.data.id,"user_answer":event.data.answer.toString(),"time":event.data.time});
+            self.result.user_answers.push({"question_id":event.data.id,"user_answer":event.data.answer,"time":event.data.time});
             self.result.point +=event.data.score;
 
             self.eventListener.handleEventNotification(event);

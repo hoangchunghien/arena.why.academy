@@ -22,9 +22,9 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 30000;  // in milisecond
+    this.timeout = 30000 + 1000;  // in milisecond
     this.timeStep = 250;
-    this.remainingTime = this.timeout + 1000; // in milisecond
+    this.remainingTime = this.timeout; // in milisecond
     this.correct = false;
     this.eventListener = eventListener;
 
@@ -43,6 +43,7 @@ function QuestionStateMachine(question, eventListener) {
     var _validateQuestion = function (question) {
         return true;
     };
+
 
     this._validateAnswer = function (answer) {
         return true;
@@ -111,7 +112,7 @@ function QuestionStateMachine(question, eventListener) {
                 console.log(logInfo + "ending");
                 console.log(self.answer);
                 var timeForChangeQuestion;
-                if (self.answer== self.question.answer) {
+                if (self.answer == self.question.answer) {
                     self.correct = true;
                     self.score = Math.floor(self.remainingTime / 1000);
                     timeForChangeQuestion = 3500;
@@ -121,11 +122,12 @@ function QuestionStateMachine(question, eventListener) {
                     timeForChangeQuestion = 2000;
                 }
 
-                var spentTime = self.timeout - self.remainingTime;
+                var spentTime = self.timeout + 1000 - self.remainingTime;
 
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
-                        correct: self.correct, score: self.score, correctAnswer: self.question.answer}});
+                        correct: self.correct, score: self.score, correctAnswer: self.question.answer,
+                        id: self.question.id, time: spentTime}});
 
                 }, 1000);
 

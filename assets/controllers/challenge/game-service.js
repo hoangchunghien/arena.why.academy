@@ -8,30 +8,35 @@ angular.module('arena.game.service', [
 
         var state = $state;
 
-        this.setState = function(value) {
+        this.setState = function (value) {
             state = value;
         };
 
-        this.getState = function() {
+        this.getState = function () {
             return state;
         };
 
         var friends = null;
         var gameFSM = null;
 
-        this.getGameFSM = function() {
+        this.getGameFSM = function () {
             return gameFSM;
         };
 
-        this.setFriends = function(values) {
+//        this.destroy = function () {
+//            gameFSM=null;
+//        };
+
+        this.setFriends = function (values) {
             friends = values;
         };
 
-        this.getFriends = function() {
+        this.getFriends = function () {
             return friends;
         };
 
-        this.challengeFriends = function() {
+
+        this.challengeFriends = function () {
 
             var friendIds = getFriendIds(friends);
             gameFSM = new GameFSM(friendIds, TAGS, self, apolloSrv, state);
@@ -39,11 +44,11 @@ angular.module('arena.game.service', [
 
         };
 
-        this.showResult = function(quizId) {
+        this.showResult = function (quizId) {
 
         };
 
-        this.acceptChallenge = function(quizId) {
+        this.acceptChallenge = function (quizId) {
 
         };
 

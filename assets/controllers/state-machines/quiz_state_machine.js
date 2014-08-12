@@ -10,7 +10,7 @@ var EVENTS = {
     }
 };
 
-function QuizStateMachine(questions, eventListener) {
+function QuizStateMachine(quiz, eventListener) {
 
     var self = this;
     this.startTimer = {};
@@ -20,8 +20,13 @@ function QuizStateMachine(questions, eventListener) {
      **/
     this.eventListener = eventListener;
     this.quiz = {};
-    this.quiz.questions = questions;
-    this.result = null;
+    this.quiz.id=quiz.id;
+    this.quiz.questions = quiz.questions;
+    this.result = {};
+    //
+    this.result.answers=[];
+    this.result.point=0;
+    //
     this.questionMachines = [];
     this.questionIndex = 0;
     this.currentQuestionMachines = null;
@@ -83,7 +88,6 @@ function QuizStateMachine(questions, eventListener) {
                 // Notify to player
                 self.eventListener.handleEventNotification({name: "quiz_initializing", data: {}});
 
-
                 self.startTimer = setTimeout(function () {
                     _initialize();
                     self.consumeEvent({name: "initialized", data: {}});
@@ -126,7 +130,8 @@ function QuizStateMachine(questions, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "finished");
-                self.eventListener.handleEventNotification({name: "quiz_finished_event", data: {}});
+
+                self.eventListener.handleEventNotification({name: "quiz_finished_event", data: {quizID:self.quiz.id,result:self.result}});
             }
         }
 
@@ -206,6 +211,9 @@ QuizStateMachine.prototype.handleEventNotification = function (event) {
             break;
         case "question_ending":
             console.log("Test question_ending");
+
+            self.result.answers.push({"question_id":event.data.id,"answer":event.data.answer.toString(),"time":event.data.time});
+            self.result.point +=event.data.score;
 
             self.eventListener.handleEventNotification(event);
 

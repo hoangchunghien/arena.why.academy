@@ -39,7 +39,7 @@ angular.module('arena.apollo.service', [
             $http({
                 method: 'POST',
                 url: url,
-                params: params,
+                data: JSON.stringify(params),
                 headers: {
                     'Content-Type': 'application/vnd.api+json; charset=utf-8',
                     'Access-Token': userSrv.getToken().value
@@ -75,11 +75,25 @@ angular.module('arena.apollo.service', [
 
         // path-format : quiz/challenge method : post
         this.createNewQuiz = function (friendsID, tags, callback) {
-            var params = [];
+            var params = {};
             params.friends = friendsID;
             params.tags = tags;
             self.postPath("v2/quiz/challenge", params, function (data) {
+                var quiz=data.quiz;
+                for (var i = 0; i < quiz.questions.length; i++) {
+                    var question = quiz.questions[i];
+                    question.question = JSON.parse(question.question);
+                    question.content = JSON.parse(question.content);
+                }
+                callback(quiz);
+            });
+        };
+
+        //path-format: method : post  quiz/id/results
+        this.postQuizResults = function (quizID, result, callback) {
+            self.postPath("v2/quiz/" + quizID + "/results", result, function (data) {
                 var results = data;
+                console.log(results);
                 callback(results);
             });
         };
@@ -90,17 +104,6 @@ angular.module('arena.apollo.service', [
             self.getPath("v2/quiz/" + userID + "/results", null, function (data) {
                 var quiz = data;
                 callback(quiz);
-            });
-        };
-
-        //path-format: method : post  quiz/id/results
-        this.postQuizResults = function (quizID, userAnswers, userPoints, callback) {
-            var params = [];
-            params.user_answers = userAnswers;
-            params.point = userPoints;
-            self.postPath("v2/quiz/" + quizID + "/results", params, function (data) {
-                var results = data;
-                callback(results);
             });
         };
 

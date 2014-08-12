@@ -16,8 +16,8 @@ angular.module('arena', [
 	'arena.chat.controller',
     'arena.users.facebook.service',
     'arena.apollo.service',
-    'arena.game.service'
-
+    'arena.game.service',
+    'arena.transfer.service'
 ]).factory('Seo', function () {
     return {
         title: 'The arena for languages'

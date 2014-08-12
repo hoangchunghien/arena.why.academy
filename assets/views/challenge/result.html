@@ -1,0 +1,47 @@
+<div class="container arena-container">
+    <div class="jumbotron challenge">
+        <div class="row">
+            <div align="center" ng-bind-template="Tổng Điểm : {{results.point}}"></div>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>Câu Hỏi</th>
+                    <th>Đáp Án Của Bạn</th>
+                    <th>Thời Gian</th>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="result in results.answers">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="['A','B','C','D'][result.answer]"></td>
+                        <th ng-bind="result.time"></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div class="row" align="center">
+                    <div>Huy Chương :</div>
+                    <img ng-src="{{medalUrl}}">
+                </div>
+
+                <div class="survey row alert alert-info">
+                    <span class="label label-primary">Góp ý</span>
+                    <div><div>Chào <b ng-bind="profile.name"></b>,</div> English Arena cần bạn!<br>Dành vài phút góp ý để Arena phát triển tốt hơn bạn nhé! <br><a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><button class="btn btn-small btn-primary">Góp ý tại đây</button></a></div>
+                </div>
+
+                <div class="row" align="center">
+                    <button type="button" class="btn btn-lg btn-danger" ng-click="backHome()">Tiếp Tục</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

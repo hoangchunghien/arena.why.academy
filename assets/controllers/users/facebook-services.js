@@ -24,6 +24,8 @@ angular.module('arena.users.facebook.service', [
             window.fbAsyncInit = function () {
                 FB.init({
                     appId: '319210081588306',
+                    status: true,
+                    cookie: true,
                     xfbml: true,
                     version: 'v2.0'
                 });
@@ -45,7 +47,7 @@ angular.module('arena.users.facebook.service', [
                                 document.getElementById('status').innerHTML =
                                     'Thanks for logging in, ' + response.name + '!';
                             });
-                        }, {scope: 'public_profile,user_friends,email'});
+                        }, {scope: 'public_profile,user_friends,email,user_groups'});
                     }
                 });
             };
@@ -59,5 +61,7 @@ angular.module('arena.users.facebook.service', [
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        }
+        };
+
+        // this.initFacebookService(function(profile){console.log(profile)});
     });

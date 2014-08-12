@@ -61,7 +61,8 @@
 
             var selected_friends = [];
             $('input.fs-friends:checked').each(function () {
-                selected_friends.push(parseInt($(this).val().split('-')[1], 10));
+                console.log($(this).val());
+                selected_friends.push($(this).val());
             });
 
             if (fsOptions.facebookInvite === true) {
@@ -161,8 +162,8 @@
 
                 FB.api('/', 'POST', {
                     batch: [
-                        { method: 'GET', relative_url: 'me/invitable_friends' },
-                        { method: 'GET', relative_url: 'me/groups' },
+                        { method: 'GET', relative_url: 'me/invitable_friends' }
+                        ,{ method: 'GET', relative_url: 'me/groups' }
                     ]
                 }, function (response) {
                     _parseFacebookFriends(response);
@@ -234,7 +235,7 @@
 
             var link = '<a class="fs-anchor" href="javascript://">' +
                 '<input class="fs-fullname" type="hidden" name="fullname[]" value="' + v[k].name.toLowerCase().replace(/\s/gi, "0") + '" />' +
-                '<input class="fs-friends" type="checkbox" name="friend[]" value="fs-' + v[k].id + '" />' +
+                '<input class="fs-friends" type="checkbox" name="friend[]" value="' + v[k].id + '" />' +
                 '<img class="fs-thumb" src="' + v[k].picture.data.url + '" />' +
                 '<span class="fs-name">' + _charLimit(v[k].name, 15) + '</span>' +
                 '</a>';

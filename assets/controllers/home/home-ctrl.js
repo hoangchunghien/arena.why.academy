@@ -53,23 +53,27 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         $scope.challengeFriend=function(friend){
             var friends=[];
             friends.push(friend);
-            gameSrv.setFriends(friends);
+            gameSrv.gameData.friends = friends;
+            gameSrv.gameData.profile = userSrv.getProfile();
             gameSrv.challengeFriends();
         };
 
 
         $scope.challengeWithRandom=function(){
             var friends=[];
-            gameSrv.setFriends(friends);
+            gameSrv.gameData.friends = friends;
+            gameSrv.gameData.profile = userSrv.getProfile();
             gameSrv.challengeFriends();
         };
 
 
         $scope.acceptChallenge=function(activity) {
+            gameSrv.gameData.profile = userSrv.getProfile();
             gameSrv.acceptChallenge(activity.object_id);
         }
 
         $scope.showResult = function(activity) {
+            gameSrv.gameData.profile = userSrv.getProfile();            
             gameSrv.showResult(activity.object_id);
         }
 

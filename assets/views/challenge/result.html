@@ -1,7 +1,6 @@
 <div class="container arena-container">
     <div class="jumbotron challenge">
         <div class="row">
-            <div align="center" ng-bind-template="Tổng Điểm : {{myResult.point}}"></div>
         </div>
 
         <div class="row" >
@@ -9,13 +8,29 @@
                 <table class="table table-bordered">
                     <thead>
                     <th>Câu Hỏi</th>
-                    <th>Đáp Án Của Bạn</th>
+                    <th>
+                        <div align="center" ng-bind="user.name"></div>
+                        <div class = "h1" align="center" ng-bind-template="{{user.result.point}}"></div>
+                    </th>
+                    <th>
+                        <div align="center" ng-bind="opponent.name"></div>
+                        <div class = "h1"  align="center" ng-bind-template="{{opponent.result.point}}"></div>
+                    </th>
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="result in myResult.user_answers">
+                    <tr ng-repeat="question in gameData.questions">
                         <td ng-bind="$index+1"></td>
-                        <td> <span ng-bind="['A','B','C','D'][myResult.user_answer]"> </span><span myResult.time></span></td>
+                        <td> 
+                            <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                            <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                            <span ng-bind="user.result.user_answers[$index].time"></span>
+                        </td>
+                        <td> 
+                            <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                            <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                            <span ng-bind="opponent.result.user_answers[$index].time"></span>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

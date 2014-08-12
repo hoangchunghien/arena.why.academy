@@ -216,26 +216,36 @@ app.controller('arena.play.on-game.ctrl',
 app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 
     function ($scope, gameSrv, gameFSM, userSrv) {
 
-    $scope.myResult = gameFSM.result;
     $scope.profile = userSrv.getProfile();
-    $scope.quiz = gameFSM.quiz;
+    $scope.myResult = gameFSM.result;
+    $scope.quiz = gameFSM.gameData.quiz;
+
+    // $scope.myResult.user = $scope.profile;
     $scope.medalUrl = "";
 
+    $scope.friendResult = {};
+    $scope.gameData = gameData = gameFSM.gameData;
+
+
+    $scope.user = null;
+    $scope.opponent = null;
 
     var _prepareData = function () {
 
+        $scope.user = gameData.players.user;
+        $scope.user.result = resultForUserID($scope.user.id);
+        $scope.opponent = gameData.players.opponent;
+        $scope.opponent.result = resultForUserID($scope.opponent.id);
 
-        console.log($scope.quiz.results);
-
-        if ($scope.myResult == null && $scope.quiz.results) {
-            var playerId;
-            for (playerId in $scope.quiz.results) {
-                if (playerId == $scope.profile.id) {
-                    $scope.myResult = $scope.quiz.results[playerId];
-                };
-            };
+        for (var i = $scope.user.result.user_answers.length - 1; i >= 0; i-- ) {
+            var userAnswer = $scope.user.result.user_answers[i];
+            userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
         };
 
+        for (var i = $scope.opponent.result.user_answers.length - 1; i >= 0; i-- ) {
+            var userAnswer = $scope.opponent.result.user_answers[i];
+            userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
+        };
 
         if ($scope.myResult) {
             prepareModal();
@@ -255,7 +265,6 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         }
     }
 
-    _prepareData();
 
 
     $scope.backHome = function () {
@@ -266,6 +275,47 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         gameSrv.destroy();
 
     }
+
+    var questionForUserAnswer = function(userAnswer) {
+        for (var i = gameData.questions.length - 1; i >= 0; i--) {
+            var question = gameData.questions[i];
+            if (question.id == userAnswer.question_id) {
+                return question;
+            };
+        }
+    };
+
+    var playerWithID = function (userID) {
+
+    }
+    
+
+    var isUserAnswerCorrect = function(userAnswer) {
+
+        if (!userAnswer) return false;
+
+        var question = questionForUserAnswer(userAnswer);
+        if (question.answer == userAnswer.user_answer) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+
+    var resultForUserID = function (userID) {
+        for (var j= gameData.results.length - 1; j >= 0; j--) {
+            var result = gameData.results[j];
+            if (result.user_id == userID) {
+                return result;
+            };
+        };
+        return null;
+    }
+
+
+    _prepareData();
+
 
 }]);
 

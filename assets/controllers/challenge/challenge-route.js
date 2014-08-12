@@ -50,19 +50,21 @@ angular.module('arena.challenge', [
                     }
                 })
                 .state('result', {
-                    parent: 'on-game',
-                    url: '',
+                    // parent: 'on-game',
+                    url: 'result',
                     resolve: {
                         gameFSM: function (gameSrv) {
                             return gameSrv.getGameFSM();
                         }
                     },
-                    views: {
-                        'play@play': {
-                            templateUrl: '/views/challenge/result.html',
+                        templateUrl: '/views/challenge/result.html',
                             controller: 'arena.play.result.ctrl'
-                        }
-                    }
+                    // views: {
+                    //     'play@play': {
+                    //         templateUrl: '/views/challenge/result.html',
+                    //         controller: 'arena.play.result.ctrl'
+                    //     }
+                    // }
                 })
                 .state('finished', {
                     parent: 'result',

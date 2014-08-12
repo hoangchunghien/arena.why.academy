@@ -7,7 +7,8 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     var quizId = null;
     var quiz = {};
     var result = {};
-    var results = {};
+
+    this.gameData = gameData;
 
     this.startup = function () {
         self.currentState = self.states['initGame'];
@@ -95,6 +96,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
             case "quiz_finished":
                 console.log("quiz_finished");
                 self.result = event.data.result;
+                self.gameData.myResult = event.data.result;
                 self.consumeEvent({name: 'result_event', data: {}});
                 break;
             case "result_finished":

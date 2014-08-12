@@ -16,8 +16,8 @@ angular.module('arena.game.service', [
             return state;
         };
 
-        var friends = null;
         var gameFSM = null;
+        this.gameData = gameData = {};
 
         this.getGameFSM = function () {
             return gameFSM;
@@ -27,18 +27,8 @@ angular.module('arena.game.service', [
             gameFSM = null;
         };
 
-        this.setFriends = function (values) {
-            friends = values;
-        };
-
-        this.getFriends = function () {
-            return friends;
-        };
-
-
         this.challengeFriends = function () {
-            var gameData={};
-            gameData.friendIds=getFriendIds(friends);
+            gameData.friendIds=getFriendIds(gameData.friends);
             gameData.tagIds=TAGS;
             self.gameFSM = new GameFSM(gameData, self, apolloSrv, state);
             self.gameFSM.startup();
@@ -46,21 +36,18 @@ angular.module('arena.game.service', [
 
         this.showResult = function (quizId) {
 
-            gameFSM = new GameFSM({}, self, apolloSrv, state);
+            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
 
             apolloSrv.getQuiz(quizId,"players,results,questions", function (quiz) {
-                var gameData = {};
-                gameData.quiz = quiz;
-
-                gameFSM.setGameData(gameData);
+                gameFSM.gameData.results = quiz.results;
+                gameFSM.gameData.players = quiz.players;
+                gameFSM.gameData.questions = quiz.questions;
                 state.go('result');
             });
         };
 
         this.acceptChallenge = function (quizId) {
-            var gameData={};
             gameData.quizId=quizId;
-            console.log(quizId);
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
             gameFSM.startup();
         };

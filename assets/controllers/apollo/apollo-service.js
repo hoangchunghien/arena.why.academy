@@ -67,7 +67,7 @@ angular.module('arena.apollo.service', [
         this.getQuiz = function (quizID, include, callback) {
             var params = [];
             params.include = include;
-            self.getPath("v2/quiz/" + quizID, params, function (data) {
+            self.getPath("quiz/" + quizID, params, function (data) {
                 var quiz=data.quiz;
                 for (var i = 0; i < quiz.questions.length; i++) {
                     var question = quiz.questions[i];

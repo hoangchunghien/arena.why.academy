@@ -23,7 +23,7 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
 //            opponentIDs.push(id);
 //            transferSrv.setOpponentIDs(opponentIDs);
 //            $state.go("challenge");
-//        }
+//        }help
 
         apolloSrv.getFriends($scope.profile.id, function (friends) {
             $scope.friends = friends;
@@ -89,6 +89,10 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             } else if (activity.status == 'accepting') {
                 return 'Nhận Lời';
             }
+        }
+
+        $scope.doHelp = function () {
+            $state.go("help");
         }
 
     }]);

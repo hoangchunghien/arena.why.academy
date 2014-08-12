@@ -14,5 +14,9 @@ angular.module('arena.home', [
                     templateUrl: '/views/main/home.html',
                     controller: 'arena.home.ctrl'
                 })
+                .state('help', {
+                    url: '/help',
+                    templateUrl: '/views/main/help.html'
+                })
         }
     ]);

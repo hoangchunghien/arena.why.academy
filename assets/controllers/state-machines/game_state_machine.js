@@ -24,16 +24,23 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
             },
             run: function () {
                 $state.go("init-game");
+                gameData.results = [];
                 if (gameData.friendIds) {
                     apolloSrv.createNewQuiz(gameData.friendIds, gameData.tagIds, function (quiz) {
                         self.quizId = quiz.id;
                         self.quiz = quiz;
+                        self.gameData.questions = quiz.questions;
                         self.consumeEvent({name: 'on_game_event', data: {}});
                     });
                 } else {
                     apolloSrv.getQuiz(gameData.quizId,"players,results,questions", function (quiz) {
                         self.quizId = quiz.id;
                         self.quiz = quiz;
+
+                        self.gameData.results = quiz.results;
+                        self.gameData.players = quiz.players;
+                        self.gameData.questions = quiz.questions;
+
                         self.consumeEvent({name: 'on_game_event', data: {}});
                     });
                 }
@@ -96,7 +103,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
             case "quiz_finished":
                 console.log("quiz_finished");
                 self.result = event.data.result;
-                self.gameData.myResult = event.data.result;
+                
+                self.gameData.results.push(event.data.result);
+
                 self.consumeEvent({name: 'result_event', data: {}});
                 break;
             case "result_finished":

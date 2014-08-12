@@ -30,8 +30,8 @@ angular.module('arena.game.service', [
         this.challengeFriends = function () {
             gameData.friendIds=getFriendIds(gameData.friends);
             gameData.tagIds=TAGS;
-            self.gameFSM = new GameFSM(gameData, self, apolloSrv, state);
-            self.gameFSM.startup();
+            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
+            gameFSM.startup();
         };
 
         this.showResult = function (quizId) {

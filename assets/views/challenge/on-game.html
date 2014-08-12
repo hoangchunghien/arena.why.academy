@@ -6,16 +6,20 @@
         <div class="row">
             <div class="col-xs-6 row-profile-left" style=" border-right: thin solid grey;">
                 <div class="col-md-3">
-                    <img ng-src="{{profile.picture_url}}">
+                    <img ng-src="{{gameData.players.user.picture_url}}">
                 </div>
-                <div class="col-md-9" ng-bind="profile.name" align="left"></div>
+                <div class="col-md-9" ng-bind="gameData.players.user.name" align="left"></div>
             </div>
             <div class="col-xs-6 row-profile-right">
-                <div class="row" align="center" ng-bind-template="Tổng điểm : {{score}}">
+                <div class="col-md-3">
+                    <img ng-src="{{gameData.players.opponent.picture_url}}">
                 </div>
-                <div class="row" align="center"
-                     ng-bind-template="Câu hỏi hiện tại: {{currentQuestion+1}}/{{numberOfQuestion}}">
+                <div class="col-md-9" ng-bind="gameData.players.opponent.name" align="left"></div>
+              
+            </div>
+            <div ng-bind-template="Tổng điểm : {{score}}">
                 </div>
+            <div ng-bind-template="Câu hỏi hiện tại: {{currentQuestion+1}}/{{numberOfQuestion}}">
             </div>
         </div>
         <hr style="border-top: thin solid grey;">

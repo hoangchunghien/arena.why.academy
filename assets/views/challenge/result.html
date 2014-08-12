@@ -14,7 +14,8 @@
                     </th>
                     <th>
                         <div align="center" ng-bind="opponent.name"></div>
-                        <div class = "h1"  align="center" ng-bind-template="{{opponent.result.point}}"></div>
+                        <div class = "h1" ng-show="opponent.result" align="center" ng-bind-template="{{opponent.result.point}}"></div>
+                        <div class = "h2" ng-hide="opponent.result" align="center">Đang đợi</div>
                     </th>
                     </thead>
 
@@ -22,14 +23,18 @@
                     <tr ng-repeat="question in gameData.questions">
                         <td ng-bind="$index+1"></td>
                         <td> 
-                            <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
-                            <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                            <span ng-bind="user.result.user_answers[$index].time"></span>
+                            <div ng-show="user.result">
+                                <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                                <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <span ng-bind="user.result.user_answers[$index].time"></span>
+                            </div>
                         </td>
                         <td> 
-                            <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
-                            <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                            <span ng-bind="opponent.result.user_answers[$index].time"></span>
+                            <div ng-show="opponent.result">
+                                <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                                <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <span ng-bind="opponent.result.user_answers[$index].time"></span>
+                            </div>
                         </td>
                     </tr>
                     </tbody>

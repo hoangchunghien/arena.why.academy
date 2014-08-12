@@ -31,6 +31,8 @@ app.controller('arena.play.on-game.ctrl',
             var countDownToZeroTimer;
 
             $scope.profile = userSrv.getProfile();
+
+            $scope.gameData = gameFSM.gameData;
             console.log($scope.profile);
 
             //
@@ -162,7 +164,10 @@ app.controller('arena.play.on-game.ctrl',
                         $scope.showCorrect = false;
                         break;
                     case "quiz_finished_event":
-                        gameFSM.handleEventNotification({name: "quiz_finished", data: {result: event.data.result}});
+
+                        var userResult = event.data.result;
+                        userResult.user_id = $scope.profile.id;
+                        gameFSM.handleEventNotification({name: "quiz_finished", data: {result: userResult}});
                         mixpanel.track("Finished Quiz", {
                             "Score": $scope.score,
                             "Number of Answers": $scope.answers.length
@@ -242,10 +247,14 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
         };
 
-        for (var i = $scope.opponent.result.user_answers.length - 1; i >= 0; i-- ) {
-            var userAnswer = $scope.opponent.result.user_answers[i];
-            userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
+
+        if ($scope.opponent.result) {
+            for (var i = $scope.opponent.result.user_answers.length - 1; i >= 0; i-- ) {
+                var userAnswer = $scope.opponent.result.user_answers[i];
+                userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
+            };    
         };
+        
 
         if ($scope.myResult) {
             prepareModal();

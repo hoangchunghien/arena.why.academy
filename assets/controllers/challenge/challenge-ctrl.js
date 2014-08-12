@@ -12,10 +12,13 @@ var app = angular.module('arena.challenge.controller', [
 
 ]);
 
-app.controller('arena.play.init-game.ctrl', function (gameFSM, gameSrv) {
+app.controller('arena.play.init-game.ctrl', ['$scope', '$state', 'audioSrv', 'apolloSrv', 'gameFSM',
+        function ($scope, $state, audioSrv, apolloSrv, gameFSM) {
 //    gameSrv.getState().go("on-game");
 
-});
+    $scope.gameData = gameFSM.gameData;
+
+}]);
 
 app.controller('arena.play.on-game.ctrl',
     ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'gameFSM',

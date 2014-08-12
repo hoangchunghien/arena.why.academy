@@ -40,10 +40,7 @@ angular.module('arena.game.service', [
             var gameData={};
             gameData.friendIds=getFriendIds(friends);
             gameData.tagIds=TAGS;
-//            var friendIds = getFriendIds(friends);
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
-
-
         };
 
         this.showResult = function (quizId) {

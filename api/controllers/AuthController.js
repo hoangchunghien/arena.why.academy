@@ -83,7 +83,7 @@ var AuthController = {
             res.redirect('https://www.facebook.com/dialog/oauth?' +
                 'client_id=' + client_id +
                 '&redirect_uri=' + redirect_url +
-                '&scope=email%2Cpublish_stream&state=123456789');
+                '&scope=email%2Cuser_friends&state=123456789');
             return;
         }
     },

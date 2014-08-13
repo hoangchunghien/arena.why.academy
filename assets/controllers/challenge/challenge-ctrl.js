@@ -176,7 +176,7 @@ app.controller('arena.play.on-game.ctrl',
 
                         gameFSM.myResult.user_answers = event.data.result.user_answers;
                         gameFSM.handleEventNotification({name: "quiz_finished", data: {}});
-                        mixpanel.track("Finished Quiz", {
+                        ApolloAnalytics.track("Finished Quiz", {
                             "Score": $scope.score,
                             "Number of Answers": $scope.answers.length
                         });
@@ -219,7 +219,7 @@ app.controller('arena.play.on-game.ctrl',
             _initialize();
 
             $scope.takeSurvey = function () {
-                mixpanel.track("Take Survey", {
+                ApolloAnalytics.track("Take Survey", {
                     "View": "Result"
                 });
 
@@ -448,7 +448,7 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //            //Reload Challenge
 //            $scope.reloadChallenge = function () {
 //
-//                mixpanel.track("Play Again", {
+//                ApolloAnalytics.track("Play Again", {
 //                    "View": "Result"
 //                });
 //
@@ -540,7 +540,7 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //                        }, 1000);
 //
 //
-//                        mixpanel.track("Finished Quiz", {
+//                        ApolloAnalytics.track("Finished Quiz", {
 //                            "Score": $scope.score,
 //                            "Number of Answers": $scope.answers.length
 //                        });
@@ -555,7 +555,7 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //            $scope.exitChallenge = function () {
 //                $state.go("main");
 //
-//                mixpanel.track("Go to MainView", {
+//                ApolloAnalytics.track("Go to MainView", {
 //                    "View": "Result"
 //                });
 //
@@ -619,7 +619,7 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //            _initialize();
 //
 //            $scope.takeSurvey = function () {
-//                mixpanel.track("Take Survey", {
+//                ApolloAnalytics.track("Take Survey", {
 //                    "View": "Result"
 //                });
 //

@@ -39,3 +39,11 @@ angular.module('arena', [
         }
     ]
 );
+
+
+
+var ApolloAnalytics = {
+    track: function(eventString, paramsObject) {
+        ApolloAnalytics.track(event, paramsObject);
+    }
+}

@@ -138,12 +138,12 @@ function QuestionStateMachine(question, eventListener) {
                 }, timeForChangeQuestion);
 
                 if (self.remainingTime > 0) {
-                    mixpanel.track("Answered Question", {
+                    ApolloAnalytics.track("Answered Question", {
                         "Corrected": self.correct, "Spent Time": spentTime
                     });
                 }
                 else {
-                    mixpanel.track("Answered Question", {
+                    ApolloAnalytics.track("Answered Question", {
                         "Spent Time": -1
                     });
                 }

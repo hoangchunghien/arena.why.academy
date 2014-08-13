@@ -37,7 +37,7 @@ function QuizStateMachine(quiz, eventListener) {
      */
     // This method _startup run when object is create new
     var _startup = function () {
-        mixpanel.track("Start Game", {
+        ApolloAnalytics.track("Start Game", {
 
         });
         self.currentState = self.states['initializing'];

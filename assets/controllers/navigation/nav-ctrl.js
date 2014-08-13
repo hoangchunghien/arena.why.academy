@@ -34,7 +34,7 @@ angular.module('arena.navigation.controller', [
                 }
 //                $scope.doLogin();
             }
-            mixpanel.track(
+            ApolloAnalytics.track(
                 "Changed State",
                 { "toState": toState.name, "fromState": fromState.name}
             );

@@ -34,15 +34,17 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             for (var i = activities.length - 1; i >= 0; i--) {
                 activity = activities[i];
 
-                if ($scope.profile.id ==  activity.receiver.id) {
-                    if (activity.is_finished) {
-                        activity.status = 'show_result';
-                    } else {
-                        activity.status = 'accepting';
-                    }
+
+                if (activity.is_finished) {
+                    activity.status = 'show_result';
                 } else {
-                    activity.status = 'waiting';
+                    if ($scope.profile.id ==  activity.receiver.id) {
+                        activity.status = 'accepting';
+                    } else {
+                        activity.status = 'waiting';
+                    }        
                 }
+                
             };
 
             // console.log(activities);

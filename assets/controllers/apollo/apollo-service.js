@@ -22,7 +22,7 @@ angular.module('arena.apollo.service', [
         this.getPath = function (urlPath, params, callback) {
             var url = baseUrl + urlPath;
             if (params === null) params = {};
-            // params.app_id = '2';
+            params.app_id = '2';
             $http({
                 method: 'GET',
                 url: url,
@@ -132,7 +132,7 @@ angular.module('arena.apollo.service', [
                         activity.is_finished=activity.metadata.is_finished;
                     }
 
-                    if (activity.action != 'finished') {
+                    if (activity.action == 'challenge') {
                         temporaryFilteredAppActivities.push(activity);
                     };
 

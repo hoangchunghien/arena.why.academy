@@ -1,12 +1,9 @@
-
-
-
 /**
  * Created by VanLinh on 7/23/2014.
  */
 
 
- ///////
+///////
 var app = angular.module('arena.challenge.controller', [
     'ui.router',
     'arena.audio.service',
@@ -19,12 +16,12 @@ var app = angular.module('arena.challenge.controller', [
 ]);
 
 app.controller('arena.play.init-game.ctrl', ['$scope', '$state', 'audioSrv', 'apolloSrv', 'gameFSM',
-        function ($scope, $state, audioSrv, apolloSrv, gameFSM) {
+    function ($scope, $state, audioSrv, apolloSrv, gameFSM) {
 //    gameSrv.getState().go("on-game");
 
-    $scope.gameData = gameFSM.gameData;
+        $scope.gameData = gameFSM.gameData;
 
-}]);
+    }]);
 
 app.controller('arena.play.on-game.ctrl',
     ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'gameFSM',
@@ -201,7 +198,7 @@ app.controller('arena.play.on-game.ctrl',
                 $scope.answers = [];
                 $scope.tableOfResults = [];
                 //for post results
-                
+
                 gameFSM.myResult.point = 0;
 
                 $scope.userAnswers = [];
@@ -231,110 +228,126 @@ app.controller('arena.play.on-game.ctrl',
         }]);
 
 
-app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv',
     function ($scope, gameSrv, gameFSM, userSrv) {
 
-    $scope.profile = userSrv.getProfile();
-    $scope.myResult = gameFSM.result;
-    $scope.quiz = gameFSM.gameData.quiz;
+        $scope.profile = userSrv.getProfile();
+        $scope.myResult = gameFSM.result;
+        $scope.quiz = gameFSM.gameData.quiz;
 
 
+        // $scope.myResult.user = $scope.profile;
+        $scope.medalUrl = "";
 
-    // $scope.myResult.user = $scope.profile;
-    $scope.medalUrl = "";
-
-    $scope.friendResult = {};
-    $scope.gameData = gameData = gameFSM.gameData;
-
-
-    $scope.user = null;
-    $scope.opponent = null;
-
-    var _prepareData = function () {
-
-        // prepareQuizResult(gameData);
-
-        $scope.user = gameData.players.user;
-        $scope.opponent = gameData.players.opponent;
-
-        for (var i = $scope.user.result.user_answers.length - 1; i >= 0; i-- ) {
-            var userAnswer = $scope.user.result.user_answers[i];
-            userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
-        };
+        $scope.friendResult = {};
+        $scope.gameData = gameData = gameFSM.gameData;
 
 
-        if ($scope.opponent.result) {
-            for (var i = $scope.opponent.result.user_answers.length - 1; i >= 0; i-- ) {
-                var userAnswer = $scope.opponent.result.user_answers[i];
-                userAnswer.isCorrected  = isUserAnswerCorrect(userAnswer);
-            };    
-        };
-        
+        $scope.user = null;
+        $scope.opponent = null;
+        $scope.userWinOrLose=null;
 
-        if ($scope.myResult) {
-            prepareModal();
-        };
-    }
+        var checkUserWinOrLose=function(){
+            if($scope.user.result.point!=null && $scope.opponent.result.point!=null){
+                $scope.userWinOrLose=false;
 
-
-    var prepareModal = function () {
-        if ($scope.myResult.point >= 220) {
-            $scope.medalUrl = "/data/image/gold-medal.png";
-        } else if ($scope.myResult.point >= 160) {
-            $scope.medalUrl = "/data/image/silver-medal.png";
-        } else if ($scope.myResult.point > 90) {
-            $scope.medalUrl = "/data/image/bronze-medal.png";
-        } else {
-            $scope.medalUrl = "";
+                if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
+                    $scope.userWinOrLose=true;
+                }else  if($scope.profile.id==$scope.opponent.id && $scope.opponent.result.point>$scope.user.result.point){
+                    $scope.userWinOrLose=true;
+                }
+                console.log($scope.userWinOrLose);
+            }
         }
-    }
+
+        var _prepareData = function () {
+
+            // prepareQuizResult(gameData);
+
+            $scope.user = gameData.players.user;
+            $scope.opponent = gameData.players.opponent;
+
+            checkUserWinOrLose();
+
+            for (var i = $scope.user.result.user_answers.length - 1; i >= 0; i--) {
+                var userAnswer = $scope.user.result.user_answers[i];
+                userAnswer.isCorrected = isUserAnswerCorrect(userAnswer);
+            }
+            ;
 
 
+            if ($scope.opponent.result) {
+                for (var i = $scope.opponent.result.user_answers.length - 1; i >= 0; i--) {
+                    var userAnswer = $scope.opponent.result.user_answers[i];
+                    userAnswer.isCorrected = isUserAnswerCorrect(userAnswer);
+                }
+                ;
+            }
+            ;
 
-    $scope.backHome = function () {
-        $scope.results = null;
-        $scope.medalUrl = null;
-        gameSrv.getState().go("home");
+
+            if ($scope.myResult) {
+                prepareModal();
+            }
+            ;
+        }
+
+
+        var prepareModal = function () {
+            if ($scope.myResult.point >= 220) {
+                $scope.medalUrl = "/data/image/gold-medal.png";
+            } else if ($scope.myResult.point >= 160) {
+                $scope.medalUrl = "/data/image/silver-medal.png";
+            } else if ($scope.myResult.point > 90) {
+                $scope.medalUrl = "/data/image/bronze-medal.png";
+            } else {
+                $scope.medalUrl = "";
+            }
+        }
+
+
+        $scope.backHome = function () {
+            $scope.results = null;
+            $scope.medalUrl = null;
+            gameSrv.getState().go("home");
 //        gameFSM.handleEventNotification({name: "result_finished", data: {}});
-        gameFSM=null;
-        gameSrv.destroy();
+            gameFSM = null;
+            gameSrv.destroy();
 
-    }
-
-    var questionForUserAnswer = function(userAnswer) {
-        for (var i = gameData.questions.length - 1; i >= 0; i--) {
-            var question = gameData.questions[i];
-            if (question.id == userAnswer.question_id) {
-                return question;
-            };
         }
-    };
 
-    var playerWithID = function (userID) {
+        var questionForUserAnswer = function (userAnswer) {
+            for (var i = gameData.questions.length - 1; i >= 0; i--) {
+                var question = gameData.questions[i];
+                if (question.id == userAnswer.question_id) {
+                    return question;
+                }
+                ;
+            }
+        };
 
-    }
-    
+        var playerWithID = function (userID) {
 
-    var isUserAnswerCorrect = function(userAnswer) {
-
-        if (!userAnswer) return false;
-
-        var question = questionForUserAnswer(userAnswer);
-        if (question.answer == userAnswer.user_answer) {
-            return true;
-        } else {
-            return false;
         }
-    };
+
+
+        var isUserAnswerCorrect = function (userAnswer) {
+
+            if (!userAnswer) return false;
+
+            var question = questionForUserAnswer(userAnswer);
+            if (question.answer == userAnswer.user_answer) {
+                return true;
+            } else {
+                return false;
+            }
+        };
 
 
 
+        _prepareData();
 
-
-    _prepareData();
-
-
-}]);
+    }]);
 
 app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 

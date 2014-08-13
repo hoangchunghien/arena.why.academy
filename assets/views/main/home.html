@@ -98,11 +98,12 @@
         $(".bt-fs-dialog").fSelector({
             facebookInvite: true,
             lang: {
-                facebookInviteMessage: "Invite message"
+                facebookInviteMessage: "Tham gia đấu trường English Arena"
             },
             onSubmit: function(response){
                 // example response usage
                 // alert(response);
+                ApolloAnalytics.track('Envite Friends', {'friends': response});
             }
         });
     });

@@ -228,6 +228,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
     $scope.myResult = gameFSM.result;
     $scope.quiz = gameFSM.gameData.quiz;
 
+
+
     // $scope.myResult.user = $scope.profile;
     $scope.medalUrl = "";
 
@@ -282,7 +284,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
     $scope.backHome = function () {
         $scope.results = null;
         $scope.medalUrl = null;
-        gameFSM.handleEventNotification({name: "result_finished", data: {}});
+        gameSrv.getState().go("home");
+//        gameFSM.handleEventNotification({name: "result_finished", data: {}});
         gameFSM=null;
         gameSrv.destroy();
 

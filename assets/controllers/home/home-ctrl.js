@@ -18,6 +18,8 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         $scope.activities = [];
         $scope.profile = userSrv.getProfile();
 
+
+        console.log($scope.profile.id);
 //        $scope.getOpponentIDs=function(id){
 //            var opponentIDs=[];
 //            opponentIDs.push(id);

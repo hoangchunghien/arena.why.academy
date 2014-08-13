@@ -16,7 +16,10 @@
                     <img ng-src="{{gameData.players.opponent.picture_url}}">
                 </div>
                 <div class="col-md-9" ng-bind="gameData.players.opponent.name" align="left"></div>
-                <div class="col-md-9" ng-bind="gameData.players.opponent.result.point" align="left"></div>                
+                <div class="col-md-9" ng-show="gameData.players.opponent.result.point"
+                     ng-bind="gameData.players.opponent.result.point" align="left"></div>
+                <div class="col-md-9" ng-hide="gameData.players.opponent.result.point"
+                     ng-bind-template="Chưa thi đấu" align="left"></div>
               
             </div>
             

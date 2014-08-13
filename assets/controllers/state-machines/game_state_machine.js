@@ -6,7 +6,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     var self = this;
     var quizId = null;
     var quiz = {};
-    var result = {};
+
+    this.myResult = {};
+    this.myResult.point = 0;
 
     this.gameData = gameData;
 
@@ -29,7 +31,12 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                     apolloSrv.createNewQuiz(gameData.friendIds, gameData.tagIds, function (quiz) {
                         self.quizId = quiz.id;
                         self.quiz = quiz;
-                        self.gameData.questions = quiz.questions;
+
+                        // make the right structure for gameData
+                        self.gameData.questions = quiz.questions;                        
+                        self.myResult.user_id = self.gameData.players.user.id;
+                        self.gameData.players.user.result = self.myResult;
+
                         self.consumeEvent({name: 'on_game_event', data: {}});
                     });
                 } else {
@@ -37,9 +44,12 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.quizId = quiz.id;
                         self.quiz = quiz;
 
+                        // make the right structure for gameData
                         self.gameData.results = quiz.results;
                         self.gameData.players = quiz.players;
                         self.gameData.questions = quiz.questions;
+                        self.myResult.user_id = self.gameData.players.opponent.id;
+                        self.gameData.players.opponent.result = self.myResult;
 
                         self.consumeEvent({name: 'on_game_event', data: {}});
                     });
@@ -66,8 +76,8 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
             run: function () {
                 $state.go("result");
                 console.log(self.quizId);
-                console.log(JSON.stringify(self.result));
-                apolloSrv.postQuizResults(self.quizId, self.result, function (data) {
+                console.log(JSON.stringify(self.myResult));
+                apolloSrv.postQuizResults(self.quizId, self.myResult, function (data) {
                     console.log(data);
                 });
 
@@ -102,9 +112,8 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
         switch (event.name) {
             case "quiz_finished":
                 console.log("quiz_finished");
-                self.result = event.data.result;
                 
-                self.gameData.results.push(event.data.result);
+                self.gameData.results.push(self.myResult);
 
                 self.consumeEvent({name: 'result_event', data: {}});
                 break;

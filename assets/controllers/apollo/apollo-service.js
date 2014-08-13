@@ -75,6 +75,9 @@ angular.module('arena.apollo.service', [
                     question.content = JSON.parse(question.content);
                     console.log(question.question);
                 }
+
+                prepareQuizResult(quiz);
+                
                 callback(quiz);
             });
         };
@@ -112,6 +115,31 @@ angular.module('arena.apollo.service', [
                 callback(quiz);
             });
         };
+
+        var prepareQuizResult = function (quizData) {
+
+            var userResult = resultForUserID(quizData, quizData.players.user.id);
+            if (userResult) {
+                quizData.players.user.result = userResult;    
+            };
+            
+            var opponentResult = resultForUserID(quizData, quizData.players.opponent.id);
+            if (opponentResult) {
+                quizData.players.opponent.result = opponentResult;    
+            };
+        };
+
+        var resultForUserID = function (quizData, userID) {
+            for (var j= quizData.results.length - 1; j >= 0; j--) {
+                var result = quizData.results[j];
+                if (result.user_id == userID) {
+                    return result;
+                };
+            };
+            return null;
+        }
+
+
 
 
         this.getAppActivities = function (userID, read, me, callback) {

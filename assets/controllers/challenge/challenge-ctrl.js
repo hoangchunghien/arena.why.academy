@@ -1,6 +1,12 @@
+
+
+
 /**
  * Created by VanLinh on 7/23/2014.
  */
+
+
+ ///////
 var app = angular.module('arena.challenge.controller', [
     'ui.router',
     'arena.audio.service',
@@ -36,6 +42,7 @@ app.controller('arena.play.on-game.ctrl',
             $scope.profile = userSrv.getProfile();
 
             $scope.gameData = gameFSM.gameData;
+
             console.log($scope.profile);
 
             //
@@ -134,7 +141,9 @@ app.controller('arena.play.on-game.ctrl',
                             _activeModal();
                             correctAnswerAudio.play();
                             $scope.answers[index] = {correct: 1};
-                            $scope.score += event.data.score;
+                            //$scope.score += event.data.score;
+                            gameFSM.myResult.point += event.data.score;
+
                             $scope.results[$scope.currentQuestion] = {'score': '+' + event.data.score, 'correct': 1};
                             $scope.showCorrect = true;
                             yourAnswer = "Đúng";
@@ -168,9 +177,8 @@ app.controller('arena.play.on-game.ctrl',
                         break;
                     case "quiz_finished_event":
 
-                        var userResult = event.data.result;
-                        userResult.user_id = $scope.profile.id;
-                        gameFSM.handleEventNotification({name: "quiz_finished", data: {result: userResult}});
+                        gameFSM.myResult.user_answers = event.data.result.user_answers;
+                        gameFSM.handleEventNotification({name: "quiz_finished", data: {}});
                         mixpanel.track("Finished Quiz", {
                             "Score": $scope.score,
                             "Number of Answers": $scope.answers.length
@@ -193,7 +201,9 @@ app.controller('arena.play.on-game.ctrl',
                 $scope.answers = [];
                 $scope.tableOfResults = [];
                 //for post results
-                $scope.score = 0;
+                
+                gameFSM.myResult.point = 0;
+
                 $scope.userAnswers = [];
                 //
                 $scope.currentQuestion = 0;
@@ -242,10 +252,10 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
     var _prepareData = function () {
 
+        // prepareQuizResult(gameData);
+
         $scope.user = gameData.players.user;
-        $scope.user.result = resultForUserID($scope.user.id);
         $scope.opponent = gameData.players.opponent;
-        $scope.opponent.result = resultForUserID($scope.opponent.id);
 
         for (var i = $scope.user.result.user_answers.length - 1; i >= 0; i-- ) {
             var userAnswer = $scope.user.result.user_answers[i];
@@ -318,15 +328,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
     };
 
 
-    var resultForUserID = function (userID) {
-        for (var j= gameData.results.length - 1; j >= 0; j--) {
-            var result = gameData.results[j];
-            if (result.user_id == userID) {
-                return result;
-            };
-        };
-        return null;
-    }
+
 
 
     _prepareData();

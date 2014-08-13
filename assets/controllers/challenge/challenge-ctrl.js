@@ -232,7 +232,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
     function ($scope, gameSrv, gameFSM, userSrv) {
 
         $scope.profile = userSrv.getProfile();
-        $scope.myResult = gameFSM.result;
+        $scope.myResult = gameFSM.myResult;
         $scope.quiz = gameFSM.gameData.quiz;
 
 
@@ -248,16 +248,20 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.userWinOrLose=null;
 
         var checkUserWinOrLose=function(){
-            if($scope.user.result.point!=null && $scope.opponent.result.point!=null){
-                $scope.userWinOrLose=false;
+            // Check if data is available
+            if (!$scope.user || !$scope.opponent) return;
+            if (!$scope.user.result || !$scope.opponent.result) return;
+            if (!$scope.user.result.point || !$scope.opponent.result.point) return;
 
-                if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
-                    $scope.userWinOrLose=true;
-                }else  if($scope.profile.id==$scope.opponent.id && $scope.opponent.result.point>$scope.user.result.point){
-                    $scope.userWinOrLose=true;
-                }
-                console.log($scope.userWinOrLose);
+
+            $scope.userWinOrLose=false;
+
+            if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
+                $scope.userWinOrLose=true;
+            }else  if($scope.profile.id==$scope.opponent.id && $scope.opponent.result.point>$scope.user.result.point){
+                $scope.userWinOrLose=true;
             }
+            console.log($scope.userWinOrLose);
         }
 
         var _prepareData = function () {
@@ -286,19 +290,21 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             ;
 
 
-            if ($scope.myResult) {
-                prepareModal();
-            }
-            ;
+            if ($scope.user.id == $scope.profile.id) {
+                prepareMedal($scope.user.result);
+            } else if ($scope.opponent.id == $scope.profile.id) {
+                prepareMedal($scope.opponent.result);
+            };
         }
 
 
-        var prepareModal = function () {
-            if ($scope.myResult.point >= 220) {
+        var prepareMedal = function (result) {
+
+            if (result.point >= 220) {
                 $scope.medalUrl = "/data/image/gold-medal.png";
-            } else if ($scope.myResult.point >= 160) {
+            } else if (result.point >= 160) {
                 $scope.medalUrl = "/data/image/silver-medal.png";
-            } else if ($scope.myResult.point > 90) {
+            } else if (result.point > 90) {
                 $scope.medalUrl = "/data/image/bronze-medal.png";
             } else {
                 $scope.medalUrl = "";
@@ -344,6 +350,10 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         };
 
 
+        $scope.stringForAnsweringTime = function (time) {
+            var timeString = (time/1000).toFixed(1).replace(/\.0$/, '');;
+            return timeString + 's';
+        }
 
         _prepareData();
 

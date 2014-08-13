@@ -49,6 +49,6 @@ app.factory('Seo', function () {
 // Proxy for Analytics, will include MixPanel and Google Analytics
 var ApolloAnalytics = {
     track: function(eventString, paramsObject) {
-        mixpanel.track(event, paramsObject);
+        mixpanel.track(eventString, paramsObject);
     }
 }

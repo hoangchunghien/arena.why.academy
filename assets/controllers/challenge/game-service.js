@@ -17,14 +17,25 @@ angular.module('arena.game.service', [
         };
 
         var gameFSM = null;
-        this.gameData = gameData = {};
+        var gameData = null;
+
+        this.reset = function () {
+            this.gameData = gameData = {};
+            gameFSM = null;
+        }
+
+        self.reset();
+
+
+        this.destroy = function () {
+            self.reset();
+            gameFSM = null;
+        };
+
+
 
         this.getGameFSM = function () {
             return gameFSM;
-        };
-
-        this.destroy = function () {
-            gameFSM = null;
         };
 
         this.challengeFriends = function () {
@@ -35,7 +46,6 @@ angular.module('arena.game.service', [
         };
 
         this.showResult = function (quizId) {
-
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
 
             apolloSrv.getQuiz(quizId,"players,results,questions", function (quiz) {

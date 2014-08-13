@@ -3,14 +3,13 @@
  */
 angular.module('arena.apollo.service', [
     'arena.users.service'
-
+    ,'arena.api.service'
 ])
-    .service('apolloSrv', ['$http', 'userSrv', function ($http, userSrv) {
+    .service('apolloSrv',  ['$http', 'userSrv','apiSrv', function ($http, userSrv, apiSrv) {
 
-        var baseUrl = "http://staging.why.academy:8080/";
 //        var baseUrl = "http://api.why.academy/";
+        var baseUrl = apiSrv.serverPath();
         var self = this;
-
 
 //        this.getPath = function (urlPath, params, callback) {
 //            var url = baseUrl + urlPath;

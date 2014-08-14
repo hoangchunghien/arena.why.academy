@@ -122,6 +122,7 @@ module.exports = {
             // app.use('/app', express.static(path.resolve(__dirname, '..', '..', 'angular', 'dev', 'src', 'app')));
 
             app.get('*', function(req, res, next){
+                // console.log("Url: " + req.url);
                 var routes = req.url.split('/');
                 var i = 0;
                 var statics = [
@@ -146,6 +147,14 @@ module.exports = {
                         isStatic = true;
                     }
                 }
+
+                /*
+                *  Cache Control set max age for these resources to 1h
+                * */
+                if (['controllers','commons','css','views'].indexOf(routes[1]) >= 0 ) {
+                    res.header('Cache-Control', 'private, max-age=3600');
+                }
+
                 if (isStatic) {
                     return next();
                 };

@@ -4,7 +4,7 @@
 <div class="container arena-container">
 <div class="jumbotron challenge">
     
-        <img class="img-responsive center-block" src="images/EnglishArena_home.png" />
+        <img class="img-responsive center-block" src="images/EnglishArena_home.png" height="300" width="300"/>
         <div class="container center">
             
         </div>
@@ -18,7 +18,14 @@
             <!-- Play now! -->
             <a class="btn btn-lg btn-primary" ng-show="profile" ui-sref="home" >Bắt đầu chơi!</a>
 
-            <span class="h3" ng-hide="profile">Đang tải...</span>
+            <span class="h3" ng-hide="profile">Đang tải...</span><br/><br/>
+
+            <div ng-hide="profile">
+                <span class="h4 label label-danger">
+                Vui lòng sử dụng Chrome/Cốc cốc để được hỗ trợ tốt nhất !
+                </span>
+                <a class="btn btn-primary" ng-hide="profile" href="http://www.google.com.vn/intl/vi/chrome/"><b>Tải Chrome</b></a>
+            </div>
 
             <!-- <a class="btn btn-lg btn-primary" ng-show="!profile" ng-click="loginWithFacebook()" >Đăng nhập</a> -->
 

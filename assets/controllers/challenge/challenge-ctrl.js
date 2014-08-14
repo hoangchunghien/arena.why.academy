@@ -40,7 +40,6 @@ app.controller('arena.play.on-game.ctrl',
 
             $scope.gameData = gameFSM.gameData;
 
-            console.log($scope.profile);
 
             //
             delegate.destroy = function () {

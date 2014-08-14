@@ -6,6 +6,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     var self = this;
     var quizId = null;
     var quiz = {};
+    var timeForChangeInitToOnGame;
 
     this.myResult = {};
     this.myResult.point = 0;
@@ -39,6 +40,10 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.gameData.players.opponent=quiz.players.opponent;
 
                         self.consumeEvent({name: 'on_game_event', data: {}});
+//                        timeForChangeInitToOnGame=setTimeout(function(){
+//                            self.consumeEvent({name: 'on_game_event', data: {}});
+//                        },20000);
+
                     });
                 } else {
                     apolloSrv.getQuiz(gameData.quizId,"players,results,questions", function (quiz) {
@@ -53,6 +58,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.gameData.players.opponent.result = self.myResult;
 
                         self.consumeEvent({name: 'on_game_event', data: {}});
+//                        timeForChangeInitToOnGame=setTimeout(function(){
+//                            self.consumeEvent({name: 'on_game_event', data: {}});
+//                        },20000);
                     });
                 }
 
@@ -65,6 +73,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 result_event: 'result'
             },
             run: function () {
+                console.log("On Game .....");
                 $state.go("on-game");
 
             }

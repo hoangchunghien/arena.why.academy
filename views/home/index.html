@@ -2,7 +2,7 @@
 
 <html ng-app="arena">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"> -->
@@ -176,12 +176,13 @@
 <script src="/controllers/challenge/game-service.js"></script>
 
 <script>
-    window.fbAsyncInit = function () {
+//    window.fbAsyncInit = function () {
         FB.init({
             appId: '319210081588306',
             status: true,
             cookie: true,
-            xfbml: true
+            xfbml: true,
+            frictionlessRequests : true
         });
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
@@ -198,7 +199,7 @@
                 }, {scope: 'public_profile,user_friends,email'});
             }
         });
-    };
+//    };
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {

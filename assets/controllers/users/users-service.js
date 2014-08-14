@@ -63,12 +63,12 @@ angular.module('arena.users.service', [
 
             var profile;
 
-//            if (this.isAuthenticated()) {
-//                var user = getUserFromCookies();
-//                profile = user.profile;
-//            }
-            var user = getUserFromCookies();
-            profile = user.profile;
+            if (this.isAuthenticated()) {
+                var user = getUserFromCookies();
+                profile = user.profile;
+                console.log("Log profile : ");
+                console.log(profile);
+            }
 
             return profile;
         }

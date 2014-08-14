@@ -20,10 +20,12 @@
 
             <span class="h3" ng-hide="profile">Đang tải...</span><br/><br/>
 
-            <span class="h4 label label-danger" ng-hide="profile">
+            <div ng-hide="profile">
+                <span class="h4 label label-danger">
                 Vui lòng sử dụng Chrome/Cốc cốc để được hỗ trợ tốt nhất !
-            </span>
-            <a href="http://www.google.com.vn/intl/vi/chrome/"><b>Tải Chrome</b></a>
+                </span>
+                <a class="btn btn-primary" ng-hide="profile" href="http://www.google.com.vn/intl/vi/chrome/"><b>Tải Chrome</b></a>
+            </div>
 
             <!-- <a class="btn btn-lg btn-primary" ng-show="!profile" ng-click="loginWithFacebook()" >Đăng nhập</a> -->
 

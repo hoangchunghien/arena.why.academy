@@ -73,6 +73,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 result_event: 'result'
             },
             run: function () {
+                console.log("On Game .....");
                 $state.go("on-game");
 
             }

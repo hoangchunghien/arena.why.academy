@@ -155,3 +155,8 @@
 .home .home-help {
     cursor: pointer;
 }
+
+.home ul.dashboard-list {
+    margin: 0px;
+    padding: 0px;
+}

@@ -60,14 +60,12 @@ angular.module('arena.users.service', [
 //        };
 
         this.getProfile = function () {
-
-            var profile;
+            var profile=null;
 
             if (this.isAuthenticated()) {
                 var user = getUserFromCookies();
                 profile = user.profile;
-                console.log("Log profile : ");
-                console.log(profile);
+                return profile;
             }
 
             return profile;

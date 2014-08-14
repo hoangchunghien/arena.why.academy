@@ -10,15 +10,18 @@ angular.module('arena.users.service', [
         var authData = null;
 
         var getUserFromCookies = function () {
-            document.cookie = decodeURIComponent(document.cookie);
-//            if (authData === null) {
+
+           if (authData === null) {
                 var user = null;
                 if ($cookies.user) {
-                    user = $cookies.user;
-                    user = JSON.parse(user.replace("j:", ""));
+
+                    // Decode cookie UTF8 string then parse
+                    var userString = decodeURIComponent($cookies.user);
+                    user = JSON.parse(userString);
                 }
                 authData = user;
-//            }
+           }
+
             return authData;
         };
 

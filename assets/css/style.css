@@ -417,7 +417,7 @@ a.navbar-brand:hover {
 }
 
 .header-nav a.btn.account {
-    padding: 6px 10px 5px 0 !important
+    /*padding: 6px 10px 5px 0 !important*/
 }
 
 .header-nav a.btn:hover {

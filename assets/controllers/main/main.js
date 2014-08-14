@@ -31,12 +31,13 @@ angular.module('arena.main', [
 
     .controller('arena.main.ctrl', function ($scope, Seo, userSrv) {
         Seo.title = "Arena for English";
-        console.log("log facebook");
-
+        
         var profile = userSrv.getProfile();
         $scope.profile = profile;
-
+        
         if (profile) {
+            console.log("Logged In: ", profile.name);
+
             mixpanel.identify(profile.id);  
             mixpanel.people.set({
                 "$name": profile.name,

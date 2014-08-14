@@ -97,8 +97,11 @@ var AuthController = {
                     var now = new Date();
                     var expiresTime = expires.getTime() - now.getTime();
 
-                    res.cookie('user', user, {maxAge: expiresTime});
-                    console.log("Cookie already set");
+                    // encode to send UTF8 string to cookie
+                    var encodedUser = encodeURIComponent(JSON.stringify(user));
+
+                    res.cookie('user', encodedUser, {maxAge: expiresTime});
+
                     res.redirect(arena_url);
                     return;
                 });
@@ -110,8 +113,12 @@ var AuthController = {
                 var now = new Date();
                 var expiresTime = expires.getTime() - now.getTime();
 
-                res.cookie('user', user, {maxAge: expiresTime});
-                console.log("Cookie already set");
+
+                // encode to send UTF8 string to cookie
+                var encodedUser = encodeURIComponent(JSON.stringify(user));
+
+                res.cookie('user', encodedUser, {maxAge: expiresTime});
+
                 res.redirect(arena_url);
                 return;
             });

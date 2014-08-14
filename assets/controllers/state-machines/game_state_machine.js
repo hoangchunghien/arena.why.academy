@@ -39,6 +39,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.gameData.players.user.result = self.myResult;
                         self.gameData.players.opponent=quiz.players.opponent;
 
+                        self.consumeEvent({name: 'on_game_event', data: {}});
 //                        timeForChangeInitToOnGame=setTimeout(function(){
 //                            self.consumeEvent({name: 'on_game_event', data: {}});
 //                        },20000);
@@ -56,6 +57,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.myResult.user_id = self.gameData.players.opponent.id;
                         self.gameData.players.opponent.result = self.myResult;
 
+                        self.consumeEvent({name: 'on_game_event', data: {}});
 //                        timeForChangeInitToOnGame=setTimeout(function(){
 //                            self.consumeEvent({name: 'on_game_event', data: {}});
 //                        },20000);

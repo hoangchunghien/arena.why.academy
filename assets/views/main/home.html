@@ -95,16 +95,44 @@
 <script type="text/javascript">
 
     jQuery(document).ready(function($) {
-        $(".bt-fs-dialog").fSelector({
-            facebookInvite: true,
-            lang: {
-                facebookInviteMessage: "Tham gia đấu trường English Arena"
-            },
-            onSubmit: function(response){
-                // example response usage
-                // alert(response);
-                ApolloAnalytics.track('Envite Friends', {'friends': response});
+
+        var friendIds;
+        $(".bt-fs-dialog").click(function(){
+            if (!friendIds) {
+                FB.api('/me/invitable_friends', function (response) {
+                    if (response.data) {
+                        friendIds = [];
+                        var data = response.data;
+                        for (var i in data) {
+                            friendIds.push(data[i].id);
+                        }
+                        showDialog(); // reload the dialog when loaded friends
+                    }
+                });
             }
+            showDialog(); // show the loading if the friends is not loading yet
         });
+
+        var showDialog = function() {
+            FB.ui({
+                method: 'apprequests',
+                message: "Tham gia đấu trường English Arena",
+                filters: [{name :'Friends to invite', user_ids: friendIds}]
+            }, function(response){
+                ApolloAnalytics.track('Invite Friends', {'friends': response});
+            });
+        };
+
+//        $(".bt-fs-dialog").fSelector({
+//            facebookInvite: true,
+//            lang: {
+//                facebookInviteMessage: "Tham gia đấu trường English Arena"
+//            },
+//            onSubmit: function(response){
+//                // example response usage
+//                // alert(response);
+//                ApolloAnalytics.track('Envite Friends', {'friends': response});
+//            }
+//        });
     });
 </script>

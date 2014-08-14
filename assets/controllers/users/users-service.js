@@ -10,7 +10,7 @@ angular.module('arena.users.service', [
         var authData = null;
 
         var getUserFromCookies = function () {
-            document.cookie = decodeURIComponent(document.cookie);
+            document.cookie = decodeURI(document.cookie);
 //            if (authData === null) {
                 var user = null;
                 if ($cookies.user) {

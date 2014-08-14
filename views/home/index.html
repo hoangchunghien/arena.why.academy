@@ -84,8 +84,8 @@
                     <a class="btn account dropdown-toggle" data-toggle="dropdown" href="/">
                         <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
                         <div class="user">
-                            <span class="hello">&nbsp;</span>
-                            <span class="name">&nbsp;</span>
+                            <!-- <span class="hello">&nbsp;</span> -->
+                            <span class="name" ng-bind="profile.name"></span>
                         </div>
                     </a>
                     <!--                         <ul class="dropdown-menu">

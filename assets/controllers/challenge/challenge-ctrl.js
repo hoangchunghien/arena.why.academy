@@ -249,9 +249,9 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         var checkUserWinOrLose=function(){
             // Check if data is available
-            if (!$scope.user || !$scope.opponent) return;
-            if (!$scope.user.result || !$scope.opponent.result) return;
-            if (!$scope.user.result.point || !$scope.opponent.result.point) return;
+            if ($scope.user==null || $scope.opponent==null) return;
+            if ($scope.user.result==null || $scope.opponent.result==null) return;
+            if ($scope.user.result.point==null || $scope.opponent.result.point==null) return;
 
 
             $scope.userWinOrLose=0;

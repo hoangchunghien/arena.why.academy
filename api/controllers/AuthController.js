@@ -97,7 +97,6 @@ var AuthController = {
                     var now = new Date();
                     var expiresTime = expires.getTime() - now.getTime();
 
-                    user.profile.name = 'Trương Văn Linh';
                     // encode to send UTF8 string to cookie
                     var encodedUserString = encodeURIComponent(JSON.stringify(user));
 
@@ -114,7 +113,6 @@ var AuthController = {
                 var now = new Date();
                 var expiresTime = expires.getTime() - now.getTime();
 
-                user.profile.name = 'Trương Văn Linh';
                 // encode to send UTF8 string to cookie
                 var encodedUserString = encodeURIComponent(JSON.stringify(user));
 

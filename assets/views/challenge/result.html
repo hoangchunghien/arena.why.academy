@@ -1,11 +1,11 @@
 <div class="container arena-container">
     <div class="jumbotron challenge result">
-        <div class="row" align="center" ng-show="userWinOrLose">
-            <label
-                   ng-bind-template="{{(userWinOrLose==true)?'Bạn đã thắng !':'Bạn đã thua !'}}"
+        <div class="row" align="center" ng-show="userWinOrLose>-1">
+            <h2
+                   ng-bind="['Bạn đã thua !','Bạn đã hòa !','Bạn đã thắng !'][userWinOrLose]"
                    class="label" style="font-size: 25px;font-family: Arial;"
-                   ng-class="{'label-success':userWinOrLose==true , 'label-danger': userWinOrLose==false}">
-            </label>
+                   ng-class="{'label-success':userWinOrLose==2,'label-primary': userWinOrLose==1, 'label-danger': userWinOrLose==0}">
+            </h2>
             <br/>
         </div>
 

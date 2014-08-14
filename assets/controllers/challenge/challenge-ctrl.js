@@ -245,7 +245,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         $scope.user = null;
         $scope.opponent = null;
-        $scope.userWinOrLose=null;
+        $scope.userWinOrLose=-1;
 
         var checkUserWinOrLose=function(){
             // Check if data is available
@@ -254,12 +254,15 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             if (!$scope.user.result.point || !$scope.opponent.result.point) return;
 
 
-            $scope.userWinOrLose=false;
+            $scope.userWinOrLose=0;
 
-            if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
-                $scope.userWinOrLose=true;
+            if($scope.user.result.point==$scope.opponent.result.point){
+                $scope.userWinOrLose=1;
+            }
+            else if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
+                $scope.userWinOrLose=2;
             }else  if($scope.profile.id==$scope.opponent.id && $scope.opponent.result.point>$scope.user.result.point){
-                $scope.userWinOrLose=true;
+                $scope.userWinOrLose=2;
             }
             console.log($scope.userWinOrLose);
         }

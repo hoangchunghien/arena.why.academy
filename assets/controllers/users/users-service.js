@@ -11,16 +11,24 @@ angular.module('arena.users.service', [
 
         var getUserFromCookies = function () {
 
-           if (authData === null) {
+            // fix utf8, after refreshing
+            document.cookie = decodeURIComponent(document.cookie);
+
+           // if (authData === null) {
                 var user = null;
                 if ($cookies.user) {
 
                     // Decode cookie UTF8 string then parse
                     var userString = decodeURIComponent($cookies.user);
-                    user = JSON.parse(userString);
+
+                    try { 
+                        user = JSON.parse(userString);
+                    } catch (err) {
+                        ApolloAnalytics.track('Login Parse User Error', {});
+                    }
                 }
                 authData = user;
-           }
+           // }
 
             return authData;
         };

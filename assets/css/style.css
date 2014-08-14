@@ -1055,7 +1055,7 @@ div[data-role="editor-toolbar"] {
 }
 
 .label, .badge {
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
     font-weight: 600;
     font-size: 12px;
     padding: 3px 6px;

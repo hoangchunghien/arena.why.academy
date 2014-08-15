@@ -114,6 +114,10 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             $state.go("help");
         }
 
+        $scope.playSoundClickedButton=function(){
+            audioSrv.playClickedButton();
+        }
+
     }]);
 app.controller('arena.help.ctrl', [ '$scope', '$state', 'audioSrv',
     function ($scope, $state, audioSrv) {

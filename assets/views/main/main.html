@@ -20,16 +20,19 @@
 
             <span class="h3" ng-show="!profile && isArenaInsideFacebook">Đang tải...</span><br/><br/>
 
-            <a class="btn btn-lg btn-primary" ng-hide="isArenaInsideFacebook" href="http://apps.facebook.com/englisharena" >Bắt đầu chơi trên Facebook</a>
+            <a ng-click="playSoundClickedButton()" class="btn btn-lg btn-primary"
+               ng-hide="isArenaInsideFacebook" href="http://apps.facebook.com/englisharena" >
+                Bắt đầu chơi trên Facebook
+            </a>
 
 
 
-            <div ng-hide="profile">
-                <span class="h4 label label-danger">
-                Vui lòng sử dụng Chrome/Cốc cốc để được hỗ trợ tốt nhất !
-                </span>
-                <a class="btn btn-primary" ng-hide="profile" href="http://www.google.com.vn/intl/vi/chrome/"><b>Tải Chrome</b></a>
-            </div>
+            <!--<div ng-hide="profile">-->
+                <!--<span class="h4 label label-danger">-->
+                <!--Vui lòng sử dụng Chrome/Cốc cốc để được hỗ trợ tốt nhất !-->
+                <!--</span>-->
+                <!--<a class="btn btn-primary" ng-hide="profile" href="http://www.google.com.vn/intl/vi/chrome/"><b>Tải Chrome</b></a>-->
+            <!--</div>-->
 
             <!-- <a class="btn btn-lg btn-primary" ng-show="!profile" ng-click="loginWithFacebook()" >Đăng nhập</a> -->
 

@@ -16,9 +16,13 @@
             <!--ng-show="showButtonPlayGame"-->
 
             <!-- Play now! -->
-            <a class="btn btn-lg btn-primary" ng-show="profile" ui-sref="home" >Bắt đầu chơi!</a>
+            <a class="btn btn-lg btn-primary" ng-show="profile && isArenaInsideFacebook" ui-sref="home" >Bắt đầu chơi!</a>
 
-            <span class="h3" ng-hide="profile">Đang tải...</span><br/><br/>
+            <span class="h3" ng-show="!profile && isArenaInsideFacebook">Đang tải...</span><br/><br/>
+
+            <a class="btn btn-lg btn-primary" ng-hide="isArenaInsideFacebook" href="http://apps.facebook.com/englisharena" >Bắt đầu chơi trên Facebook</a>
+
+
 
             <div ng-hide="profile">
                 <span class="h4 label label-danger">

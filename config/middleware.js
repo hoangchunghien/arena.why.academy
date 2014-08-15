@@ -9,7 +9,7 @@ var request = require('request');
 var passport = require('passport')
     , FacebookStrategy = require('passport-facebook').Strategy;
 
-var getUserToken = function(fbToken, callback) {
+var getUserToken = function (fbToken, callback) {
 
     var authentication = {'access_token': fbToken};
     console.log("Authentication: " + JSON.stringify(authentication));
@@ -21,7 +21,7 @@ var getUserToken = function(fbToken, callback) {
     request.post({
         headers: {'content-type': 'application/x-www-form-urlencoded'},
         url: url
-    }, function(error, response, body) {
+    }, function (error, response, body) {
         console.log("Error: " + error);
         console.log("Response: " + JSON.stringify(response));
         console.log("Body: " + body);
@@ -41,11 +41,11 @@ var getUserToken = function(fbToken, callback) {
     });
 };
 
-var verifyHandler = function(token, tokenSecret, profile, done) {
+var verifyHandler = function (token, tokenSecret, profile, done) {
     console.log("verify handler");
-    process.nextTick(function() {
+    process.nextTick(function () {
         console.log("Getting user why.academy information");
-        getUserToken(token, function(user) {
+        getUserToken(token, function (user) {
             console.log("Getting user why.academy information [DONE]");
             return done(null, user);
             /*
@@ -90,11 +90,11 @@ var verifyHandler = function(token, tokenSecret, profile, done) {
         });
     });
 };
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
     // user.user_token = JSON.stringify(user.user_token);
     done(null, user);
 });
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
     //User.findOne({uid: uid}).done(function(err, user) {
     done(null, user);
     //});
@@ -102,7 +102,7 @@ passport.deserializeUser(function(user, done) {
 module.exports = {
     // Init custom express middleware
     express: {
-        customMiddleware: function(app) {
+        customMiddleware: function (app) {
 
 
             passport.use(new FacebookStrategy({
@@ -121,7 +121,7 @@ module.exports = {
             // app.use(express.static(path.resolve(__dirname, '..', 'assets')));
             // app.use('/app', express.static(path.resolve(__dirname, '..', '..', 'angular', 'dev', 'src', 'app')));
 
-            app.get('*', function(req, res, next){
+            app.get('*', function (req, res, next) {
                 // console.log("Url: " + req.url);
                 var routes = req.url.split('/');
                 var i = 0;
@@ -142,30 +142,36 @@ module.exports = {
 //                    ,'admin'
                 ];
                 var isStatic = false;
-                for(i = 0; i < statics.length; i++){
-                    if(routes[1] === statics[i]){
+                for (i = 0; i < statics.length; i++) {
+                    if (routes[1] === statics[i]) {
                         isStatic = true;
                     }
                 }
 
                 /*
-                *  Cache Control set max age for these resources to 1h
-                * */
-                if (['controllers','commons','css','views'].indexOf(routes[1]) >= 0 ) {
+                 *  Cache Control set max age for these resources to 1h
+                 * */
+                if (['controllers', 'commons', 'css', 'views'].indexOf(routes[1]) >= 0) {
                     res.header('Cache-Control', 'private, max-age=3600');
                 }
 
                 if (isStatic) {
                     return next();
-                };
+                }
 
-                var userAgent = req.headers['user-agent'];
-                if(userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0){
-                    return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
-                }
-                else {
-                    return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
-                }
+//                var userAgent = req.headers['user-agent'];
+//                console.log(userAgent);
+//                if (userAgent) {
+//                    if (userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0) {
+//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
+//                    }
+//                    else {
+//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
+//                    }
+//                }
+
+                return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
+
             });
         }
     }

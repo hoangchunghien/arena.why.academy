@@ -13,6 +13,8 @@ var app = angular.module('arena.home.controller', [
 ]);
 app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'transferSrv', 'gameSrv',
     function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv, transferSrv, gameSrv) {
+        audioSrv.init();
+
         console.log("home game");
         $scope.friends = [];
         $scope.activities = [];
@@ -56,6 +58,7 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         });
 
         $scope.challengeFriend = function (friend) {
+            audioSrv.playClickedButton();
             var friends = [];
             friends.push(friend);
             gameSrv.gameData.friends = friends;
@@ -67,6 +70,7 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
 
 
         $scope.challengeWithRandom = function () {
+            audioSrv.playClickedButton();
             var friends = [];
             gameSrv.gameData.friends = friends;
 
@@ -77,14 +81,17 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
 
 
         $scope.acceptChallenge = function (activity) {
+            audioSrv.playClickedButton();
             gameSrv.acceptChallenge(activity.object_id);
         }
 
         $scope.showResult = function (activity) {
+            audioSrv.playClickedButton();
             gameSrv.showResult(activity.object_id);
         }
 
         $scope.activityAction = function (activity) {
+            audioSrv.playClickedButton();
             if (activity.is_finished) {
                 $scope.showResult(activity);
             } else {
@@ -103,6 +110,7 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         }
 
         $scope.doHelp = function () {
+            audioSrv.playClickedButton();
             $state.go("help");
         }
 

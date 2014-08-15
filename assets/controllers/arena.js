@@ -52,3 +52,12 @@ var ApolloAnalytics = {
         mixpanel.track(eventString, paramsObject);
     }
 }
+
+
+
+var isArenaInsideFacebook = function () {
+    if (window.name.indexOf("_fb_") > -1) {
+        return true;
+    }
+    return false;
+}

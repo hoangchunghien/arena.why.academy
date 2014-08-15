@@ -154,7 +154,7 @@ angular.module('arena.apollo.service', [
                     var metadata=activity.metadata;
 
                     if(metadata){
-                        console.log(activity);
+                        // console.log(activity);
                         activity.metadata=JSON.parse(metadata);
                         activity.is_finished=activity.metadata.is_finished;
                     }
@@ -164,7 +164,7 @@ angular.module('arena.apollo.service', [
                     };
 
 
-                    console.log(activity.user.name + ' ' + activity.receiver.name + ' ' + activity.action + ' ' + (activity.is_finished?'is_finished':'not_finished'));
+                    // console.log(activity.user.name + ' ' + activity.receiver.name + ' ' + activity.action + ' ' + (activity.is_finished?'is_finished':'not_finished'));
 
                     
                 }

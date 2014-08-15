@@ -1,6 +1,8 @@
 <div class="container arena-container">
     <div class="col-lg-12">
 
+
+
         <div class="box home chat chat-full noOverflow">
 
             <div class="box-title" >
@@ -87,6 +89,16 @@
         </div>
 
     </div>
+
+    <div align="center" class="comments">
+        <div class="comments-title">Góp ý và bình luận</div>
+        <div class="fb-comments" data-href="https://apps.facebook.com/englisharena" data-numposts="5" data-colorscheme="light" href="https://apps.facebook.com/englisharena"></div>
+        
+
+        <!-- <div class="fb-comments" data-href="https://localhost:1337/home" data-numposts="5" data-colorscheme="light" href="https://localhost:1337/home"></div> -->
+        <br/><br/><br/><br/>
+    </div>
+
 </div>
 
 
@@ -134,5 +146,9 @@
 //                ApolloAnalytics.track('Envite Friends', {'friends': response});
 //            }
 //        });
+
+
+        // rescan Facebook Comments box
+        FB.XFBML.parse();
     });
 </script>

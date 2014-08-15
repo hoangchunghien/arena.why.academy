@@ -38,8 +38,8 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
         }
     }
     $scope.sendMessage = function () {
-        socket.emit('send', JSON.stringify({ user: $scope.user, "room": $scope.currentRoom,
-			message: this.message }));
+        socket.emit('send', encodeURIComponent(JSON.stringify({ user: $scope.user, "room": $scope.currentRoom,
+			message: this.message })));
         $scope.message ='';
     }
     $scope.privateChat = function (user) {
@@ -88,15 +88,18 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 	socket.on("disconnect", function () {
 		console.log("disconnect");
 	});
-    socket.on("log in", function (data) {
+    socket.on("log in", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
 		//console.log(data);
         $scope.users = data;
 		//$scope.joinRoom({room_id:"1", name: "#general" });
 		$scope.joinRoom({id:"1"});
     });
-	socket.on("new user login", function (data) {
+	socket.on("new user login", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
 		//console.log(data);
-        $scope.users.push(data);
+        //$scope.users.push(data);
+		$scope.users = data;
     });
 	socket.on("join", function (string) {
 		console.log(string);
@@ -120,8 +123,11 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			array.push(data.user);
 		}
     });
-    socket.on("message", function (string) {
+    socket.on("message", function (s) {
 		console.log("on message");
+		var string = decodeURIComponent(s);
+		console.log(string);
+		//socket.emit('test', string);
 		var data = JSON.parse(string);
 		if ($scope.currentRoom.id === data.room.id)
 		{
@@ -131,18 +137,27 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			$scope.messages.push(data);
 		}
     });
+	socket.on('private chat', function (room, string) {
+		console.log('private chat');
+		console.log(room);
+		console.log(string);
+		$scope.currentRoom = {id:room};
+		var data = JSON.parse(decodeURIComponent(string));
+		$scope.messages = data["messages"];
+	});
     socket.on('private chat offer', function (string) {
 		var data = JSON.parse(string);
 		$scope.joinRoom(data.room);
         //$scope.currentRoom = data.room;
         //socket.emit('add user', { username: $scope.username, room: data.room });
     });
-	socket.on("user disconnect", function (data) {
+	socket.on("user disconnect", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
         //$scope.users = data;
-		for(var i = $scope.users.length; i--;){
-			if ($scope.users[i].id === data.id) 
-				$scope.users.splice(i, 1);
-		}
+		//for(var i = $scope.users.length; i--;){
+		//	if ($scope.users[i].id === data.id) 
+		//		$scope.users.splice(i, 1);
+		//}
 		var array = $scope.usersInCurrentRoom;
 		for(var i = array.length; i--;){
 			if (array[i].id === data.id) 

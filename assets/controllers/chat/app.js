@@ -10,8 +10,8 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 
 
     $scope.user = {};
-    $scope.rooms = [{room_id:"1", name: "#general" }, {room_id:"2", name: "#english" },
-				{ room_id:"3",name: "#other" }];
+    $scope.rooms = [{id:"1", name: "#general" }];//, {room_id:"2", name: "#english" },
+				//{ room_id:"3",name: "#other" }];
     //$scope.messages = [{ name: "abc", message: "dsds" }];
     $scope.users = [];
 	$scope.usersInCurrentRoom = [];
@@ -57,8 +57,10 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 	
 	
 	socket.on("connect", function () {
+		console.log("connect");
 		if (!$scope.user.name)
 		{
+			console.log("first time");
 			var profile =userSrv.getProfile();
 			if (profile)
 			{
@@ -68,11 +70,29 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			}
 		}
     });
+	socket.on("reconnect", function () {
+		console.log("reconnect");
+	});
+	socket.on("reconnect_attempt", function () {
+		console.log("reconnect_attempt");
+	});
+	socket.on("reconnecting", function () {
+		console.log("reconnecting");
+	});
+	socket.on("reconnect_failed", function () {
+		console.log("reconnect_failed");
+	});
+	socket.on("reconnect_error", function () {
+		console.log("reconnect_error");
+	});
+	socket.on("disconnect", function () {
+		console.log("disconnect");
+	});
     socket.on("log in", function (data) {
 		//console.log(data);
         $scope.users = data;
 		//$scope.joinRoom({room_id:"1", name: "#general" });
-		$scope.joinRoom($scope.rooms[0]);
+		$scope.joinRoom({id:"1"});
     });
 	socket.on("new user login", function (data) {
 		//console.log(data);
@@ -101,8 +121,9 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 		}
     });
     socket.on("message", function (string) {
+		console.log("on message");
 		var data = JSON.parse(string);
-		if ($scope.currentRoom.room_id === data.room.room_id)
+		if ($scope.currentRoom.id === data.room.id)
 		{
 			//$scope.messages.push({ "name": data.user.name, "message": data.message.message,
 			//"time":data.message.time });

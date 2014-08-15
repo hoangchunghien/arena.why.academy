@@ -83,7 +83,7 @@ var AuthController = {
             res.redirect('https://www.facebook.com/dialog/oauth?' +
                 'client_id=' + client_id +
                 '&redirect_uri=' + redirect_url +
-                '&scope=email%2Cpublish_stream&state=123456789');
+                '&scope=email%2Cuser_friends&state=123456789');
             return;
         }
     },
@@ -97,8 +97,11 @@ var AuthController = {
                     var now = new Date();
                     var expiresTime = expires.getTime() - now.getTime();
 
-                    res.cookie('user', user, {maxAge: expiresTime});
-                    console.log("Cookie already set");
+                    // encode to send UTF8 string to cookie
+                    var encodedUserString = encodeURIComponent(JSON.stringify(user));
+
+                    res.cookie('user', encodedUserString, {maxAge: expiresTime});
+
                     res.redirect(arena_url);
                     return;
                 });
@@ -110,8 +113,11 @@ var AuthController = {
                 var now = new Date();
                 var expiresTime = expires.getTime() - now.getTime();
 
-                res.cookie('user', user, {maxAge: expiresTime});
-                console.log("Cookie already set");
+                // encode to send UTF8 string to cookie
+                var encodedUserString = encodeURIComponent(JSON.stringify(user));
+
+                res.cookie('user', encodedUserString, {maxAge: expiresTime});
+
                 res.redirect(arena_url);
                 return;
             });

@@ -1,0 +1,73 @@
+<div class="container arena-container">
+    <div class="jumbotron challenge result">
+        <div class="row" align="center" ng-show="userWinOrLose>-1">
+            <h2
+                   ng-bind="['Bạn đã thua !','Bạn đã hòa !','Bạn đã thắng !'][userWinOrLose]"
+                   class="label" style="font-size: 25px;font-family: Arial;"
+                   ng-class="{'label-success':userWinOrLose==2,'label-primary': userWinOrLose==1, 'label-danger': userWinOrLose==0}">
+            </h2>
+            <br/>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>Câu Hỏi</th>
+                    <th>
+                        <div align="center" ng-bind="user.name"></div>
+                        <div class = "h1" align="center" ng-bind-template="{{user.result.point}}"></div>
+                    </th>
+                    <th>
+                        <div align="center" ng-bind="opponent.name"></div>
+                        <div class = "h1" ng-show="opponent.result" align="center" ng-bind-template="{{opponent.result.point}}"></div>
+                        <div class = "h2" ng-hide="opponent.result" align="center">Đang đợi</div>
+                    </th>
+                    </thead>
+
+                    <tbody>
+                    <tr ng-repeat="question in gameData.questions">
+                        <td ng-bind="$index+1"></td>
+                        <td> 
+                            <div ng-show="user.result">
+                                <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                                <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>
+                            </div>
+                        </td>
+                        <td> 
+                            <div ng-show="opponent.result">
+                                <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
+                                <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <div class="row" align="center">
+                    <div>Huy Chương :</div>
+                    <img ng-src="{{medalUrl}}">
+                </div>
+
+                <br/>
+                <div class="row" align="center">
+                    <button type="button" class="btn btn-lg btn-danger" ng-click="backHome()">Tiếp Tục</button>
+                </div>
+
+                <br/><br/>
+                <div class="survey row alert alert-info">
+                    <span class="label label-primary">Góp ý</span>
+                    <div><div>Chào <b ng-bind="profile.name"></b>,</div> English Arena cần bạn!<br>Dành vài phút góp ý để Arena phát triển tốt hơn bạn nhé! <br><a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><button class="btn btn-small btn-primary">Góp ý tại đây</button></a></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>

@@ -5,14 +5,14 @@
 angular.module('arena.api.service', [
 
 ])
-    .factory('api', function() {
+    .factory('apiSrv', function() {
         var factory = {};
         factory.serverPath = function() {
             if (window.location.hostname === "localhost") {
-                return "http://staging.why.academy:8080";
+                return "http://staging.why.academy:8080/";
             }
             else {
-                return "http://api.why.academy";
+                return "http://api.why.academy/";
             }
         };
         return factory;

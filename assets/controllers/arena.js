@@ -2,7 +2,7 @@
  * Created by Hien on 5/30/2014.
  */
 
-angular.module('arena', [
+var app = angular.module('arena', [
     'arena.main',
     'arena.api.service',
     'arena.utils.service',
@@ -10,20 +10,30 @@ angular.module('arena', [
     'ui.router',
     'arena.challenge',
     'arena.challenge.controller',
+    'arena.home',
+    'arena.home.controller',
 	'arena.chat',
 	'arena.chat.controller',
-    'arena.users.facebook.service'
-]).factory('Seo', function () {
+    'arena.users.facebook.service',
+    'arena.apollo.service',
+    'arena.game.service',
+    'arena.transfer.service'
+]);
+
+app.factory('Seo', function () {
     return {
         title: 'The arena for languages'
     };
 })
     .run(
-    ['Seo', '$rootScope', '$state', '$stateParams',
-        function (Seo, $rootScope, $state, $stateParams) {
+    ['Seo', '$rootScope', '$state', '$stateParams', '$templateCache',
+        function (Seo, $rootScope, $state, $stateParams, $templateCache) {
             $rootScope.Seo = Seo;
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
+
+            // Prevent cache
+            $templateCache.removeAll();
         }
     ]
 )
@@ -34,3 +44,11 @@ angular.module('arena', [
         }
     ]
 );
+
+
+// Proxy for Analytics, will include MixPanel and Google Analytics
+var ApolloAnalytics = {
+    track: function(eventString, paramsObject) {
+        mixpanel.track(eventString, paramsObject);
+    }
+}

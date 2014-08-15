@@ -6,6 +6,7 @@ angular.module('arena.users.facebook.service', [
 ])
     .service('facebookSrv', function () {
         var profile;
+
         var self=this;
         this.loadFacebookProfile = function (callback) {
             if (profile) {
@@ -15,16 +16,12 @@ angular.module('arena.users.facebook.service', [
             self.initFacebookService(callback);
 
         };
+
         this.getFacebookProfile = function () {
             return profile;
         };
         this.initFacebookService = function (callback) {
-            window.fbAsyncInit = function () {
-                FB.init({
-                    appId: '319210081588306',
-                    xfbml: true,
-                    version: 'v2.0'
-                });
+
                 FB.getLoginStatus(function (response) {
                     if (response.status === 'connected') {
                         console.log(response);
@@ -57,5 +54,6 @@ angular.module('arena.users.facebook.service', [
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        }
+
+        // this.initFacebookService(function(profile){console.log(profile)});
     });

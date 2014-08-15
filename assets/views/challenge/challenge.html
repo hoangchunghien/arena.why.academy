@@ -5,12 +5,6 @@
         -->
         <div class="row">
             <div class="col-xs-6 row-profile-left" style=" border-right: thin solid grey;">
-                <!--<div class="row" align="center">-->
-                <!--<img ng-src="{{profile.picture_url}}">-->
-                <!--</div>-->
-                <!--<div class="row" align="center" style="margin-top: 3px;">-->
-                <!--<div ng-bind="profile.name"></div>-->
-                <!--</div>-->
                 <div class="col-md-3">
                     <img ng-src="{{profile.picture_url}}">
                 </div>
@@ -33,9 +27,7 @@
                 <div>
                     <div ng-repeat=" result in results" class="arena-circle"
                          ng-class="{'arena-done':result.correct==1,'arena-fail':result.correct==0}">
-                        <!--<span class="arena-label" ng-bind="$index+1"></span>-->
                         <span class="arena-label" ng-bind-template="{{result.score}}"></span>
-                        <!--<span class="arena-title" ng-bind-template="+{{result.score}}"></span>-->
                     </div>
                 </div>
             </div>
@@ -43,7 +35,7 @@
         <!--
         Row 3
          -->
-        <div class="row row-question" ng-bind="question.question" align="center">
+        <div class="row row-question" ng-bind="question.question.text" align="center">
         </div>
         <div class="progress">
             <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
@@ -56,7 +48,7 @@
         Row 4
         -->
         <div class="row">
-            <div ng-repeat="choice in question.content.multichoices" class="col-md-6">
+            <div ng-repeat="choice in question.content.choices" class="col-md-6">
                 <button type="button" class="btn  choice-button" ng-click="clickAnswer($index)"
                         ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
                         ng-disabled="disabledButton==true">
@@ -74,16 +66,8 @@
             <div class="modal-dialog">
                 <div class="modal-content arena-modal-content">
                     <div class="modal-header">
-                        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        -->
                         <h4 class="modal-title arena-modal-title">Chính xác !</h4>
                     </div>
-                    <!--<div class="modal-body">-->
-                    <!--<p>One fine body&hellip;</p>-->
-                    <!--</div>-->
-                    <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                    <!--</div>-->
                 </div>
                 <!-- /.modal-content -->
             </div>
@@ -121,14 +105,13 @@
                                     <tr>
                                         <th>Câu hỏi</th>
                                         <th>Đáp án của bạn</th>
-                                        <th>Đáp án đúng</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="result in tableOfResults" valign="middle">
                                         <td ng-bind="$index+1"></td>
-                                        <td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>
-                                        <td ng-bind="['A','B','C','D'][result.correctAnswer]"></td>
+                                        <td ng-bind="result.yourAnswer"></td>
+                                        <!--<td ng-bind="['A','B','C','D'][result.yourAnswer]"></td>-->
                                     </tr>
                                     </tbody>
                                 </table>
@@ -146,14 +129,16 @@
                                     <button type="button" class="btn btn-danger" data-dismiss="modal"
                                             ng-click="exitChallenge()">Đóng
                                     </button>
+
                                 </div>
 
+                                <div class="survey row alert alert-info">
+                                    <span class="label label-primary">Góp ý</span>
+                                    <div><div>Chào <b ng-bind="profile.name"></b>,</div> English Arena cần bạn!<br>Dành vài phút góp ý để Arena phát triển tốt hơn bạn nhé! <br><a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><button class="btn btn-small btn-primary">Góp ý tại đây</button></a></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="survey row alert alert-info">
-                            <span class="label label-success">Góp ý giúp phát triển English Arena</span>
-                            <h3>Chào <b>{{profile.name}}</b>, English Arena cần bạn!<br/>Dành vài phút góp ý, giúp Arena phát triển tốt hơn nhé! <a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><b>Link góp ý</b></a></h3>
-                        </div>
+
                     </div>
                 </div>
                 <!-- /.modal-content -->

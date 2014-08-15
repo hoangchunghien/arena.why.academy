@@ -1,0 +1,138 @@
+<div class="container arena-container">
+    <div class="col-lg-12">
+
+        <div class="box home chat chat-full noOverflow">
+
+            <div class="box-title" >
+                <div class="col-md-8" align="center">
+                    <span class="title">English Arena</span>
+                </div>
+                <div class="col-md-4" align="right">
+                    <span ng-click="doHelp()" class="home-help">
+                        <i class="fa fa-question-circle"></i> <span>Hướng dẫn</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="home-main" >
+                <div class="actions" align="center">
+                    <button class="btn btn-lg btn-success btn-action" ng-click="challengeWithRandom()">Trận Mới</button>
+                </div>
+                <div class="section-header">
+                        <h2><i class="fa fa-flash"></i>Các Trận đấu đang diễn ra</h2>
+                        
+                    </div>
+
+                    <div class="activities">
+                        <table>
+                            <tbody>
+                            <tr ng-repeat="activity in activities">
+                                <td>
+                                    <div class="row"><img class="avatar" ng-src="{{activity.user.picture_url}}" alt="avatar"></div>
+                                    <div class="row"><span class="name" ng-bind="activity.user.name"></span></div>
+
+                                </td>
+                                <td class="score">
+                                    <span class="blue"><b>V.S</b></span>
+                                </td>
+                                <td>
+                                    <div class="row"><img class="avatar" ng-src="{{activity.receiver.picture_url}}" alt="avatar"></div>
+                                    <div class="row"><span class="name" ng-bind="activity.receiver.name"></span></div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn"
+                                            ng-bind="activityActionString(activity)"
+                                            ng-class="{'btn-success' :activity.is_finished, 'btn-danger':activity.is_finished==null}"
+                                            ng-click="activityAction(activity)"
+                                            ng-hide="activity.status == 'waiting'">
+                                    </button>
+                                    <span ng-show="activity.status == 'waiting'" ng-bind="activityActionString(activity)">
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                <div class="status">
+                    <span class="trophy label label-info"><i class="fa fa-trophy"></i></span><span class="highscore h4">Điểm cao nhất của bạn trong tuần: 4300</span>
+                </div>
+            </div>
+            <div class="contacts">
+                <div class="span4" ontablet="span6" ondesktop="span4">
+                    <div class="section-header">
+                        <h2><i class="fa fa-user"></i>Bạn bè</h2>
+
+                    </div>
+                    <div class="box-content">
+                        <ul  class="dashboard-list">
+                            <li ng-repeat="friend in friends">
+                                <a >
+                                    <img class="avatar" alt="{{friend.name}}" ng-src="{{friend.picture_url}}">
+                                </a>
+                                <b ng-bind="friend.name"></b><br>
+                                Điểm cao: <span>1111</span><br>
+                                <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button>
+                            </li>
+                            <li align="center">
+                                <br /><br />
+                                <a href="javascript:{}" class="btn btn-info bt-fs-dialog">Mời bạn bè vào Đấu trường</a>
+                                <!-- <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button> -->
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function($) {
+
+        var friendIds;
+        $(".bt-fs-dialog").click(function(){
+            if (!friendIds) {
+                FB.api('/me/invitable_friends', function (response) {
+                    if (response.data) {
+                        friendIds = [];
+                        var data = response.data;
+                        for (var i in data) {
+                            friendIds.push(data[i].id);
+                        }
+                        showDialog(); // reload the dialog when loaded friends
+                    }
+                });
+            }
+            showDialog(); // show the loading if the friends is not loading yet
+        });
+
+        var showDialog = function() {
+            FB.ui({
+                method: 'apprequests',
+                message: "Tham gia đấu trường English Arena",
+                filters: [{name :'Friends to invite', user_ids: friendIds}]
+            }, function(response){
+                ApolloAnalytics.track('Invite Friends', {'friends': response});
+            });
+        };
+
+//        $(".bt-fs-dialog").fSelector({
+//            facebookInvite: true,
+//            lang: {
+//                facebookInviteMessage: "Tham gia đấu trường English Arena"
+//            },
+//            onSubmit: function(response){
+//                // example response usage
+//                // alert(response);
+//                ApolloAnalytics.track('Envite Friends', {'friends': response});
+//            }
+//        });
+    });
+</script>

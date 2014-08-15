@@ -1,7 +1,8 @@
 angular.module('arena.main', [
     'ui.router',
     'arena.users.service',
-    'arena.users.facebook.service'
+    'arena.users.facebook.service',
+    'arena.apollo.service'
 ])
     .config([
         '$stateProvider', '$urlRouterProvider',
@@ -23,18 +24,20 @@ angular.module('arena.main', [
                         $state.go("main");
                     }
                 })
+
+
         }
     ])
 
-    .controller('arena.main.ctrl', function ($scope, Seo, userSrv, facebookSrv) {
+    .controller('arena.main.ctrl', function ($scope, Seo, userSrv) {
         Seo.title = "Arena for English";
-        console.log("log facebook");
-//        $scope.showButtonPlayGame=userSrv.isAuthenticated();
-
+        
         var profile = userSrv.getProfile();
         $scope.profile = profile;
-
+        
         if (profile) {
+            console.log("Logged In: ", profile.name);
+
             mixpanel.identify(profile.id);  
             mixpanel.people.set({
                 "$name": profile.name,
@@ -42,17 +45,6 @@ angular.module('arena.main', [
             });
         };
 
-    })
-    
-    .controller('arena.loginFacebook.ctrl', function ($scope, $state, Seo, userSrv, facebookSrv) {
-        Seo.title = "Arena for English";
-        console.log("log facebook");
-        $scope.showButtonPlayGame=true;
-//        $state.go('main');
-//        facebookSrv.loadFacebookProfile(function(response) {
-//            console.log("into load FB");
-//            console.log(response);
-//            $state.go('main');
-//        });
-//        $scope.showButtonPlayGame=userSrv.isAuthenticated();
     });
+
+

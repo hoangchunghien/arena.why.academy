@@ -10,15 +10,25 @@ angular.module('arena.users.service', [
         var authData = null;
 
         var getUserFromCookies = function () {
+            // fix utf8, after refreshing
             document.cookie = decodeURIComponent(document.cookie);
-//            if (authData === null) {
+
+           // if (authData === null) {
                 var user = null;
                 if ($cookies.user) {
-                    user = $cookies.user;
-                    user = JSON.parse(user.replace("j:", ""));
+
+                    // Decode cookie UTF8 string then parse
+                    var userString = decodeURIComponent($cookies.user);
+
+                    try { 
+                        user = JSON.parse(userString);
+                    } catch (err) {
+                        ApolloAnalytics.track('Login Parse User Error', {});
+                    }
                 }
                 authData = user;
-//            }
+           // }
+
             return authData;
         };
 
@@ -60,13 +70,13 @@ angular.module('arena.users.service', [
 //        };
 
         this.getProfile = function () {
-
-            var profile;
+            var profile=null;
 
             if (this.isAuthenticated()) {
                 var user = getUserFromCookies();
                 profile = user.profile;
-            }            
+                return profile;
+            }
 
             return profile;
         }

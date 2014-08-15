@@ -11,8 +11,8 @@ var app = angular.module('arena.home.controller', [
     'arena.game.service'
 
 ]);
-app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv','transferSrv','gameSrv',
-    function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv,transferSrv,gameSrv) {
+app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'transferSrv', 'gameSrv',
+    function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv, transferSrv, gameSrv) {
         console.log("home game");
         $scope.friends = [];
         $scope.activities = [];
@@ -40,22 +40,23 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
                 if (activity.is_finished) {
                     activity.status = 'show_result';
                 } else {
-                    if ($scope.profile.id ==  activity.receiver.id) {
+                    if ($scope.profile.id == activity.receiver.id) {
                         activity.status = 'accepting';
                     } else {
                         activity.status = 'waiting';
-                    }        
+                    }
                 }
-                
-            };
+
+            }
+            ;
 
             // console.log(activities);
 
             $scope.activities = activities;
         });
 
-        $scope.challengeFriend=function(friend){
-            var friends=[];
+        $scope.challengeFriend = function (friend) {
+            var friends = [];
             friends.push(friend);
             gameSrv.gameData.friends = friends;
             gameSrv.gameData.players = {};
@@ -65,8 +66,8 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         };
 
 
-        $scope.challengeWithRandom=function(){
-            var friends=[];
+        $scope.challengeWithRandom = function () {
+            var friends = [];
             gameSrv.gameData.friends = friends;
 
             gameSrv.gameData.players = {};
@@ -75,15 +76,15 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
         };
 
 
-        $scope.acceptChallenge=function(activity) {
+        $scope.acceptChallenge = function (activity) {
             gameSrv.acceptChallenge(activity.object_id);
         }
 
-        $scope.showResult = function(activity) {
+        $scope.showResult = function (activity) {
             gameSrv.showResult(activity.object_id);
         }
 
-        $scope.activityAction = function(activity) {
+        $scope.activityAction = function (activity) {
             if (activity.is_finished) {
                 $scope.showResult(activity);
             } else {
@@ -91,7 +92,7 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             }
         }
 
-        $scope.activityActionString = function(activity) {
+        $scope.activityActionString = function (activity) {
             if (activity.status == 'show_result') {
                 return 'Xem Kết quả';
             } else if (activity.status == 'waiting') {
@@ -105,4 +106,12 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             $state.go("help");
         }
 
+    }]);
+app.controller('arena.help.ctrl', [ '$scope', '$state', 'audioSrv',
+    function ($scope, $state, audioSrv) {
+        audioSrv.init();
+
+        $scope.playSoundClickedButton=function(){
+            audioSrv.playClickedButton();
+        }
     }]);

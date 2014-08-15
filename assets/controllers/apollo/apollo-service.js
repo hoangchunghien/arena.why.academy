@@ -22,6 +22,8 @@ angular.module('arena.apollo.service', [
             var url = baseUrl + urlPath;
             if (params === null) params = {};
             params.app_id = '2';
+
+            ApolloServices.track("GET Start", {"url":urlPath});
             $http({
                 method: 'GET',
                 url: url,
@@ -30,6 +32,11 @@ angular.module('arena.apollo.service', [
                     'Access-Token': userSrv.getToken().value
                 }
             }).then(function (resp) {
+                if (resp) {
+                    ApolloServices.track("GET Callback", {"resp":resp});    
+                };
+                
+                console.log(resp);
                 callback(resp.data);
             });
         };
@@ -37,6 +44,8 @@ angular.module('arena.apollo.service', [
 
         this.postPath = function (urlPath, params, callback) {
             
+            ApolloServices.track("GET Start", {"url":urlPath});
+
             var url = baseUrl + urlPath;
             if (params === null) params = {};
             params.app_id = '2';
@@ -49,6 +58,10 @@ angular.module('arena.apollo.service', [
                     'Access-Token': userSrv.getToken().value
                 }
             }).then(function (resp) {
+
+                if (resp) {
+                    ApolloServices.track("GET Callback", {"resp":resp});    
+                };
                 console.log(resp);
                 callback(resp.data);
             });

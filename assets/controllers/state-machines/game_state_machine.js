@@ -44,6 +44,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
 //                            self.consumeEvent({name: 'on_game_event', data: {}});
 //                        },20000);
 
+
+                        
+
                     });
                 } else {
                     apolloSrv.getQuiz(gameData.quizId,"players,results,questions", function (quiz) {

@@ -45,6 +45,8 @@ angular.module('arena.main', [
             });
         };
 
+        $scope.isArenaInsideFacebook = isArenaInsideFacebook();
+
     });
 
 

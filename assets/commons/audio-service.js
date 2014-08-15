@@ -6,11 +6,55 @@ angular.module('arena.audio.service', [
 
 ])
     .service('audioSrv', function () {
-        var backgroundAudio;
-        var countDownAudio;
-        var countDownCoongAudio;
-        var wrongAnswerAudio;
-        var correctAnswerAudio;
+
+        var backgroundAudio = null;
+        var countDownAudio = null;
+        var countDownCoongAudio = null;
+        var wrongAnswerAudio = null;
+        var correctAnswerAudio = null;
+        var clickedButton = null;
+        var openOnGameAudio = null;
+
+
+        this.init = function () {
+            if (backgroundAudio == null) {
+                backgroundAudio = soundManager.createSound({
+                    url: "/data/sound/starting.mp3",
+                    loops: 10
+                });
+            }
+            if (countDownAudio == null) {
+                countDownAudio = soundManager.createSound({
+                    url: "/data/sound/countdown.mp3"
+                });
+            }
+            if (countDownCoongAudio == null) {
+                countDownCoongAudio = soundManager.createSound({
+                    url: "/data/sound/coong.mp3"
+                });
+            }
+            if (wrongAnswerAudio == null) {
+                wrongAnswerAudio = soundManager.createSound({
+                    url: "/data/sound/wrong-answer.mp3"
+                });
+            }
+            if (correctAnswerAudio == null) {
+                correctAnswerAudio = soundManager.createSound({
+                    url: "/data/sound/true-answer.mp3"
+                });
+            }
+            if (clickedButton == null) {
+                clickedButton = soundManager.createSound({
+                    url: "/data/sound/clicked-button.mp3"
+                });
+            }
+            if (openOnGameAudio == null) {
+                openOnGameAudio = soundManager.createSound({
+                    url: "/data/sound/open-on-game.mp3"
+                });
+            }
+
+        };
 
         this.playAudio = function (url) {
             var mySound = soundManager.createSound({
@@ -38,77 +82,26 @@ angular.module('arena.audio.service', [
             }, 3000);
         };
         //
-        this.getBackgroundAudio = function () {
-            var url = arguments[0];
-            var loop = arguments[1];
-            if (backgroundAudio == null) {
-                backgroundAudio = soundManager.createSound({
-                    id: 'backgroundAudio',
-                    url: url,
-                    loops: loop
-                });
-            }
-            return backgroundAudio;
-        };
-        this.setBackgroundAudio = function (sound) {
-            backgroundAudio = sound;
-        };
-        //
-        this.getCountDownAudio = function () {
-            var url = arguments[0];
-            if (countDownAudio == null) {
-                countDownAudio = soundManager.createSound({
-                    id: 'countDownAudio',
-                    url: url
-                });
-            }
-            return countDownAudio;
-        };
-        this.setCountDownAudio = function (sound) {
-            countDownAudio = sound;
-        };
-        //
-        this.getCountDownCoongAudio = function () {
-            var url = arguments[0];
-            if (countDownCoongAudio == null) {
-                countDownCoongAudio = soundManager.createSound({
-                    id: 'countDownCoongAudio',
-                    url: url
-                });
-            }
-            return countDownCoongAudio;
-        };
-        this.setCountDownCoongAudio = function (sound) {
-            countDownCoongAudio = sound;
-        };
-        //
-        this.getCorrectAnswerAudio = function () {
-            var url = arguments[0];
-            if (correctAnswerAudio == null) {
-                correctAnswerAudio = soundManager.createSound({
-                    id: 'correctAnswerAudio',
-                    url: url
-                });
-            }
-            return correctAnswerAudio;
-        };
-        this.setCorrectAnswerAudio = function (sound) {
-            correctAnswerAudio = sound;
-        };
-        //
-        this.getWrongAnswerAudio = function () {
-            var url = arguments[0];
-            if (wrongAnswerAudio == null) {
-                wrongAnswerAudio = soundManager.createSound({
-                    id: 'wrongAnswerAudio',
-                    url: url
-                });
-            }
-            return wrongAnswerAudio;
-        };
-        this.setWrongAnswerAudio = function (sound) {
-            wrongAnswerAudio = sound;
-        };
+
+        this.muteAllsound = function () {
+            backgroundAudio.mute();
+            countDownAudio.mute();
+            countDownCoongAudio.mute();
+            wrongAnswerAudio.mute();
+            correctAnswerAudio.mute();
+            clickedButton.mute();
+            openOnGameAudio.mute();
+        }
+
+        this.pauseAllsound = function () {
+            backgroundAudio.pause();
+            countDownAudio.pause();
+            countDownCoongAudio.pause();
+            wrongAnswerAudio.pause();
+            correctAnswerAudio.pause();
+            clickedButton.pause();
+            openOnGameAudio.pause();
+        }
 
         this.destroyAllSound = function () {
             backgroundAudio.destruct();
@@ -117,10 +110,35 @@ angular.module('arena.audio.service', [
             countDownAudio = null;
             countDownCoongAudio.destruct();
             countDownCoongAudio = null;
-            soundManager.destroySound('wrongAnswerAudio');
-            soundManager.destroySound('correctAnswerAudio');
-
+            wrongAnswerAudio.destruct();
+            wrongAnswerAudio = null;
+            correctAnswerAudio.destruct();
+            correctAnswerAudio = null;
+            clickedButton.destruct();
+            clickedButton = null;
+            openOnGameAudio.destruct();
+            openOnGameAudio = null;
         };
-
+        this.playBackgroundAudio = function () {
+            backgroundAudio.play();
+        }
+        this.playCountDownAudio = function () {
+            countDownAudio.play();
+        }
+        this.playCountDownCoongAudio = function () {
+            countDownCoongAudio.play();
+        }
+        this.playWrongAnswerAudio = function () {
+            wrongAnswerAudio.play();
+        }
+        this.playCorrectAnswerAudio = function () {
+            correctAnswerAudio.play();
+        }
+        this.playClickedButton = function () {
+            clickedButton.play();
+        }
+        this.playOpenOnGameAudio = function () {
+            openOnGameAudio.play();
+        }
 
     });

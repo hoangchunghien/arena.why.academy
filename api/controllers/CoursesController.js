@@ -1,5 +1,6 @@
 var CoursesController = {
     index: function(req, res) {
+
         return res.view({
             
         });

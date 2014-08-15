@@ -2,7 +2,8 @@ angular.module('arena.main', [
     'ui.router',
     'arena.users.service',
     'arena.users.facebook.service',
-    'arena.apollo.service'
+    'arena.apollo.service',
+    'arena.audio.service'
 ])
     .config([
         '$stateProvider', '$urlRouterProvider',
@@ -29,7 +30,8 @@ angular.module('arena.main', [
         }
     ])
 
-    .controller('arena.main.ctrl', function ($scope, Seo, userSrv) {
+    .controller('arena.main.ctrl', function ($scope, Seo, userSrv,audioSrv) {
+        audioSrv.init();
         Seo.title = "Arena for English";
         
         var profile = userSrv.getProfile();
@@ -46,6 +48,10 @@ angular.module('arena.main', [
         };
 
         $scope.isArenaInsideFacebook = isArenaInsideFacebook();
+
+        $scope.playSoundClickedButton=function(){
+            audioSrv.playClickedButton();
+        }
 
     });
 

@@ -10,8 +10,8 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 
 
     $scope.user = {};
-    $scope.rooms = [{room_id:"1", name: "#general" }, {room_id:"2", name: "#english" },
-				{ room_id:"3",name: "#other" }];
+    $scope.rooms = [{id:"1", name: "#general" }];//, {room_id:"2", name: "#english" },
+				//{ room_id:"3",name: "#other" }];
     //$scope.messages = [{ name: "abc", message: "dsds" }];
     $scope.users = [];
 	$scope.usersInCurrentRoom = [];
@@ -38,8 +38,8 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
         }
     }
     $scope.sendMessage = function () {
-        socket.emit('send', JSON.stringify({ user: $scope.user, "room": $scope.currentRoom,
-			message: this.message }));
+        socket.emit('send', encodeURIComponent(JSON.stringify({ user: $scope.user, "room": $scope.currentRoom,
+			message: this.message })));
         $scope.message ='';
     }
     $scope.privateChat = function (user) {
@@ -57,8 +57,10 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 	
 	
 	socket.on("connect", function () {
+		console.log("connect");
 		if (!$scope.user.name)
 		{
+			console.log("first time");
 			var profile =userSrv.getProfile();
 			if (profile)
 			{
@@ -68,15 +70,36 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			}
 		}
     });
-    socket.on("log in", function (data) {
+	socket.on("reconnect", function () {
+		console.log("reconnect");
+	});
+	socket.on("reconnect_attempt", function () {
+		console.log("reconnect_attempt");
+	});
+	socket.on("reconnecting", function () {
+		console.log("reconnecting");
+	});
+	socket.on("reconnect_failed", function () {
+		console.log("reconnect_failed");
+	});
+	socket.on("reconnect_error", function () {
+		console.log("reconnect_error");
+	});
+	socket.on("disconnect", function () {
+		console.log("disconnect");
+	});
+    socket.on("log in", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
 		//console.log(data);
         $scope.users = data;
 		//$scope.joinRoom({room_id:"1", name: "#general" });
-		$scope.joinRoom($scope.rooms[0]);
+		$scope.joinRoom({id:"1"});
     });
-	socket.on("new user login", function (data) {
+	socket.on("new user login", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
 		//console.log(data);
-        $scope.users.push(data);
+        //$scope.users.push(data);
+		$scope.users = data;
     });
 	socket.on("join", function (string) {
 		console.log(string);
@@ -100,9 +123,13 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			array.push(data.user);
 		}
     });
-    socket.on("message", function (string) {
+    socket.on("message", function (s) {
+		console.log("on message");
+		var string = decodeURIComponent(s);
+		console.log(string);
+		//socket.emit('test', string);
 		var data = JSON.parse(string);
-		if ($scope.currentRoom.room_id === data.room.room_id)
+		if ($scope.currentRoom.id === data.room.id)
 		{
 			//$scope.messages.push({ "name": data.user.name, "message": data.message.message,
 			//"time":data.message.time });
@@ -110,18 +137,27 @@ app.controller('arena.chat.ctrl', function ($scope, socket, userSrv) {
 			$scope.messages.push(data);
 		}
     });
+	socket.on('private chat', function (room, string) {
+		console.log('private chat');
+		console.log(room);
+		console.log(string);
+		$scope.currentRoom = {id:room};
+		var data = JSON.parse(decodeURIComponent(string));
+		$scope.messages = data["messages"];
+	});
     socket.on('private chat offer', function (string) {
 		var data = JSON.parse(string);
 		$scope.joinRoom(data.room);
         //$scope.currentRoom = data.room;
         //socket.emit('add user', { username: $scope.username, room: data.room });
     });
-	socket.on("user disconnect", function (data) {
+	socket.on("user disconnect", function (string) {
+		var data = JSON.parse(decodeURIComponent(string));
         //$scope.users = data;
-		for(var i = $scope.users.length; i--;){
-			if ($scope.users[i].id === data.id) 
-				$scope.users.splice(i, 1);
-		}
+		//for(var i = $scope.users.length; i--;){
+		//	if ($scope.users[i].id === data.id) 
+		//		$scope.users.splice(i, 1);
+		//}
 		var array = $scope.usersInCurrentRoom;
 		for(var i = array.length; i--;){
 			if (array[i].id === data.id) 

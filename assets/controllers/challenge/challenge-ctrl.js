@@ -26,15 +26,11 @@ app.controller('arena.play.init-game.ctrl', ['$scope', '$state', 'audioSrv', 'ap
 app.controller('arena.play.on-game.ctrl',
     ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'gameFSM',
         function (delegate, $scope, $state, $http, $timeout, userSrv, audioSrv, facebookSrv, apolloSrv, gameFSM) {
+            audioSrv.init();
             var self = this;
 
             var quizMachine;
-            var backgroundAudio;
-            var countDownAudio;
-            var countDownCoongAudio;
-            var correctAnswerAudio;
-            var wrongAnswerAudio;
-            var countDownToZeroTimer;
+
 
             $scope.profile = userSrv.getProfile();
 
@@ -75,14 +71,14 @@ app.controller('arena.play.on-game.ctrl',
                 countDownToZeroTimer =
                     setTimeout(function () {
                         $scope.ThreeToZero--;
-                        countDownAudio.play();
+                        audioSrv.playCountDownAudio();
                         $scope.$apply();
                         if ($scope.ThreeToZero > 0) {
                             _countDownThreeToZero();
                         } else {
                             setTimeout(function () {
                                 $scope.ThreeToZero = "Bắt đầu !";
-                                countDownCoongAudio.play();
+                                audioSrv.playCountDownCoongAudio();
                                 $scope.$apply();
                             }, 1000);
                         }
@@ -98,6 +94,7 @@ app.controller('arena.play.on-game.ctrl',
             //
             //
             $scope.clickAnswer = function (index) {
+                audioSrv.playClickedButton();
                 var event = {};
                 event.name = "question_answer";
                 event.data = {answer: index};
@@ -122,7 +119,7 @@ app.controller('arena.play.on-game.ctrl',
 
                     case "quiz_questioning":
 
-                        backgroundAudio.play();
+                        audioSrv.playBackgroundAudio();
                         $scope.question = event.data.question;
                         $scope.timeout += event.data.timeout;
                         console.log("quiz_questioning");
@@ -135,7 +132,7 @@ app.controller('arena.play.on-game.ctrl',
 
                         if (event.data.correct) {
                             _activeModal();
-                            correctAnswerAudio.play();
+                            audioSrv.playCorrectAnswerAudio();
                             $scope.answers[index] = {correct: 1};
                             //$scope.score += event.data.score;
                             gameFSM.myResult.point += event.data.score;
@@ -145,7 +142,7 @@ app.controller('arena.play.on-game.ctrl',
                             yourAnswer = "Đúng";
 
                         } else {
-                            wrongAnswerAudio.play();
+                            audioSrv.playWrongAnswerAudio();
                             $scope.answers[index] = {correct: 0};
                             $scope.results[$scope.currentQuestion] = {'score': '+' + event.data.score, 'correct': 0};
 
@@ -187,11 +184,6 @@ app.controller('arena.play.on-game.ctrl',
             };
 
             var _initialize = function () {
-                backgroundAudio = audioSrv.getBackgroundAudio("/data/sound/starting.mp3", 10);
-                countDownAudio = audioSrv.getCountDownAudio("/data/sound/countdown.mp3");
-                countDownCoongAudio = audioSrv.getCountDownCoongAudio("/data/sound/coong.mp3");
-                correctAnswerAudio = audioSrv.getCorrectAnswerAudio("/data/sound/true-answer.mp3");
-                wrongAnswerAudio = audioSrv.getWrongAnswerAudio("/data/sound/wrong-answer.mp3");
 
                 $scope.results = [];
                 $scope.answers = [];
@@ -217,18 +209,12 @@ app.controller('arena.play.on-game.ctrl',
             };
             _initialize();
 
-            $scope.takeSurvey = function () {
-                ApolloAnalytics.track("Take Survey", {
-                    "View": "Result"
-                });
-
-            }
-
         }]);
 
 
-app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv',
-    function ($scope, gameSrv, gameFSM, userSrv) {
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv','audioSrv',
+    function ($scope, gameSrv, gameFSM, userSrv,audioSrv) {
+        audioSrv.init();
 
         $scope.profile = userSrv.getProfile();
         $scope.myResult = gameFSM.myResult;
@@ -315,6 +301,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
 
         $scope.backHome = function () {
+            audioSrv.playClickedButton();
             $scope.results = null;
             $scope.medalUrl = null;
             gameSrv.getState().go("home");
@@ -357,6 +344,12 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             return timeString + 's';
         }
 
+        $scope.takeSurvey = function () {
+            audioSrv.playClickedButton();
+            ApolloAnalytics.track("Take Survey", {
+                "View": "Result"
+            });
+        }
         _prepareData();
 
     }]);

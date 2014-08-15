@@ -14,6 +14,7 @@ var app = angular.module('arena.home.controller', [
 app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'transferSrv', 'gameSrv',
     function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv, transferSrv, gameSrv) {
         audioSrv.init();
+        audioSrv.playOpenOnGameAudio();
 
         console.log("home game");
         $scope.friends = [];

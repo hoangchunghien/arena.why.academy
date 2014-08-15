@@ -158,18 +158,17 @@ module.exports = {
                 if (isStatic) {
                     return next();
                 }
-                ;
 
-                var userAgent = req.headers['user-agent'];
-                console.log(userAgent);
-                if (userAgent) {
-                    if (userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0) {
-                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
-                    }
-                    else {
-                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
-                    }
-                }
+//                var userAgent = req.headers['user-agent'];
+//                console.log(userAgent);
+//                if (userAgent) {
+//                    if (userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0) {
+//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
+//                    }
+//                    else {
+//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
+//                    }
+//                }
 
                 return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
 

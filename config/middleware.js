@@ -48,44 +48,6 @@ var verifyHandler = function (token, tokenSecret, profile, done) {
         getUserToken(token, function (user) {
             console.log("Getting user why.academy information [DONE]");
             return done(null, user);
-            /*
-             User.findOne({uid: profile.id}).done(function(err, user) {
-             if (user) {
-             return done(null, user);
-             } else {
-
-             var data = {
-             uid: profile.id,
-             name: profile.name,
-             user_token: user_token,
-             user_token_expires: user_token_expires
-             };
-             if (profile.email) {
-             data.email = profile.email;
-             }
-             if (profile.first_name) {
-             data.fistname = profile.first_name;
-             }
-             if (profile.last_name) {
-             data.lastname = profile.last_name;
-             }
-             if (profile.picture_url) {
-             data.picture_url = profile.picture_url;
-             }
-             if (profile.gender) {
-             data.gender = profile.gender;
-             }
-             if (profile.locale) {
-             data.locale = profile.locale;
-             }
-             console.log("Data: " + JSON.stringify(data));
-             User.create(data).done(function(err, user) {
-             return done(err, user);
-             });
-             }
-             });
-             });
-             */
 
         });
     });
@@ -159,16 +121,15 @@ module.exports = {
                     return next();
                 }
 
-//                var userAgent = req.headers['user-agent'];
+                var userAgent = req.headers['user-agent'];
 //                console.log(userAgent);
-//                if (userAgent) {
-//                    if (userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0) {
-//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
-//                    }
-//                    else {
-//                        return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
-//                    }
-//                }
+                if (userAgent)
+                if (userAgent.indexOf('Chrome') >= 0 || userAgent.indexOf('CoRom') >= 0) {
+                    return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
+                }
+                else {
+                    return res.render(path.resolve(__dirname, '..', 'views', 'home', 'unsupported.html'));
+                }
 
                 return res.render(path.resolve(__dirname, '..', 'views', 'home', 'index.html'));
 

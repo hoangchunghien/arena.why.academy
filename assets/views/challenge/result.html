@@ -27,19 +27,49 @@
 
                     <tbody>
                     <tr ng-repeat="question in gameData.questions">
-                        <td ng-bind="$index+1"></td>
+                        <td>
+                             <span class="dropdown">
+                                    <a ng-bind="$index+1"
+                                       href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
+                                    <ul class="dropdown-menu" style="width: 300px;">
+                                        <li ng-bind="question.question.text"></li>
+                                        <li class="divider" style="border: thin;"></li>
+                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
+                                    </ul>
+                                </span>
+                        </td>
                         <td> 
                             <div ng-show="user.result">
                                 <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
                                 <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                                <span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>
+                                <!--<span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>-->
+                                <span class="dropdown">
+                                    <a ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"
+                                       href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
+                                    <ul class="dropdown-menu" style="width: 300px;">
+                                        <li ng-bind="question.question.text"></li>
+                                        <li class="divider" style="border: thin;"></li>
+                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
+                                    </ul>
+                                </span>
                             </div>
                         </td>
                         <td> 
                             <div ng-show="opponent.result">
                                 <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
                                 <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                                <span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>
+                                <!--<span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>-->
+
+                                <span class="dropdown">
+                                    <a ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"
+                                            href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
+                                    <ul class="dropdown-menu" style="width: 300px;">
+                                        <li ng-bind="question.question.text"></li>
+                                        <li class="divider" style="border: thin;"></li>
+                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
+                                    </ul>
+                                </span>
+
                             </div>
                         </td>
                     </tr>

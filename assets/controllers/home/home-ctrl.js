@@ -82,12 +82,10 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
 
 
         $scope.acceptChallenge = function (activity) {
-            audioSrv.playClickedButton();
             gameSrv.acceptChallenge(activity.object_id);
         }
 
         $scope.showResult = function (activity) {
-            audioSrv.playClickedButton();
             gameSrv.showResult(activity.object_id);
         }
 

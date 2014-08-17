@@ -3,6 +3,7 @@
  */
 
 function GameFSM(gameData, gameSrv, apolloSrv, $state) {
+    console.log("Game data: " + JSON.stringify(gameData));
     var self = this;
     var quizId = null;
     var quiz = {};

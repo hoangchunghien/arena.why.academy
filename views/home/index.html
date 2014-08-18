@@ -2,7 +2,7 @@
 
 <html ng-app="arena">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"> -->
@@ -135,7 +135,6 @@
 <div ui-view class="container bs-docs-container"></div>
 
 
-
 <script src="//connect.facebook.net/en_US/all.js "></script>
 <script src="/vendor/jquery/dist/jquery.min.js"></script>
 <script src="/vendor/angular/angular.min.js"></script>
@@ -177,34 +176,15 @@
 <script src="/controllers/challenge/game-service.js"></script>
 
 <script>
-//    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '319210081588306',
-            status: true,
-            cookie: true,
-            xfbml: true,
-            frictionlessRequests : true
-        });
-//        doLogin();
-//        if (!loginRequested) {
-//            loginRequested = true;
-//            FB.getLoginStatus(function (response) {
-//                if (response.status === 'connected') {
-//                    console.log(response);
-//                    console.log('Logged in.');
-//                }
-//                else {
-//                    FB.login(function () {
-//                        FB.api('/me', function (response) {
-//                            console.log('Successful login for: ' + response.name);
-//                            document.getElementById('status').innerHTML =
-//                                    'Thanks for logging in, ' + response.name + '!';
-//                        });
-//                    }, {scope: 'public_profile,user_friends,email'});
-//                }
-//            });
-//        }
-//    };
+
+    FB.init({
+        appId: '319210081588306',
+        status: true,
+        cookie: true,
+        xfbml: true,
+        frictionlessRequests: true
+    });
+
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {

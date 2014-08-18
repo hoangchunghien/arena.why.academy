@@ -26,50 +26,21 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="question in gameData.questions">
-                        <td>
-                             <span class="dropdown">
-                                    <a ng-bind="$index+1"
-                                       href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
-                                    <ul class="dropdown-menu" style="width: 300px;">
-                                        <li ng-bind="question.question.text"></li>
-                                        <li class="divider" style="border: thin;"></li>
-                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
-                                    </ul>
-                                </span>
+                    <tr ng-repeat="question in gameData.questions" ng-click="clickRow(question,$index)">
+                        <td ng-bind="$index+1">
                         </td>
                         <td> 
                             <div ng-show="user.result">
                                 <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
                                 <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                                <!--<span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>-->
-                                <span class="dropdown">
-                                    <a ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"
-                                       href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
-                                    <ul class="dropdown-menu" style="width: 300px;">
-                                        <li ng-bind="question.question.text"></li>
-                                        <li class="divider" style="border: thin;"></li>
-                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
-                                    </ul>
-                                </span>
+                                <span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>
                             </div>
                         </td>
                         <td> 
                             <div ng-show="opponent.result">
                                 <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
                                 <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
-                                <!--<span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>-->
-
-                                <span class="dropdown">
-                                    <a ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"
-                                            href="#" data-toggle="dropdown" class="dropdown-toggle" ng-bind="question.type"></a>
-                                    <ul class="dropdown-menu" style="width: 300px;">
-                                        <li ng-bind="question.question.text"></li>
-                                        <li class="divider" style="border: thin;"></li>
-                                        <li ng-bind-template="Đáp án đúng :  {{question.content.choices[question.answer].text}}"></li>
-                                    </ul>
-                                </span>
-
+                                <span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>
                             </div>
                         </td>
                     </tr>
@@ -97,7 +68,24 @@
 
         </div>
 
-
+        <!--Modal for question review-->
+        <div class="modal" id="my_modal" align="center" style="margin-top:200px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" align="left">
+                        <label class="label label-primary" id="indexReview"></label>
+                        <div id="questionReview"></div>
+                    </div>
+                    <div class="modal-body" align="left">
+                        <span class="label label-success">Đáp án đúng :</span>
+                        <div id="answerReview" style="display: inline"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

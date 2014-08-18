@@ -338,6 +338,12 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             }
         };
 
+        $scope.clickRow=function(question,index){
+            $('#my_modal').modal('show');
+            $('#indexReview').text('Câu hỏi '+index+':  ')
+            $('#questionReview').text(question.question.text);
+            $('#answerReview').text('  '+question.content.choices[question.answer].text);
+        }
 
         $scope.stringForAnsweringTime = function (time) {
             var timeString = (time/1000).toFixed(1).replace(/\.0$/, '');;

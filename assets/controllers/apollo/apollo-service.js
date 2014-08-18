@@ -7,7 +7,6 @@ angular.module('arena.apollo.service', [
 ])
     .service('apolloSrv',  ['$http', 'userSrv','apiSrv', function ($http, userSrv, apiSrv) {
 
-//        var baseUrl = "http://api.why.academy/";
         var baseUrl = apiSrv.serverPath();
         var self = this;
 
@@ -22,6 +21,8 @@ angular.module('arena.apollo.service', [
             var url = baseUrl + urlPath;
             if (params === null) params = {};
             params.app_id = '2';
+
+            ApolloAnalytics.track("GET Start", {"url":urlPath});
             $http({
                 method: 'GET',
                 url: url,
@@ -30,13 +31,20 @@ angular.module('arena.apollo.service', [
                     'Access-Token': userSrv.getToken().value
                 }
             }).then(function (resp) {
+                if (resp) {
+                    ApolloAnalytics.track("GET Callback", {"resp":resp});
+                };
+                
+                console.log(resp);
                 callback(resp.data);
             });
         };
 
 
         this.postPath = function (urlPath, params, callback) {
-            
+
+            ApolloAnalytics.track("GET Start", {"url":urlPath});
+
             var url = baseUrl + urlPath;
             if (params === null) params = {};
             params.app_id = '2';
@@ -49,6 +57,10 @@ angular.module('arena.apollo.service', [
                     'Access-Token': userSrv.getToken().value
                 }
             }).then(function (resp) {
+
+                if (resp) {
+                    ApolloAnalytics.track("GET Callback", {"resp":resp});
+                };
                 console.log(resp);
                 callback(resp.data);
             });

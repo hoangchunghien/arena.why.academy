@@ -1,6 +1,7 @@
 /**
  * Created by Hien on 5/30/2014.
  */
+var facebookLoginRequested = false;
 
 angular.module('arena.navigation.controller', [
     'ui.router',
@@ -14,11 +15,12 @@ angular.module('arena.navigation.controller', [
         $scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             $scope.loading = true;
             if (!userSrv.isAuthenticated()) {
-//                console.log(window.location);
-//                if (window.location.pathname !== "/") {
-//                    window.location.href = '/';
-//                }
+                facebookLoginRequested = true;
                 $scope.doLogin();
+            }
+            if (!facebookLoginRequested) {
+                facebookLoginRequested = true;
+                facebookSrv.initFacebookService(function (response) { });
             }
         });
 
@@ -43,35 +45,17 @@ angular.module('arena.navigation.controller', [
         $scope.init = function () {
             document.cookie = decodeURIComponent(document.cookie);
             $scope.profile = userSrv.getProfile() || {};
-//            $scope.$apply();
-//            facebookSrv.loadFacebookProfile(function (response) {
-//                $scope.profile = response;
-//                $scope.profile.picture_url = 'http://graph.facebook.com/' + response.id + "/picture";
-//                console.log($scope.profile);
-//                console.log($scope.profile.name);
-//                $state.go('main');
-////                $scope.$apply();
-//
-//            });
             $scope.authenticated = userSrv.isAuthenticated();
-//            $scope.authenticated = true;
             $scope.loadUserNavBar();
         };
 
         $scope.doLogin = function () {
-            // window.location = "/login/facebook";
             facebookSrv.loadFacebookProfile(function (response) {
-                window.location =  "/auth/facebook?token=" + FB.getAccessToken();
-
-//                $scope.profile = response;
-//                $scope.profile.picture_url = 'http://graph.facebook.com/' + response.id + "/picture";
-//                console.log($scope.profile);
-//                console.log($scope.profile.name);
-//                $state.go('main');
-////                $scope.$apply();
-
+                window.location = "/auth/facebook?token=" + FB.getAccessToken();
             });
         };
+
+        doLogin = $scope.doLogin;
 
         $scope.doLogout = function () {
             // user.logout();

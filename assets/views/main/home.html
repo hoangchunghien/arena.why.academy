@@ -57,7 +57,7 @@
                     </div>
 
                 <div class="status">
-                    <span class="trophy label label-info"><i class="fa fa-trophy"></i></span><span class="highscore h4">Điểm cao nhất của bạn trong tuần: 4300</span>
+                    <span class="trophy label label-info"><i class="fa fa-trophy"></i></span><span class="highscore h4">Điểm cao nhất của bạn trong tuần</span>
                 </div>
             </div>
             <div class="contacts">
@@ -72,13 +72,14 @@
                                 <a >
                                     <img class="avatar" alt="{{friend.name}}" ng-src="{{friend.picture_url}}">
                                 </a>
-                                <b ng-bind="friend.name"></b><br>
-                                Điểm cao: <span>1111</span><br>
+                                <b ng-bind="friend.name"></b>
+                                <br>
+                                <!-- Điểm cao: <span>1111</span><br> -->
                                 <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button>
                             </li>
                             <li align="center">
                                 <br /><br />
-                                <a href="javascript:{}" class="btn btn-info bt-fs-dialog">Mời bạn bè vào Đấu trường</a>
+                                <a ng-click="playSoundClickedButton()" href="javascript:{}" class="btn btn-info bt-fs-dialog">Mời bạn bè vào Đấu trường</a>
                                 <!-- <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button> -->
                             </li>
 
@@ -122,7 +123,10 @@
                     }
                 });
             }
-            showDialog(); // show the loading if the friends is not loading yet
+            else {
+                showDialog(); // show the loading if the friends is not loading yet
+            }
+
         });
 
         var showDialog = function() {

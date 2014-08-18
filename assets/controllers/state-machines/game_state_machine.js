@@ -3,6 +3,7 @@
  */
 
 function GameFSM(gameData, gameSrv, apolloSrv, $state) {
+    console.log("Game data: " + JSON.stringify(gameData));
     var self = this;
     var quizId = null;
     var quiz = {};
@@ -43,6 +44,9 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
 //                        timeForChangeInitToOnGame=setTimeout(function(){
 //                            self.consumeEvent({name: 'on_game_event', data: {}});
 //                        },20000);
+
+
+                        
 
                     });
                 } else {

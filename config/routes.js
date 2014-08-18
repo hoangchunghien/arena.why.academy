@@ -32,9 +32,7 @@ module.exports.routes = {
     // 
     // (This would also work if you had a file at: `/views/home.ejs`)
     '/': {
-        controller: 'home',
-        action: 'index'
-        // view: 'home/index'
+        view: 'home/index'
     },
     '/login/:provider': {
         controller: 'auth',

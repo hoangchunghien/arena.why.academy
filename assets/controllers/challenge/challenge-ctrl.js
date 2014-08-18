@@ -209,18 +209,12 @@ app.controller('arena.play.on-game.ctrl',
             };
             _initialize();
 
-            $scope.takeSurvey = function () {
-                ApolloAnalytics.track("Take Survey", {
-                    "View": "Result"
-                });
-
-            }
-
         }]);
 
 
-app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv',
-    function ($scope, gameSrv, gameFSM, userSrv) {
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv','audioSrv',
+    function ($scope, gameSrv, gameFSM, userSrv,audioSrv) {
+        audioSrv.init();
 
         $scope.profile = userSrv.getProfile();
         $scope.myResult = gameFSM.myResult;
@@ -307,6 +301,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
 
         $scope.backHome = function () {
+            audioSrv.playClickedButton();
             $scope.results = null;
             $scope.medalUrl = null;
             gameSrv.getState().go("home");
@@ -349,6 +344,12 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             return timeString + 's';
         }
 
+        $scope.takeSurvey = function () {
+            audioSrv.playClickedButton();
+            ApolloAnalytics.track("Take Survey", {
+                "View": "Result"
+            });
+        }
         _prepareData();
 
     }]);

@@ -185,21 +185,25 @@
             xfbml: true,
             frictionlessRequests : true
         });
-        FB.getLoginStatus(function (response) {
-            if (response.status === 'connected') {
-                console.log(response);
-                console.log('Logged in.');
-            }
-            else {
-                FB.login(function () {
-                    FB.api('/me', function (response) {
-                        console.log('Successful login for: ' + response.name);
-                        document.getElementById('status').innerHTML =
-                                'Thanks for logging in, ' + response.name + '!';
-                    });
-                }, {scope: 'public_profile,user_friends,email'});
-            }
-        });
+//        doLogin();
+//        if (!loginRequested) {
+//            loginRequested = true;
+//            FB.getLoginStatus(function (response) {
+//                if (response.status === 'connected') {
+//                    console.log(response);
+//                    console.log('Logged in.');
+//                }
+//                else {
+//                    FB.login(function () {
+//                        FB.api('/me', function (response) {
+//                            console.log('Successful login for: ' + response.name);
+//                            document.getElementById('status').innerHTML =
+//                                    'Thanks for logging in, ' + response.name + '!';
+//                        });
+//                    }, {scope: 'public_profile,user_friends,email'});
+//                }
+//            });
+//        }
 //    };
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];

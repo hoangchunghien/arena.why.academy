@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/challenge.css">
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+
+
+    <script>
+        var myApp = angular.module('myApp', []);
+
+        myApp.controller('GiftCtrl', ['$scope', function ($scope) {
+            var codes = ['S3DA5G'];
+            $scope.acceptCode = function () {
+                if (codes.indexOf($scope.code) >= 0) {
+                    $scope.codeAccepted = true;
+
+                }
+                else {
+                    alert("Code không hợp lệ");
+                }
+            }
+        }]);
+    </script>
+    <title>Quà tặng</title>
+</head>
+<body ng-controller="GiftCtrl">
+
+<div class="container arena-container">
+    <div class="jumbotron challenge">
+        <a href="/"><img class="img-responsive center-block" src="images/EnglishArena_home.png" height="300" width="300"></a>
+        <div align="center">
+            <div ng-show="!codeAccepted">
+                <p>
+
+                <div class="h1">Chào bạn !</div>
+                </p>
+                <p>
+
+                <h2>Vui lòng nhập code vào ô sau đây để được nhận quà từ Why Academy </h2>
+                <br>
+                <input class="form-control" type="text" ng-model="code">
+                <br>
+                <button class="btn" type="button" ng-click="acceptCode()">&nbsp;&nbsp;OK!&nbsp;&nbsp;</button>
+
+                <p>
+            </div>
+
+        </div>
+        <div ng-show="codeAccepted">
+            <div itemprop="commentText" class="post entry-content ">
+                <table class="table table-striped bootstrap-datatable datatable dataTable">
+                    <tr>
+                        <td>1</td>
+                        <td><img width="50px"
+                                 src="http://2.bp.blogspot.com/-Ykge4E-jH08/UniMOYKb85I/AAAAAAAAAGw/md6Q2FgzfhQ/s1600/images.jpg">
+                        </td>
+                        <td>Very easy TOEIC</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/qje4m0olnmm/600+est_.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/atqpv6kt2u526te/Very%2BEasy%2BTOEIC.rar">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><img width="50px"
+                                 src="http://2.bp.blogspot.com/-LNTxWrLDd5s/UniNBd6BKxI/AAAAAAAAAHA/-2Ugc4QOUA4/s320/13299688568683.jpg">
+                        </td>
+                        <td>Starter TOEIC</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/cynvhd9opr61ai3/Starter_TOEIC_3rd_Edition_2.rar">Book</a><br>
+                            <a href="http://www.mediafire.com/download/rn4399ojbdz54dm/STE+-+cd1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/lhxc3tqjsbc8l0x/STE+-+cd2.rar">CD2</a><br>
+                            <a href="http://www.mediafire.com/download/0f3v1526o11349p/STE+-+cd3.rar">CD3</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img width="50px"
+                                 src="http://3.bp.blogspot.com/-mJTd0X3gjIQ/UniLUR8EkkI/AAAAAAAAAGo/0LFXf7duet8/s320/13299687633268.jpg"
+                                 alt="13299687633268.jpg"></td>
+                        <td>Developing Skills for the TOEIC Test</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/2mndep59o5w0lna/Developing+skills+for+Toeic+Audio.rar"
+                               title="Pass: ebooktienganh.com">Book</a><br>
+                            <a href="http://www.mediafire.com/download/2mndep59o5w0lna/Developing+skills+for+Toeic+Audio.rar"
+                               title="Pass: ebooktienganh.com">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><img width="50px"
+                                 src="http://3.bp.blogspot.com/-Rxqadox2Uis/UniMbuqKKSI/AAAAAAAAAG4/VZ214AzspAU/s320/Toeic600B.jpg"
+                                 alt="Toeic600B.jpg"></td>
+                        <td>600 Essential Word for the TOEIC test</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/qje4m0olnmm/600+est_.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/z73uq23b80hy9s7/600_EWT_New_CD1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/zjlrtpe3l0dbb4d/600_EWT_CD2.rar">CD2</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><img width="50px"
+                                 src="http://1.bp.blogspot.com/-Azm5wqDItRg/UnsaPeE0FVI/AAAAAAAAAHo/fJTFWkBqiPg/s320/13299810523610.jpg"
+                                 alt="13299810523610.jpg"></td>
+                        <td> New Real Longman TOEIC Actual Tests For Reading Comprehension and Full Actual Tests</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/tripgr6ad8z56f1/new+longman+real+toeic+actual+tests+for+reading+comprehension+-+rc.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/uz9dac7o55ej544/BuiDung_DHBKDN_Part1.New+real+toeic+full+test.rar">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><img width="50px"
+                                 src="http://1.bp.blogspot.com/-JCbcInuMTaE/UntgK2juq_I/AAAAAAAAAH8/KbGD4tRWo5g/s1600/13299711748348.jpg">
+                        </td>
+                        <td>TOEIC Analyst</td>
+                        <td>
+                            <a href="http://www.fshare.vn/file/T3SC8G31WT#download">Book</a><br>
+                            <a href="http://www.mediafire.com/download/7tauw97r5hrjuba/TOEIC+Analyst+CD-1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/7hy5b81xo1xg8ho/TOEIC+Analyst+CD-2.rar">CD2</a><br>
+                            <a href="http://www.mediafire.com/download/iyqxstuh0rfztw5/TOEIC+Analyst+CD-3.rar">CD3</a>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

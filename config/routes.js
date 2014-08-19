@@ -41,6 +41,9 @@ module.exports.routes = {
     '/logout': {
         controller: 'auth',
         action: 'logout'
+    },
+    '/qua-tang': {
+        view: 'gift/index'
     }
 
     /*

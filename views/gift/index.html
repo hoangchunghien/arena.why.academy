@@ -19,7 +19,7 @@
 
             var codes = ['S3DA5G'];
             $scope.acceptCode = function () {
-                if (codes.indexOf($scope.code) >= 0) {
+                if (codes.indexOf($scope.code.toUpperCase()) >= 0) {
                     $scope.codeAccepted = true;
 
                 }

@@ -48,7 +48,6 @@ app.controller('arena.question.ctrl', [ '$scope', '$state', '$http', 'userSrv', 
                     questionTags.push($(this).val());
                 }
             });
-            console.log(questionTags.length);
             if(questionTags.length){
                 return true;
             }else{
@@ -60,7 +59,8 @@ app.controller('arena.question.ctrl', [ '$scope', '$state', '$http', 'userSrv', 
         $scope.postQuestion=function(){
             if(validateQuestionContent()==false){
                 alert("Please, fill in Question Content !");
-            } return;
+                return;
+            }
             if(validateQuestionTags()==false){
                 alert("Please, fill in Multi Tags !");
                 return;
@@ -96,7 +96,6 @@ app.controller('arena.question.ctrl', [ '$scope', '$state', '$http', 'userSrv', 
             }
             questions.push(question);
             var data={"questions":questions};
-            console.log(data);
 
             apolloSrv.postQuestion(data, function (data) {
                 console.log(data);

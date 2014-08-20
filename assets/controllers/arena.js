@@ -17,7 +17,9 @@ var app = angular.module('arena', [
     'arena.users.facebook.service',
     'arena.apollo.service',
     'arena.game.service',
-    'arena.transfer.service'
+    'arena.transfer.service',
+    'arena.question',
+    'arena.question.controller'
 ]);
 
 app.factory('Seo', function () {

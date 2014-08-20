@@ -10,12 +10,6 @@ angular.module('arena.apollo.service', [
         var baseUrl = apiSrv.serverPath();
         var self = this;
 
-//        this.getPath = function (urlPath, params, callback) {
-//            var url = baseUrl + urlPath;
-//            $http.get(url).success(function (data) {
-//                callback(data);
-//            });
-//        };
 
         this.getPath = function (urlPath, params, callback) {
             var url = baseUrl + urlPath;
@@ -184,6 +178,19 @@ angular.module('arena.apollo.service', [
                 callback(temporaryFilteredAppActivities);
             });
         };
+
+        this.postQuestion = function (question, callback) {
+            self.postPath("v2/questions", question, function (data) {
+                var result = data;
+                callback(result);
+            });
+        };
+
+        this.getQuestionTags=function(callback){
+            self.getPath = function (urlPath, params, callback){
+
+            }
+        }
 
 
     }]);

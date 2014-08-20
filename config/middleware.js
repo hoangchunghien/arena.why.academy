@@ -100,7 +100,8 @@ module.exports = {
                     'login',
                     'logout',
                     'auth',
-                    'data'
+                    'data',
+                    'qua-tang'
 //                    ,'admin'
                 ];
                 var isStatic = false;

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/challenge.css">
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+
+
+    <script>
+        var myApp = angular.module('myApp', []);
+
+        myApp.controller('GiftCtrl', ['$scope', function ($scope) {
+
+            var codes = ['S3DA5G'];
+            $scope.acceptCode = function () {
+                if (codes.indexOf($scope.code) >= 0) {
+                    $scope.codeAccepted = true;
+
+                }
+                else {
+                    alert("Code không hợp lệ");
+                }
+            }
+        }]);
+    </script>
+    <title>Quà tặng</title>
+</head>
+<body ng-controller="GiftCtrl">
+
+<div class="container arena-container">
+    <div class="jumbotron challenge">
+        <a href="/"><img class="img-responsive center-block" src="images/EnglishArena_home.png" height="300" width="300"></a>
+        <div align="center">
+            <div ng-show="!codeAccepted">
+                <p>
+
+                <div class="h1">Chào bạn !</div>
+                </p>
+                <p>
+
+                <h2>Vui lòng nhập code vào ô sau đây để được nhận quà từ Why Academy </h2>
+                <br>
+                <input class="form-control" type="text" ng-model="code">
+                <br>
+                <button class="btn" type="button" ng-click="acceptCode()">&nbsp;&nbsp;OK!&nbsp;&nbsp;</button>
+
+                <p>
+            </div>
+
+        </div>
+        <div ng-show="codeAccepted">
+            <div itemprop="commentText" class="post entry-content ">
+                <table class="table table-striped bootstrap-datatable datatable dataTable">
+                    <tr>
+                        <td>1</td>
+                        <td><img width="50px"
+                                 src="http://2.bp.blogspot.com/-Ykge4E-jH08/UniMOYKb85I/AAAAAAAAAGw/md6Q2FgzfhQ/s1600/images.jpg">
+                        </td>
+                        <td>Very easy TOEIC</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/qje4m0olnmm/600+est_.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/atqpv6kt2u526te/Very%2BEasy%2BTOEIC.rar">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><img width="50px"
+                                 src="http://2.bp.blogspot.com/-LNTxWrLDd5s/UniNBd6BKxI/AAAAAAAAAHA/-2Ugc4QOUA4/s320/13299688568683.jpg">
+                        </td>
+                        <td>Starter TOEIC</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/cynvhd9opr61ai3/Starter_TOEIC_3rd_Edition_2.rar">Book</a><br>
+                            <a href="http://www.mediafire.com/download/rn4399ojbdz54dm/STE+-+cd1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/lhxc3tqjsbc8l0x/STE+-+cd2.rar">CD2</a><br>
+                            <a href="http://www.mediafire.com/download/0f3v1526o11349p/STE+-+cd3.rar">CD3</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><img width="50px"
+                                 src="http://3.bp.blogspot.com/-mJTd0X3gjIQ/UniLUR8EkkI/AAAAAAAAAGo/0LFXf7duet8/s320/13299687633268.jpg"
+                                 alt="13299687633268.jpg"></td>
+                        <td>Developing Skills for the TOEIC Test</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/2mndep59o5w0lna/Developing+skills+for+Toeic+Audio.rar"
+                               title="Pass: ebooktienganh.com">Book</a><br>
+                            <a href="http://www.mediafire.com/download/2mndep59o5w0lna/Developing+skills+for+Toeic+Audio.rar"
+                               title="Pass: ebooktienganh.com">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><img width="50px"
+                                 src="http://3.bp.blogspot.com/-Rxqadox2Uis/UniMbuqKKSI/AAAAAAAAAG4/VZ214AzspAU/s320/Toeic600B.jpg"
+                                 alt="Toeic600B.jpg"></td>
+                        <td>600 Essential Word for the TOEIC test</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/qje4m0olnmm/600+est_.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/z73uq23b80hy9s7/600_EWT_New_CD1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/zjlrtpe3l0dbb4d/600_EWT_CD2.rar">CD2</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><img width="50px"
+                                 src="http://1.bp.blogspot.com/-Azm5wqDItRg/UnsaPeE0FVI/AAAAAAAAAHo/fJTFWkBqiPg/s320/13299810523610.jpg"
+                                 alt="13299810523610.jpg"></td>
+                        <td> New Real Longman TOEIC Actual Tests For Reading Comprehension and Full Actual Tests</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/tripgr6ad8z56f1/new+longman+real+toeic+actual+tests+for+reading+comprehension+-+rc.pdf">Book</a><br>
+                            <a href="http://www.mediafire.com/download/uz9dac7o55ej544/BuiDung_DHBKDN_Part1.New+real+toeic+full+test.rar">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><img width="50px"
+                                 src="http://1.bp.blogspot.com/-JCbcInuMTaE/UntgK2juq_I/AAAAAAAAAH8/KbGD4tRWo5g/s1600/13299711748348.jpg">
+                        </td>
+                        <td>TOEIC Analyst</td>
+                        <td>
+                            <a href="http://www.fshare.vn/file/T3SC8G31WT#download">Book</a><br>
+                            <a href="http://www.mediafire.com/download/7tauw97r5hrjuba/TOEIC+Analyst+CD-1.rar">CD1</a><br>
+                            <a href="http://www.mediafire.com/download/7hy5b81xo1xg8ho/TOEIC+Analyst+CD-2.rar">CD2</a><br>
+                            <a href="http://www.mediafire.com/download/iyqxstuh0rfztw5/TOEIC+Analyst+CD-3.rar">CD3</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><img width="50px" src="http://luyenthitoeic.biz/wp-content/uploads/2014/03/doko-TOEIC-Training-Reading-Comprehension-860.jpg"></td>
+                        <td>Toeic Traing Reading Comprehension 860</td>
+                        <td><a href="https://docs.google.com/file/d/0ByYm6ZCH9rF-S2dEMnA4dlBDWlE">Book</a></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><img width="50px" src="data:image/jpeg;base64,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"></td>
+                        <td>Target Score Second edition</td>
+                        <td><a href="https://docs.google.com/file/d/0BxpdsKVrHVKnekJEMnYzRUZSdm8">Book + CD</a></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><img width="50px" src="http://mshoa.hanoicdc.net/uploads/images/2012/news/150141_23022012_147625.jpg"></td>
+                        <td>Tactics for Toeic Listening and Reading Tests</td>
+                        <td>
+                            <a href="https://docs.google.com/file/d/0ByYm6ZCH9rF-VkVQc1JQQWxLdTg">Book</a><br>
+                            <a href="https://docs.google.com/file/d/0ByYm6ZCH9rF-Um1xbjlHSjVWd1E">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><img width="50px" src="http://www.eltbooks.com/cover/9781424002962.jpg"></td>
+                        <td>Complete Guide to the TOEIC Test 3rd</td>
+                        <td>
+                            <a href="http://www.mediafire.com/download/h19oabll0tad9a4/Ebook+CGTTToeic.rar">Book</a><br>
+                            <a href="http://www.mediafire.com/download/1fh11dlv96g5hhr/Audio+CGTTToeic.rar">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><img width="50px" src="http://2.bp.blogspot.com/-Wd3LDc9ZhmE/TuStmrzeiII/AAAAAAAAAB0/R8JgTyNmMW0/s1600/Toeic.jpg"></td>
+                        <td>TOEIC Official Test-Preparation Guide</td>
+                        <td>
+                            <a href="https://docs.google.com/file/d/0ByYm6ZCH9rF-aUhaUElDclVhZjg/">Book</a><br>
+                            <a href="https://docs.google.com/file/d/0ByYm6ZCH9rF-V1VsTW5HbHJONVU/edit">CD</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><img width="50px" src="http://saigoncom.vn/image/data/thang%2012/new-toeic-3.jpg"></td>
+                        <td>New Toeic 3 Level 860 + 620 + 720</td>
+                        <td>
+                            <a href="https://docs.google.com/uc?id=0ByYm6ZCH9rF-azQ0VFhTVmRBV28&export=download">Book</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><img width="50px" src="http://minhkhai.vn/hinhlon/208461.jpg"></td>
+                        <td>Longman New Toeic - Lead to Change Listening Comprehension</td>
+                        <td>
+                            <a href="https://docs.google.com/uc?id=0Bx9-z3sQTnrgZzlaMEhIS1ZUSmc&export=download">Book</a>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

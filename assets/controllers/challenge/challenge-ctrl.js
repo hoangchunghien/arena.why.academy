@@ -339,6 +339,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         };
 
         $scope.clickRow=function(question,index){
+            audioSrv.playPopupAudio();
             $('#my_modal').modal('show');
             $('#indexReview').text('Câu hỏi '+index+':  ')
             $('#questionReview').text(question.question.text);
@@ -356,6 +357,11 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
                 "View": "Result"
             });
         }
+
+        $scope.playSoundClickedButton=function(){
+            audioSrv.playClickedButton();
+        };
+
         _prepareData();
 
     }]);

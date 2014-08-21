@@ -14,6 +14,7 @@ angular.module('arena.audio.service', [
         var correctAnswerAudio = null;
         var clickedButton = null;
         var openOnGameAudio = null;
+        var popupAudio = null;
 
 
         this.init = function () {
@@ -51,6 +52,11 @@ angular.module('arena.audio.service', [
             if (openOnGameAudio == null) {
                 openOnGameAudio = soundManager.createSound({
                     url: "/data/sound/open-on-game.mp3"
+                });
+            }
+            if (popupAudio == null) {
+                popupAudio = soundManager.createSound({
+                    url: "/data/sound/popup.mp3"
                 });
             }
 
@@ -91,6 +97,7 @@ angular.module('arena.audio.service', [
             correctAnswerAudio.mute();
             clickedButton.mute();
             openOnGameAudio.mute();
+            popupAudio.mute();
         }
 
         this.pauseAllsound = function () {
@@ -101,6 +108,8 @@ angular.module('arena.audio.service', [
             correctAnswerAudio.pause();
             clickedButton.pause();
             openOnGameAudio.pause();
+            popupAudio.pause();
+
         }
 
         this.destroyAllSound = function () {
@@ -118,6 +127,9 @@ angular.module('arena.audio.service', [
             clickedButton = null;
             openOnGameAudio.destruct();
             openOnGameAudio = null;
+            popupAudio.destruct();
+            popupAudio = null;
+
         };
         this.playBackgroundAudio = function () {
             backgroundAudio.play();
@@ -139,6 +151,9 @@ angular.module('arena.audio.service', [
         }
         this.playOpenOnGameAudio = function () {
             openOnGameAudio.play();
+        }
+        this.playPopupAudio = function () {
+            popupAudio.play();
         }
 
     });

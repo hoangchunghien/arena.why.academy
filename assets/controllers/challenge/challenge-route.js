@@ -57,8 +57,8 @@ angular.module('arena.challenge', [
                             return gameSrv.getGameFSM();
                         }
                     },
-                        templateUrl: '/views/challenge/result.html',
-                            controller: 'arena.play.result.ctrl'
+                    templateUrl: '/views/challenge/result.html',
+                    controller: 'arena.play.result.ctrl'
                     // views: {
                     //     'play@play': {
                     //         templateUrl: '/views/challenge/result.html',

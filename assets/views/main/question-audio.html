@@ -13,10 +13,25 @@
             <div class="box-content">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="control-label" for="questionContent">Question content</label>
+                        <label class="control-label" for="questionPicture">Question picture url</label>
                         <div class="controls">
-                            <input type="text" id="questionContent" class="form-control" ng-blur="questionContentChange()"
-                                   ng-model="question.questionContent" >
+                            <input type="text" id="questionPicture" class="form-control" ng-blur="questionPictureUrlChange()"
+                                   ng-model="question.questionPictureUrl" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="questionAudio">Question audio url</label>
+                        <div class="controls">
+                            <input type="text" id="questionAudio" class="form-control" ng-blur="questionAudioUrlChange()"
+                                   ng-model="question.questionAudioUrl" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="numberOfAnswers">Number of answers</label>
+                        <div class="controls">
+                            <select id="numberOfAnswers" class="form-control">
+                                <option ng-repeat="answer in question.numberOfAnswers" value="{{answer}}" ng-bind="answer"></option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

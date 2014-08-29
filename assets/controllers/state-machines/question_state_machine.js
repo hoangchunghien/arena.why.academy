@@ -181,7 +181,7 @@ function QuestionStateMachine(question, eventListener) {
                 self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
 //                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.TIMERCHANGED, data:data});
                 if (self.remainingTime <= 0) {
-                    self.consumeEvent({name: "question_timeout"});
+//                    self.consumeEvent({name: "question_timeout"});
                     return;
                 }
                 countDown();

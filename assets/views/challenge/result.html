@@ -69,16 +69,22 @@
         </div>
 
         <!--Modal for question review-->
-        <div class="modal" id="my_modal" align="center" style="margin-top:200px;">
+        <div class="modal" id="my_modal" align="center" style="margin-top:150px;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" align="left">
                         <label class="label label-primary" id="indexReview"></label>
                         <div id="questionReview"></div>
+                        <div align="center">
+                            <img id="questionPicture" ng-src="{{questionPictureUrl}}"
+                                 ng-show="questionPictureUrl" height="200px;"/><br/>
+                            <button class="btn btn-lg btn-success" ng-click="replayQuestionAudio()"
+                                    ng-show="questionAudioUrl" >Nghe Lại</button>
+                        </div>
                     </div>
                     <div class="modal-body" align="left">
                         <span class="label label-success">Đáp án đúng :</span>
-                        <div id="answerReview" style="display: inline"></div>
+                        <div id="answerReview" style="display: inline;"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="playSoundClickedButton()">Đóng</button>

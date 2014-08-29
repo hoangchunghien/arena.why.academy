@@ -170,10 +170,10 @@ app.controller('arena.question-audio.ctrl', [ '$scope', '$state', '$http', 'user
 
 
         $scope.postQuestion=function(){
-            if(validateQuestionPictureUrl()==false){
-                alert("Please, fill in Question Picture Url !");
-                return;
-            }
+//            if(validateQuestionPictureUrl()==false){
+//                alert("Please, fill in Question Picture Url !");
+//                return;
+//            }
             if(validateQuestionAudioUrl()==false){
                 alert("Please, fill in Question Audio Url !");
                 return;

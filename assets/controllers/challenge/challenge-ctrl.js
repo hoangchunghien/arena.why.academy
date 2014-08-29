@@ -130,7 +130,7 @@ app.controller('arena.play.on-game.ctrl',
                         break;
                     case "question_ending":
 //                        audioSrv.destroyQuestionAudio();
-                        if(event.data.audio){
+                        if (event.data.audio) {
                             audioSrv.destroyQuestionAudio();
                         }
 
@@ -227,8 +227,8 @@ app.controller('arena.play.on-game.ctrl',
         }]);
 
 
-app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv','audioSrv',
-    function ($scope, gameSrv, gameFSM, userSrv,audioSrv) {
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 'audioSrv',
+    function ($scope, gameSrv, gameFSM, userSrv, audioSrv) {
         audioSrv.init();
 
         $scope.profile = userSrv.getProfile();
@@ -242,27 +242,32 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.friendResult = {};
         $scope.gameData = gameData = gameFSM.gameData;
 
+        //Question Picture_url
+        $scope.questionPictureUrl = null;
+        //Question Audio_url
+        $scope.questionAudioUrl = null;
+
 
         $scope.user = null;
         $scope.opponent = null;
-        $scope.userWinOrLose=-1;
+        $scope.userWinOrLose = -1;
 
-        var checkUserWinOrLose=function(){
+        var checkUserWinOrLose = function () {
             // Check if data is available
-            if ($scope.user==null || $scope.opponent==null) return;
-            if ($scope.user.result==null || $scope.opponent.result==null) return;
-            if ($scope.user.result.point==null || $scope.opponent.result.point==null) return;
+            if ($scope.user == null || $scope.opponent == null) return;
+            if ($scope.user.result == null || $scope.opponent.result == null) return;
+            if ($scope.user.result.point == null || $scope.opponent.result.point == null) return;
 
 
-            $scope.userWinOrLose=0;
+            $scope.userWinOrLose = 0;
 
-            if($scope.user.result.point==$scope.opponent.result.point){
-                $scope.userWinOrLose=1;
+            if ($scope.user.result.point == $scope.opponent.result.point) {
+                $scope.userWinOrLose = 1;
             }
-            else if($scope.profile.id==$scope.user.id && $scope.user.result.point>$scope.opponent.result.point){
-                $scope.userWinOrLose=2;
-            }else  if($scope.profile.id==$scope.opponent.id && $scope.opponent.result.point>$scope.user.result.point){
-                $scope.userWinOrLose=2;
+            else if ($scope.profile.id == $scope.user.id && $scope.user.result.point > $scope.opponent.result.point) {
+                $scope.userWinOrLose = 2;
+            } else if ($scope.profile.id == $scope.opponent.id && $scope.opponent.result.point > $scope.user.result.point) {
+                $scope.userWinOrLose = 2;
             }
             console.log($scope.userWinOrLose);
         }
@@ -297,7 +302,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
                 prepareMedal($scope.user.result);
             } else if ($scope.opponent.id == $scope.profile.id) {
                 prepareMedal($scope.opponent.result);
-            };
+            }
+            ;
         }
 
 
@@ -324,7 +330,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             gameFSM = null;
             gameSrv.destroy();
 
-        }
+        };
 
         var questionForUserAnswer = function (userAnswer) {
             for (var i = gameData.questions.length - 1; i >= 0; i--) {
@@ -338,7 +344,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         var playerWithID = function (userID) {
 
-        }
+        };
 
 
         var isUserAnswerCorrect = function (userAnswer) {
@@ -353,27 +359,45 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             }
         };
 
-        $scope.clickRow=function(question,index){
+        $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
+
             $('#my_modal').modal('show');
-            $('#indexReview').text('Câu hỏi '+index+':  ')
+            $('#indexReview').text('Câu hỏi ' + index + ':  ')
             $('#questionReview').text(question.question.text);
-            $('#answerReview').text('  '+question.content.choices[question.answer].text);
-        }
+            $('#answerReview').text('  ' + question.content.choices[question.answer].text);
+
+            if (question.question.picture_url) {
+                $scope.questionPictureUrl = question.question.picture_url;
+//                $('#questionPicture').attr('src',$scope.questionPictureUrl);
+                var answer = ['A', 'B', 'C', 'D'];
+                $('#answerReview').text('  ' + answer[question.answer]);
+            }
+            if(question.question.audio_url){
+                $scope.questionAudioUrl = question.question.audio_url;
+            }
+
+        };
+
+        //replay question audio
+        $scope.replayQuestionAudio = function () {
+            audioSrv.playAudio($scope.questionAudioUrl);
+        };
 
         $scope.stringForAnsweringTime = function (time) {
-            var timeString = (time/1000).toFixed(1).replace(/\.0$/, '');;
+            var timeString = (time / 1000).toFixed(1).replace(/\.0$/, '');
+            ;
             return timeString + 's';
-        }
+        };
 
         $scope.takeSurvey = function () {
             audioSrv.playClickedButton();
             ApolloAnalytics.track("Take Survey", {
                 "View": "Result"
             });
-        }
+        };
 
-        $scope.playSoundClickedButton=function(){
+        $scope.playSoundClickedButton = function () {
             audioSrv.playClickedButton();
         };
 

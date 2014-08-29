@@ -19,7 +19,9 @@ var app = angular.module('arena', [
     'arena.game.service',
     'arena.transfer.service',
     'arena.question',
-    'arena.question.controller'
+    'arena.question.controller',
+    'arena.select-topic',
+    'arena.select-topic.controller'
 ]);
 
 app.factory('Seo', function () {

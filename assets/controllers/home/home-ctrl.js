@@ -66,7 +66,8 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
             gameSrv.gameData.players = {};
             gameSrv.gameData.players.user = userSrv.getProfile();
             gameSrv.gameData.players.opponent = friend;
-            gameSrv.challengeFriends();
+//            gameSrv.challengeFriends();
+            $state.go("select-topic");
         };
 
 
@@ -77,7 +78,8 @@ app.controller('arena.home.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'aud
 
             gameSrv.gameData.players = {};
             gameSrv.gameData.players.user = userSrv.getProfile();
-            gameSrv.challengeFriends();
+//            gameSrv.challengeFriends();
+            $state.go("select-topic");
         };
 
 

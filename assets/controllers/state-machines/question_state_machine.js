@@ -76,7 +76,7 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "answering");
-                self.eventListener.handleEventNotification({name: "question_answering", data: {}});
+                self.eventListener.handleEventNotification({name: "question_answering",data: {}});
             }
         },
         answered: {
@@ -129,7 +129,7 @@ function QuestionStateMachine(question, eventListener) {
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
                         correct: self.correct, score: self.score, correctAnswer: self.question.answer,
-                        id: self.question.id, time: spentTime}});
+                        id: self.question.id, time: spentTime, audio:self.question.question.audio_url}});
 
                 }, 1000);
 

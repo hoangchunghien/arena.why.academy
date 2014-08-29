@@ -119,13 +119,21 @@ app.controller('arena.play.on-game.ctrl',
 
                     case "quiz_questioning":
 
-                        audioSrv.playBackgroundAudio();
+//                        audioSrv.playBackgroundAudio();
+                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
+                        audioSrv.playQuestionAudio();
+
                         $scope.question = event.data.question;
                         $scope.timeout += event.data.timeout;
                         console.log("quiz_questioning");
                         console.log($scope.timeout);
                         break;
                     case "question_ending":
+//                        audioSrv.destroyQuestionAudio();
+                        if(event.data.audio){
+                            audioSrv.destroyQuestionAudio();
+                        }
+
                         console.log("question_ending");
                         var index = $scope.lastAnswered;
                         var yourAnswer = "Sai";
@@ -155,6 +163,9 @@ app.controller('arena.play.on-game.ctrl',
                         console.log("Answered");
                         $scope.disabledButton = true;
                         break;
+                    case "question_answering":
+                        console.log("Answering");
+                        break;
                     case "question_time_changed":
                         console.log(event.name, event.data.remainingTime);
                         $scope.countDown = event.data.remainingTime;
@@ -162,6 +173,10 @@ app.controller('arena.play.on-game.ctrl',
                         break;
                     case "question_next_question":
                         console.log("next question");
+
+                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
+                        audioSrv.playQuestionAudio();
+
                         $scope.currentQuestion++;
                         $scope.question = event.data.question;
                         $scope.answers = [];

@@ -1,0 +1,51 @@
+<div class="container arena-container">
+    <div class="jumbotron challenge">
+
+    	<div class="row">
+            <div class="col-xs-6 row-profile-left" style=" border-right: thin solid grey;">
+                <div class="col-md-3">
+                    <img ng-src="{{gameData.players.user.picture_url}}">
+                </div>
+                <div class="col-md-9" ng-bind="gameData.players.user.name" align="left"></div>
+            </div>
+            <div class="col-xs-6 row-profile-right">
+                <div class="col-md-3">
+                    <img ng-src="{{gameData.players.opponent.picture_url}}">
+                </div>
+                <div class="col-md-9" ng-bind="gameData.players.opponent.name" align="left"></div>
+            </div>
+        </div>
+        <br/><br/>
+
+        <div class="row">
+            <div class="col-md-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Chủ Đề</th>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="topic in topics">
+                           <td ng-bind="['TOEIC'][topic]"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>Chi Tiết</th>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="tagDetail in tagDetails" ng-click="chooseTags(tagDetail.tags)">
+                            <td  ng-bind="tagDetail.name"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

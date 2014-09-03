@@ -21,12 +21,12 @@
             <div class="col-md-4" align="center">
                 <table class="table table-bordered">
                     <thead>
-                        <th>Chủ Đề</th>
+                        <th class="danger">Chủ Đề</th>
                     </thead>
 
                     <tbody>
                         <tr ng-repeat="topic in topics">
-                           <td ng-bind="['TOEIC'][topic]"></td>
+                           <td ng-bind="['TOEIC'][topic]" ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -34,12 +34,12 @@
             <div class="col-md-8">
                 <table class="table table-bordered">
                     <thead>
-                    <th>Thể Loại</th>
+                    <th class="danger">Thể Loại</th>
                     </thead>
 
                     <tbody>
                         <tr ng-repeat="tagDetail in tagDetails">
-                            <td>
+                            <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
                                 <span ng-bind="tagDetail.name"></span>
                                 <span style="float: right;">
                                     <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>

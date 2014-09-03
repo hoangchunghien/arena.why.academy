@@ -118,8 +118,10 @@ app.controller('arena.play.on-game.ctrl',
                 switch (event.name) {
 
                     case "quiz_questioning":
+                        if(event.data.question.question.audio_url==null){
+                            audioSrv.playBackgroundAudio();
+                        }
 
-//                        audioSrv.playBackgroundAudio();
                         audioSrv.createQuestionAudio(event.data.question.question.audio_url);
                         audioSrv.playQuestionAudio();
 

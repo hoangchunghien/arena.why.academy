@@ -51,6 +51,19 @@ function QuizStateMachine(quiz, eventListener) {
     var _initialize = function () {
         for (var i = 0; i < self.quiz.questions.length; i++) {
             var question = self.quiz.questions[i];
+            //
+            if(question.question.audio_url){
+
+                question.question.text="When you hear a question or statement and three responses. You must select the " +
+                    "best response to to the question or statement";
+                if(question.question.picture_url){
+                    question.question.text="When you hear the statements, you must select the one statement that" +
+                        " best decribes what you see in the picture";
+                }
+
+            }
+            //
+            console.log(question);
             self.questionMachines[i] = new QuestionStateMachine(question, self);
         }
         if (self.questionMachines.length > 0) {

@@ -45,12 +45,11 @@
         Row 3
          -->
         <div class="row row-question">
-            <div ng-show="question.question.text" ng-bind="question.question.text" align="center" style="height: 120px;" ></div>
+            <div ng-show="question.question.text" ng-bind="question.question.text"></div>
             <div align="center">
                 <img align="middle" ng-show="question.question.picture_url" ng-src="{{question.question.picture_url}}" height="200px" />
             </div>
-
-        </div><br/>
+        </div>
         <div class="progress">
             <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"

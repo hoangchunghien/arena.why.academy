@@ -18,7 +18,7 @@
         <br/><br/>
 
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-4" align="center">
                 <table class="table table-bordered">
                     <thead>
                         <th>Chủ Đề</th>
@@ -31,16 +31,20 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <table class="table table-bordered">
                     <thead>
-                    <th>Chi Tiết</th>
+                    <th>Thể Loại</th>
                     </thead>
 
                     <tbody>
-                        <tr ng-repeat="tagDetail in tagDetails" ng-click="chooseTags(tagDetail.tags)">
-                            <td  ng-bind="tagDetail.name"></td>
+                        <tr ng-repeat="tagDetail in tagDetails">
+                            <td>
+                                <span ng-bind="tagDetail.name"></span>
+                                <span style="float: right;">
+                                    <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>
+                                </span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

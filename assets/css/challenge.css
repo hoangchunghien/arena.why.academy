@@ -46,9 +46,16 @@ body {
     font-size: 17px;
 }
 .row-question {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 23px;
+    font-size: 23px ;
+}
+
+.question-content {
+    height: 120px;
+}
+.question-tutorial {
+    height: 80;
 }
 
 .row-answer {

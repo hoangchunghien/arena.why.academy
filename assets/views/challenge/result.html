@@ -75,6 +75,14 @@
                     <div class="modal-header" align="left">
                         <label class="label label-primary" id="indexReview"></label>
                         <div id="questionReview"></div>
+                        <div ng-show="answersForReview">
+                            <ul ng-repeat="answer in answersForReview">
+                                <li>
+                                    <span ng-bind="['A. ','B. ','C. ','D. '][$index]"></span>
+                                    <span ng-bind="answer.text"></span>
+                                </li>
+                            </ul>
+                        </div>
                         <div align="center">
                             <img id="questionPicture" ng-src="{{questionPictureUrl}}"
                                  ng-show="questionPictureUrl" height="200px;"/><br/>

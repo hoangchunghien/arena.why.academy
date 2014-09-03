@@ -246,6 +246,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.questionPictureUrl = null;
         //Question Audio_url
         $scope.questionAudioUrl = null;
+        //answers of question for review
+        $scope.answersForReview=[];
 
 
         $scope.user = null;
@@ -361,20 +363,23 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
+            var answer = ['A', 'B', 'C', 'D'];
 
             $('#my_modal').modal('show');
             $('#indexReview').text('Câu hỏi ' + index + ':  ')
             $('#questionReview').text(question.question.text);
-            $('#answerReview').text('  ' + question.content.choices[question.answer].text);
+            $('#answerReview').text('  '+answer[question.answer]+". " + question.content.choices[question.answer].text);
+            if(question.question.audio_url==null){
+                $scope.answersForReview=question.content.choices;
+            }
 
             if (question.question.picture_url) {
                 $scope.questionPictureUrl = question.question.picture_url;
-//                $('#questionPicture').attr('src',$scope.questionPictureUrl);
-                var answer = ['A', 'B', 'C', 'D'];
                 $('#answerReview').text('  ' + answer[question.answer]);
             }
             if(question.question.audio_url){
                 $scope.questionAudioUrl = question.question.audio_url;
+                $('#answerReview').text('  ' + answer[question.answer]);
             }
 
         };

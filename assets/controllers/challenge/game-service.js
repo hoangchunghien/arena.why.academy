@@ -4,7 +4,7 @@ angular.module('arena.game.service', [
     .service('gameSrv', function (apolloSrv, $state) {
 
         var self = this;
-        var TAGS = ['1'];
+        var TAGS = ['1','4'];
 
         var state = $state;
 

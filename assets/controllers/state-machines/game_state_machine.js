@@ -5,7 +5,7 @@
 function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     console.log("Game data: " + JSON.stringify(gameData));
     var self = this;
-    var quizId = null;
+    var quizID = null;
     var quiz = {};
     var timeForChangeInitToOnGame;
 
@@ -32,7 +32,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 gameData.results = [];
                 if (gameData.friendIds) {
                     apolloSrv.createNewQuiz(gameData.friendIds, gameData.tagIds, function (quiz) {
-                        self.quizId = quiz.id;
+                        self.quizID = quiz.id;
                         self.quiz = quiz;
 
                         // make the right structure for gameData
@@ -46,8 +46,8 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
 
                     });
                 } else {
-                    apolloSrv.getQuiz(gameData.quizId, "players,results,questions", function (quiz) {
-                        self.quizId = quiz.id;
+                    apolloSrv.getQuiz(gameData.quizID, "players,results,questions", function (quiz) {
+                        self.quizID = quiz.id;
                         self.quiz = quiz;
 
                         // make the right structure for gameData
@@ -92,10 +92,10 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 finished_event: "finished"
             },
             run: function () {
-                $state.go("result");
-                console.log(self.quizId);
+                $state.go("result",{quizID:self.quizID});
+                console.log(self.quizID);
                 console.log(JSON.stringify(self.myResult));
-                apolloSrv.postQuizResults(self.quizId, self.myResult, function (data) {
+                apolloSrv.postQuizResults(self.quizID, self.myResult, function (data) {
                     console.log(data);
                 });
 

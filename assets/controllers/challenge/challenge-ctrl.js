@@ -27,7 +27,7 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
         $scope.gameData = gameFSM.gameData;
 
         var checkAudioLoaded = function (audios) {
-            if (audios.length<=0) {
+            if (audios.length <= 0) {
                 return true;
             }
             for (var i = 0; i < audios.length; i++) {
@@ -38,7 +38,7 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
             return true;
         };
         var checkImageLoaded = function (images) {
-            if (images.length<=0) {
+            if (images.length <= 0) {
                 return true;
             }
             for (var i = 0; i < images.length; i++) {
@@ -55,7 +55,7 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
             if (gameFSM.quiz.questions[i].question.audio_url) {
                 resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
                 if (gameFSM.quiz.questions[i].question.picture_url) {
-                    resources.images[i]=new Image();
+                    resources.images[i] = new Image();
                     resources.images[i].src = gameFSM.quiz.questions[i].question.picture_url;
                 }
             }
@@ -164,7 +164,6 @@ app.controller('arena.play.on-game.ctrl',
             };
 
 
-
             this.handleEventNotification = function (event) {
                 console.log(event);
 
@@ -256,7 +255,7 @@ app.controller('arena.play.on-game.ctrl',
 
             var _updateTimer = function () {
                 var percent = ($scope.countDown) / $scope.timeout * 100;
-                setTimerClock(parseFloat($scope.countDown/1000 - 1).toFixed(0), percent);
+                setTimerClock(parseFloat($scope.countDown / 1000 - 1).toFixed(0), percent);
             }
 
             var _initialize = function () {
@@ -318,32 +317,36 @@ app.controller('arena.play.on-game.ctrl',
         }]);
 
 
-app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 'audioSrv',
-    function ($scope, gameSrv, gameFSM, userSrv, audioSrv) {
+app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userSrv', 'audioSrv', 'apolloSrv', 'quizID',
+    function ($scope, gameSrv, gameFSM, userSrv, audioSrv, apolloSrv, quizID) {
         audioSrv.init();
 
-        $scope.profile = userSrv.getProfile();
-        $scope.myResult = gameFSM.myResult;
-        $scope.quiz = gameFSM.gameData.quiz;
+
+        var initialize = function () {
+            $scope.profile = userSrv.getProfile();
+            $scope.myResult = gameFSM.myResult;
+            $scope.quiz = gameFSM.gameData.quiz;
 
 
-        // $scope.myResult.user = $scope.profile;
-        $scope.medalUrl = "";
+            // $scope.myResult.user = $scope.profile;
+            $scope.medalUrl = "";
 
-        $scope.friendResult = {};
-        $scope.gameData = gameData = gameFSM.gameData;
+            $scope.friendResult = {};
+            $scope.gameData = gameData = gameFSM.gameData;
 
-        //Question Picture_url
-        $scope.questionPictureUrl = null;
-        //Question Audio_url
-        $scope.questionAudioUrl = null;
-        //answers of question for review
-        $scope.answersForReview = [];
+            //Question Picture_url
+            $scope.questionPictureUrl = null;
+            //Question Audio_url
+            $scope.questionAudioUrl = null;
+            //answers of question for review
+            $scope.answersForReview = [];
 
 
-        $scope.user = null;
-        $scope.opponent = null;
-        $scope.userWinOrLose = -1;
+            $scope.user = null;
+            $scope.opponent = null;
+            $scope.userWinOrLose = -1;
+        };
+
 
         var checkUserWinOrLose = function () {
             // Check if data is available
@@ -497,7 +500,17 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             audioSrv.playClickedButton();
         };
 
-        _prepareData();
+        if (gameFSM == null) {
+            gameSrv.prepareForShowingResult(quizID, function () {
+                gameFSM = gameSrv.getGameFSM();
+                initialize();
+                _prepareData();
+            });
+        }
+        else {
+            initialize();
+            _prepareData();
+        }
 
     }]);
 
@@ -780,54 +793,54 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //        }]);
 
 
-var setTimerClock = function(value, temp){
+var setTimerClock = function (value, temp) {
 
-    if($('.tempStat')) {
-        
-        $('.tempStat').each(function(){
+    if ($('.tempStat')) {
+
+        $('.tempStat').each(function () {
 
             $(this).html(value);
-                        
+
             if (temp < 20) {
-                
+
                 $(this).animate({
-                            borderColor: "#67c2ef"
-                        }, 'fast');
-                
+                    borderColor: "#67c2ef"
+                }, 'fast');
+
             } else if (temp > 19 && temp < 40) {
-                
+
                 $(this).animate({
-                            borderColor: "#CBE968"
-                        }, 'slow');
-                
+                    borderColor: "#CBE968"
+                }, 'slow');
+
             } else if (temp > 39 && temp < 60) {
-                
+
                 $(this).animate({
-                            borderColor: "#eae874"
-                        }, 'slow');
+                    borderColor: "#eae874"
+                }, 'slow');
 
             } else if (temp > 59 && temp < 80) {
-                
+
                 $(this).animate({
-                            borderColor: "#fabb3d"
-                        }, 'slow');
+                    borderColor: "#fabb3d"
+                }, 'slow');
 
             } else if (temp > 79 && temp < 100) {
 
                 $(this).animate({
-                            borderColor: "#fa603d"
-                        }, 'slow');
+                    borderColor: "#fa603d"
+                }, 'slow');
 
             } else {
-                
+
                 $(this).animate({
-                            borderColor: "#ff5454"
-                        }, 'slow');
-                
+                    borderColor: "#ff5454"
+                }, 'slow');
+
             }
-            
+
         });
-        
+
     }
-    
+
 }

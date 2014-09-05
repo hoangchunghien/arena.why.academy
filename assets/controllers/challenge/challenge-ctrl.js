@@ -22,6 +22,58 @@ app.controller('arena.play.init-game.ctrl', ['$scope', '$state', 'audioSrv', 'ap
         $scope.gameData = gameFSM.gameData;
 
     }]);
+app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSrv', 'apolloSrv', 'gameFSM',
+    function ($scope, $state, audioSrv, apolloSrv, gameFSM) {
+        $scope.gameData = gameFSM.gameData;
+
+        var checkAudioLoaded = function (audios) {
+            if (audios.length<=0) {
+                return true;
+            }
+            for (var i = 0; i < audios.length; i++) {
+                if (audios[i].readyState != 4) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        var checkImageLoaded = function (images) {
+            if (images.length<=0) {
+                return true;
+            }
+            for (var i = 0; i < images.length; i++) {
+                if (images[i].complete == false) {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        var resources = {"images": [], "audios": []};
+        var checkResourceLoadedTimer;
+        for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
+            if (gameFSM.quiz.questions[i].question.audio_url) {
+                resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
+                if (gameFSM.quiz.questions[i].question.picture_url) {
+                    resources.images[i]=new Image();
+                    resources.images[i].src = gameFSM.quiz.questions[i].question.picture_url;
+                }
+            }
+        }
+
+        var checkResourceLoaded = function () {
+            checkResourceLoadedTimer = setTimeout(function () {
+                if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
+                    clearTimeout(checkResourceLoadedTimer);
+                    gameFSM.handleEventNotification({name: "loading_resource_finished", data: {}});
+                    return;
+                }
+                checkResourceLoaded();
+            }, 100);
+        };
+        checkResourceLoaded();
+
+    }]);
 
 app.controller('arena.play.on-game.ctrl',
     ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'gameFSM',
@@ -112,13 +164,14 @@ app.controller('arena.play.on-game.ctrl',
             };
 
 
+
             this.handleEventNotification = function (event) {
                 console.log(event);
 
                 switch (event.name) {
 
                     case "quiz_questioning":
-                        if(event.data.question.question.audio_url==null){
+                        if (event.data.question.question.audio_url == null) {
                             audioSrv.playBackgroundAudio();
                         }
 
@@ -200,6 +253,30 @@ app.controller('arena.play.on-game.ctrl',
                 }
             };
 
+//            var checkAudioLoaded = function (audios) {
+//                if (audios.length<=0) {
+//                    return true;
+//                }
+//                for (var i = 0; i < audios.length; i++) {
+//                    if (audios[i].readyState != 4) {
+//                        console.log( i + ':' + audios[i].readyState );
+//                        return false;
+//                    }
+//                }
+//                return true;
+//            };
+//            var checkImageLoaded = function (images) {
+//                if (images.length<=0) {
+//                    return true;
+//                }
+//                for (var i = 0; i < images.length; i++) {
+//                    if (images[i].complete == false) {
+//                        return false;
+//                    }
+//                }
+//                return true;
+//            };
+
             var _initialize = function () {
 
                 $scope.results = [];
@@ -216,6 +293,35 @@ app.controller('arena.play.on-game.ctrl',
                 $scope.ThreeToZero = 3;
                 $scope.disabledButton = false;
 
+//                var resources = {"images": [], "audios": []};
+//                var checkResourceLoadedTimer;
+//                for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
+//                    if (gameFSM.quiz.questions[i].question.audio_url) {
+//                        resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
+//                        if (gameFSM.quiz.questions[i].question.picture_url) {
+//                            resources.images[i]=new Image();
+//                            resources.images[i].src = gameFSM.quiz.questions[i].question.picture_url;
+//                        }
+//                    }
+//                }
+//
+//                var checkResourceLoaded = function () {
+//                    checkResourceLoadedTimer = setTimeout(function () {
+//                        if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
+//                            clearTimeout(checkResourceLoadedTimer);
+//                            quizMachine = new QuizStateMachine(gameFSM.quiz, self);
+//                            $scope.numberOfQuestion = quizMachine.quiz.questions.length;
+//                            for (var i = 0; i < $scope.numberOfQuestion; i++) {
+//                                $scope.results.push({'score': i + 1, 'correct': null});
+//                            }
+//                            _startModalChallenge();
+//                            return;
+//                        }
+//                        checkResourceLoaded();
+//                    }, 1000);
+//                };
+//                checkResourceLoaded();
+
                 quizMachine = new QuizStateMachine(gameFSM.quiz, self);
                 $scope.numberOfQuestion = quizMachine.quiz.questions.length;
                 for (var i = 0; i < $scope.numberOfQuestion; i++) {
@@ -225,6 +331,7 @@ app.controller('arena.play.on-game.ctrl',
 
             };
             _initialize();
+
 
         }]);
 
@@ -249,7 +356,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         //Question Audio_url
         $scope.questionAudioUrl = null;
         //answers of question for review
-        $scope.answersForReview=[];
+        $scope.answersForReview = [];
 
 
         $scope.user = null;
@@ -370,16 +477,16 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             $('#my_modal').modal('show');
             $('#indexReview').text('Câu hỏi ' + index + ':  ')
             $('#questionReview').text(question.question.text);
-            $('#answerReview').text('  '+answer[question.answer]+". " + question.content.choices[question.answer].text);
-            if(question.question.audio_url==null){
-                $scope.answersForReview=question.content.choices;
+            $('#answerReview').text('  ' + answer[question.answer] + ". " + question.content.choices[question.answer].text);
+            if (question.question.audio_url == null) {
+                $scope.answersForReview = question.content.choices;
             }
 
             if (question.question.picture_url) {
                 $scope.questionPictureUrl = question.question.picture_url;
                 $('#answerReview').text('  ' + answer[question.answer]);
             }
-            if(question.question.audio_url){
+            if (question.question.audio_url) {
                 $scope.questionAudioUrl = question.question.audio_url;
                 $('#answerReview').text('  ' + answer[question.answer]);
             }

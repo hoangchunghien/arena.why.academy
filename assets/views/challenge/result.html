@@ -10,24 +10,31 @@
         </div>
 
         <div class="row" >
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <table class="table table-bordered">
                     <thead>
                     <th>Câu Hỏi</th>
                     <th>
                         <div align="center" ng-bind="user.name"></div>
-                        <div class = "h1" align="center" ng-bind-template="{{user.result.point}}"></div>
+                        <div class = "h2" align="center" ng-bind-template="{{user.result.point}}"></div>
                     </th>
                     <th>
                         <div align="center" ng-bind="opponent.name"></div>
-                        <div class = "h1" ng-show="opponent.result" align="center" ng-bind-template="{{opponent.result.point}}"></div>
+                        <div class = "h2" ng-show="opponent.result" align="center" ng-bind-template="{{opponent.result.point}}"></div>
                         <div class = "h2" ng-hide="opponent.result" align="center">Đang đợi</div>
                     </th>
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="question in gameData.questions" ng-click="clickRow(question,$index)">
-                        <td ng-bind="$index+1">
+                    <tr ng-repeat="question in gameData.questions">
+                        <td >
+                            <span ng-bind="$index+1"></span>
+                            <span>
+                                <button class="btn" style="float: right;" ng-class="{'btn-success':user.result.user_answers[$index].isCorrected==true,
+                                'btn-danger':user.result.user_answers[$index].isCorrected==false}" ng-click="clickRow(question,$index)">
+                                    Xem Lại
+                                </button>
+                            </span>
                         </td>
                         <td> 
                             <div ng-show="user.result">
@@ -47,7 +54,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="row" align="center">
                     <div>Huy Chương :</div>
                     <img ng-src="{{medalUrl}}">

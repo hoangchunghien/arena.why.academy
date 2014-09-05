@@ -19,11 +19,14 @@ angular.module('arena.audio.service', [
         var questionAudio=null;
 
         this.createQuestionAudio=function(audio_url){
-            if (questionAudio == null) {
-                questionAudio = soundManager.createSound({
-                    url: audio_url
-                });
-            }
+//            if (questionAudio == null) {
+//                questionAudio = soundManager.createSound({
+//                    url: audio_url
+//                });
+//            }
+            questionAudio = soundManager.createSound({
+                url: audio_url
+            });
         };
 
         this.destroyQuestionAudio=function(){

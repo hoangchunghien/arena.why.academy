@@ -48,14 +48,15 @@ body {
 .row-question {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 23px ;
+
 }
 
 .question-content {
     height: 120px;
+    font-size: 23px ;
 }
 .question-tutorial {
-    height: 80;
+    font-size: 20px ;
 }
 
 .row-answer {

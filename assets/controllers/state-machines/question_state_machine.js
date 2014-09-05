@@ -115,11 +115,11 @@ function QuestionStateMachine(question, eventListener) {
                 if (self.answer == self.question.answer) {
                     self.correct = true;
                     self.score = Math.floor(self.remainingTime / 1000);
-                    timeForChangeQuestion = 3500;
+                    timeForChangeQuestion = 4500; //3500
                 } else {
                     self.score = 0;
                     self.correct = false;
-                    timeForChangeQuestion = 2000;
+                    timeForChangeQuestion = 3500; //2000
                 }
                 var spentTime=-1;
                 if(self.remainingTime>0){
@@ -170,6 +170,7 @@ function QuestionStateMachine(question, eventListener) {
         console.log("run Active timer");
         var data = {};
         data.remainingTime = self.remainingTime;
+
         self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
 
         var countDown = function () {

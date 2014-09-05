@@ -48,7 +48,8 @@
              ng-class="{'question-content':question.question.audio_url==null,'question-tutorial':question.question.audio_url!=null }">
             <div ng-show="question.question.text" ng-bind="question.question.text"></div>
             <div align="center">
-                <img align="middle" ng-show="question.question.picture_url" ng-src="{{question.question.picture_url}}" height="200px" />
+                <img id="questionPicture" align="middle" ng-show="question.question.picture_url"
+                     ng-src="{{question.question.picture_url}}" height="200px"/>
             </div>
         </div>
         <div class="progress">

@@ -28,8 +28,23 @@ angular.module('arena.challenge', [
                         }
                     }
                 })
-                .state('on-game', {
+                .state('loading-resource', {
                     parent: 'init-game',
+                    url: '',
+                    resolve: {
+                        gameFSM: function (gameSrv) {
+                            return gameSrv.getGameFSM();
+                        }
+                    },
+                    views: {
+                        'play@play': {
+                            templateUrl: '/views/challenge/init-game.html',
+                            controller: 'arena.play.loading-resource.ctrl'
+                        }
+                    }
+                })
+                .state('on-game', {
+                    parent: 'loading-resource',
                     url: '',
                     resolve: {
                         gameFSM: function (gameSrv) {

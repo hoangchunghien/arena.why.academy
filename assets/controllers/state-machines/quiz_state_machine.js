@@ -20,12 +20,12 @@ function QuizStateMachine(quiz, eventListener) {
      **/
     this.eventListener = eventListener;
     this.quiz = {};
-    this.quiz.id=quiz.id;
+    this.quiz.id = quiz.id;
     this.quiz.questions = quiz.questions;
     this.result = {};
     //
-    this.result.user_answers=[];
-    this.result.point=0;
+    this.result.user_answers = [];
+    this.result.point = 0;
     //
     this.questionMachines = [];
     this.questionIndex = 0;
@@ -49,21 +49,28 @@ function QuizStateMachine(quiz, eventListener) {
     };
 
     var _initialize = function () {
+
+//        for (var i = 0; i < self.quiz.questions.length; i++) {
+//            var img = new Image();
+//            img.src = self.quiz.questions[i].question.picture_url;
+//            var audio = new Audio(self.quiz.questions[i].question.audio_url);
+//        }
+
         for (var i = 0; i < self.quiz.questions.length; i++) {
             var question = self.quiz.questions[i];
             //
-            if(question.question.audio_url){
+            if (question.question.audio_url) {
 
-                question.question.text="When you hear a question or statement and three responses. You must select the " +
+                question.question.text = "When you hear a question or statement and three responses. You must select the " +
                     "best response to the question or statement";
-                if(question.question.picture_url){
-                    question.question.text="When you hear the statements, you must select the one statement that" +
+                if (question.question.picture_url) {
+
+                    question.question.text = "When you hear the statements, you must select the one statement that" +
                         " best decribes what you see in the picture";
                 }
 
             }
             //
-            console.log(question);
             self.questionMachines[i] = new QuestionStateMachine(question, self);
         }
         if (self.questionMachines.length > 0) {
@@ -144,7 +151,7 @@ function QuizStateMachine(quiz, eventListener) {
             run: function () {
                 console.log(logInfo + "finished");
 
-                self.eventListener.handleEventNotification({name: "quiz_finished_event", data: {quizID:self.quiz.id,result:self.result}});
+                self.eventListener.handleEventNotification({name: "quiz_finished_event", data: {quizID: self.quiz.id, result: self.result}});
             }
         }
 
@@ -225,8 +232,8 @@ QuizStateMachine.prototype.handleEventNotification = function (event) {
         case "question_ending":
             console.log("Test question_ending");
 
-            self.result.user_answers.push({"question_id":event.data.id,"user_answer":event.data.answer,"time":event.data.time});
-            self.result.point +=event.data.score;
+            self.result.user_answers.push({"question_id": event.data.id, "user_answer": event.data.answer, "time": event.data.time});
+            self.result.point += event.data.score;
 
             self.eventListener.handleEventNotification(event);
 
@@ -237,6 +244,9 @@ QuizStateMachine.prototype.handleEventNotification = function (event) {
             break;
         case "question_timeout":
             self.eventListener.handleEventNotification({name: "question_timeout", data: self.currentQuestionMachines.question});
+            break;
+        case "resource_loaded":
+            self.currentQuestionMachines.active();
             break;
         default:
             self.eventListener.handleEventNotification(event);

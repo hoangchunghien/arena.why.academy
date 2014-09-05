@@ -24,9 +24,10 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
         initGame: {
             name: 'init-game',
             events: {
-                on_game_event: 'onGame'
+                loading_resource_event: 'loadingResource'
             },
             run: function () {
+                console.log("Init-game .....");
                 $state.go("init-game");
                 gameData.results = [];
                 if (gameData.friendIds) {
@@ -35,16 +36,17 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.quiz = quiz;
 
                         // make the right structure for gameData
-                        self.gameData.questions = quiz.questions;                        
+                        self.gameData.questions = quiz.questions;
                         self.myResult.user_id = self.gameData.players.user.id;
                         self.gameData.players.user.result = self.myResult;
-                        self.gameData.players.opponent=quiz.players.opponent;
+                        self.gameData.players.opponent = quiz.players.opponent;
 
-                        self.consumeEvent({name: 'on_game_event', data: {}});
+//                        self.consumeEvent({name: 'on_game_event', data: {}});
+                        self.consumeEvent({name: 'loading_resource_event', data: {}});
 
                     });
                 } else {
-                    apolloSrv.getQuiz(gameData.quizId,"players,results,questions", function (quiz) {
+                    apolloSrv.getQuiz(gameData.quizId, "players,results,questions", function (quiz) {
                         self.quizId = quiz.id;
                         self.quiz = quiz;
 
@@ -55,12 +57,22 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                         self.myResult.user_id = self.gameData.players.opponent.id;
                         self.gameData.players.opponent.result = self.myResult;
 
-                        self.consumeEvent({name: 'on_game_event', data: {}});
-
+//                        self.consumeEvent({name: 'on_game_event', data: {}});
+                        self.consumeEvent({name: 'loading_resource_event', data: {}});
                     });
                 }
 
 
+            }
+        },
+        loadingResource: {
+            name: 'loading-resource',
+            events: {
+                on_game_event: 'onGame'
+            },
+            run: function () {
+                console.log("resource loaded....");
+                $state.go("loading-resource");
             }
         },
         onGame: {
@@ -116,9 +128,13 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     GameFSM.prototype.handleEventNotification = function (event) {
         var self = this;
         switch (event.name) {
+            case "loading_resource_finished":
+                console.log("loading_resource_finished");
+                self.consumeEvent({name: 'on_game_event', data: {}});
+                break;
             case "quiz_finished":
                 console.log("quiz_finished");
-                
+
                 self.gameData.results.push(self.myResult);
 
                 self.consumeEvent({name: 'result_event', data: {}});
@@ -132,7 +148,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
     };
 
 
-    this.setGameData = function(data) {
+    this.setGameData = function (data) {
         if (data.quiz) self.quiz = data.quiz;
     }
 

@@ -21,13 +21,16 @@
             </div>
             <div class="col-xs-5 row-profile-right alert alert-warning">
                 <div class="col-md-9">
-                    <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
+                    <div class="name" align="right">Đấu thủ ngẫu nhiên</div>
                     <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
                     <div class="status" ng-hide="gameData.players.opponent.result.point"
                             ng-bind-template="Chưa thi đấu"></div>
                 </div>
                 <div style="float: right;">
-                    <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}">
+                    <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}"
+                        ng-show="gameData.players.opponent.picture_url"/>
+                    <img class="avatar" ng-src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yo/r/UlIqmHJn-SK.gif"
+                        ng-hide="gameData.players.opponent.picture_url"/>
                 </div>
             </div>
         </div>

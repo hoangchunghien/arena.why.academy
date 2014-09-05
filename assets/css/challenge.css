@@ -1,7 +1,6 @@
 
 body {
     background-color: hsl(0, 0%, 91%);
-    background: url("../images/arena_background.png") no-repeat bottom center fixed hsl(0, 0%, 91%);
 }
 
 .arena-container {
@@ -97,7 +96,10 @@ body {
 
 
 .survey {
-    margin: 20px;
+    bottom: 20px;
+    width: 300px;
+    right: 20px;
+    position: absolute;
 }
 
 .challenge-title .name {
@@ -197,6 +199,27 @@ box-sizing: content-box;
 }
 
 
-.result-question {
+.result-question-row {
     cursor: pointer;
 }
+
+.result-question-row:hover {
+    background-color: #DDD;
+}
+
+.result-question-row .answer-corrected, .result-question-row .answer-wrong {
+    font-size: 40px;
+}
+
+.result-question-row .answer-corrected {
+    color: #78CD51;
+}
+
+.result-question-row .answer-wrong {
+    color: #FF5454;
+}
+
+.result-question-row td {
+    vertical-align: middle;    
+}
+

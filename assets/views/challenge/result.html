@@ -16,13 +16,12 @@
 
                     <div class="tempStatBox">
                         <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
-                        
                     </div>
             </div>
             <div class="col-xs-5 row-profile-right alert alert-warning">
                 <div class="col-md-9">
                     <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
-                    <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
+                    <div class="score" ng-bind="gameData.players.opponent.result.point" align="right"></div>
                     <div class="status" ng-hide="gameData.players.opponent.result.point"
                             ng-bind-template="Chưa thi đấu"></div>
                 </div>
@@ -32,6 +31,7 @@
             </div>
         </div>
 
+        <br/>
 
         <div class="row" align="center" ng-show="userWinOrLose>-1">
             <h2
@@ -42,70 +42,57 @@
             <br/>
         </div>
 
-        <div class="row" >
-            <div class="col-md-8">
-                <table class="table table-bordered">
-                    <thead>
-                    <th>Câu Hỏi</th>
-                    <th>
-                        <div align="center" ng-bind="user.name"></div>
-                        <div class = "h2" align="center" ng-bind-template="{{user.result.point}}"></div>
-                    </th>
-                    <th>
-                        <div align="center" ng-bind="opponent.name"></div>
-                        <div class = "h2" ng-show="opponent.result" align="center" ng-bind-template="{{opponent.result.point}}"></div>
-                        <div class = "h2" ng-hide="opponent.result" align="center">Đang đợi</div>
-                    </th>
-                    </thead>
+        <div class="row" align="center" ng-show="medalUrl">
+            <h2 ng-show="medalUrl">Huy Chương:</h2>
+            <img ng-src="{{medalUrl}}">
+        </div>
+        <br/>
 
+        <div class="row" align="center">
+
+            <div>
+                <h1>Xem lại câu hỏi</h1>
+                <table class="table table-bordered">
                     <tbody>
-                    <tr ng-repeat="question in gameData.questions">
+
+                    <thead>
+                    <tr><th>Câu Hỏi</th>
+                    <th>
+                        <img class="avatar" ng-src="{{gameData.players.user.picture_url}}">
+                    </th>
+                    <th>
+                        <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}">
+                    </th>
+                    </tr></thead>
+                    <tr ng-repeat="question in gameData.questions" class="result-question-row" ng-click="clickRow(question,$index)"> 
                         <td >
                             <span ng-bind="$index+1"></span>
-                            <span>
-                                <button class="btn" style="float: right;" ng-class="{'btn-success':user.result.user_answers[$index].isCorrected==true,
-                                'btn-danger':user.result.user_answers[$index].isCorrected==false}" ng-click="clickRow(question,$index)">
-                                    Xem Lại
-                                </button>
-                            </span>
                         </td>
                         <td> 
                             <div ng-show="user.result">
-                                <i ng-show="user.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
-                                <i ng-hide="user.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <i ng-show="user.result.user_answers[$index].isCorrected" class="answer-corrected fa fa-check-circle"></i>
+                                <i ng-hide="user.result.user_answers[$index].isCorrected" class="answer-wrong fa fa-times-circle"></i>
                                 <span ng-bind="stringForAnsweringTime(user.result.user_answers[$index].time)"></span>
                             </div>
                         </td>
                         <td> 
                             <div ng-show="opponent.result">
-                                <i ng-show="opponent.result.user_answers[$index].isCorrected" class="fa fa-check-circle"></i>
-                                <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="fa fa-times-circle"></i>
+                                <i ng-show="opponent.result.user_answers[$index].isCorrected" class="answer-corrected fa fa-check-circle"></i>
+                                <i ng-hide="opponent.result.user_answers[$index].isCorrected" class="answer-wrong fa fa-times-circle"></i>
                                 <span ng-bind="stringForAnsweringTime(opponent.result.user_answers[$index].time)"></span>
                             </div>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-md-4">
-                <div class="row" align="center">
-                    <div>Huy Chương :</div>
-                    <img ng-src="{{medalUrl}}">
-                </div>
+            </div>            
 
-                <br/>
-                <div class="row" align="center">
-                    <button type="button" class="btn btn-lg btn-danger" ng-click="backHome()">Tiếp Tục</button>
-                </div>
+            
 
-                <br/><br/>
-                <div class="survey row alert alert-info">
-                    <span class="label label-primary">Góp ý</span>
-                    <div><div>Chào <b ng-bind="profile.name"></b>,</div> English Arena cần bạn!<br>Dành vài phút góp ý để Arena phát triển tốt hơn bạn nhé! <br><a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><button class="btn btn-small btn-primary">Góp ý tại đây</button></a></div>
-                </div>
+        </div>
 
-            </div>
-
+        <div class="row" align="center">
+            <button type="button" class="btn btn-lg btn-info" ng-click="backHome()">Trở lại</button>
         </div>
 
         <!--Modal for question review-->
@@ -142,4 +129,9 @@
         </div>
 
     </div>
+</div>
+
+<div class="survey row alert alert-info">
+    <span class="label label-primary">Góp ý</span>
+    <div><div>Chào <b ng-bind="profile.name"></b>,</div> English Arena cần bạn!<br>Dành vài phút góp ý để Arena phát triển tốt hơn bạn nhé! <br><a href="https://docs.google.com/forms/d/16qRKfCrXxq12D5VJdROVJ8eAr07nDB0v9qwXOncGfvw/viewform?usp=send_form" target="_blank" ng-click="takeSurvey()"><button class="btn btn-small btn-primary">Góp ý tại đây</button></a></div>
 </div>

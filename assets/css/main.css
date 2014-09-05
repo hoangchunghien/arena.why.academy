@@ -67,3 +67,14 @@ img.avatar {
     -moz-border-radius: 50em;
     border-radius: 50em;
 }
+
+.background-footer {
+	z-index: -9999;
+	width: 100%;
+	height: 145px;
+	position: fixed;
+	bottom: 0px;
+	background-color: hsl(0, 0%, 91%);
+    background: url("../images/arena_background.png") no-repeat bottom center fixed hsl(0, 0%, 91%);
+
+}

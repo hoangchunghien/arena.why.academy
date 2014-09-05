@@ -1,41 +1,60 @@
 <div class="container arena-container">
-    <div class="jumbotron challenge">
+    <div class="challenge">
 
-    	<div class="row">
-            <div class="col-xs-6 row-profile-left" style=" border-right: thin solid grey;">
-                <div class="col-md-3">
-                    <img ng-src="{{gameData.players.user.picture_url}}">
+        <div class="row challenge-title">
+            <div class="col-xs-5 row-profile-left alert alert-warning">
+                <div>
+                    <div style="float: left;">
+                        <img class="avatar" ng-src="{{gameData.players.user.picture_url}}">
+                    </div>
                 </div>
-                <div class="col-md-9" ng-bind="gameData.players.user.name" align="left"></div>
+                <div class="col-md-9">
+                    <div class="name" ng-bind="gameData.players.user.name" align="left"></div>
+                    <div class="score" ng-bind="gameData.players.user.result.point" align="left"></div>
+                </div>
             </div>
-            <div class="col-xs-6 row-profile-right">
-                <div class="col-md-3">
-                    <img ng-src="{{gameData.players.opponent.picture_url}}">
+            <div class="col-xs-2" align="center">
+                <div class="tempStatBox">
+                        <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
+                        
+                    </div>
+            </div>
+            <div class="col-xs-5 row-profile-right alert alert-warning">
+                <div class="col-md-9">
+                    <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
+                    <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
+                    <div class="status" ng-hide="gameData.players.opponent.result.point"
+                            ng-bind-template="Chưa thi đấu"></div>
                 </div>
-                <div class="col-md-9" ng-bind="gameData.players.opponent.name" align="left"></div>
+                <div style="float: right;">
+                    <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}">
+                </div>
             </div>
         </div>
-        <br/><br/>
+
+        <br/>
+
+        <h1>Chọn Chủ Đề thi đấu</h1>
+
+        <br/>
 
         <div class="row">
             <div class="col-md-4" align="center">
                 <table class="table table-bordered">
                     <thead>
-                        <th class="danger">Chủ Đề</th>
                     </thead>
-
                     <tbody>
                         <tr ng-repeat="topic in topics">
-                           <td ng-bind="['TOEIC'][topic]" ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}"></td>
+                           <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
+                                <span ng-bind="['TOEIC'][topic]"></span><span class="indicator fa fa-chevron-right"></span>
+                           </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-8">
                 <table class="table table-bordered">
-                    <thead>
-                    <th class="danger">Thể Loại</th>
-                    </thead>
+                    
 
                     <tbody>
                         <tr ng-repeat="tagDetail in tagDetails">

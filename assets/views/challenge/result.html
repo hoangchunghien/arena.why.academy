@@ -1,5 +1,38 @@
 <div class="container arena-container">
-    <div class="jumbotron challenge result">
+    <div class="challenge result">
+
+        <div class="row challenge-title">
+            <div class="col-xs-5 row-profile-left alert alert-warning">
+                <div style="float: left;">
+                    <img class="avatar" ng-src="{{gameData.players.user.picture_url}}">
+                </div>
+                <div class="col-md-9">
+                    <div class="name" ng-bind="gameData.players.user.name" align="left"></div>
+                    <div class="score" ng-bind="gameData.players.user.result.point" align="left"></div>
+                </div>
+            </div>
+            <div class="col-xs-2" align="center">
+                <!-- <b style="line-height: 70px;">VS</b> -->
+
+                    <div class="tempStatBox">
+                        <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
+                        
+                    </div>
+            </div>
+            <div class="col-xs-5 row-profile-right alert alert-warning">
+                <div class="col-md-9">
+                    <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
+                    <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
+                    <div class="status" ng-hide="gameData.players.opponent.result.point"
+                            ng-bind-template="Chưa thi đấu"></div>
+                </div>
+                <div style="float: right;">
+                    <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}">
+                </div>
+            </div>
+        </div>
+
+
         <div class="row" align="center" ng-show="userWinOrLose>-1">
             <h2
                    ng-bind="['Bạn đã thua !','Bạn đã hòa !','Bạn đã thắng !'][userWinOrLose]"
@@ -26,7 +59,7 @@
                     </thead>
 
                     <tbody>
-                    <tr ng-repeat="question in gameData.questions" ng-click="clickRow(question,$index)">
+                    <tr ng-repeat="question in gameData.questions" ng-click="clickRow(question,$index)" class="result-question">
                         <td ng-bind="$index+1">
                         </td>
                         <td> 

@@ -171,6 +171,7 @@ app.controller('arena.play.on-game.ctrl',
                     case "question_time_changed":
                         console.log(event.name, event.data.remainingTime);
                         $scope.countDown = event.data.remainingTime;
+                        _updateTimer();
                         $scope.$apply();
                         break;
                     case "question_next_question":
@@ -199,6 +200,11 @@ app.controller('arena.play.on-game.ctrl',
 
                 }
             };
+
+            var _updateTimer = function () {
+                var percent = ($scope.countDown) / $scope.timeout * 100;
+                setTimerClock(parseFloat($scope.countDown/1000 - 1).toFixed(0), percent);
+            }
 
             var _initialize = function () {
 
@@ -689,3 +695,56 @@ app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 //            }
 //
 //        }]);
+
+
+var setTimerClock = function(value, temp){
+
+    if($('.tempStat')) {
+        
+        $('.tempStat').each(function(){
+
+            $(this).html(value);
+                        
+            if (temp < 20) {
+                
+                $(this).animate({
+                            borderColor: "#67c2ef"
+                        }, 'fast');
+                
+            } else if (temp > 19 && temp < 40) {
+                
+                $(this).animate({
+                            borderColor: "#CBE968"
+                        }, 'slow');
+                
+            } else if (temp > 39 && temp < 60) {
+                
+                $(this).animate({
+                            borderColor: "#eae874"
+                        }, 'slow');
+
+            } else if (temp > 59 && temp < 80) {
+                
+                $(this).animate({
+                            borderColor: "#fabb3d"
+                        }, 'slow');
+
+            } else if (temp > 79 && temp < 100) {
+
+                $(this).animate({
+                            borderColor: "#fa603d"
+                        }, 'slow');
+
+            } else {
+                
+                $(this).animate({
+                            borderColor: "#ff5454"
+                        }, 'slow');
+                
+            }
+            
+        });
+        
+    }
+    
+}

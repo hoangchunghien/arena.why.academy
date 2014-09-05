@@ -20,7 +20,7 @@
 
 .navbar {
 	border-bottom: 1px solid #1E8FC6;
-	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);*/
 }
 a.navbar-brand {
 	background: transparent;
@@ -36,7 +36,7 @@ a.navbar-brand {
 
 .box {
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-	border-radius: 6px;
+	border-radius: 4px;
 }
 
 .btn {
@@ -52,3 +52,18 @@ a.navbar-brand {
 }
 
 
+.arena-container .navbar-nav .nav-item {
+	padding: 10px 16px;	
+}
+
+
+
+.arena-container .navbar-default .navbar-nav>li>a {
+	color: white;
+}
+
+img.avatar {
+    -webkit-border-radius: 50em;
+    -moz-border-radius: 50em;
+    border-radius: 50em;
+}

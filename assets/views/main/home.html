@@ -10,57 +10,90 @@
 
         <div class="nav-no-collapse header-nav">
             <ul class="nav navbar-nav pull-left">
-
-                <!-- start: User Dropdown -->
-                <li class="dropdown">
-                    <a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
-                        <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
-                       <!--  <div class="user">
-                            <span class="hello">&nbsp;</span>
-                            <span class="name" ng-bind="profile.name"></span>
-                        </div> -->
-                    </a>
-
-                    <!--                         <ul class="dropdown-menu">
-                                                <li class="dropdown-menu-title">
-
-                                                </li>
-                                                <li><a href="widgets.html#"><i class="fa fa-user"></i> Profile</a></li>
-                                                <li><a href="widgets.html#"><i class="fa fa-cog"></i> Settings</a></li>
-                                                <li><a href="widgets.html#"><i class="fa fa-envelope"></i> Messages</a></li>
-                                                <li><a href="login.html"><i class="fa fa-off"></i> Logout</a></li>
-                                            </ul> -->
+                <li class="nav-item">
+                    <a href="/home" class="brand">
+                        English Arena
+                    </a>    
                 </li>
-                <!-- end: User Dropdown -->
-                <li class="nav-item">English Arena</li>
                 <li class="dropdown">
                     <span class="h2"></span>
                     <img src="/images/loaders/spinner5.gif" ng-show="loading"/>
                 </li>
             </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                    <!-- start: Notifications Dropdown -->
+                    <li class="dropdown hidden-xs">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" ui-sref="question">
+                            <i class="fa fa-tasks"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <span class="dropdown-menu-title">Thêm câu hỏi vào Arena</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- end: Notifications Dropdown -->
+                    <!-- start: Message Dropdown -->
+                    <li class="dropdown hidden-xs">
+                        <a class="btn dropdown-toggle" data-hover="dropdown" href="" ui-sref="chat">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <ul class="dropdown-menu messages">
+                            <li>
+                                <span class="dropdown-menu-title">Cộng đồng</span>
+                            </li>   
+                            
+                            <li>
+                                <a href="" ui-sref="chat">
+                                    <span class="avatar"><img src="https://fbcdn-photos-f-a.akamaihd.net/hphotos-ak-xpf1/t39.2081-0/p50x50/10574703_328822080627106_309832939_n.png" alt="Avatar"></span>
+                                    <span class="header">
+                                        <span class="from">
+                                            English Arena
+                                         </span>
+                                        <span class="time">
+                                            Jul 25, 2012
+                                        </span>
+                                    </span>
+                                    <span class="message">
+                                        Nhấn vào để thảo luận cùng cộng đồng English Arena
+                                    </span>  
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-menu-sub-footer" ui-sref="chat">View all messages</a>
+                            </li>   
+                        </ul>
+                    </li>
+                    <!-- end: Message Dropdown -->
+                    <li class="dropdown hidden-xs">
+                        <a class="btn dropdown-toggle" data-hover="dropdown" href="" ng-click="doHelp()">
+                            <i class="fa fa-question-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <span class="dropdown-menu-title">Hướng dẫn</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- start: User Dropdown -->
+                    <li class="dropdown">
+                        <a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
+                            <div class="avatar"><img ng-src="{{profile.picture_url}}" alt="Avatar"></div>
+                            <div class="user">
+                                <span class="hello">Xin chào!</span>
+                                <span class="name" ng-bind="profile.name"></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-menu-title"></li>
+                        </ul>
+                    </li>
+                    <!-- end: User Dropdown -->
+                </ul>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
-        <ul class="nav navbar-nav navbar-right">
-        <!--<li ng-show="!isAuth"><a href="" ng-click="doLogin()"><span class="h2"></span>Login</a></li>-->
-        <!-- <li ng-show="isAuth" class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="h2"></span>
-                <img ng-src="{{profile.picture_url}}" width="20" height="20">
-                &nbsp<span ng-bind="profile.name"></span>
-            </a> -->
-        <!--&nbsp<b class="caret"></b></a>-->
-        <!--<ul class="dropdown-menu">-->
-        <!--<li>&nbsp;</li>-->
-        <!--<li class="divider"></li>-->
-        <li class="nav-item"><a href="" ng-click="doHelp()"><i class="fa fa-question-circle"></i> <span>Hướng dẫn</span></a></li>
-        </ul>
-        <!--                 </li>
-                    </ul> -->
 
-         <!-- </div> -->
-        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
 </nav>

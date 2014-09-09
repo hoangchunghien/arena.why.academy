@@ -20,14 +20,14 @@
 
 .navbar {
 	border-bottom: 1px solid #1E8FC6;
+	height: 40px;
 	/*box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);*/
 }
-a.navbar-brand {
+a.brand {
 	background: transparent;
-	text-align: center;
-	border-bottom: 0px;
-	padding: 9px 0 10px 0!important;
 	color: white;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .navbar-default .navbar-brand, .navbar a {
@@ -80,3 +80,7 @@ img.avatar {
     background: url("../images/arena_background.png") no-repeat bottom center fixed hsl(0, 0%, 91%);
 
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+ }

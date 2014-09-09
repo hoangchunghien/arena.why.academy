@@ -66,10 +66,15 @@ angular.module('arena.challenge', [
                 })
                 .state('result', {
                     // parent: 'on-game',
-                    url: 'result',
+                    url: '/quiz/{quizID:[0-9]*}/results',
                     resolve: {
-                        gameFSM: function (gameSrv) {
+
+                        gameFSM: function (gameSrv ,$stateParams) {
                             return gameSrv.getGameFSM();
+
+                        },
+                        quizID:function($stateParams){
+                            return $stateParams.quizID;
                         }
                     },
                     templateUrl: '/views/challenge/result.html',

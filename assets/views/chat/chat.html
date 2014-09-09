@@ -1,15 +1,11 @@
-﻿
-    <div id="container" style="width:100%">
+﻿<div class="container arena-container">
 		<div class="box chat chat-full noOverflow">
 
 						<div class="box-header">
-							<h2><!--<i class="fa fa-list"></i>-->Chat</h2>
-							<!--<div class="box-icon">
-								<a href="widgets.html#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>-->
-						</div>
+                			<h2><a href ui-sref="home"><i class="fa fa-arrow-left"></i></a>Chat</h2>        
+            			</div>
 						<div class="contacts">
-							<ul class="list" >
+							<ul class="list">
 								<li ng-repeat="room in rooms" ng-click="joinRoom(room)">
 									<span class="name">{{room.name}}</span>
 								</li>

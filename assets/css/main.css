@@ -37,6 +37,8 @@ a.navbar-brand {
 .box {
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
 	border-radius: 4px;
+	-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 
 .btn {

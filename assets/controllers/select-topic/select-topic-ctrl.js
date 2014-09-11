@@ -23,7 +23,7 @@ app.controller('arena.select-topic.ctrl', [ '$scope', '$state', '$http', 'userSr
         $scope.tagDetails=[
             {"name":"Listening Photographs (Starter)","tags":["7","9","13"]},
             {"name":"Listening Question-Response (Starter)","tags":["7","9","14"]},
-            {"name":"Grammar","tags":["4"]}
+            {"name":"Grammar","tags":["4","9"]}
         ];
 
         var multipleTags=["1"];

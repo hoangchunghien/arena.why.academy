@@ -40,6 +40,7 @@ app.controller('arena.select-topic.ctrl', [ '$scope', '$state', '$http', 'userSr
 
 
             gameSrv.tags=multipleTags;
+            console.log(multipleTags);
             gameSrv.challengeFriends();
         };
 

@@ -62,11 +62,11 @@ function QuizStateMachine(quiz, eventListener) {
             if (question.question.audio_url) {
 
                 question.question.text = "When you hear a question or statement and three responses. You must select the " +
-                    "best response to the question or statement";
+                    "best response to the question or statement.";
                 if (question.question.picture_url) {
 
                     question.question.text = "When you hear the statements, you must select the one statement that" +
-                        " best decribes what you see in the picture";
+                        " best decribes what you see in the picture.";
                 }
 
             }

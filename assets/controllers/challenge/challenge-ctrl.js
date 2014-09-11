@@ -145,11 +145,11 @@ app.controller('arena.play.on-game.ctrl',
             };
             //
             //
-            $scope.clickAnswer = function (index) {
+            $scope.clickAnswer = function (index,userAnswer) {
                 audioSrv.playClickedButton();
                 var event = {};
                 event.name = "question_answer";
-                event.data = {answer: index};
+                event.data = {answer: userAnswer};
                 $scope.lastAnswered = index;
                 quizMachine.consumeEvent(event);
 
@@ -209,6 +209,7 @@ app.controller('arena.play.on-game.ctrl',
                             $scope.results[$scope.currentQuestion] = {'score': '+' + event.data.score, 'correct': 0};
 
                         }
+//
                         $scope.answers[event.data.correctAnswer] = {correct: 1};
                         $scope.lastAnswered = null;
                         $scope.$apply();
@@ -404,7 +405,6 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
 
         var prepareMedal = function (result) {
-
             if (result.point >= 220) {
                 $scope.medalUrl = "/data/image/gold-medal.png";
             } else if (result.point >= 160) {
@@ -414,7 +414,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             } else {
                 $scope.medalUrl = "";
             }
-        }
+
+        };
 
 
         $scope.backHome = function () {
@@ -457,23 +458,20 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
-            var answer = ['A', 'B', 'C', 'D'];
 
             $('#my_modal').modal('show');
             $('#indexReview').text('Câu hỏi ' + index + ':  ')
             $('#questionReview').text(question.question.text);
-            $('#answerReview').text('  ' + answer[question.answer] + ". " + question.content.choices[question.answer].text);
+            $('#answerReview').text('  ' + question.answer);
             if (question.question.audio_url == null) {
                 $scope.answersForReview = question.content.choices;
             }
 
             if (question.question.picture_url) {
                 $scope.questionPictureUrl = question.question.picture_url;
-                $('#answerReview').text('  ' + answer[question.answer]);
             }
             if (question.question.audio_url) {
                 $scope.questionAudioUrl = question.question.audio_url;
-                $('#answerReview').text('  ' + answer[question.answer]);
             }
 
         };

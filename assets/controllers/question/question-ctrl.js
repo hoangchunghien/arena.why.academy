@@ -15,8 +15,8 @@ var app = angular.module('arena.question.controller', [
 ]);
 
 app.controller('arena.question.create.ctrl', [
-    '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'picturesSrv',
-    function ($scope, $state, $http, userSrv, audioSrv, picturesSrv) {
+    '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'picturesSrv', 'apolloSrv',
+    function ($scope, $state, $http, userSrv, audioSrv, picturesSrv, apolloSrv) {
         $scope.question = {};
         $scope.question.content = {};
         $scope.question.content.choices = [];
@@ -101,6 +101,67 @@ app.controller('arena.question.create.ctrl', [
 
         $scope.questionTagsChanged = function (tag) {
             validateQuestionTags();
+        };
+
+        $scope.saveChanged = function () {
+            validateData();
+            if (isScopeValid()) {
+                var question = {};
+                question.type = "multichoice";
+                question.difficulty_level = 5;
+                var tags = generateTagsLink();
+                question.links = {tags: tags};
+                question.content = generateContent();
+                question.answer = generateAnswer();
+                question.question = generateQuestion();
+
+                var questions = [question];
+                var data = {questions: questions};
+                apolloSrv.postQuestion(data, function (data) {
+                    alert(JSON.stringify(data));
+                });
+            }
+        };
+
+        var generateAnswer = function() {
+            return $scope.question.correct.text;
+        };
+
+        var generateContent = function() {
+            var content = {};
+            content.choices = [];
+            for (var i in $scope.question.content.choices) {
+                if ($scope.question.content.choices[i].text !== "") {
+                    var choice = {};
+                    choice.text = $scope.question.content.choices[i].text;
+                    content.choices.push(choice);
+                }
+            }
+            return JSON.stringify(content);
+        };
+
+        var generateQuestion = function() {
+            var question = {};
+            if ($scope.question.text) {
+                question.text = $scope.question.text;
+            }
+            if ($scope.question.pictureUrl) {
+                question.picture_url = $scope.question.pictureUrl;
+            }
+            if ($scope.question.audioUrl) {
+                question.audio_url = $scope.question.audioUrl;
+            }
+            return JSON.stringify(question);
+        };
+
+        var generateTagsLink = function () {
+            var tags = [];
+            for (var i in $scope.question.tags) {
+                if ($scope.question.tags[i]) {
+                    tags.push(i + '');
+                }
+            }
+            return tags;
         };
 
         // TODO load static tag from api server
@@ -231,6 +292,7 @@ app.controller('arena.question.create.ctrl', [
                 && $scope.validated.tagGrp) {
                 return true;
             }
+            return false;
         };
 
         var validateQuestionText = function () {
@@ -424,7 +486,9 @@ app.controller('arena.question.ctrl', [ '$scope', '$state', '$http', 'userSrv', 
 
         };
 
-    }]);
+    }
+]);
+
 app.controller('arena.question-audio.ctrl', [ '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'transferSrv', 'gameSrv',
     function ($scope, $state, $http, userSrv, audioSrv, facebookSrv, apolloSrv, transferSrv, gameSrv) {
 

@@ -11,8 +11,14 @@ angular.module('arena.question', [
                 .state('question', {
                     url: '/question',
                     templateUrl: '/views/main/question.html',
-                    controller: 'arena.question.ctrl'
+                    controller: 'arena.question.create.ctrl'
                 })
+                .state('question-audio', {
+                    url: '/question-audio',
+                    templateUrl: '/views/main/question-audio.html',
+                    controller: 'arena.question-audio.ctrl'
+                })
+
 
         }
     ]);

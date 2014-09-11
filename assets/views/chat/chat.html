@@ -1,15 +1,26 @@
-﻿
-    <div id="container" style="width:100%">
+﻿<div class="container arena-container">
 		<div class="box chat chat-full noOverflow">
 
 						<div class="box-header">
-							<h2><!--<i class="fa fa-list"></i>-->Chat</h2>
-							<!--<div class="box-icon">
-								<a href="widgets.html#" class="btn-close"><i class="fa fa-times"></i></a>
-							</div>-->
-						</div>
+
+
+
+        <div class="nav-no-collapse header-nav">
+            <ul class="nav navbar-nav pull-left">
+							<li class="nav-item">
+			                    <a href ui-sref="home" class="pull-left brand">
+			                    	<i class="fa fa-arrow-left"></i>
+			                        English Arena
+			                    </a>  
+			                    &nbsp;&nbsp;|&nbsp;<span>Chat</span>
+			                </li>
+			            </ul>
+
+
+			</div>
+            			</div>
 						<div class="contacts">
-							<ul class="list" >
+							<ul class="list">
 								<li ng-repeat="room in rooms" ng-click="joinRoom(room)">
 									<span class="name">{{room.name}}</span>
 								</li>

@@ -76,7 +76,7 @@ function QuestionStateMachine(question, eventListener) {
             },
             run: function () {
                 console.log(logInfo + "answering");
-                self.eventListener.handleEventNotification({name: "question_answering", data: {}});
+                self.eventListener.handleEventNotification({name: "question_answering",data: {}});
             }
         },
         answered: {
@@ -115,21 +115,30 @@ function QuestionStateMachine(question, eventListener) {
                 if (self.answer == self.question.answer) {
                     self.correct = true;
                     self.score = Math.floor(self.remainingTime / 1000);
-                    timeForChangeQuestion = 3500;
+                    timeForChangeQuestion = 4500; //3500
                 } else {
                     self.score = 0;
                     self.correct = false;
-                    timeForChangeQuestion = 2000;
+                    timeForChangeQuestion = 3500; //2000
                 }
                 var spentTime=-1;
                 if(self.remainingTime>0){
                     spentTime = self.timeout + 1000 - self.remainingTime;
                 }
 
+                //find index of correct answer
+                var indexOfCorrectAnswer=null;
+                for(var i=0; i<self.question.content.choices.length; i++){
+                    if(self.question.content.choices[i].text==self.question.answer){
+                        indexOfCorrectAnswer=i;
+                        break;
+                    }
+                }
+
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
-                        correct: self.correct, score: self.score, correctAnswer: self.question.answer,
-                        id: self.question.id, time: spentTime}});
+                        correct: self.correct, score: self.score, correctAnswer: indexOfCorrectAnswer,
+                        id: self.question.id, time: spentTime, audio:self.question.question.audio_url}});
 
                 }, 1000);
 
@@ -170,6 +179,7 @@ function QuestionStateMachine(question, eventListener) {
         console.log("run Active timer");
         var data = {};
         data.remainingTime = self.remainingTime;
+
         self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
 
         var countDown = function () {
@@ -181,7 +191,7 @@ function QuestionStateMachine(question, eventListener) {
                 self.eventListener.handleEventNotification({name: "question_time_changed", data: data});
 //                self.eventListener.handleEventNotification({name: EVENTS.RESPONSE.TIMERCHANGED, data:data});
                 if (self.remainingTime <= 0) {
-                    self.consumeEvent({name: "question_timeout"});
+//                    self.consumeEvent({name: "question_timeout"});
                     return;
                 }
                 countDown();

@@ -18,6 +18,7 @@ angular.module('arena.game.service', [
 
         var gameFSM = null;
         var gameData = null;
+        var tags = null;
 
         this.reset = function () {
             this.gameData = gameData = {};
@@ -33,31 +34,48 @@ angular.module('arena.game.service', [
         };
 
 
-
         this.getGameFSM = function () {
             return gameFSM;
         };
 
         this.challengeFriends = function () {
-            gameData.friendIds=getFriendIds(gameData.friends);
-            gameData.tagIds=TAGS;
+            gameData.friendIds = getFriendIds(gameData.friends);
+//            gameData.tagIds=TAGS;
+            gameData.tagIds = self.tags;
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
             gameFSM.startup();
         };
 
-        this.showResult = function (quizId) {
+        this.showResult = function (quizID) {
+//            gameFSM = new GameFSM(gameData, self, apolloSrv, state);
+//
+//            apolloSrv.getQuiz(quizID, "players,results,questions", function (quiz) {
+//                gameFSM.gameData.results = quiz.results;
+//                gameFSM.gameData.players = quiz.players;
+//                gameFSM.gameData.questions = quiz.questions;
+////                state.go('result');
+////                state.go('result',{quizID:quizID});
+//                // callback display
+//
+//            });
+            state.go('result',{quizID:quizID});
+        };
+        this.prepareForShowingResult = function (quizID, callback) {
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
 
-            apolloSrv.getQuiz(quizId,"players,results,questions", function (quiz) {
+            apolloSrv.getQuiz(quizID, "players,results,questions", function (quiz) {
                 gameFSM.gameData.results = quiz.results;
                 gameFSM.gameData.players = quiz.players;
                 gameFSM.gameData.questions = quiz.questions;
-                state.go('result');
+//                state.go('result');
+//                state.go('result',{quizID:quizID});
+                // callback display
+                callback();
             });
         };
 
-        this.acceptChallenge = function (quizId) {
-            gameData.quizId=quizId;
+        this.acceptChallenge = function (quizID) {
+            gameData.quizID = quizID;
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
             gameFSM.startup();
         };
@@ -70,5 +88,6 @@ angular.module('arena.game.service', [
             }
             return friendIds;
         };
+
 
     });

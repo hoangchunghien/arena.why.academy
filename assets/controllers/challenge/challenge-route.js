@@ -28,8 +28,23 @@ angular.module('arena.challenge', [
                         }
                     }
                 })
-                .state('on-game', {
+                .state('loading-resource', {
                     parent: 'init-game',
+                    url: '',
+                    resolve: {
+                        gameFSM: function (gameSrv) {
+                            return gameSrv.getGameFSM();
+                        }
+                    },
+                    views: {
+                        'play@play': {
+                            templateUrl: '/views/challenge/init-game.html',
+                            controller: 'arena.play.loading-resource.ctrl'
+                        }
+                    }
+                })
+                .state('on-game', {
+                    parent: 'loading-resource',
                     url: '',
                     resolve: {
                         gameFSM: function (gameSrv) {
@@ -51,10 +66,15 @@ angular.module('arena.challenge', [
                 })
                 .state('result', {
                     // parent: 'on-game',
-                    url: 'result',
+                    url: '/quiz/{quizID:[0-9]*}/results',
                     resolve: {
-                        gameFSM: function (gameSrv) {
+
+                        gameFSM: function (gameSrv ,$stateParams) {
                             return gameSrv.getGameFSM();
+
+                        },
+                        quizID:function($stateParams){
+                            return $stateParams.quizID;
                         }
                     },
                     templateUrl: '/views/challenge/result.html',

@@ -1,7 +1,6 @@
 
 body {
     background-color: hsl(0, 0%, 91%);
-    background: url("../images/arena_background.png") no-repeat bottom center fixed hsl(0, 0%, 91%);
 }
 
 .arena-container {
@@ -18,7 +17,16 @@ body {
     }
 }
 
-.arena-container .jumbotron {
+.arena-container {
+    
+    
+}
+
+.arena-container .challenge {
+    border-radius: 4px;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: inherit;
     background-color: white;
     box-shadow: 0 0 30px hsla(0, 0%, 0%, 0.08);
 }
@@ -46,10 +54,17 @@ body {
     font-size: 17px;
 }
 .row-question {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
+
+}
+
+.question-content {
     height: 120px;
-    font-size: 23px;
+    font-size: 23px ;
+}
+.question-tutorial {
+    font-size: 20px ;
 }
 
 .row-answer {
@@ -81,5 +96,130 @@ body {
 
 
 .survey {
-    margin: 20px;
+    bottom: 20px;
+    width: 300px;
+    right: 20px;
+    position: absolute;
 }
+
+.challenge-title .name {
+    /*font-weight: bold;*/
+}
+
+.challenge-title .score {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.challenge-title .status {
+    text-align: right;
+    font-style: italic;
+    font-size: small;
+    color: black;
+}
+
+span.indicator {
+    text-decoration: none;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.tempStatBox {
+    width: 80px;
+    padding: 0;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    margin: 0 auto;
+}
+
+.tempStatBox .tempStat {
+position: relative;
+font-size: 28px;
+line-height: 60px;
+-webkit-border-radius: 50em;
+-moz-border-radius: 50em;
+border-radius: 50em;
+border: 10px solid #FFF;
+background: #F9F9F9;
+height: 60px;
+width: 60px;
+text-align: center;
+margin: 0 auto;
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+
+.tempStatBox .tempStat:after {
+content: "";
+top: 0;
+left: 0;
+height: 58px;
+width: 58px;
+position: absolute;
+-webkit-border-radius: 50em;
+-moz-border-radius: 50em;
+border-radius: 50em;
+border: 1px solid #FFF;
+background: rgba(0, 0, 0, 0);
+-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+
+.tempStatBox .tempStat:before {
+content: "";
+top: -10px;
+left: -10px;
+height: 80px;
+width: 80px;
+position: absolute;
+-webkit-border-radius: 50em;
+-moz-border-radius: 50em;
+border-radius: 50em;
+background: rgba(0, 0, 0, 0);
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 0 #FFF;
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 0 #fff;
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 0 #FFF;
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+}
+
+.challenge .progress {
+    height: 8px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+
+.result-question-row {
+    cursor: pointer;
+}
+
+.result-question-row:hover {
+    background-color: #DDD;
+}
+
+.result-question-row .answer-corrected, .result-question-row .answer-wrong {
+    font-size: 40px;
+}
+
+.result-question-row .answer-corrected {
+    color: #78CD51;
+}
+
+.result-question-row .answer-wrong {
+    color: #FF5454;
+}
+
+.result-question-row td {
+    vertical-align: middle;    
+}
+

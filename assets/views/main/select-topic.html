@@ -1,0 +1,77 @@
+<div class="container arena-container">
+    <div class="challenge">
+
+        <div class="row challenge-title">
+            <div class="col-xs-5 row-profile-left alert alert-warning">
+                <div>
+                    <div style="float: left;">
+                        <img class="avatar" ng-src="{{gameData.players.user.picture_url}}">
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="name" ng-bind="gameData.players.user.name" align="left"></div>
+                    <div class="score" ng-bind="gameData.players.user.result.point" align="left"></div>
+                </div>
+            </div>
+            <div class="col-xs-2" align="center">
+                <div class="tempStatBox">
+                        <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
+                        
+                    </div>
+            </div>
+            <div class="col-xs-5 row-profile-right alert alert-warning">
+                <div class="col-md-9">
+                    <div class="name" align="right">Đấu thủ ngẫu nhiên</div>
+                    <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
+                    <div class="status" ng-hide="gameData.players.opponent.result.point"
+                            ng-bind-template="Chưa thi đấu"></div>
+                </div>
+                <div style="float: right;">
+                    <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}"
+                        ng-show="gameData.players.opponent.picture_url"/>
+                    <img class="avatar" ng-src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yo/r/UlIqmHJn-SK.gif"
+                        ng-hide="gameData.players.opponent.picture_url"/>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+
+        <h1>Chọn Chủ Đề thi đấu</h1>
+
+        <br/>
+
+        <div class="row">
+            <div class="col-md-4" align="center">
+                <table class="table table-bordered">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="topic in topics">
+                           <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
+                                <span ng-bind="['TOEIC'][topic]"></span><span class="indicator fa fa-chevron-right"></span>
+                           </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-bordered">
+                    
+
+                    <tbody>
+                        <tr ng-repeat="tagDetail in tagDetails">
+                            <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
+                                <span ng-bind="tagDetail.name"></span>
+                                <span style="float: right;">
+                                    <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

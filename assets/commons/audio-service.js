@@ -16,6 +16,25 @@ angular.module('arena.audio.service', [
         var openOnGameAudio = null;
         var popupAudio = null;
 
+        var questionAudio=null;
+
+        this.createQuestionAudio=function(audio_url){
+//            if (questionAudio == null) {
+//                questionAudio = soundManager.createSound({
+//                    url: audio_url
+//                });
+//            }
+            questionAudio = soundManager.createSound({
+                url: audio_url
+            });
+        };
+
+        this.destroyQuestionAudio=function(){
+            if(questionAudio!=null){
+                questionAudio.destruct();
+                questionAudio = null;
+            }
+        };
 
         this.init = function () {
             if (backgroundAudio == null) {
@@ -63,10 +82,17 @@ angular.module('arena.audio.service', [
         };
 
         this.playAudio = function (url) {
+            var callback = arguments[1];
             var mySound = soundManager.createSound({
-                url: url
+                url: url,
+                onfinish: function() {
+                    if (callback) {
+                        callback();
+                    }
+                }
             });
             mySound.play();
+            return mySound;
         };
 
         this.checkSoundUrl = function (url) {
@@ -133,27 +159,30 @@ angular.module('arena.audio.service', [
         };
         this.playBackgroundAudio = function () {
             backgroundAudio.play();
-        }
+        };
         this.playCountDownAudio = function () {
             countDownAudio.play();
-        }
+        };
         this.playCountDownCoongAudio = function () {
             countDownCoongAudio.play();
-        }
+        };
         this.playWrongAnswerAudio = function () {
             wrongAnswerAudio.play();
-        }
+        };
         this.playCorrectAnswerAudio = function () {
             correctAnswerAudio.play();
-        }
+        };
         this.playClickedButton = function () {
             clickedButton.play();
-        }
+        };
         this.playOpenOnGameAudio = function () {
             openOnGameAudio.play();
-        }
+        };
         this.playPopupAudio = function () {
             popupAudio.play();
-        }
+        };
+        this.playQuestionAudio=function(){
+            questionAudio.play();
+        };
 
     });

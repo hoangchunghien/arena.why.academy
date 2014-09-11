@@ -39,6 +39,8 @@ app.controller('arena.question.create.ctrl', [
         $scope.processing.question = {};
         $scope.processing.answer = {};
         $scope.processing.answer.choices = [];
+        $scope.playing = {};
+        $scope.playing.question = {};
 
         $scope.questionTextChanged = function () {
             validateQuestionText();
@@ -49,7 +51,33 @@ app.controller('arena.question.create.ctrl', [
         };
 
         $scope.questionAudioUrlChanged = function () {
+
             validateQuestionAudioUrl();
+        };
+
+        var sound;
+        $scope.playAudio = function() {
+            $scope.playing.question.audioUrl = true;
+            sound = audioSrv.playAudio($scope.question.audioUrl, function() {
+                $scope.audioStatus = 'stop';
+                $scope.playing.question.audioUrl = false;
+                $scope.$apply();
+            });
+            $scope.audioStatus = 'play';
+        };
+        $scope.stopAudio = function() {
+            sound.destruct();
+            $scope.playing.question.audioUrl = false;
+        };
+        $scope.togglePauseAudio = function() {
+            if ($scope.audioStatus === 'play') {
+                sound.pause();
+                $scope.audioStatus = 'pause';
+            }
+            else if ($scope.audioStatus === 'pause') {
+                sound.play();
+                $scope.audioStatus = 'play';
+            }
         };
 
         $scope.questionChoicesChanged = function (index) {
@@ -322,6 +350,7 @@ app.controller('arena.question.create.ctrl', [
         };
 
         var validateQuestionAudioUrl = function () {
+            $scope.enabled.playAudio = false;
             $scope.error.question.audioUrl = false;
             $scope.validated.question.audioUrl = false;
             if ($scope.question.audioUrl) {
@@ -330,6 +359,7 @@ app.controller('arena.question.create.ctrl', [
                     $scope.error.question.audioUrl = !valid;
                     $scope.processing.question.audioUrl = false;
                     $scope.validated.question.audioUrl = valid;
+                    $scope.enabled.playAudio = valid;
                     validateData();
                     $scope.$apply();
                 });

@@ -266,6 +266,10 @@ ul.subtopics, ul.topics {
     line-height: 40px;
     font-size: 1.3em;
 }
+.subtopic span.label {
+    margin: 2px;
+}
+
 
 .help {
     line-height: 2.2em;

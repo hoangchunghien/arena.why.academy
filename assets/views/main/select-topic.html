@@ -52,7 +52,7 @@
             </div>
             <div class="col-xs-8">
                 <ul class="subtopics">
-                    <li ng-class='info' ng-repeat="tagDetail in tags[0].children"
+                    <li class='subtopic' ng-repeat="tagDetail in tags[0].children"
                         data-toggle="tooltip" data-placement="top" title="{{tagDetail.description}}">
 
 
@@ -61,8 +61,8 @@
                             <button class="btn btn-success" ng-click="chooseTags(tagDetail.ids)">Thách Đấu</button>
                         </span>
                         <br/>
-                        <span class="label label-info" ng-repeat="label in tagDetail.label" ng-bind="label"></span>
-                        <span class="label label-info">Beginner</span>
+                        <span class="label label-info" ng-repeat="label in tagDetail.labels" ng-bind="label"></span>
+                    `
                     </li>
                 </ul>
             </div>

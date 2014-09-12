@@ -5,6 +5,7 @@
 var app = angular.module('arena', [
     'arena.main',
     'arena.api.service',
+    'arena.pictures.service',
     'arena.utils.service',
     'arena.navigation.controller',
     'ui.router',

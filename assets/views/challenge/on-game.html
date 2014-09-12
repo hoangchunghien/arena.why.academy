@@ -25,7 +25,7 @@
             <div class="col-xs-5 row-profile-right alert alert-warning">
                 <div class="col-xs-9">
                     <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
-                    <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
+                    <div class="score" ng-bind="gameData.players.opponent.result.point" align="right"></div>
                     <div class="status" ng-hide="gameData.players.opponent.result.point"
                             ng-bind-template="Chưa thi đấu"></div>
                 </div>
@@ -77,11 +77,9 @@
 
         <div class="row">
             <div ng-repeat="choice in question.content.choices" class="col-md-6">
-                <button type="button" class="btn  choice-button" ng-click="clickAnswer($index)"
+                <button type="button" class="btn  choice-button" ng-click="clickAnswer($index,choice.text)"
                         ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
-                        ng-disabled="disabledButton==true">
-                    <span ng-bind="['A','B','C','D'][$index]" class="badge choice-span"></span>
-                    {{choice.text}}
+                        ng-disabled="disabledButton==true" ng-bind="choice.text">
                 </button>
             </div>
         </div>

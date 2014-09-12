@@ -82,10 +82,17 @@ angular.module('arena.audio.service', [
         };
 
         this.playAudio = function (url) {
+            var callback = arguments[1];
             var mySound = soundManager.createSound({
-                url: url
+                url: url,
+                onfinish: function() {
+                    if (callback) {
+                        callback();
+                    }
+                }
             });
             mySound.play();
+            return mySound;
         };
 
         this.checkSoundUrl = function (url) {

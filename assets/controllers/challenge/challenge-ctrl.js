@@ -26,15 +26,30 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
     function ($scope, $state, audioSrv, apolloSrv, gameFSM) {
         $scope.gameData = gameFSM.gameData;
 
+        var percentageAuioDownloading = [];
+        $scope.percentageDownloading=0;
+
+        if(gameFSM.quiz.questions[0].question.audio_url){
+            for(var i=0; i<gameFSM.quiz.questions.length; i++){
+                percentageAuioDownloading[i]=0;
+            }
+        }
+
+
+
         var checkAudioLoaded = function (audios) {
             if (audios.length <= 0) {
+                $scope.percentageDownloading=100;
                 return true;
             }
             for (var i = 0; i < audios.length; i++) {
                 if (audios[i].readyState != 4) {
                     return false;
+                }else{
+                    percentageAuioDownloading[i]=10;
                 }
             }
+
             return true;
         };
         var checkImageLoaded = function (images) {
@@ -63,6 +78,12 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
 
         var checkResourceLoaded = function () {
             checkResourceLoadedTimer = setTimeout(function () {
+                var percentageDownloading=0;
+               for(var i=0; i< percentageAuioDownloading.length; i++){
+                   percentageDownloading+=percentageAuioDownloading[i];
+               }
+                $scope.percentageDownloading=percentageDownloading;
+                $scope.$apply();
                 if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
                     clearTimeout(checkResourceLoadedTimer);
                     gameFSM.handleEventNotification({name: "loading_resource_finished", data: {}});

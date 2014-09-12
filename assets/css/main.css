@@ -84,3 +84,8 @@ img.avatar {
 .dropdown:hover .dropdown-menu {
     display: block;
  }
+
+ .main-container {
+ 	overflow-y: scroll;
+ 	height: 100vh;
+ }

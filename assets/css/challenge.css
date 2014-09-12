@@ -266,3 +266,8 @@ ul.subtopics, ul.topics {
     line-height: 40px;
     font-size: 1.3em;
 }
+
+.help {
+    line-height: 2.2em;
+    font-size: 1.2em;
+}

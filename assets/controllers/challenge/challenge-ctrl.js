@@ -367,6 +367,10 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             $scope.user = null;
             $scope.opponent = null;
             $scope.userWinOrLose = -1;
+
+            var sound;
+            $scope.playing = {};
+            $scope.playing.question = {};
         };
 
 
@@ -498,8 +502,31 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         };
 
         //replay question audio
-        $scope.replayQuestionAudio = function () {
-            audioSrv.playAudio($scope.questionAudioUrl);
+        $scope.playAudio = function () {
+//            audioSrv.playAudio($scope.questionAudioUrl);
+
+            $scope.playing.question.audioUrl = true;
+            sound = audioSrv.playAudio($scope.questionAudioUrl, function() {
+                $scope.audioStatus = 'stop';
+                $scope.playing.question.audioUrl = false;
+                $scope.$apply();
+            });
+            $scope.audioStatus = 'play';
+        };
+
+        $scope.stopAudio = function() {
+            sound.destruct();
+            $scope.playing.question.audioUrl = false;
+        };
+        $scope.togglePauseAudio = function() {
+            if ($scope.audioStatus === 'play') {
+                sound.pause();
+                $scope.audioStatus = 'pause';
+            }
+            else if ($scope.audioStatus === 'pause') {
+                sound.play();
+                $scope.audioStatus = 'play';
+            }
         };
 
         $scope.stringForAnsweringTime = function (time) {

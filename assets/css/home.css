@@ -51,6 +51,13 @@
     border-left: 1px solid #EEE;
 }
 
+.home .contacts .invite-friend{
+   height: 60px;
+    padding-top: 15px;
+    background-color: #fff;
+    border-top: 2px solid #E4E6EB;
+}
+
 .home .home-main {
     width: 65%;
     float: left;

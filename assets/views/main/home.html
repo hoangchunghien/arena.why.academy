@@ -23,19 +23,19 @@
 
             <ul class="nav navbar-nav pull-right">
                     <!-- start: Notifications Dropdown -->
-                    <li class="dropdown hidden-xs">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown" ui-sref="question">
-                            <i class="fa fa-tasks"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <span class="dropdown-menu-title">Thêm câu hỏi vào Arena</span>
-                            </li>
-                        </ul>
-                    </li>
+                    <!--<li class="dropdown hidden-xs">-->
+                        <!--<a class="btn dropdown-toggle" data-toggle="dropdown" ui-sref="question">-->
+                            <!--<i class="fa fa-tasks"></i>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li>-->
+                                <!--<span class="dropdown-menu-title">Thêm câu hỏi vào Arena</span>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
                     <!-- end: Notifications Dropdown -->
                     <!-- start: Message Dropdown -->
-                    <li class="dropdown hidden-xs">
+<!--                     <li class="dropdown hidden-xs">
                         <a class="btn dropdown-toggle" data-hover="dropdown" href="" ui-sref="chat">
                             <i class="fa fa-envelope"></i>
                         </a>
@@ -64,8 +64,8 @@
                                 <a class="dropdown-menu-sub-footer" ui-sref="chat">View all messages</a>
                             </li>   
                         </ul>
-                    </li>
-                    <!-- end: Message Dropdown -->
+                    </li> -->
+
                     <li class="dropdown hidden-xs">
                         <a class="btn dropdown-toggle" data-hover="dropdown" href="" ng-click="doHelp()">
                             <i class="fa fa-question-circle"></i>
@@ -165,7 +165,7 @@
 
                     </div>
                     <div class="box-content">
-                        <ul  class="dashboard-list">
+                        <ul  class="dashboard-list" style="height: 480px;">
                             <li ng-repeat="friend in friends">
                                 <a >
                                     <img class="avatar" alt="{{friend.name}}" ng-src="{{friend.picture_url}}">
@@ -175,13 +175,20 @@
                                 <!-- Điểm cao: <span>1111</span><br> -->
                                 <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button>
                             </li>
-                            <li align="center">
-                                <br /><br />
-                                <a ng-click="playSoundClickedButton()" href="javascript:{}" class="btn btn-info bt-fs-dialog">Mời bạn bè vào Đấu trường</a>
-                                <!-- <button class="btn btn-sm btn-success" ng-click="challengeFriend(friend)">Thách Đấu</button> -->
-                            </li>
+
+                            <!--<li align="center">-->
+                                <!--<br /><br />-->
+                                <!--<a ng-click="playSoundClickedButton()" href="javascript:{}" class="btn btn-info bt-fs-dialog">Mời bạn bè vào Đấu trường</a>-->
+                              <!---->
+                            <!--</li>-->
 
                         </ul>
+
+                    </div>
+                    <div align="center" class="invite-friend">
+                        <a ng-click="playSoundClickedButton()" href="javascript:{}" class="btn btn-info bt-fs-dialog">
+                            Mời bạn bè vào Đấu trường
+                        </a>
                     </div>
                 </div>
             </div>

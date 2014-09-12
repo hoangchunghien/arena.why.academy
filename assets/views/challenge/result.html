@@ -118,8 +118,21 @@
                         <div align="center">
                             <img id="questionPicture" ng-src="{{questionPictureUrl}}"
                                  ng-show="questionPictureUrl" height="200px;"/><br/>
-                            <button class="btn btn-lg btn-success" ng-click="replayQuestionAudio()"
-                                    ng-show="questionAudioUrl" >Nghe Lại</button>
+                            <!--<button class="btn btn-lg btn-success" ng-click="replayQuestionAudio()"-->
+                                    <!--ng-show="questionAudioUrl" >Nghe Lại</button>-->
+                            <button class="btn btn-success" ng-show="questionAudioUrl">
+                            <!--<span class="input-group-btn" >-->
+                                    <a class="btn" ng-click="playAudio()" ng-show="!playing.question.audioUrl">
+                                        <span class="glyphicon glyphicon-volume-up"
+                                              ></span>
+                                    </a>
+                                    <a class="btn" ng-show="playing.question.audioUrl" ng-click="togglePauseAudio()">
+                                        <span class="glyphicon"
+                                              ng-class="{'glyphicon-pause':audioStatus==='play','glyphicon-play':audioStatus==='pause'}"></span>
+                                    </a>
+                                    <a class="btn" ng-show="playing.question.audioUrl" ng-click="stopAudio()">
+                                        <span class="glyphicon glyphicon-stop"></span></a>
+                            </button>
                         </div>
                     </div>
                     <div class="modal-body" align="left">

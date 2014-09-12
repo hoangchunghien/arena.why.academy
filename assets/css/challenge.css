@@ -118,12 +118,7 @@ body {
     color: black;
 }
 
-span.indicator {
-    text-decoration: none;
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-}
+
 
 .tempStatBox {
     width: 80px;
@@ -223,3 +218,51 @@ box-sizing: content-box;
     vertical-align: middle;    
 }
 
+
+ul.topics li.selected {
+    background-color: #FCF8E3;
+}
+
+ul.topics span.indicator {
+    text-decoration: none;
+    position: absolute;
+    right: -5px;
+    cursor: pointer;
+    display: none;
+    line-height: 40px;
+}
+
+ul.topics li.selected span.indicator {
+    display: inline-block;
+}
+
+ul.subtopics li:hover  {
+    background-color: #FCF8E3;
+}
+
+ul.subtopics li, ul.topics li {
+    list-style-type:none;
+    padding: 10px;
+    border-bottom: 1px solid #EEE;
+    height: 60px;
+}
+
+ul.subtopics, ul.topics {
+    padding: 0px;
+    border: 1px solid #FCF8E3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+
+}
+
+.arena-topics .tag-name {
+    font-weight: bold;
+    padding-bottom: 4px;
+}
+
+.topics .tag-name {
+    line-height: 40px;
+    font-size: 1.3em;
+}

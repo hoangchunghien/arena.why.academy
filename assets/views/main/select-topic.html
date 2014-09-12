@@ -37,42 +37,31 @@
 
         <br/>
 
-        <h1>Chọn Chủ Đề thi đấu</h1>
+        <h1>Chọn Chủ đề thi đấu</h1>
 
         <br/>
 
-        <div class="row">
-            <div class="col-xs-4" align="center">
-                <table class="table table-bordered">
-                    <thead>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="topic in topics">
-                           <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
-                                <span ng-bind="['TOEIC'][topic]"></span><span class="indicator fa fa-chevron-right"></span>
+        <div class="arena-topics row">
+            <div class="col-xs-4">
+                <ul class="topics">
+                   <li class="topic selected" ng-repeat="topic in topics">
+                        <span class="tag-name" ng-bind="['TOEIC'][topic]"></span><span class="indicator fa fa-chevron-right"></span>
 
-                           </td>
-                        </tr>
-                    </tbody>
-                </table>
+                   </li>
+                </ul>
             </div>
             <div class="col-xs-8">
-                <table class="table table-bordered">
-                    
-
-                    <tbody>
-                        <tr ng-repeat="tagDetail in tagDetails">
-                            <td ng-class="{'info':($index%2)==0,'danger':($index%2)!=0}">
-                                <span ng-bind="tagDetail.name"></span>
-                                <span style="float: right;">
-                                    <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>
-                                </span>
-                                <br/>
-                                <span class="label label-success">Beginner</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <ul class="subtopics">
+                    <li ng-class='info' ng-repeat="tagDetail in tagDetails">
+                        <span class="tag-name" ng-bind="tagDetail.name"></span>
+                        <span style="float: right;">
+                            <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>
+                        </span>
+                        <br/>
+                        <span class="label label-info">Listening</span>
+                        <span class="label label-info">Beginner</span>
+                    </li>
+                </ul>
             </div>
         </div>
 

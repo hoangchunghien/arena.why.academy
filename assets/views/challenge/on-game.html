@@ -9,7 +9,7 @@
                 <div style="float: left;">
                     <img class="avatar" ng-src="{{gameData.players.user.picture_url}}">
                 </div>
-                <div class="col-md-9">
+                <div class="col-xs-9">
                     <div class="name" ng-bind="gameData.players.user.name" align="left"></div>
                     <div class="score" ng-bind="gameData.players.user.result.point" align="left"></div>
                 </div>
@@ -23,7 +23,7 @@
                     </div>
             </div>
             <div class="col-xs-5 row-profile-right alert alert-warning">
-                <div class="col-md-9">
+                <div class="col-xs-9">
                     <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
                     <div class="score" ng-bind="gameData.players.opponent.result.point" align=""></div>
                     <div class="status" ng-hide="gameData.players.opponent.result.point"

@@ -82,7 +82,7 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
                for(var i=0; i< percentageAuioDownloading.length; i++){
                    percentageDownloading+=percentageAuioDownloading[i];
                }
-                $scope.percentageDownloading=percentageDownloading;
+                $scope.percentageDownloading=percentageDownloading+"%";
                 $scope.$apply();
                 if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
                     clearTimeout(checkResourceLoadedTimer);

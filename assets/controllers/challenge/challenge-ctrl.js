@@ -82,7 +82,7 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
                for(var i=0; i< percentageAuioDownloading.length; i++){
                    percentageDownloading+=percentageAuioDownloading[i];
                }
-                $scope.percentageDownloading=percentageDownloading;
+                $scope.percentageDownloading=percentageDownloading+"%";
                 $scope.$apply();
                 if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
                     clearTimeout(checkResourceLoadedTimer);
@@ -254,6 +254,10 @@ app.controller('arena.play.on-game.ctrl',
                         audioSrv.createQuestionAudio(event.data.question.question.audio_url);
                         audioSrv.playQuestionAudio();
 
+                        if($scope.question.question.picture_url){
+                            $scope.question.question.picture_url=null;
+                        }
+
                         $scope.currentQuestion++;
                         $scope.question = event.data.question;
                         $scope.answers = [];
@@ -344,6 +348,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         audioSrv.init();
 
 
+        var sound;
         var initialize = function () {
             $scope.profile = userSrv.getProfile();
             $scope.myResult = gameFSM.myResult;
@@ -368,7 +373,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             $scope.opponent = null;
             $scope.userWinOrLose = -1;
 
-            var sound;
+
             $scope.playing = {};
             $scope.playing.question = {};
         };
@@ -484,6 +489,11 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
 
+            $scope.stopAudio();
+            $('#my_modal').modal({
+                backdrop: 'static',
+                keyboard: true
+            });
             $('#my_modal').modal('show');
             $('#indexReview').text('Câu hỏi ' + index + ':  ')
             $('#questionReview').text(question.question.text);
@@ -505,6 +515,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.playAudio = function () {
 //            audioSrv.playAudio($scope.questionAudioUrl);
 
+
             $scope.playing.question.audioUrl = true;
             sound = audioSrv.playAudio($scope.questionAudioUrl, function() {
                 $scope.audioStatus = 'stop';
@@ -515,8 +526,11 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         };
 
         $scope.stopAudio = function() {
-            sound.destruct();
-            $scope.playing.question.audioUrl = false;
+            if(sound){
+                sound.destruct();
+                $scope.playing.question.audioUrl = false;
+            }
+
         };
         $scope.togglePauseAudio = function() {
             if ($scope.audioStatus === 'play') {
@@ -542,8 +556,12 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             });
         };
 
-        $scope.playSoundClickedButton = function () {
+        $scope.closeQuestionModal = function () {
+            $scope.stopAudio();
             audioSrv.playClickedButton();
+            if($scope.questionPictureUrl){
+                $scope.questionPictureUrl=null;
+            }
         };
 
         if (gameFSM == null) {

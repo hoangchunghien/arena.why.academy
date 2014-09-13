@@ -220,7 +220,7 @@ box-sizing: content-box;
 
 
 ul.topics li.selected {
-    background-color: #FCF8E3;
+    background-color: #fabb3d;
 }
 
 ul.topics span.indicator {
@@ -237,19 +237,19 @@ ul.topics li.selected span.indicator {
 }
 
 ul.subtopics li:hover  {
-    background-color: #FCF8E3;
+    background-color: #fabb3d;
 }
 
 ul.subtopics li, ul.topics li {
     list-style-type:none;
     padding: 10px;
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #fabb3d;
     height: 60px;
 }
 
 ul.subtopics, ul.topics {
     padding: 0px;
-    border: 1px solid #FCF8E3;
+    border: 1px solid #fabb3d;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -266,6 +266,10 @@ ul.subtopics, ul.topics {
     line-height: 40px;
     font-size: 1.3em;
 }
+.subtopic span.label {
+    margin: 2px;
+}
+
 
 .help {
     line-height: 2.2em;

@@ -1,3 +1,4 @@
+
 <div class="container arena-container">
     <div class="challenge">
 
@@ -44,22 +45,24 @@
         <div class="arena-topics row">
             <div class="col-xs-4">
                 <ul class="topics">
-                   <li class="topic selected" ng-repeat="topic in topics">
-                        <span class="tag-name" ng-bind="['TOEIC'][topic]"></span><span class="indicator fa fa-chevron-right"></span>
-
+                   <li class="topic selected" ng-repeat="tag in tags">
+                        <span class="tag-name" ng-bind="tag.name"></span><span class="indicator fa fa-chevron-right"></span>
                    </li>
                 </ul>
             </div>
             <div class="col-xs-8">
                 <ul class="subtopics">
-                    <li ng-class='info' ng-repeat="tagDetail in tagDetails">
+                    <li class='subtopic' ng-repeat="tagDetail in tags[0].children"
+                        data-toggle="tooltip" data-placement="top" title="{{tagDetail.description}}">
+
+
                         <span class="tag-name" ng-bind="tagDetail.name"></span>
                         <span style="float: right;">
-                            <button class="btn btn-success" ng-click="chooseTags(tagDetail.tags)">Thách Đấu</button>
+                            <button class="btn btn-success" ng-click="chooseTags(tagDetail.ids)">Thách Đấu</button>
                         </span>
                         <br/>
-                        <span class="label label-info">Listening</span>
-                        <span class="label label-info">Beginner</span>
+                        <span class="label label-info" ng-repeat="label in tagDetail.labels" ng-bind="label"></span>
+                    `
                     </li>
                 </ul>
             </div>
@@ -67,3 +70,4 @@
 
     </div>
 </div>
+

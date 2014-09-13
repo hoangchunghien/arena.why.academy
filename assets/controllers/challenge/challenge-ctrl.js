@@ -254,6 +254,10 @@ app.controller('arena.play.on-game.ctrl',
                         audioSrv.createQuestionAudio(event.data.question.question.audio_url);
                         audioSrv.playQuestionAudio();
 
+                        if($scope.question.question.picture_url){
+                            $scope.question.question.picture_url=null;
+                        }
+
                         $scope.currentQuestion++;
                         $scope.question = event.data.question;
                         $scope.answers = [];
@@ -555,6 +559,9 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.closeQuestionModal = function () {
             $scope.stopAudio();
             audioSrv.playClickedButton();
+            if($scope.questionPictureUrl){
+                $scope.questionPictureUrl=null;
+            }
         };
 
         if (gameFSM == null) {

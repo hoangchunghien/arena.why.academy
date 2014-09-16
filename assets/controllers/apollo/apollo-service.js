@@ -190,7 +190,18 @@ angular.module('arena.apollo.service', [
             self.getPath = function (urlPath, params, callback){
 
             }
-        }
+        };
+
+        this.getAllQuestions=function(callback){
+            var params={
+                "q[type]":"multichoice",
+                "sort[]":"-created_at",
+                "q[user.id]":"212"
+            };
+            self.getPath("v2/questions", params, function (data) {
+                callback(data.questions);
+            });
+        };
 
 
     }]);

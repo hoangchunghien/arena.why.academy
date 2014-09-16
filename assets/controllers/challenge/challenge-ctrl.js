@@ -488,6 +488,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
+            $scope.questionAudioForReview=audioSrv.getAudioForReview();
 
             $scope.stopAudio();
             $('#my_modal').modal({
@@ -511,37 +512,46 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         };
 
+        $scope.playAudio=function(){
+            audioSrv.playAudioForReview($scope.questionAudioUrl);
+        };
+        $scope.stopAudio=function(){
+            audioSrv.stopAudioForReview();
+        };
+        $scope.togglePauseAudio=function(){
+            audioSrv.togglePauseAudioForReview();
+        };
         //replay question audio
-        $scope.playAudio = function () {
-//            audioSrv.playAudio($scope.questionAudioUrl);
-
-
-            $scope.playing.question.audioUrl = true;
-            sound = audioSrv.playAudio($scope.questionAudioUrl, function() {
-                $scope.audioStatus = 'stop';
-                $scope.playing.question.audioUrl = false;
-                $scope.$apply();
-            });
-            $scope.audioStatus = 'play';
-        };
-
-        $scope.stopAudio = function() {
-            if(sound){
-                sound.destruct();
-                $scope.playing.question.audioUrl = false;
-            }
-
-        };
-        $scope.togglePauseAudio = function() {
-            if ($scope.audioStatus === 'play') {
-                sound.pause();
-                $scope.audioStatus = 'pause';
-            }
-            else if ($scope.audioStatus === 'pause') {
-                sound.play();
-                $scope.audioStatus = 'play';
-            }
-        };
+//        $scope.playAudio = function () {
+////            audioSrv.playAudio($scope.questionAudioUrl);
+//
+//
+//            $scope.playing.question.audioUrl = true;
+//            sound = audioSrv.playAudio($scope.questionAudioUrl, function() {
+//                $scope.audioStatus = 'stop';
+//                $scope.playing.question.audioUrl = false;
+//                $scope.$apply();
+//            });
+//            $scope.audioStatus = 'play';
+//        };
+//
+//        $scope.stopAudio = function() {
+//            if(sound){
+//                sound.destruct();
+//                $scope.playing.question.audioUrl = false;
+//            }
+//
+//        };
+//        $scope.togglePauseAudio = function() {
+//            if ($scope.audioStatus === 'play') {
+//                sound.pause();
+//                $scope.audioStatus = 'pause';
+//            }
+//            else if ($scope.audioStatus === 'pause') {
+//                sound.play();
+//                $scope.audioStatus = 'play';
+//            }
+//        };
 
         $scope.stringForAnsweringTime = function (time) {
             var timeString = (time / 1000).toFixed(1).replace(/\.0$/, '');

@@ -1,0 +1,62 @@
+
+<div class="container arena-container">
+
+    <div class="box noOverflow">
+        <div class="box-header">
+            <div class="nav-no-collapse header-nav">
+                <ul class="nav navbar-nav pull-left">
+                    <li class="nav-item">
+                        <a href ui-sref="home" class="pull-left brand">
+                            <i class="fa fa-arrow-left"></i>
+                            English Arena
+                        </a>
+                        &nbsp;&nbsp;|&nbsp;<span>Đóng góp cộng đồng</span>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+        <div class="box-content">
+            <div align="center">
+                <h1>Câu hỏi</h1>
+            </div>
+
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <td>ID</td>
+                        <td>Câu hỏi</td>
+                        <td>Tác giả</td>
+                        <td>Ngày tạo</td>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="question in questions">
+                            <td ng-bind="question.id" align="center"></td>
+                            <td align="center">
+                                <div class="row" ng-show="question.question.text">
+                                    <div ng-bind="question.question.text"></div>
+                                    <div>
+                                        <ur ng-repeat="answer in question.content.choices">
+                                            <li ng-bind="answer.text"></li>
+                                        </ur>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="question.question.picture_url">
+                                    <img ng-src="{{question.question.picture_url}}" height="100px;">
+                                </div>
+                                <div class="row" ng-show="question.question.aduio_url">
+                                    <button class="btn">Play</button>
+                                </div>
+                            </td>
+                            <td ng-bind="question.user.name"></td>
+                            <td ng-bind="question.created_at"></td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

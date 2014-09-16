@@ -6,7 +6,7 @@ angular.module('arena.audio.service', [
 
 ])
     .service('audioSrv', function () {
-
+        var self=this;
         var backgroundAudio = null;
         var countDownAudio = null;
         var countDownCoongAudio = null;
@@ -17,6 +17,11 @@ angular.module('arena.audio.service', [
         var popupAudio = null;
 
         var questionAudio=null;
+        var questionAudioForReview={
+            "audio":null,
+            "playing":null,
+            "audioStatus":null
+        };
 
         this.createQuestionAudio=function(audio_url){
 //            if (questionAudio == null) {
@@ -184,5 +189,35 @@ angular.module('arena.audio.service', [
         this.playQuestionAudio=function(){
             questionAudio.play();
         };
+
+        this.playAudioForReview = function (audioUrl) {
+            questionAudioForReview.playing=true;
+            questionAudioForReview.audio = self.playAudio(audioUrl, function() {
+                questionAudioForReview.audioStatus = 'stop';
+                questionAudioForReview.playing= false;
+            });
+            questionAudioForReview.audioStatus = 'play';
+        };
+
+        this.stopAudioForReview = function() {
+            if(questionAudioForReview.audio){
+                questionAudioForReview.audio.destruct();
+                questionAudioForReview.playing = false;
+            }
+
+        };
+        this.togglePauseAudioForReview = function() {
+            if (questionAudioForReview.audioStatus === 'play') {
+                questionAudioForReview.audio.pause();
+                questionAudioForReview.audioStatus = 'pause';
+            }
+            else if (questionAudioForReview.audioStatus === 'pause') {
+                questionAudioForReview.audio.play();
+                questionAudioForReview.audioStatus = 'play';
+            }
+        };
+        this.getAudioForReview=function(){
+            return questionAudioForReview;
+        }
 
     });

@@ -1,24 +1,25 @@
 /**
  * Created by VanLinh on 8/18/2014.
  */
-angular.module('arena.question', [
+angular.module('arena.questions', [
     'ui.router'
 ])
     .config([
         '$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             $stateProvider
-                .state('question', {
-                    url: '/question',
-                    templateUrl: '/views/main/question.html',
-                    controller: 'arena.question.create.ctrl'
-                })
-                .state('question-audio', {
-                    url: '/question-audio',
-                    templateUrl: '/views/main/question-audio.html',
-                    controller: 'arena.question-audio.ctrl'
-                })
 
+                .state('questions', {
+                    url: '/questions',
+                    templateUrl: '/views/questions/questions.html',
+                    controller: 'arena.questions.home.ctrl'
+                })
+                .state('question-create', {
+                    parent: 'questions',
+                    url: '/new',
+                    templateUrl: '/views/questions/question-create.html',
+                    controller: 'arena.questions.create.ctrl'
+                })
 
         }
     ]);

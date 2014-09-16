@@ -19,8 +19,8 @@ var app = angular.module('arena', [
     'arena.apollo.service',
     'arena.game.service',
     'arena.transfer.service',
-    'arena.question',
-    'arena.question.controller',
+    'arena.questions',
+    'arena.questions.controller',
     'arena.select-topic',
     'arena.select-topic.controller'
 ]);

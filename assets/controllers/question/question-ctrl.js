@@ -27,7 +27,6 @@ app.controller('arena.questions.home.ctrl', [
                 questions[i].content=JSON.parse(questions[i].content);
             }
             $scope.questions=questions;
-
         })
 
     }

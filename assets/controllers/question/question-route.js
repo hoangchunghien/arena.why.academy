@@ -15,7 +15,6 @@ angular.module('arena.questions', [
                     controller: 'arena.questions.home.ctrl'
                 })
                 .state('question-create', {
-                    parent: 'questions',
                     url: '/new',
                     templateUrl: '/views/questions/question-create.html',
                     controller: 'arena.questions.create.ctrl'

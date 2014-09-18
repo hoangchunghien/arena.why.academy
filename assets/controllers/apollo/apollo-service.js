@@ -187,20 +187,30 @@ angular.module('arena.apollo.service', [
         };
 
         this.getQuestionTags=function(callback){
-            self.getPath = function (urlPath, params, callback){
-
-            }
+            self.getPath("v2/tags",null,function (data) {
+                callback(data.tags);
+            });
         };
 
         this.getAllQuestions=function(callback){
             var params={
                 "q[type]":"multichoice",
                 "sort[]":"-created_at",
-                "q[user.id]":"212"
+                "fields[]":"rates_count"
             };
             self.getPath("v2/questions", params, function (data) {
                 callback(data.questions);
             });
+        };
+        this.rateUp=function(questionId){
+            self.postPath('v2/questions/'+questionId+'/rates/up',null,function(){
+
+            })
+        };
+        this.rateDown=function(questionId){
+            self.postPath('v2/questions/'+questionId+'/rates/down',null,function(){
+
+            })
         };
 
 

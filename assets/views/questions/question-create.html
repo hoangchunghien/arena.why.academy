@@ -35,7 +35,7 @@
                             <div class="controls">
                                 <input type="text" id="questionText" class="form-control"
                                        ng-blur="questionTextChanged()"
-                                       ng-model="question.text">
+                                       ng-model="question.question.text">
                             </div>
                         </div>
                         <div class="form-group"
@@ -48,7 +48,7 @@
                             <div class="controls">
                                 <input type="text" id="questionPicture" class="form-control"
                                        ng-blur="questionPictureUrlChanged()"
-                                       ng-model="question.pictureUrl">
+                                       ng-model="question.question.picture_url">
                             </div>
                         </div>
                         <div class="form-group"
@@ -61,7 +61,7 @@
                             <div class="controls" ng-class="{'input-group':enabled.playAudio}">
                                 <input type="text" id="questionAudio" class="form-control"
                                        ng-blur="questionAudioUrlChanged()"
-                                       ng-model="question.audioUrl">
+                                       ng-model="question.question.audio_url">
                                 <span class="input-group-btn" ng-show="enabled.playAudio">
                                     <a class="btn" ng-click="playAudio()" ng-show="!playing.question.audioUrl">
                                         <span class="glyphicon"
@@ -124,8 +124,11 @@
                         <div class="controls">
                             <div ng-repeat="tag in static.tags">
                                 <div class="col-md-4">
-                                    <input type="checkbox" ng-model="question.tags[tag.id]"
-                                           ng-change="questionTagsChanged(tag)">
+                                    <!--<input type="checkbox" ng-model="question.link.tags[tag.id]"-->
+                                           <!--ng-change="questionTagsChanged(tag)">-->
+                                    <input type="checkbox" ng-model="question.links.tags[tag.id]"
+                                        ng-change="questionTagsChanged(tag)">
+
                                     <span ng-bind="tag.name"></span>
                                     <br/>
                                 </div>

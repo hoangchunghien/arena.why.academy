@@ -17,15 +17,20 @@ angular.module('arena.questions', [
                 .state('question-create', {
                     url: '/question/new',
                     templateUrl: '/views/questions/question-create.html',
-                    controller: 'arena.questions.create.ctrl'
+                    controller: 'arena.questions.create.ctrl',
+                    resolve: {
+                        viewData:function(){
+                            return {'mode':'new'};
+                        }
+                    }
                 })
                 .state('question-edit', {
                     url: '/questions/{questionId:[0-9]*}/edit',
                     templateUrl: '/views/questions/question-create.html',
-                    controller: 'arena.questions.edit.ctrl',
+                    controller: 'arena.questions.create.ctrl',
                     resolve: {
-                        questionId:function($stateParams){
-                            return $stateParams.questionId;
+                        viewData:function($stateParams){
+                            return {'mode':'edit','questionId':$stateParams.questionId};
                         }
                     }
 

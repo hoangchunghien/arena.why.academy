@@ -15,9 +15,20 @@ angular.module('arena.questions', [
                     controller: 'arena.questions.home.ctrl'
                 })
                 .state('question-create', {
-                    url: '/new',
+                    url: '/question/new',
                     templateUrl: '/views/questions/question-create.html',
                     controller: 'arena.questions.create.ctrl'
+                })
+                .state('question-edit', {
+                    url: '/questions/{questionId:[0-9]*}/edit',
+                    templateUrl: '/views/questions/question-create.html',
+                    controller: 'arena.questions.edit.ctrl',
+                    resolve: {
+                        questionId:function($stateParams){
+                            return $stateParams.questionId;
+                        }
+                    }
+
                 })
 
         }

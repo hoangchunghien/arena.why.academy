@@ -3,9 +3,9 @@
  */
 angular.module('arena.apollo.service', [
     'arena.users.service'
-    ,'arena.api.service'
+    , 'arena.api.service'
 ])
-    .service('apolloSrv',  ['$http', 'userSrv','apiSrv', function ($http, userSrv, apiSrv) {
+    .service('apolloSrv', ['$http', 'userSrv', 'apiSrv', function ($http, userSrv, apiSrv) {
 
         var baseUrl = apiSrv.serverPath();
         var self = this;
@@ -16,7 +16,7 @@ angular.module('arena.apollo.service', [
             if (params === null) params = {};
             params.app_id = '2';
 
-            ApolloAnalytics.track("GET Start", {"url":urlPath});
+            ApolloAnalytics.track("GET Start", {"url": urlPath});
             $http({
                 method: 'GET',
                 url: url,
@@ -26,9 +26,10 @@ angular.module('arena.apollo.service', [
                 }
             }).then(function (resp) {
                 if (resp) {
-                    ApolloAnalytics.track("GET Callback", {"resp":resp});
-                };
-                
+                    ApolloAnalytics.track("GET Callback", {"resp": resp});
+                }
+                ;
+
                 console.log(resp);
                 callback(resp.data);
             });
@@ -37,7 +38,7 @@ angular.module('arena.apollo.service', [
 
         this.postPath = function (urlPath, params, callback) {
 
-            ApolloAnalytics.track("GET Start", {"url":urlPath});
+            ApolloAnalytics.track("GET Start", {"url": urlPath});
 
             var url = baseUrl + urlPath;
             if (params === null) params = {};
@@ -53,8 +54,9 @@ angular.module('arena.apollo.service', [
             }).then(function (resp) {
 
                 if (resp) {
-                    ApolloAnalytics.track("GET Callback", {"resp":resp});
-                };
+                    ApolloAnalytics.track("GET Callback", {"resp": resp});
+                }
+                ;
                 console.log(resp);
                 callback(resp.data);
             });
@@ -73,7 +75,7 @@ angular.module('arena.apollo.service', [
             var params = [];
             params.include = include;
             self.getPath("quiz/" + quizID, params, function (data) {
-                var quiz=data.quiz;
+                var quiz = data.quiz;
                 for (var i = 0; i < quiz.questions.length; i++) {
                     var question = quiz.questions[i];
                     question.question = JSON.parse(question.question);
@@ -82,7 +84,7 @@ angular.module('arena.apollo.service', [
                 }
 
                 prepareQuizResult(quiz);
-                
+
                 callback(quiz);
             });
         };
@@ -93,7 +95,7 @@ angular.module('arena.apollo.service', [
             params.friends = friendsID;
             params.tags = tags;
             self.postPath("v2/quiz/challenge", params, function (data) {
-                var quiz=data.quiz;
+                var quiz = data.quiz;
                 for (var i = 0; i < quiz.questions.length; i++) {
                     var question = quiz.questions[i];
                     question.question = JSON.parse(question.question);
@@ -125,26 +127,28 @@ angular.module('arena.apollo.service', [
 
             var userResult = resultForUserID(quizData, quizData.players.user.id);
             if (userResult) {
-                quizData.players.user.result = userResult;    
-            };
-            
+                quizData.players.user.result = userResult;
+            }
+            ;
+
             var opponentResult = resultForUserID(quizData, quizData.players.opponent.id);
             if (opponentResult) {
-                quizData.players.opponent.result = opponentResult;    
-            };
+                quizData.players.opponent.result = opponentResult;
+            }
+            ;
         };
 
         var resultForUserID = function (quizData, userID) {
-            for (var j= quizData.results.length - 1; j >= 0; j--) {
+            for (var j = quizData.results.length - 1; j >= 0; j--) {
                 var result = quizData.results[j];
                 if (result.user_id == userID) {
                     return result;
-                };
-            };
+                }
+                ;
+            }
+            ;
             return null;
         }
-
-
 
 
         this.getAppActivities = function (userID, read, me, callback) {
@@ -155,24 +159,25 @@ angular.module('arena.apollo.service', [
                 var activities = data.app_activities;
 
                 var temporaryFilteredAppActivities = [];
-                for(var i=0; i<activities.length; i++){
-                    var activity=activities[i];
-                    var metadata=activity.metadata;
+                for (var i = 0; i < activities.length; i++) {
+                    var activity = activities[i];
+                    var metadata = activity.metadata;
 
-                    if(metadata){
+                    if (metadata) {
                         // console.log(activity);
-                        activity.metadata=JSON.parse(metadata);
-                        activity.is_finished=activity.metadata.is_finished;
+                        activity.metadata = JSON.parse(metadata);
+                        activity.is_finished = activity.metadata.is_finished;
                     }
 
                     if (activity.action == 'challenge') {
                         temporaryFilteredAppActivities.push(activity);
-                    };
+                    }
+                    ;
 
 
                     // console.log(activity.user.name + ' ' + activity.receiver.name + ' ' + activity.action + ' ' + (activity.is_finished?'is_finished':'not_finished'));
 
-                    
+
                 }
 
                 callback(temporaryFilteredAppActivities);
@@ -186,31 +191,43 @@ angular.module('arena.apollo.service', [
             });
         };
 
-        this.getQuestionTags=function(callback){
-            self.getPath("v2/tags",null,function (data) {
+        this.getQuestionTags = function (callback) {
+            self.getPath("v2/tags", null, function (data) {
                 callback(data.tags);
             });
         };
 
-        this.getAllQuestions=function(callback){
-            var params={
-                "q[type]":"multichoice",
-                "sort[]":"-created_at",
-                "fields[]":"rates_count"
+        this.getAllQuestions = function (callback) {
+            var params = {
+                "q[type]": "multichoice",
+                "sort[]": "id",
+                "fields[]": "rates_count"
             };
             self.getPath("v2/questions", params, function (data) {
                 callback(data.questions);
             });
         };
-        this.rateUp=function(questionId){
-            self.postPath('v2/questions/'+questionId+'/rates/up',null,function(){
+        this.rateUp = function (questionId) {
+            self.postPath('v2/questions/' + questionId + '/rates/up', null, function () {
 
             })
         };
-        this.rateDown=function(questionId){
-            self.postPath('v2/questions/'+questionId+'/rates/down',null,function(){
+        this.rateDown = function (questionId) {
+            self.postPath('v2/questions/' + questionId + '/rates/down', null, function () {
 
             })
+        };
+        this.getQuestion = function (questionId, callback) {
+            var params = {
+                "include": "lesson,tags"
+            };
+            self.getPath("v2/questions" + '/' + questionId, params, function (data) {
+                var question = data.questions[0];
+                question.question = JSON.parse(question.question);
+                question.content = JSON.parse(question.content);
+//                question.links = JSON.parse(question.links);
+                callback(question);
+            });
         };
 
 

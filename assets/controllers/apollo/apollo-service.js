@@ -62,12 +62,30 @@ angular.module('arena.apollo.service', [
             });
         };
 
-        this.getFriends = function (userID, callback) {
-            self.getPath("users/" + userID + "/friends", null, function (data) {
-                var friends = data.user_friends;
-                callback(friends);
-            });
+        this.patchPath = function (urlPath, params, callback) {
 
+            ApolloAnalytics.track("GET Start", {"url": urlPath});
+
+            var url = baseUrl + urlPath;
+            if (params === null) params = {};
+            params.app_id = '2';
+            $http({
+                method: 'PATCH',
+                url: url,
+                data: JSON.stringify(params),
+                headers: {
+                    'Content-Type': 'application/vnd.api+json; charset=utf-8',
+                    'Access-Token': userSrv.getToken().value
+                }
+            }).then(function (resp) {
+
+                if (resp) {
+                    ApolloAnalytics.track("GET Callback", {"resp": resp});
+                }
+                ;
+                console.log(resp);
+                callback(resp.data);
+            });
         };
 
         // path-format : quiz/{id} method :get
@@ -228,6 +246,13 @@ angular.module('arena.apollo.service', [
 //                question.links = JSON.parse(question.links);
                 callback(question);
             });
+        };
+
+
+        this.editQuestion = function (questionId, params, callback) {
+            self.patchPath('v2/questions/'+questionId,params,function(data){
+                callback(data);
+            })
         };
 
 

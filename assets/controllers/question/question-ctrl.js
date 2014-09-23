@@ -168,19 +168,33 @@ app.controller('arena.questions.create.ctrl', [
             $scope.question.links = {};
             $scope.question.links.tags = [];
         } else {
-            //
             apolloSrv.getQuestion(viewData.questionId, function (question) {
+                $scope.question = {};
+                $scope.question.question = {};
+                $scope.question.content = {};
+                $scope.question.content.choices = [];
+                $scope.question.links = {};
 
                 $scope.question = question;
-                $scope.$apply();
+
+                $scope.question.correct = {};
+                $scope.question.correct.text = question.answer;
+
+                $scope.originalTags = question.links.tags;
+                $scope.question.links.tags = [];
+
+
+                loadQuestionAnswerSelector();
+                initAnswer();
+                initTags();
+                validateAllContentForEditQuestion();
+
             });
 
         }
 
 
-        /*
-         * For validated data, use this variable to tracking which question field had validated to prevent re-validate it
-         * */
+
         $scope.validated = {};
         $scope.error = {};
         $scope.validated.question = {};
@@ -197,6 +211,15 @@ app.controller('arena.questions.create.ctrl', [
         $scope.processing.answer.choices = [];
         $scope.playing = {};
         $scope.playing.question = {};
+
+        var validateAllContentForEditQuestion=function(){
+            validateQuestionPictureUrl();
+            validateQuestionAudioUrl();
+            validateAnswerGroup();
+            validateQuestionAnswer();
+            validateQuestionContent();
+            validateQuestionTags();
+        };
 
         $scope.questionTextChanged = function () {
             validateQuestionText();
@@ -265,6 +288,7 @@ app.controller('arena.questions.create.ctrl', [
         $scope.questionChoiceRemove = function (index) {
             if ($scope.question.correct.text === $scope.question.content.choices[index].text)
                 $scope.question.correct = {};
+
             $scope.question.content.choices.splice(index, 1);
             loadQuestionAnswerSelector();
             validateQuestionAnswer();
@@ -284,6 +308,7 @@ app.controller('arena.questions.create.ctrl', [
         };
 
         $scope.questionTagsChanged = function (tag) {
+
             validateQuestionTags();
         };
 
@@ -316,8 +341,32 @@ app.controller('arena.questions.create.ctrl', [
 
         };
 
-        var editQuestion = function () {
 
+        var editQuestion = function () {
+//            var content = JSON.stringify($scope.question.content);
+//            var question = JSON.stringify($scope.question.question);
+            var content = generateContent();
+            var question = generateQuestion();
+            var answer = generateAnswer();
+
+            var oldTags = $scope.originalTags;
+            var newTags = generateTagsLink();
+
+            var params = [];
+            params = [
+                { "op": "replace", "path": "/questions/0/question", "value": question },
+                { "op": "replace", "path": "/questions/0/content", "value": content },
+                { "op": "replace", "path": "/questions/0/answer", "value": answer }
+            ];
+            for (var i = 0; i < oldTags.length; i++) {
+                params.push({ "op": "remove", "path": "/questions/0/links/tags/" + oldTags[i] });
+            }
+            for (var i = 0; i < newTags.length; i++) {
+                params.push({ "op": "add", "path": "/questions/0/links/tags/-", "value": newTags[i] });
+            }
+            apolloSrv.editQuestion(viewData.questionId, params, function (data) {
+                    alert('Edit successfully !');
+            });
         };
 
         var generateAnswer = function () {
@@ -425,11 +474,25 @@ app.controller('arena.questions.create.ctrl', [
 //                name: "question-response"
 //            }
 //        ];
-
+        function initAnswer() {
+            for (var i in $scope.question.content.choices) {
+                if ($scope.question.answer === $scope.question.content.choices[i].text) {
+                    $scope.question.correct = $scope.question.content.choices[i];
+                }
+            }
+        }
+        var initTags = function () {
+            for (var i = 0; i < $scope.originalTags.length; i++) {
+                var tag = $scope.originalTags[i];
+                $scope.question.links.tags[tag] = true;
+            }
+        };
         var initialize = function () {
-            $scope.question.content.choices = [
-                {text: ''}
-            ];
+            if (viewData.mode == 'new') {
+                $scope.question.content.choices = [
+                    {text: ''}
+                ];
+            }
         };
 
         var validateData = function () {
@@ -564,6 +627,8 @@ app.controller('arena.questions.create.ctrl', [
             $scope.validated.answer.correct = false;
             $scope.error.answer.correct = false;
 
+            console.log($scope.question.correct);
+
             if ($scope.question.correct.text) {
                 $scope.validated.answer.correct = true;
                 $scope.error.answer.correct = false;
@@ -576,10 +641,13 @@ app.controller('arena.questions.create.ctrl', [
         };
 
         var validateQuestionTags = function () {
+
+
             $scope.validated.question.tags = false;
             $scope.error.question.tags = false;
 
             var validated = false;
+
             for (var i in $scope.question.links.tags) {
                 if ($scope.question.links.tags[i] == true) {
                     $scope.validated.question.tags = true;
@@ -590,6 +658,7 @@ app.controller('arena.questions.create.ctrl', [
             if (!validated) {
                 $scope.error.question.tags = true;
             }
+
             validateData();
         };
 

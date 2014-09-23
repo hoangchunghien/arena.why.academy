@@ -105,10 +105,12 @@
                              ng-class="{'has-success':validated.answer.correct, 'has-error':error.answer.correct}">
                             <label class="control-label" for="correctAnswer">Correct</label>
 
+                            <!--ng-options="choice.text for choice in static.answers"-->
                             <div class="controls">
                                 <select id="correctAnswer" class="form-control"
-                                        ng-options="choice.text for choice in static.answers"
-                                        ng-model="question.correct" ng-change="questionAnswerChanged()">
+                                        ng-model="question.correct" ng-change="questionAnswerChanged()"
+                                        ng-options="choice.text for choice in static.answers">
+
                                 </select>
                             </div>
                         </div>
@@ -124,11 +126,8 @@
                         <div class="controls">
                             <div ng-repeat="tag in static.tags">
                                 <div class="col-md-4">
-                                    <!--<input type="checkbox" ng-model="question.link.tags[tag.id]"-->
-                                           <!--ng-change="questionTagsChanged(tag)">-->
                                     <input type="checkbox" ng-model="question.links.tags[tag.id]"
                                         ng-change="questionTagsChanged(tag)">
-
                                     <span ng-bind="tag.name"></span>
                                     <br/>
                                 </div>

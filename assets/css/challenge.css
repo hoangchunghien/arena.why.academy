@@ -275,3 +275,18 @@ ul.subtopics, ul.topics {
     line-height: 2.2em;
     font-size: 1.2em;
 }
+
+.votes-count {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.questions-time {
+    font-style: italic;
+    display: block;
+}
+
+.questions-user {
+    font-weight: bold;
+    display: block;
+}

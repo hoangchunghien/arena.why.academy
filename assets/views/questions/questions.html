@@ -18,33 +18,36 @@
             </div>
         </div>
         <div class="box-content">
-            <div align="right">
-                <button class="btn btn-success" ng-click="createNewQuestion()">Đóng góp câu hỏi mới</button>
-            </div>
+            <br/>
             <div align="center">
-                <h1>Câu hỏi</h1>
+                <button class="btn btn-success" ng-click="createNewQuestion()">Đóng góp Câu hỏi mới</button>
+            </div>
+            <br/>
+            <div align="center">
+                <h1>Đánh giá các Câu hỏi từ Cộng đồng</h1>
             </div>
 
             <div>
                 <table class="table table-bordered">
-                    <thead align="center">
+<!--                     <thead align="center">
                         <td>ID</td>
                         <td>Câu hỏi</td>
                         <td>Tác giả</td>
                         <td>Ngày tạo</td>
-                    </thead>
+                    </thead> -->
                     <tbody>
                         <tr ng-repeat="question in questions" ng-click="clickRow($index)">
-                            <td ng-bind="question.id" align="center"></td>
+                            <td align="center"><span class="votes-count" ng-bind="question.rates_count"></span> votes</td>
                             <td align="left" style="padding: 0% 5% 0% 5%;">
+                            <div>
                                 <div class="row" ng-show="question.question.text">
-                                <div ng-bind="question.question.text"></div>
-                                <div>
-                                    <ur ng-repeat="answer in question.content.choices">
-                                        <li ng-bind="answer.text"></li>
-                                    </ur>
+                                    <div ng-bind="question.question.text"></div>
+                                    <div>
+                                        <ur ng-repeat="answer in question.content.choices">
+                                            <li ng-bind="answer.text"></li>
+                                        </ur>
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="row" ng-hide="question.question.text" ng-bind-template="Question audio">
                                 </div>
 
@@ -53,9 +56,11 @@
                                 </div>
 
                                 <div class="row" ng-bind-template="Đáp án đúng : {{question.answer}}"></div>
+
+                            </div>
                             </td>
-                            <td ng-bind="question.user.name"></td>
-                            <td ng-bind="question.created_at"></td>
+                            <td><span ng-bind="question.user.name" class="questions-user"></span>
+                                <span ng-bind="timeAgo(question.created_at)" class="questions-time"></span></td>
 
                         </tr>
                     </tbody>
@@ -69,7 +74,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" align="left">
-                    <label class="label label-primary" id="indexReview"></label>
+                    <label class="h2" id="indexReview"></label>
+
+                </div>
+                <div class="modal-body" align="left">
                     <div id="questionReview"></div>
                     <div ng-show="answersForReview">
                         <ul ng-repeat="answer in answersForReview">
@@ -97,24 +105,28 @@
                             </a>
                         </button>
                     </div>
-                    <div align="left" class="row">
-                        <span class="label label-success">Đáp án đúng :</span>
-                        <div id="answerReview" style="display: inline;"></div>
-                    </div>
-                    <div align="left" class="row">
-                        <span class="label label-warning">Tags :</span>
+                    <p>
+                        <span class="h4">Đáp án đúng:</span>
+                        <span id="answerReview"></span>
+                    </p>
+                    <p>
+                        <span>Tags:</span>
                         <span class="label label-primary" ng-repeat="tag in tags" ng-bind="questionTags[tag-1].name" style="margin: 3px;"></span>
-                    </div>
-                    <div align="left" class="row">
-                        <span class="label label-primary">Liked :</span>
-                        <div ng-bind="rates_count" style="display: inline;"></div>
-                    </div>
-                </div>
-                <div class="modal-body" align="left">
-                    <button class="btn" ng-class="{'btn-primary': my_rate==1 }" ng-click="rateUp()" ng-disabled="my_rate==1">Thích</button>
-                    <button class="btn" ng-class="{'btn-primary': my_rate==-1}" ng-click="rateDown()" ng-disabled="my_rate==-1">Không thích</button>
+                    </p>
+                     <p>
+                        <span>Đóng góp bởi:</span>
+                        <span ng-bind=""></span>
+                    </p>
+                <hr/>
+                <div>
+                        Đánh giá câu hỏi này có đúng và tốt không?
+
+                        <span class="label label-warning"><span ng-bind="rates_count"></span> votes</span>
+                    <button class="btn" ng-class="{'btn-primary': my_rate==1 }" ng-click="rateUp()" ng-disabled="my_rate==1">Vote Up</button>
+                    <button class="btn" ng-class="{'btn-primary': my_rate==-1}" ng-click="rateDown()" ng-disabled="my_rate==-1">Vote Down</button>
                     <button class="btn btn-warning" ng-show="isYourQuestion==true" ng-click="editQuestion()">Chỉnh sửa</button>
                 </div>
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="closeQuestionModal()">Đóng</button>
                 </div>

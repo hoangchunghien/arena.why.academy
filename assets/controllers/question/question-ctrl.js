@@ -50,7 +50,7 @@ app.controller('arena.questions.home.ctrl', [
                 keyboard: true
             });
             $('#my_modal').modal('show');
-            $('#indexReview').text('Câu hỏi : ');
+            $('#indexReview').text('Câu hỏi');
             $('#questionReview').text($scope.questions[index].question.text);
             $('#answerReview').text('  ' + $scope.questions[index].answer);
             if ($scope.questions[index].question.audio_url == null) {

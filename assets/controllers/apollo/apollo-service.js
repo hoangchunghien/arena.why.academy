@@ -202,6 +202,14 @@ angular.module('arena.apollo.service', [
             });
         };
 
+        this.getFriends = function (userID, callback) {
+            self.getPath("users/" + userID + "/friends", null, function (data) {
+                var friends = data.user_friends;
+                callback(friends);
+            });
+        }
+
+
         this.postQuestion = function (question, callback) {
             self.postPath("v2/questions", question, function (data) {
                 var result = data;

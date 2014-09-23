@@ -136,7 +136,7 @@ app.controller('arena.questions.home.ctrl', [
             $state.go('question-edit', {questionId: $scope.questions[$scope.questionIndex].id});
         };
 
-
+        $scope.timeAgo = timeAgoWithUTCString;
     }
 ]);
 

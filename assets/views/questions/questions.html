@@ -18,33 +18,36 @@
             </div>
         </div>
         <div class="box-content">
-            <div align="right">
-                <button class="btn btn-success" ng-click="createNewQuestion()">Đóng góp câu hỏi mới</button>
-            </div>
+            <br/>
             <div align="center">
-                <h1>Câu hỏi</h1>
+                <button class="btn btn-success" ng-click="createNewQuestion()">Đóng góp Câu hỏi Mới</button>
+            </div>
+            <br/>
+            <div align="center">
+                <h1>Đánh giá các Câu hỏi từ Cộng đồng</h1>
             </div>
 
             <div>
                 <table class="table table-bordered">
-                    <thead align="center">
+<!--                     <thead align="center">
                         <td>ID</td>
                         <td>Câu hỏi</td>
                         <td>Tác giả</td>
                         <td>Ngày tạo</td>
-                    </thead>
+                    </thead> -->
                     <tbody>
                         <tr ng-repeat="question in questions" ng-click="clickRow($index)">
-                            <td ng-bind="question.id" align="center"></td>
+                            <td align="center"><span class="votes-count" ng-bind="question.rates_count"></span> votes</td>
                             <td align="left" style="padding: 0% 5% 0% 5%;">
+                            <div>
                                 <div class="row" ng-show="question.question.text">
-                                <div ng-bind="question.question.text"></div>
-                                <div>
-                                    <ur ng-repeat="answer in question.content.choices">
-                                        <li ng-bind="answer.text"></li>
-                                    </ur>
+                                    <div ng-bind="question.question.text"></div>
+                                    <div>
+                                        <ur ng-repeat="answer in question.content.choices">
+                                            <li ng-bind="answer.text"></li>
+                                        </ur>
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="row" ng-hide="question.question.text" ng-bind-template="Question audio">
                                 </div>
 
@@ -53,9 +56,11 @@
                                 </div>
 
                                 <div class="row" ng-bind-template="Đáp án đúng : {{question.answer}}"></div>
+
+                            </div>
                             </td>
-                            <td ng-bind="question.user.name"></td>
-                            <td ng-bind="question.created_at"></td>
+                            <td><span ng-bind="question.user.name" class="questions-user"></span>
+                                <span ng-bind="timeAgo(question.created_at)" class="questions-time"></span></td>
 
                         </tr>
                     </tbody>

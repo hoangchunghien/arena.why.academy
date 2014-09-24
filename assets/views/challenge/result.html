@@ -102,59 +102,50 @@
         </div>
 
         <!--Modal for question review-->
-        <div class="modal" id="my_modal" align="center" style="margin-top:150px;" >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" align="left">
-                        <label class="label label-primary" id="indexReview"></label>
-                        <div id="questionReview"></div>
-                        <div ng-show="answersForReview">
-                            <ul ng-repeat="answer in answersForReview">
-                                <li>
-                                    <span ng-bind="answer.text"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div align="center">
-                            <img id="questionPicture" ng-src="{{questionPictureUrl}}"
-                                 ng-show="questionPictureUrl" height="200px;"/><br/>
+        <question-modal></question-modal>
+        <!--<div class="modal" id="my_modal" align="center" style="margin-top:150px;" >-->
+            <!--<div class="modal-dialog">-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header" align="left">-->
+                        <!--<label class="label label-primary" id="indexReview"></label>-->
+                        <!--<div id="questionReview"></div>-->
+                        <!--<div ng-show="answersForReview">-->
+                            <!--<ul ng-repeat="answer in answersForReview">-->
+                                <!--<li>-->
+                                    <!--<span ng-bind="answer.text"></span>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                        <!--<div align="center">-->
+                            <!--<img id="questionPicture" ng-src="{{questionPictureUrl}}"-->
+                                 <!--ng-show="questionPictureUrl" height="200px;"/><br/>-->
 
-                            <button class="btn btn-success" ng-show="questionAudioUrl">
-                                    <!--<a class="btn" ng-click="playAudio()" ng-show="!playing.question.audioUrl">-->
-                                        <!--<span class="glyphicon glyphicon-volume-up"></span>-->
-                                    <!--</a>-->
-                                    <!--<a class="btn" ng-show="playing.question.audioUrl" ng-click="togglePauseAudio()">-->
+                            <!--<button class="btn btn-success" ng-show="questionAudioUrl">-->
+
+                                <!--<a class="btn" ng-click="playAudio()" ng-show="!questionAudioForReview.playing">-->
+                                    <!--<span class="glyphicon glyphicon-volume-up"></span>-->
+                                <!--</a>-->
+                                <!--<a class="btn" ng-show="questionAudioForReview.playing" ng-click="togglePauseAudio()">-->
                                         <!--<span class="glyphicon"-->
-                                              <!--ng-class="{'glyphicon-pause':audioStatus==='play','glyphicon-play':audioStatus==='pause'}">   -->
+                                              <!--ng-class="{'glyphicon-pause':questionAudioForReview.audioStatus==='play','glyphicon-play':questionAudioForReview.audioStatus==='pause'}">-->
                                         <!--</span>-->
-                                    <!--</a>-->
-                                    <!--<a class="btn" ng-show="playing.question.audioUrl" ng-click="stopAudio()">-->
-                                        <!--<span class="glyphicon glyphicon-stop"></span>-->
-                                    <!--</a>-->
-                                <a class="btn" ng-click="playAudio()" ng-show="!questionAudioForReview.playing">
-                                    <span class="glyphicon glyphicon-volume-up"></span>
-                                </a>
-                                <a class="btn" ng-show="questionAudioForReview.playing" ng-click="togglePauseAudio()">
-                                        <span class="glyphicon"
-                                              ng-class="{'glyphicon-pause':questionAudioForReview.audioStatus==='play','glyphicon-play':questionAudioForReview.audioStatus==='pause'}">
-                                        </span>
-                                </a>
-                                <a class="btn" ng-show="questionAudioForReview.playing" ng-click="stopAudio()">
-                                    <span class="glyphicon glyphicon-stop"></span>
-                                </a>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="modal-body" align="left">
-                        <span class="label label-success">Đáp án đúng :</span>
-                        <div id="answerReview" style="display: inline;"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="closeQuestionModal()">Đóng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                <!--</a>-->
+                                <!--<a class="btn" ng-show="questionAudioForReview.playing" ng-click="stopAudio()">-->
+                                    <!--<span class="glyphicon glyphicon-stop"></span>-->
+                                <!--</a>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body" align="left">-->
+                        <!--<span class="label label-success">Đáp án đúng :</span>-->
+                        <!--<div id="answerReview" style="display: inline;"></div>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="closeQuestionModal()">Đóng</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
     </div>
 </div>

@@ -1,5 +1,5 @@
 
-<div class="container arena-container">
+<div class="container arena-container" style="max-width: 1200px">
 
     <div class="box noOverflow">
         <div class="box-header">
@@ -17,51 +17,52 @@
 
             </div>
         </div>
-        <div class="box-content">
-            <form class="form-horizontal">
-                <div class="form-group" ng-class="{'has-success':validated.questionGrp, 'has-error':error.questionGrp}">
-                    <span class="h3 control-label">Question</span>
+        <div class="box-content row">
+            <div class="col-md-6" style="border-right: thin solid grey;">
+                <form class="form-horizontal">
+                    <div class="form-group" ng-class="{'has-success':validated.questionGrp, 'has-error':error.questionGrp}">
+                        <span class="h3 control-label">Question</span>
                     <span style="font-style: italic" ng-show="error.questionGrp">(Must have something here: <b>text</b>, <b>audio
                         url</b> OR <b>picture url</b>)</span>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11">
-                        <div class="form-group"
-                             ng-class="{'has-success':validated.question.text, 'has-error':error.question.text}">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <div class="form-group"
+                                 ng-class="{'has-success':validated.question.text, 'has-error':error.question.text}">
 
-                            <label class="control-label">Text</label>
+                                <label class="control-label">Text</label>
 
-                            <div class="controls">
-                                <input type="text" id="questionText" class="form-control"
-                                       ng-blur="questionTextChanged()"
-                                       ng-model="question.question.text">
+                                <div class="controls">
+                                    <input type="text" id="questionText" class="form-control"
+                                           ng-blur="questionTextChanged()"
+                                           ng-model="question.question.text">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group"
-                             ng-class="{'has-success':validated.question.pictureUrl, 'has-error':error.question.pictureUrl}">
-                            <label class="control-label">Picture Url</label>
-                            <span ng-show="processing.question.pictureUrl">(checking...)</span>
+                            <div class="form-group"
+                                 ng-class="{'has-success':validated.question.pictureUrl, 'has-error':error.question.pictureUrl}">
+                                <label class="control-label">Picture Url</label>
+                                <span ng-show="processing.question.pictureUrl">(checking...)</span>
                             <span style="font-style: italic"
                                   ng-show="error.question.pictureUrl">(Invalid picture url)</span>
 
-                            <div class="controls">
-                                <input type="text" id="questionPicture" class="form-control"
-                                       ng-blur="questionPictureUrlChanged()"
-                                       ng-model="question.question.picture_url">
+                                <div class="controls">
+                                    <input type="text" id="questionPicture" class="form-control"
+                                           ng-blur="questionPictureUrlChanged()"
+                                           ng-model="question.question.picture_url">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group"
-                             ng-class="{'has-success':validated.question.audioUrl, 'has-error':error.question.audioUrl}">
-                            <label class="control-label">Audio Url</label>
-                            <span ng-show="processing.question.audioUrl">(checking...)</span>
+                            <div class="form-group"
+                                 ng-class="{'has-success':validated.question.audioUrl, 'has-error':error.question.audioUrl}">
+                                <label class="control-label">Audio Url</label>
+                                <span ng-show="processing.question.audioUrl">(checking...)</span>
                             <span style="font-style: italic"
                                   ng-show="error.question.audioUrl">(Invalid audio url)</span>
 
-                            <div class="controls" ng-class="{'input-group':enabled.playAudio}">
-                                <input type="text" id="questionAudio" class="form-control"
-                                       ng-blur="questionAudioUrlChanged()"
-                                       ng-model="question.question.audio_url">
+                                <div class="controls" ng-class="{'input-group':enabled.playAudio}">
+                                    <input type="text" id="questionAudio" class="form-control"
+                                           ng-blur="questionAudioUrlChanged()"
+                                           ng-model="question.question.audio_url">
                                 <span class="input-group-btn" ng-show="enabled.playAudio">
                                     <a class="btn" ng-click="playAudio()" ng-show="!playing.question.audioUrl">
                                         <span class="glyphicon"
@@ -74,76 +75,95 @@
                                     <a class="btn" ng-show="playing.question.audioUrl" ng-click="stopAudio()">
                                         <span class="glyphicon glyphicon-stop"></span></a>
                                 </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" ng-class="{'has-success':validated.answerGrp, 'has-error':error.answerGrp}">
-                    <span class="h3 control-label">Answer</span>
-                </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11">
-                        <div class="form-group" ng-class="{'has-success':validated.answer.choicesGrp}">
-                            <label class="control-label">Choices</label>
+                    <div class="form-group" ng-class="{'has-success':validated.answerGrp, 'has-error':error.answerGrp}">
+                        <span class="h3 control-label">Answer</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <div class="form-group" ng-class="{'has-success':validated.answer.choicesGrp}">
+                                <label class="control-label">Choices</label>
 
-                            <div id="grpPhoneticsInput">
-                                <div class="input-group" ng-repeat="c in question.content.choices"
-                                     ng-class="{'has-success':validated.answer.choices[$index], 'has-error':error.answer.choices[$index]}">
-                                    <input type="text" class="form-control" ng-model="c.text"
-                                           ng-keyup="questionChoicesChanged($index)"/>
+                                <div id="grpPhoneticsInput">
+                                    <div class="input-group" ng-repeat="c in question.content.choices"
+                                         ng-class="{'has-success':validated.answer.choices[$index], 'has-error':error.answer.choices[$index]}">
+                                        <input type="text" class="form-control" ng-model="c.text"
+                                               ng-keyup="questionChoicesChanged($index)"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default" type="button"
                                                 ng-click="questionChoiceRemove($index)">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </button>
                                     </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group"
+                                 ng-class="{'has-success':validated.answer.correct, 'has-error':error.answer.correct}">
+                                <label class="control-label" for="correctAnswer">Correct</label>
+
+                                <!--ng-options="choice.text for choice in static.answers"-->
+                                <div class="controls">
+                                    <select id="correctAnswer" class="form-control"
+                                            ng-model="question.correct" ng-change="questionAnswerChanged()"
+                                            ng-options="choice.text for choice in static.answers">
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group"
-                             ng-class="{'has-success':validated.answer.correct, 'has-error':error.answer.correct}">
-                            <label class="control-label" for="correctAnswer">Correct</label>
-
-                            <!--ng-options="choice.text for choice in static.answers"-->
+                    </div>
+                    <div class="form-group" ng-class="{'has-success':validated.tagGrp, 'has-error':error.tagGrp}">
+                        <span class="h3 control-label">Tags</span>
+                        <span style="font-style: italic" ng-show="error.tagGrp">(Must choose one)</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
                             <div class="controls">
-                                <select id="correctAnswer" class="form-control"
-                                        ng-model="question.correct" ng-change="questionAnswerChanged()"
-                                        ng-options="choice.text for choice in static.answers">
-
-                                </select>
+                                <div ng-repeat="tag in static.tags">
+                                    <div class="col-md-4">
+                                        <input type="checkbox" ng-model="question.links.tags[tag.id]"
+                                               ng-change="questionTagsChanged(tag)">
+                                        <span ng-bind="tag.name"></span>
+                                        <br/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group" ng-class="{'has-success':validated.tagGrp, 'has-error':error.tagGrp}">
-                    <span class="h3 control-label">Tags</span>
-                    <span style="font-style: italic" ng-show="error.tagGrp">(Must choose one)</span>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-9 col-sm-3">
+                            <button ng-click="saveChanged()" class="btn btn-lg btn-success"
+                                    ng-class="{'disabled':!enabled.btnSave}">Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6" style="padding-right: 30px; padding-top: 100px">
+                <div class="row row-question" align="center">
+                    <div ng-show="validated.question.pictureUrl" >
+                        <img ng-src="{{question.question.picture_url}}" ng-show="question.question.picture_url" height="200px">
+                    </div>
+                    <div ng-bind="question.question.text"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11">
-                        <div class="controls">
-                            <div ng-repeat="tag in static.tags">
-                                <div class="col-md-4">
-                                    <input type="checkbox" ng-model="question.links.tags[tag.id]"
-                                        ng-change="questionTagsChanged(tag)">
-                                    <span ng-bind="tag.name"></span>
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-9 col-sm-3">
-                        <button ng-click="saveChanged()" class="btn btn-lg btn-success"
-                                ng-class="{'disabled':!enabled.btnSave}">Save
+                    <div ng-repeat="choice in question.content.choices" class="col-md-6">
+                        <button type="button" class="btn choice-button" disabled
+                                ng-class="{'btn-success' :choice.text==question.correct.text}"
+                                ng-bind="choice.text"
+                                ng-show="choice.text!==''">
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

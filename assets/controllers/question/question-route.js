@@ -35,6 +35,17 @@ angular.module('arena.questions', [
                     }
 
                 })
+                .state('question-share', {
+                    url: '/questions/{questionId:[0-9]*}/share',
+                    templateUrl: '/views/questions/question-share.html',
+                    controller: 'arena.questions.share.ctrl',
+                    resolve: {
+                        questionId:function($stateParams){
+                            return $stateParams.questionId;
+                        }
+                    }
+
+                })
 
         }
     ]);

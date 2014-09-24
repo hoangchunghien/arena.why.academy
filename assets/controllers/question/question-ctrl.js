@@ -53,6 +53,7 @@ app.controller('arena.questions.home.ctrl', [
             $('#indexReview').text('Câu hỏi');
             $('#questionReview').text($scope.questions[index].question.text);
             $('#answerReview').text('  ' + $scope.questions[index].answer);
+            $('#questionAuthor').text($scope.questions[index].user.name);
             if ($scope.questions[index].question.audio_url == null) {
                 $scope.answersForReview = $scope.questions[index].content.choices;
                 console.log($scope.answersForReview);
@@ -83,6 +84,7 @@ app.controller('arena.questions.home.ctrl', [
             $scope.stopAudio();
             audioSrv.playClickedButton();
             $('#questionReview').text(null);
+            $('#questionAuthor').text(null);
             $('#my_modal').modal({
                 backdrop: 'static',
                 keyboard: true
@@ -135,23 +137,85 @@ app.controller('arena.questions.home.ctrl', [
             $scope.closeQuestionModal();
             $state.go('question-edit', {questionId: $scope.questions[$scope.questionIndex].id});
         };
+        $scope.shareQuestion = function () {
+            $scope.closeQuestionModal();
+            $state.go('question-share', {questionId: $scope.questions[$scope.questionIndex].id});
+        };
 
         $scope.timeAgo = timeAgoWithUTCString;
     }
 ]);
 
-app.controller('arena.questions.edit.ctrl', [
+app.controller('arena.questions.share.ctrl', [
     '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'picturesSrv', 'apolloSrv', 'questionId',
     function ($scope, $state, $http, userSrv, audioSrv, picturesSrv, apolloSrv, questionId) {
-        $scope.static = {};
+
+        $scope.playing = {};
+        $scope.playing.question = {};
         apolloSrv.getQuestionTags(function (questionTags) {
-            $scope.static.tags = questionTags;
+            $scope.questionTags = questionTags;
         });
-
         apolloSrv.getQuestion(questionId, function (question) {
+            $scope.question = question;
+            $scope.my_rate = question.my_rate;
 
+            if (question.question.audio_url) {
+
+                question.question.text = "When you hear a question or statement and three responses. You must select the " +
+                    "best response to the question or statement.";
+                if (question.question.picture_url) {
+
+                    question.question.text = "When you hear the statements, you must select the one statement that" +
+                        " best decribes what you see in the picture.";
+                }
+
+            }
         });
+        $scope.rateUp = function () {
+            if ($scope.my_rate == -1) {
+                $scope.question.rates_count += 2;
+            } else {
+                $scope.question.rates_count += 1;
+            }
 
+            $scope.my_rate = 1;;
+            apolloSrv.rateUp($scope.question.id);
+
+        };
+        $scope.rateDown = function () {
+            if ($scope.my_rate == 1) {
+                $scope.question.rates_count -= 2;
+            } else {
+                $scope.question.rates_count -= 1;
+            }
+
+            $scope.my_rate = -1;
+            apolloSrv.rateDown($scope.question.id);
+        };
+        var sound;
+        $scope.playAudio = function () {
+            $scope.playing.question.audioUrl = true;
+            sound = audioSrv.playAudio($scope.question.question.audio_url, function () {
+                $scope.audioStatus = 'stop';
+                $scope.playing.question.audioUrl = false;
+                $scope.$apply();
+            });
+            $scope.audioStatus = 'play';
+        };
+        $scope.stopAudio = function () {
+            sound.destruct();
+            $scope.playing.question.audioUrl = false;
+        };
+        $scope.togglePauseAudio = function () {
+            if ($scope.audioStatus === 'play') {
+                sound.pause();
+                $scope.audioStatus = 'pause';
+            }
+            else if ($scope.audioStatus === 'pause') {
+                sound.play();
+                $scope.audioStatus = 'play';
+            }
+        };
     }
 ]);
 
@@ -194,7 +258,6 @@ app.controller('arena.questions.create.ctrl', [
         }
 
 
-
         $scope.validated = {};
         $scope.error = {};
         $scope.validated.question = {};
@@ -212,7 +275,7 @@ app.controller('arena.questions.create.ctrl', [
         $scope.playing = {};
         $scope.playing.question = {};
 
-        var validateAllContentForEditQuestion=function(){
+        var validateAllContentForEditQuestion = function () {
             validateQuestionPictureUrl();
             validateQuestionAudioUrl();
             validateAnswerGroup();
@@ -365,7 +428,7 @@ app.controller('arena.questions.create.ctrl', [
                 params.push({ "op": "add", "path": "/questions/0/links/tags/-", "value": newTags[i] });
             }
             apolloSrv.editQuestion(viewData.questionId, params, function (data) {
-                    alert('Edit successfully !');
+                alert('Edit successfully !');
             });
         };
 
@@ -481,6 +544,7 @@ app.controller('arena.questions.create.ctrl', [
                 }
             }
         }
+
         var initTags = function () {
             for (var i = 0; i < $scope.originalTags.length; i++) {
                 var tag = $scope.originalTags[i];

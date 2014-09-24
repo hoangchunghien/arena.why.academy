@@ -226,8 +226,9 @@ angular.module('arena.apollo.service', [
         this.getAllQuestions = function (callback) {
             var params = {
                 "q[type]": "multichoice",
-                "sort[]": "id",
+                "sort[]": "-created_at",
                 "fields[]": "rates_count"
+
             };
             self.getPath("v2/questions", params, function (data) {
                 callback(data.questions);

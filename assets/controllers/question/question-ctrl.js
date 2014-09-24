@@ -56,7 +56,6 @@ app.controller('arena.questions.home.ctrl', [
             $('#questionAuthor').text($scope.questions[index].user.name);
             if ($scope.questions[index].question.audio_url == null) {
                 $scope.answersForReview = $scope.questions[index].content.choices;
-                console.log($scope.answersForReview);
             }
 
             if ($scope.questions[index].question.picture_url) {
@@ -68,6 +67,8 @@ app.controller('arena.questions.home.ctrl', [
             if ($scope.userProfile.id == $scope.questions[index].user.id) {
                 $scope.isYourQuestion = true;
             }
+
+            $scope.questionInPublic=true;
 
         };
 
@@ -178,7 +179,8 @@ app.controller('arena.questions.share.ctrl', [
                 $scope.question.rates_count += 1;
             }
 
-            $scope.my_rate = 1;;
+            $scope.my_rate = 1;
+            ;
             apolloSrv.rateUp($scope.question.id);
 
         };
@@ -730,3 +732,9 @@ app.controller('arena.questions.create.ctrl', [
     }
 ]);
 
+app.directive('questionModal', [function () {
+    return {
+        restrict: 'E',
+        templateUrl: '/views/questions/question-modal.html'
+    };
+}]);

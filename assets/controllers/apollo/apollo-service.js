@@ -98,7 +98,6 @@ angular.module('arena.apollo.service', [
                     var question = quiz.questions[i];
                     question.question = JSON.parse(question.question);
                     question.content = JSON.parse(question.content);
-                    console.log(question.question);
                 }
 
                 prepareQuizResult(quiz);

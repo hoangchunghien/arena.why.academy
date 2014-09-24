@@ -35,8 +35,6 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
             }
         }
 
-
-
         var checkAudioLoaded = function (audios) {
             if (audios.length <= 0) {
                 $scope.percentageDownloading=100;
@@ -509,6 +507,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             if (question.question.audio_url) {
                 $scope.questionAudioUrl = question.question.audio_url;
             }
+            $scope.questionInResult=true;
 
         };
 
@@ -572,6 +571,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             if($scope.questionPictureUrl){
                 $scope.questionPictureUrl=null;
             }
+            $scope.questionIdForRate=null;
         };
 
         if (gameFSM == null) {
@@ -591,6 +591,8 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 
 });
+
+
 
 //app.controller('arena.challenge.ctrl',
 //    ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'transferSrv',

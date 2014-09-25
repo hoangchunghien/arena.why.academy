@@ -82,7 +82,7 @@
                         <td ng-repeat="(i, letter) in letters track by $index"
                             style="border: 1px; border-style: solid; border-color: #95c1d3; text-align: center; font-size: 16pt"
                             width="24pt" height="36pt"
-                            ng-bind="choosenLetters[$index]"></td>
+                            ng-bind="choosenLetters[$index]" ng-click="removeChoosenLetter($index)"></td>
                     </tr>
                 </table>
             </div>

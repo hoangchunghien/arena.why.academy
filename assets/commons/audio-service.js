@@ -7,6 +7,8 @@ angular.module('arena.audio.service', [
 ])
     .service('audioSrv', function () {
         var self=this;
+        var audioMapping = {};
+        var audios = [];
         var backgroundAudio = null;
         var countDownAudio = null;
         var countDownCoongAudio = null;
@@ -86,7 +88,7 @@ angular.module('arena.audio.service', [
 
         };
 
-        this.playAudio = function (url) {
+        this.addAudio = function(url) {
             var callback = arguments[1];
             var mySound = soundManager.createSound({
                 url: url,
@@ -96,8 +98,38 @@ angular.module('arena.audio.service', [
                     }
                 }
             });
+            audios.push(mySound);
+            audioMapping[url] = audios.length - 1;
             mySound.play();
-            return mySound;
+            mySound.pause();
+        };
+
+        this.stopAudio = function(url) {
+            if (audioMapping[url]) {
+                audios[audioMapping[url]].stop();
+            }
+        };
+
+        this.playAudio = function (url) {
+            var callback = arguments[1];
+            if (audioMapping[url]) {
+                audios[audioMapping[url]].play();
+                return audios[audioMapping[url]];
+            }
+            else {
+                self.addAudio(url);
+                self.playAudio(url);
+            }
+//            var mySound = soundManager.createSound({
+//                url: url,
+//                onfinish: function() {
+//                    if (callback) {
+//                        callback();
+//                    }
+//                }
+//            });
+//            mySound.play();
+//            return mySound;
         };
 
         this.checkSoundUrl = function (url) {

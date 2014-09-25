@@ -66,6 +66,9 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
         var checkResourceLoadedTimer;
         for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
             if (gameFSM.quiz.questions[i].question.audio_url) {
+                audioSrv.addAudio(gameFSM.quiz.questions[i].question.audio_url, function() {
+                   checkResourceLoaded();
+                });
                 resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
                 if (gameFSM.quiz.questions[i].question.picture_url) {
                     resources.images[i] = new Image();
@@ -248,9 +251,9 @@ app.controller('arena.play.on-game.ctrl',
                             audioSrv.playBackgroundAudio();
                         }
 
-                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
-                        audioSrv.playQuestionAudio();
-
+//                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
+//                        audioSrv.playQuestionAudio();
+                        audioSrv.playAudio(event.data.question.question.audio_url);
                         $scope.question = event.data.question;
                         initForQuestionContent();
                         $scope.timeout += event.data.timeout;
@@ -260,7 +263,7 @@ app.controller('arena.play.on-game.ctrl',
                     case "question_ending":
 //                        audioSrv.destroyQuestionAudio();
                         if (event.data.audio) {
-                            audioSrv.destroyQuestionAudio();
+                            audioSrv.stopAudio($scope.question.question.audio_url);
                         }
 
                         console.log("question_ending");
@@ -316,9 +319,9 @@ app.controller('arena.play.on-game.ctrl',
                     case "question_next_question":
                         console.log("next question");
 
-                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
-                        audioSrv.playQuestionAudio();
-
+//                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
+//                        audioSrv.playQuestionAudio();
+                        audioSrv.playAudio(event.data.question.question.audio_url);
                         if($scope.question.question.picture_url){
                             $scope.question.question.picture_url=null;
                         }

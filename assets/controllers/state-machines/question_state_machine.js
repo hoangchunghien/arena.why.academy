@@ -127,17 +127,18 @@ function QuestionStateMachine(question, eventListener) {
                 }
 
                 //find index of correct answer
-                var indexOfCorrectAnswer=null;
-                for(var i=0; i<self.question.content.choices.length; i++){
-                    if(self.question.content.choices[i].text==self.question.answer){
-                        indexOfCorrectAnswer=i;
-                        break;
-                    }
-                }
+//                var indexOfCorrectAnswer=null;
+//                if (self.question.content.choices)
+//                for(var i=0; i<self.question.content.choices.length; i++){
+//                    if(self.question.content.choices[i].text==self.question.answer){
+//                        indexOfCorrectAnswer=i;
+//                        break;
+//                    }
+//                }
 
                 self.questionEndingTimer = setTimeout(function () {
                     self.eventListener.handleEventNotification({name: "question_ending", data: {answer: self.answer,
-                        correct: self.correct, score: self.score, correctAnswer: indexOfCorrectAnswer,
+                        correct: self.correct, score: self.score, correctAnswer: self.question.answer,
                         id: self.question.id, time: spentTime, audio:self.question.question.audio_url}});
 
                 }, 1000);

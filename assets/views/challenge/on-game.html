@@ -17,17 +17,17 @@
             <div class="col-xs-2" align="center">
                 <!-- <b style="line-height: 70px;">VS</b> -->
 
-                    <div class="tempStatBox">
-                        <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
-                        
-                    </div>
+                <div class="tempStatBox">
+                    <div class="tempStat" style="border-color: rgb(103, 194, 239);">VS</div>
+
+                </div>
             </div>
             <div class="col-xs-5 row-profile-right alert alert-warning">
                 <div class="col-xs-9">
                     <div class="name" ng-bind="gameData.players.opponent.name" align="right"></div>
                     <div class="score" ng-bind="gameData.players.opponent.result.point" align="right"></div>
                     <div class="status" ng-hide="gameData.players.opponent.result.point"
-                            ng-bind-template="Chưa thi đấu"></div>
+                         ng-bind-template="Chưa thi đấu"></div>
                 </div>
                 <div style="float: right;">
                     <img class="avatar" ng-src="{{gameData.players.opponent.picture_url}}">
@@ -41,6 +41,7 @@
         -->
         <div class="row" align="center">
             <span ng-bind-template="Câu hỏi hiện tại: {{currentQuestion+1}}/{{numberOfQuestion}}"></span>
+
             <div class="arena-progress">
                 <div>
                     <div ng-repeat=" result in results" class="arena-circle"
@@ -58,10 +59,9 @@
             <div ng-show="question.question.text" ng-bind="question.question.text"></div>
             <div align="center">
                 <img id="questionPicture" align="middle" ng-show="question.question.picture_url"
-                     ng-src="{{question.question.picture_url}}" height="200px"/>
+                     ng-src="{{question.question.picture_url}}" height="150px"/>
             </div>
         </div>
-        
 
 
         <!--
@@ -75,17 +75,36 @@
             </div>
         </div>
 
-        <div class="row">
-            <div ng-repeat="choice in question.content.choices" class="col-md-6">
-                <button type="button" class="btn  choice-button" ng-click="clickAnswer($index,choice.text)"
-                        ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
-                        ng-disabled="disabledButton==true" ng-bind="choice.text">
-                </button>
+        <div class="row" ng-show="question.content.letters" align="center">
+            <div>
+                <table>
+                    <tr>
+                        <td ng-repeat="(i, letter) in letters track by $index"
+                            style="border: 1px; border-style: solid; border-color: #95c1d3; text-align: center; font-size: 16pt"
+                            width="24pt" height="36pt"
+                            ng-bind="choosenLetters[$index]"></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="padding-top: 50px;">
+                <a ng-repeat="(i, letter) in question.content.letters track by $index"
+                   class="btn btn-primary" ng-bind="letter"
+                   style="font-size: 20pt; width: 24pt; height: 36pt; margin-right: 5pt; border-radius: 0px; padding-left: 8px;"
+                   ng-click="chooseLetterIndex($index)"></a>
             </div>
         </div>
 
+        <div class="row" ng-show="question.content.choices">
+            <div ng-repeat="choice in question.content.choices" class="col-md-6">
+                <a class="btn  choice-button" ng-click="clickAnswer($index,choice.text)"
+                   ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
+                   ng-disabled="disabledButton==true">
+                    <span ng-bind="choice.text" ng-show="choice.text && choice.text!=''"></span>
+                    <img ng-src="{{choice.picture_url}}" ng-show="choice.picture_url && choice.picture_url!=''" height="150px">
+                </a>
+            </div>
+        </div>
 
-       
 
         <!--
         Modal : check correct answer !

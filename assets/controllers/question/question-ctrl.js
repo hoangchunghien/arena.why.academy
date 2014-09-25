@@ -68,7 +68,7 @@ app.controller('arena.questions.home.ctrl', [
                 $scope.isYourQuestion = true;
             }
 
-            $scope.questionInPublic=true;
+            $scope.questionInPublic = true;
 
         };
 
@@ -148,8 +148,10 @@ app.controller('arena.questions.home.ctrl', [
 ]);
 
 app.controller('arena.questions.share.ctrl', [
-    '$scope', '$state', '$http', 'userSrv', 'audioSrv', 'picturesSrv', 'apolloSrv', 'questionId',
-    function ($scope, $state, $http, userSrv, audioSrv, picturesSrv, apolloSrv, questionId) {
+    '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'picturesSrv', 'apolloSrv', 'questionId',
+    function ($scope, $state, $http, $timeout, userSrv, audioSrv, picturesSrv, apolloSrv, questionId) {
+
+        audioSrv.init();
 
         $scope.playing = {};
         $scope.playing.question = {};
@@ -217,6 +219,41 @@ app.controller('arena.questions.share.ctrl', [
                 sound.play();
                 $scope.audioStatus = 'play';
             }
+        };
+
+        $scope.showCheckCorrectAnswer = [null, null, null, null];
+        $scope.disableButton = false;
+        var _activeModal = function () {
+            $timeout(function () {
+                $('#showCheckCorrectAnswer').modal('show');
+            }, 200);
+            $timeout(function () {
+                $('#showCheckCorrectAnswer').modal('hide');
+            }, 1800);
+        };
+        var checkCorrectAnswer = function (answer) {
+            if (answer == $scope.question.answer) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.clickAnswer = function (answer, index) {
+            for(var i=0; i<$scope.question.content.choices.length; i++){
+                if($scope.question.content.choices[i].text==$scope.question.answer){
+                    $scope.showCheckCorrectAnswer[i]=true;
+                }
+            }
+            $scope.disableButton = true;
+            if (checkCorrectAnswer(answer) == true) {
+                audioSrv.playCorrectAnswerAudio();
+                $scope.showCheckCorrectAnswer[index] = true;
+                _activeModal();
+            } else {
+                audioSrv.playWrongAnswerAudio();
+                $scope.showCheckCorrectAnswer[index] = false;
+            }
+
         };
     }
 ]);

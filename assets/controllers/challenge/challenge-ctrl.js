@@ -164,42 +164,6 @@ app.controller('arena.play.on-game.ctrl',
             };
             //
             //
-
-            // ---------------------------------------------------------------------------------------------------------
-            // FOR LETTERS QUESTION TYPE
-            //----------------------------------------------------------------------------------------------------------
-            var initForQuestionContent = function() {
-                if ($scope.question.content.letters) {
-                    $scope.letters = [];
-                    for (var i in $scope.question.content.letters)
-                        $scope.letters.push($scope.question.content.letters[i]);
-                    $scope.choosenLetters = [];
-                }
-            };
-
-            var generateLettersFromArray = function(letters) {
-                var str = "";
-                for (var i in letters) {
-                    str += letters[i];
-                }
-                return str;
-            };
-
-            $scope.choosenLetters = [];
-            $scope.chooseLetterIndex = function(index) {
-                $scope.choosenLetters.push($scope.question.content.letters[index]);
-                $scope.question.content.letters.splice(index, 1);
-                if ($scope.question.content.letters.length == 0) {
-                    var letters = generateLettersFromArray($scope.choosenLetters);
-                    var event = {};
-                    event.name = "question_answer";
-                    event.data = {answer: letters};
-                    quizMachine.consumeEvent(event);
-                }
-            };
-
-            //---------------------------------------------------------------------------------------------------------
-
             $scope.clickAnswer = function (index,userAnswer) {
                 audioSrv.playClickedButton();
                 var event = {};
@@ -218,13 +182,6 @@ app.controller('arena.play.on-game.ctrl',
                 audioSrv.playAudio(url);
             };
 
-            var findCorrectAnswerIndex = function(correct) {
-                for (var i in $scope.question.content.choices) {
-                    if ($scope.question.content.choices[i].text == correct) {
-                        return i;
-                    }
-                }
-            };
 
             this.handleEventNotification = function (event) {
                 console.log(event);
@@ -240,7 +197,6 @@ app.controller('arena.play.on-game.ctrl',
                         audioSrv.playQuestionAudio();
 
                         $scope.question = event.data.question;
-                        initForQuestionContent();
                         $scope.timeout += event.data.timeout;
                         console.log("quiz_questioning");
                         console.log($scope.timeout);
@@ -258,9 +214,7 @@ app.controller('arena.play.on-game.ctrl',
                         if (event.data.correct) {
                             _activeModal();
                             audioSrv.playCorrectAnswerAudio();
-                            if ($scope.question.content.choices) {
-                                $scope.answers[index] = {correct: 1};
-                            }
+                            $scope.answers[index] = {correct: 1};
                             //$scope.score += event.data.score;
                             gameFSM.myResult.point += event.data.score;
 
@@ -270,19 +224,13 @@ app.controller('arena.play.on-game.ctrl',
 
                         } else {
                             audioSrv.playWrongAnswerAudio();
-                            if ($scope.question.content.choices) {
-                                $scope.answers[index] = {correct: 0};
-                            }
+                            $scope.answers[index] = {correct: 0};
                             $scope.results[$scope.currentQuestion] = {'score': '+' + event.data.score, 'correct': 0};
 
                         }
 //
-                        if ($scope.question.content.choices) {
-                            var index = findCorrectAnswerIndex(event.data.correctAnswer);
-                            $scope.answers[index] = {correct: 1};
-                            $scope.lastAnswered = null;
-                        }
-
+                        $scope.answers[event.data.correctAnswer] = {correct: 1};
+                        $scope.lastAnswered = null;
                         $scope.$apply();
                         break;
                     case "question_answered":
@@ -310,7 +258,6 @@ app.controller('arena.play.on-game.ctrl',
 
                         $scope.currentQuestion++;
                         $scope.question = event.data.question;
-                        initForQuestionContent();
                         $scope.answers = [];
                         $scope.disabledButton = false;
                         $scope.showCorrect = false;

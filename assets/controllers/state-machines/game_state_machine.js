@@ -71,7 +71,7 @@ function GameFSM(gameData, gameSrv, apolloSrv, $state) {
                 on_game_event: 'onGame'
             },
             run: function () {
-                console.log("resource loaded....");
+                console.log("resource loading....");
                 $state.go("loading-resource");
             }
         },

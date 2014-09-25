@@ -15,7 +15,7 @@ angular.module('arena.questions', [
                     controller: 'arena.questions.home.ctrl'
                 })
                 .state('question-create', {
-                    url: '/question/new',
+                    url: '/questions/new',
                     templateUrl: '/views/questions/question-create.html',
                     controller: 'arena.questions.create.ctrl',
                     resolve: {
@@ -36,7 +36,7 @@ angular.module('arena.questions', [
 
                 })
                 .state('question-share', {
-                    url: '/questions/{questionId:[0-9]*}/share',
+                    url: '/questions/{questionId:[0-9]*}',
                     templateUrl: '/views/questions/question-share.html',
                     controller: 'arena.questions.share.ctrl',
                     resolve: {

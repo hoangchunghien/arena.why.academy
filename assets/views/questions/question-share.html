@@ -64,10 +64,23 @@
 
             <div class="row">
                 <div ng-repeat="choice in question.content.choices" class="col-md-6">
-                    <button type="button" class="btn choice-button" ng-bind="choice.text">
+                    <button type="button" class="btn choice-button" ng-bind="choice.text" ng-click="clickAnswer(choice.text,$index)"
+                            ng-class="{'btn-success':showCheckCorrectAnswer[$index]==true,'btn-danger':showCheckCorrectAnswer[$index]==false}"
+                            ng-disabled="disableButton==true">
                     </button>
                 </div>
             </div>
+
+            <div id="showCheckCorrectAnswer" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content arena-modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title arena-modal-title">Chính xác !</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

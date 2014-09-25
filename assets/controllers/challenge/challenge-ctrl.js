@@ -186,15 +186,6 @@ app.controller('arena.play.on-game.ctrl',
             };
 
             $scope.choosenLetters = [];
-
-            $scope.removeChoosenLetter = function(index) {
-                if ($scope.choosenLetters[index]) {
-                    $scope.question.content.letters.push($scope.choosenLetters[index]);
-                    $scope.choosenLetters.splice(index, 1);
-                }
-
-            };
-
             $scope.chooseLetterIndex = function(index) {
                 $scope.choosenLetters.push($scope.question.content.letters[index]);
                 $scope.question.content.letters.splice(index, 1);

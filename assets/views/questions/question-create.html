@@ -147,13 +147,15 @@
                 </form>
             </div>
 
-            <div class="col-md-6" style="padding-right: 30px; padding-top: 100px">
+            <div class="col-md-6" style="padding-left: 20px; padding-right: 30px; padding-top: 150px">
+
                 <div class="row row-question" align="center">
                     <div ng-show="validated.question.pictureUrl" >
                         <img ng-src="{{question.question.picture_url}}" ng-show="question.question.picture_url" height="200px">
                     </div>
                     <div ng-bind="question.question.text"></div>
                 </div>
+
                 <div class="row">
                     <div ng-repeat="choice in question.content.choices" class="col-md-6">
                         <button type="button" class="btn choice-button" disabled
@@ -162,6 +164,12 @@
                                 ng-show="choice.text!==''">
                         </button>
                     </div>
+                </div>
+
+                <div class="row" ng-show="validated.tagGrp" style="padding-top: 64px; padding-left: 12px;">
+                    <span>Tags:</span>
+                    <span class="label label-primary" ng-repeat="tag in static.tags" ng-bind="tag.name"
+                          style="margin: 3px;" ng-show="question.links.tags[tag.id]"></span>
                 </div>
             </div>
         </div>

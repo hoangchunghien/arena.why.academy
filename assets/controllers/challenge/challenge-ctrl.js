@@ -210,9 +210,13 @@ app.controller('arena.play.on-game.ctrl',
 
             $scope.clickAnswer = function (index,userAnswer) {
                 audioSrv.playClickedButton();
+                var answer = userAnswer;
+                if ($scope.question.type == "MultiPicture" || $scope.question.type == "Picture Multichoice") {
+                    answer = index;
+                }
                 var event = {};
                 event.name = "question_answer";
-                event.data = {answer: userAnswer};
+                event.data = {answer: answer};
                 $scope.lastAnswered = index;
                 quizMachine.consumeEvent(event);
 
@@ -286,7 +290,10 @@ app.controller('arena.play.on-game.ctrl',
                         }
 //
                         if ($scope.question.content.choices) {
-                            var index = findCorrectAnswerIndex(event.data.correctAnswer);
+                            var index = event.data.correctAnswer;
+                            if ($scope.question.type != "MultiPicture" && $scope.question.type != "Picture Multichoice") {
+                                index = findCorrectAnswerIndex(event.data.correctAnswer);
+                            }
                             $scope.answers[index] = {correct: 1};
                             $scope.lastAnswered = null;
                         }

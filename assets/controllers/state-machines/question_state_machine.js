@@ -53,6 +53,10 @@ function QuestionStateMachine(question, eventListener) {
         // TODO
     };
 
+    var isAnswerCorrect = function(answer) {
+        return answer == self.question.answer;
+    };
+
     this.states = {
         initializing: {
             name: 'initializing',
@@ -112,13 +116,12 @@ function QuestionStateMachine(question, eventListener) {
                 console.log(logInfo + "ending");
                 console.log(self.answer);
                 var timeForChangeQuestion;
-                if (self.answer == self.question.answer) {
-                    self.correct = true;
+                self.correct = isAnswerCorrect(self.answer);
+                if (self.correct) {
                     self.score = Math.floor(self.remainingTime / 1000);
                     timeForChangeQuestion = 4500; //3500
                 } else {
                     self.score = 0;
-                    self.correct = false;
                     timeForChangeQuestion = 3500; //2000
                 }
                 var spentTime=-1;

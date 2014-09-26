@@ -40,8 +40,10 @@ angular.module('arena.game.service', [
 
         this.challengeFriends = function () {
             gameData.friendIds = getFriendIds(gameData.friends);
-//            gameData.tagIds=TAGS;
-            gameData.tagIds = self.tags;
+            if(self.tags){
+                gameData.tagIds = self.tags;
+            }
+
             gameFSM = new GameFSM(gameData, self, apolloSrv, state);
             gameFSM.startup();
         };

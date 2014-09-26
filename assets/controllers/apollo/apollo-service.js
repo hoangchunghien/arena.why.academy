@@ -110,7 +110,9 @@ angular.module('arena.apollo.service', [
         this.createNewQuiz = function (friendsID, tags, callback) {
             var params = {};
             params.friends = friendsID;
-            params.tags = tags;
+            if(tags){
+                params.tags = tags;
+            }
             self.postPath("v2/quiz/challenge", params, function (data) {
                 var quiz = data.quiz;
                 for (var i = 0; i < quiz.questions.length; i++) {

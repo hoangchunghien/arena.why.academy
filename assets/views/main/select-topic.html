@@ -45,14 +45,15 @@
         <div class="arena-topics row">
             <div class="col-xs-4">
                 <ul class="topics">
-                   <li class="topic selected" ng-repeat="tag in tags">
+                   <li class="topic" ng-repeat="tag in tags" ng-click="chooseTopic($index)" ng-mouseover="chooseTopic($index)"
+                           ng-class="{'selected':$index==indexOfTopic}">
                         <span class="tag-name" ng-bind="tag.name"></span><span class="indicator fa fa-chevron-right"></span>
                    </li>
                 </ul>
             </div>
             <div class="col-xs-8">
                 <ul class="subtopics">
-                    <li class='subtopic' ng-repeat="tagDetail in tags[0].children"
+                    <li class='subtopic' ng-repeat="tagDetail in tags[indexOfTopic].children"
                         data-toggle="tooltip" data-placement="top" title="{{tagDetail.description}}">
 
 

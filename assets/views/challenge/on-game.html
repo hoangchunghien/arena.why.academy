@@ -67,13 +67,7 @@
         <!--
         Row 4
         -->
-        <div class="progress">
-            <div class="progress-bar progress-bar-success active" role="progressbar"
-                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                 ng-style="{width: getProgress()} "
-                 ng-class="{'progress-bar-warning': countDown/timeout<0.7, 'progress-bar-danger': countDown/timeout<0.4}">
-            </div>
-        </div>
+
 
         <div class="row" ng-show="question.content.letters" align="center">
             <div>
@@ -100,8 +94,17 @@
                    ng-class="{'btn-success' :answers[$index].correct==1, 'btn-danger':answers[$index].correct==0}"
                    ng-disabled="disabledButton==true">
                     <span ng-bind="choice.text" ng-show="choice.text && choice.text!=''"></span>
-                    <img ng-src="{{choice.picture_url}}" ng-show="choice.picture_url && choice.picture_url!=''" height="150px">
+                    <img ng-src="{{choice.picture_url}}" ng-show="choice.picture_url && choice.picture_url!=''" height="150px" width="80%">
                 </a>
+            </div>
+        </div>
+        <br/>
+        <!--ProcessBar-->
+        <div class="progress">
+            <div class="progress-bar progress-bar-success active" role="progressbar"
+                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                 ng-style="{width: getProgress()} "
+                 ng-class="{'progress-bar-warning': countDown/timeout<0.7, 'progress-bar-danger': countDown/timeout<0.4}">
             </div>
         </div>
 

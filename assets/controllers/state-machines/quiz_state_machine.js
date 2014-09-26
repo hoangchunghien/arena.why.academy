@@ -59,7 +59,7 @@ function QuizStateMachine(quiz, eventListener) {
         for (var i = 0; i < self.quiz.questions.length; i++) {
             var question = self.quiz.questions[i];
             //
-            if (question.question.audio_url) {
+            if (question.question.audio_url & question.question.text) {
 
                 question.question.text = "When you hear a question or statement and three responses. You must select the " +
                     "best response to the question or statement.";

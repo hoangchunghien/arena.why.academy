@@ -22,7 +22,7 @@ function QuestionStateMachine(question, eventListener) {
      **/
     this.question = question;
     this.answer = null;
-    this.timeout = 30000 + 1000;  // in milisecond
+    this.timeout = 40000 + 1000;  // in milisecond
     this.timeStep = 250;
     this.remainingTime = this.timeout; // in milisecond
     this.correct = false;
@@ -118,7 +118,7 @@ function QuestionStateMachine(question, eventListener) {
                 var timeForChangeQuestion;
                 self.correct = isAnswerCorrect(self.answer);
                 if (self.correct) {
-                    self.score = Math.floor(self.remainingTime / 1000);
+                    self.score = Math.floor(self.remainingTime / 400);
                     timeForChangeQuestion = 4500; //3500
                 } else {
                     self.score = 0;

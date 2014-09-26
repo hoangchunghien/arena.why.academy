@@ -221,6 +221,7 @@ box-sizing: content-box;
 
 ul.topics li.selected {
     background-color: #fabb3d;
+
 }
 
 ul.topics span.indicator {
@@ -289,4 +290,7 @@ ul.subtopics, ul.topics {
 .questions-user {
     font-weight: bold;
     display: block;
+}
+.topic{
+    cursor: pointer;
 }

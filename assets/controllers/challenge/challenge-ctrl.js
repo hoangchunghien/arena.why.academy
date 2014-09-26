@@ -580,11 +580,11 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
 
         var prepareMedal = function (result) {
-            if (result.point >= 220) {
+            if (result.point >= 800) {
                 $scope.medalUrl = "/data/image/gold-medal.png";
-            } else if (result.point >= 160) {
+            } else if (result.point >= 600) {
                 $scope.medalUrl = "/data/image/silver-medal.png";
-            } else if (result.point > 90) {
+            } else if (result.point > 400) {
                 $scope.medalUrl = "/data/image/bronze-medal.png";
             } else {
                 $scope.medalUrl = "";

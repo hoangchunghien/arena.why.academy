@@ -36,7 +36,7 @@
                     "description": "In Part II of the TOEIC you will be tested on your ability to respond to a question. It is very important that you can understand and identify wh-questions. You will listen to three possible responses. Only one of the responses is correct."
                 },
                 {
-                    "name": "Grammar",
+                    "name": "Grammar (Beginer)",
                     "ids": [
                         "1",
                         "4",
@@ -45,6 +45,21 @@
                     "labels": [
                         "Grammar",
                         "Beginer"
+                    ],
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "Vocabulary",
+            "ids": [
+            ],
+            "description": "",
+            "children": [
+                {
+                    "name": "3000 English words",
+                    "labels": [
+                        "Vocabulary"
                     ],
                     "description": ""
                 }

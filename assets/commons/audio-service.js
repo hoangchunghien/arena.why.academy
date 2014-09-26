@@ -89,12 +89,24 @@ angular.module('arena.audio.service', [
         };
 
         this.addAudio = function(url) {
-            var callback = arguments[1];
+            var finishedCallback = arguments[1];
+            var loadingCallback = arguments[2];
+            var onloadCallback = arguments[3];
             var mySound = soundManager.createSound({
                 url: url,
                 onfinish: function() {
-                    if (callback) {
-                        callback();
+                    if (finishedCallback) {
+                        finishedCallback();
+                    }
+                },
+                whileloading: function() {
+                    if (loadingCallback) {
+                        loadingCallback(this.url, this.bytesLoaded/this.bytesTotal);
+                    }
+                },
+                onload: function() {
+                    if (onloadCallback) {
+                        onloadCallback(this.url);
                     }
                 }
             });

@@ -27,75 +27,151 @@ app.controller('arena.play.loading-resource.ctrl', ['$scope', '$state', 'audioSr
         $scope.gameData = gameFSM.gameData;
 
         var percentageAuioDownloading = [];
-        $scope.percentageDownloading=0;
+        $scope.percentageDownloading = 0;
 
-        if(gameFSM.quiz.questions[0].question.audio_url){
-            for(var i=0; i<gameFSM.quiz.questions.length; i++){
-                percentageAuioDownloading[i]=0;
-            }
-        }
+//        if (gameFSM.quiz.questions[0].question.audio_url) {
+//            for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
+//                percentageAuioDownloading[i] = 0;
+//            }
+//        }
+//
+//        var checkAudioLoaded = function (audios) {
+//            if (audios.length <= 0) {
+//                $scope.percentageDownloading = 100;
+//                return true;
+//            }
+//            for (var i = 0; i < audios.length; i++) {
+//                if (audios[i].readyState != 4) {
+//                    return false;
+//                } else {
+//                    percentageAuioDownloading[i] = 10;
+//                }
+//            }
+//
+//            return true;
+//        };
+//        var checkImageLoaded = function (images) {
+//            if (images.length <= 0) {
+//                return true;
+//            }
+//            for (var i = 0; i < images.length; i++) {
+//                if (images[i].complete == false) {
+//                    return false;
+//                }
+//            }
+//            return true;
+//        };
 
-        var checkAudioLoaded = function (audios) {
-            if (audios.length <= 0) {
-                $scope.percentageDownloading=100;
-                return true;
-            }
-            for (var i = 0; i < audios.length; i++) {
-                if (audios[i].readyState != 4) {
-                    return false;
-                }else{
-                    percentageAuioDownloading[i]=10;
+//        var resources = {"images": [], "audios": []};
+//        var checkResourceLoadedTimer;
+//        for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
+//            if (gameFSM.quiz.questions[i].question.audio_url) {
+//                var audioUrl = gameFSM.quiz.questions[i].question.audio_url;
+//                audioSrv.addAudio(audioUrl,
+//                    function () {
+//                        checkResourceLoaded();
+//                    },
+//                    function (loadedPercent) {
+//                        console.log(audioUrl + " [" + loadedPercent * 100 + " %]")
+//                    }
+//                );
+//                resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
+//                if (gameFSM.quiz.questions[i].question.picture_url) {
+//                    resources.images[i] = new Image();
+//                    resources.images[i].src = gameFSM.quiz.questions[i].question.picture_url;
+//                }
+//            }
+//        }
+
+        var findAllResourceUrls = function (quiz) {
+            if (!quiz || !quiz.questions) return;
+            var resourceUrls = [];
+            for (var i in quiz.questions) {
+                var question = quiz.questions[i];
+                if (question.question.picture_url) {
+                    resourceUrls.push({type: 'image', url: question.question.picture_url});
+                }
+
+                if (question.question.audio_url) {
+                    resourceUrls.push({type: 'audio', url: question.question.audio_url});
+                }
+
+                if (question.content.choices) {
+                    for (var i in question.content.choices) {
+                        var choice = question.content.choices[i];
+                        if (choice.picture_url) {
+                            resourceUrls.push({type: 'image', url: choice.picture_url});
+                        }
+                    }
                 }
             }
-
-            return true;
+            return resourceUrls;
         };
-        var checkImageLoaded = function (images) {
-            if (images.length <= 0) {
-                return true;
-            }
-            for (var i = 0; i < images.length; i++) {
-                if (images[i].complete == false) {
-                    return false;
-                }
-            }
-            return true;
+
+        var startGame = function () {
+            gameFSM.handleEventNotification({name: "loading_resource_finished", data: {}});
         };
 
-        var resources = {"images": [], "audios": []};
-        var checkResourceLoadedTimer;
-        for (var i = 0; i < gameFSM.quiz.questions.length; i++) {
-            if (gameFSM.quiz.questions[i].question.audio_url) {
-                audioSrv.addAudio(gameFSM.quiz.questions[i].question.audio_url, function() {
-                   checkResourceLoaded();
-                });
-                resources.audios.push(new Audio(gameFSM.quiz.questions[i].question.audio_url));
-                if (gameFSM.quiz.questions[i].question.picture_url) {
-                    resources.images[i] = new Image();
-                    resources.images[i].src = gameFSM.quiz.questions[i].question.picture_url;
-                }
-            }
-        }
-
+        var resourceUrls = findAllResourceUrls(gameFSM.quiz);
+        var resourcesLoading = {};
         var checkResourceLoaded = function () {
-            checkResourceLoadedTimer = setTimeout(function () {
-                var percentageDownloading=0;
-               for(var i=0; i< percentageAuioDownloading.length; i++){
-                   percentageDownloading+=percentageAuioDownloading[i];
-               }
-                $scope.percentageDownloading=percentageDownloading+"%";
-                $scope.$apply();
-                if (checkAudioLoaded(resources.audios) == true && checkImageLoaded(resources.images) == true) {
-                    clearTimeout(checkResourceLoadedTimer);
-                    gameFSM.handleEventNotification({name: "loading_resource_finished", data: {}});
-                    return;
-                }
-                checkResourceLoaded();
-            }, 100);
-        };
-        checkResourceLoaded();
+            var total = 0;
+            var size = 0;
+            for (var key in resourcesLoading) {
+                console.log(key + " [" + resourcesLoading[key] + "]");
+                total += resourcesLoading[key];
+                console.log("Total: " + total);
+                size++;
+            }
+            var loadedPercent = total / size;
+            var loadedPercentRounded = (Math.round(loadedPercent * 10000) / 10000);
+            $scope.percentageDownloading = loadedPercentRounded * 100 + "%";
+            $scope.$apply();
+            if (loadedPercent >= 1) {
+                startGame();
+            }
 
-    }]);
+        };
+        var loadResources = function () {
+            if (resourceUrls.length > 0) {
+                for (var i in resourceUrls) {
+                    var res = resourceUrls[i];
+                    resourcesLoading[res.url] = 0;
+                    if (res.type == "audio") {
+                        audioSrv.addAudio(res.url,
+                            function () {
+                                console.log("Finished");
+                            },
+                            function (url, loadedPercent) {
+                                console.log(url + " [" + loadedPercent + "]");
+                                resourcesLoading[url] = loadedPercent;
+                                checkResourceLoaded();
+                            },
+                            function(url) {
+                                resourcesLoading[url] = 1;
+                                checkResourceLoaded();
+                            }
+                        );
+                    }
+                    else if (res.type == "image") {
+                        var img = new Image();
+                        img.src = res.url;
+                        img.onload = function () {
+                            resourcesLoading[this.src] = 1;
+                            checkResourceLoaded();
+//                            document.createElement("img").src = this.src;
+                        }
+                    }
+                }
+            }
+            else {
+                startGame();
+            }
+        };
+
+        loadResources();
+    }
+]);
 
 app.controller('arena.play.on-game.ctrl',
     ['delegate', '$scope', '$state', '$http', '$timeout', 'userSrv', 'audioSrv', 'facebookSrv', 'apolloSrv', 'gameFSM',
@@ -171,7 +247,7 @@ app.controller('arena.play.on-game.ctrl',
             // ---------------------------------------------------------------------------------------------------------
             // FOR LETTERS QUESTION TYPE
             //----------------------------------------------------------------------------------------------------------
-            var initForQuestionContent = function() {
+            var initForQuestionContent = function () {
                 if ($scope.question.content.letters) {
                     $scope.letters = [];
                     for (var i in $scope.question.content.letters)
@@ -180,7 +256,7 @@ app.controller('arena.play.on-game.ctrl',
                 }
             };
 
-            var generateLettersFromArray = function(letters) {
+            var generateLettersFromArray = function (letters) {
                 var str = "";
                 for (var i in letters) {
                     str += letters[i];
@@ -190,14 +266,14 @@ app.controller('arena.play.on-game.ctrl',
 
             $scope.choosenLetters = [];
 
-            $scope.removeChoosenLetter = function(index) {
+            $scope.removeChoosenLetter = function (index) {
                 if ($scope.choosenLetters[index]) {
                     $scope.question.content.letters.push($scope.choosenLetters[index]);
                     $scope.choosenLetters.splice(index, 1);
                 }
             };
 
-            $scope.chooseLetterIndex = function(index) {
+            $scope.chooseLetterIndex = function (index) {
                 $scope.choosenLetters.push($scope.question.content.letters[index]);
                 $scope.question.content.letters.splice(index, 1);
                 if ($scope.question.content.letters.length == 0) {
@@ -211,7 +287,7 @@ app.controller('arena.play.on-game.ctrl',
 
             //---------------------------------------------------------------------------------------------------------
 
-            $scope.clickAnswer = function (index,userAnswer) {
+            $scope.clickAnswer = function (index, userAnswer) {
                 audioSrv.playClickedButton();
                 var answer = userAnswer;
                 if ($scope.question.type == "MultiPicture" || $scope.question.type == "Picture Multichoice") {
@@ -233,7 +309,7 @@ app.controller('arena.play.on-game.ctrl',
                 audioSrv.playAudio(url);
             };
 
-            var findCorrectAnswerIndex = function(correct) {
+            var findCorrectAnswerIndex = function (correct) {
                 for (var i in $scope.question.content.choices) {
                     if ($scope.question.content.choices[i].text == correct) {
                         return i;
@@ -322,8 +398,8 @@ app.controller('arena.play.on-game.ctrl',
 //                        audioSrv.createQuestionAudio(event.data.question.question.audio_url);
 //                        audioSrv.playQuestionAudio();
                         audioSrv.playAudio(event.data.question.question.audio_url);
-                        if($scope.question.question.picture_url){
-                            $scope.question.question.picture_url=null;
+                        if ($scope.question.question.picture_url) {
+                            $scope.question.question.picture_url = null;
                         }
 
                         $scope.currentQuestion++;
@@ -557,7 +633,7 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 
         $scope.clickRow = function (question, index) {
             audioSrv.playPopupAudio();
-            $scope.questionAudioForReview=audioSrv.getAudioForReview();
+            $scope.questionAudioForReview = audioSrv.getAudioForReview();
 
             $scope.stopAudio();
             $('#my_modal').modal({
@@ -578,17 +654,17 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
             if (question.question.audio_url) {
                 $scope.questionAudioUrl = question.question.audio_url;
             }
-            $scope.questionInResult=true;
+            $scope.questionInResult = true;
 
         };
 
-        $scope.playAudio=function(){
+        $scope.playAudio = function () {
             audioSrv.playAudioForReview($scope.questionAudioUrl);
         };
-        $scope.stopAudio=function(){
+        $scope.stopAudio = function () {
             audioSrv.stopAudioForReview();
         };
-        $scope.togglePauseAudio=function(){
+        $scope.togglePauseAudio = function () {
             audioSrv.togglePauseAudioForReview();
         };
         //replay question audio
@@ -639,10 +715,10 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
         $scope.closeQuestionModal = function () {
             $scope.stopAudio();
             audioSrv.playClickedButton();
-            if($scope.questionPictureUrl){
-                $scope.questionPictureUrl=null;
+            if ($scope.questionPictureUrl) {
+                $scope.questionPictureUrl = null;
             }
-            $scope.questionIdForRate=null;
+            $scope.questionIdForRate = null;
         };
 
         if (gameFSM == null) {
@@ -662,7 +738,6 @@ app.controller('arena.play.result.ctrl', ['$scope', 'gameSrv', 'gameFSM', 'userS
 app.controller('arena.play.finished.ctrl', function (gameFSM, gameSrv) {
 
 });
-
 
 
 //app.controller('arena.challenge.ctrl',

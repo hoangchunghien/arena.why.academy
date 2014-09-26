@@ -15,6 +15,7 @@ angular.module('arena.pictures.service', [
 
     .service('picturesSrv', ['apiSrv', function(api) {
 
+        var picturesBase64 = {};
         var API_SERVER_URL = api.serverPath();
         this.upload = function(file, name, onProgressCallback, onSuccessCallback) {
             var fd = new FormData();
@@ -54,5 +55,35 @@ angular.module('arena.pictures.service', [
                 timer;
             }, 3000);
         };
+
+        function convertImgToBase64(url, callback, outputFormat){
+            var canvas = document.createElement('CANVAS'),
+                ctx = canvas.getContext('2d'),
+                img = new Image;
+            img.crossOrigin="anonymous";
+
+            img.onload = function(){
+                var dataURL;
+                canvas.height = img.height;
+                canvas.width = img.width;
+                ctx.drawImage(img, 0, 0);
+                dataURL = canvas.toDataURL(outputFormat);
+                callback(this.url, dataURL);
+                canvas = null;
+            };
+            img.src = url;
+        };
+
+        this.addPicture = function(url) {
+            var callback = arguments[1];
+            if (picturesBase64[url]) {
+                return picturesBase64[url];
+            }
+            convertImgToBase64(url, function(_url, base64Img){
+                picturesBase64[_url] = base64Img;
+                callback(_url, base64Img);
+            }, "image/png");
+        };
+
 
     }]);
